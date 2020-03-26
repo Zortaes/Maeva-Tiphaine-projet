@@ -1,21 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+
+
+{% block title %}Acceuil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<img src="{{ asset('build/images/imageHome.jpg') }}" alt="hands and flowers">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Tiphaine/Work/projet-ecolo/src/Controller/MainController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Tiphaine/Work/projet-ecolo/templates/main/homepage.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- 
+        LAST ARTICLES (limit 5)
+    -->
+    {% for lastArticle in lastArticles %}
 
+        <h2> {{ lastArticle.title }} </h2>
+        <p> {{ lastArticle.category.name}} </p>
+        <p> {{ lastArticle.category.color}} </p>
+        <p> {{ lastArticle.category.picture}} </p>
+        <p> {{ lastArticle.user.viewUsername }} </p>
+        <p> {{ lastArticle.summary}} </p>
+
+
+
+        {% set sum = 0 %}
+
+        {# Sum of votes for one article #}
+        {% for votes in lastArticle.votes %}
+            {% set sum = sum + votes.voteValue %}
+        {% endfor %}
+
+        {# If article have a vote #}
+        {% if (sum != 0) %}
+            
+            {# average #}
+            {% set average = sum / lastArticle.votes|length %}
+        
+                {% if (average|round == 1) %}
+                    {% set label = 'Mediocre' %}
+                {% endif %}
+
+                {% if (average|round == 2) %}
+                    {% set label = 'Pas mal' %}
+                {% endif %}
+
+                {% if (average|round == 3) %}
+                    {% set label = 'Bien' %}
+                {% endif %}
+
+                {% if (average|round == 4) %}
+                    {% set label = 'Super' %}
+                {% endif %}
+
+                {% if (average|round == 5) %}
+                    {% set label = 'Excellent' %}
+                {% endif %}
+
+        {# article haven't a vote #}
+        {% else %}
+            {% set label = 'Non noté' %}
+        {% endif %}
+
+        <p>{{label}}</p>        
+           
+    {% endfor %}   
+
+     
+    <!-- 
+        BEST ARTICLES (limit 5)
+    -->
+    {% for bestArticle in bestArticles %}
+        <h2>{{bestArticle.title}}</h2>
+        <p>{{bestArticle.category_name}}</p>
+        <p>{{bestArticle.category_color}}</p>
+        <p>{{bestArticle.category_picture}}</p>
+        <p>{{bestArticle.username}}</p>
+        <p> {{bestArticle.summary}} </p>
+
+                {% if (bestArticle.moyen|round == 1) %}
+                {% set label = 'Mediocre' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 2) %}
+                {% set label = 'Pas mal' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 3) %}
+                {% set label = 'Bien' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 4) %}
+                {% set label = 'Super' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 5) %}
+                {% set label = 'Excellent' %}
+                {% endif %}
+
+        <p>  {{label}}</p>
+      
+ 
+      
+    {% endfor %}
+  
 {% endblock %}
+ 
+
