@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
     {
 
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        dd($categories);
+        
         return $this->render('_sidebar.html.twig', 
         [
             'categories' => $categories

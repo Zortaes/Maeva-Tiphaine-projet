@@ -7,7 +7,9 @@
   <ul>
   <li>Categories</li>
     <ul>
-        
+     {% for category in categories %}
+        <li> {{category.name}}</li>
+     {% endfor %}
     </ul>
 
   <li><a href="#">Nous contacter</a></li>
