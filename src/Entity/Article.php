@@ -175,12 +175,37 @@ class Article
         return $this->category;
     }
 
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */ 
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     /**
      * Get the value of user
      */ 
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -198,4 +223,7 @@ class Article
     {
         return $this->votes;
     }
+
+ 
+
 }

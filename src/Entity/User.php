@@ -149,7 +149,7 @@ class User implements UserInterface
     /**
      * Get the value of birth_date
      */ 
-    public function getBirth_date()
+    public function getBirthDate()
     {
         return $this->birth_date;
     }
@@ -159,7 +159,7 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setBirth_date($birth_date)
+    public function setBirthDate($birth_date)
     {
         $this->birth_date = $birth_date;
 

@@ -97,4 +97,28 @@ class Vote
     {
         return $this->user;
     }
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of article
+     *
+     * @return  self
+     */ 
+    public function setArticle($article)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
 }
