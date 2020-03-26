@@ -31,6 +31,16 @@ class Vote
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="votes")
+     */
+    private $article;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="votes")
+    */
+    private $user; 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,5 +80,21 @@ class Vote
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * Get the value of article
+     */ 
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * Get the value of user
+     */ 
+    public function getUser()
+    {
+        return $this->user;
     }
 }

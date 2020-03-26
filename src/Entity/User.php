@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -50,7 +51,7 @@ class User implements UserInterface
      */
     private $password;
 
-        /**
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -59,6 +60,24 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     */
+    private $articles;
+
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user")
+    */
+    private $votes;
+
+    public function __construct() 
+    {
+        $this->articles = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        
+    }
+
 
     public function getId(): ?int
     {
@@ -220,5 +239,21 @@ class User implements UserInterface
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * Get oRM/OneToMany(targetEntity="App/Entity/Article", mappedBy="user")
+     */ 
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Get the value of votes
+     */ 
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }

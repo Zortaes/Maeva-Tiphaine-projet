@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +51,32 @@ class Article
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article")
+     */
+    private $ingredients;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="article")
+     */
+    private $votes;
+
+    public function __construct() 
+    {
+        $this->ingredients = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,5 +165,37 @@ class Article
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * Get the value of category
+     */ 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Get the value of user
+     */ 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Get oRM/OneToMany(targetEntity="App/Entity/ListIngredient", mappedBy="article")
+     */ 
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * Get the value of votes
+     */ 
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }

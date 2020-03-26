@@ -41,6 +41,11 @@ class ListIngredient
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="ingredients")
+     */
+    private $article;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +109,13 @@ class ListIngredient
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    /**
+     * Get the value of article
+     */ 
+    public function getArticle()
+    {
+        return $this->article;
     }
 }
