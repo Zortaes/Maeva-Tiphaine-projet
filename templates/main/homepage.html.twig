@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+
+    
+    <!-- 
+        LAST ARTICLES (limit 5)
+    -->
+    {% for lastArticle in lastArticles %}
+
+        <h2>{{ lastArticle.title }}</h2>
+        <p> {{ lastArticle.user.viewUsername }}  </p>
+
+
+
+        {% set sum = 0 %}
+
+        {# Sum of votes for one article #}
+        {% for votes in lastArticle.votes %}
+            {% set sum = sum + votes.voteValue %}
+        {% endfor %}
+
+        {# If article have a vote #}
+        {% if (sum != 0) %}
+            
+            {# average #}
+            {% set average = sum / lastArticle.votes|length %}
+        
+                {% if (average|round == 1) %}
+                    {% set label = 'Mediocre' %}
+                {% endif %}
+
+                {% if (average|round == 2) %}
+                    {% set label = 'Pas mal' %}
+                {% endif %}
+
+                {% if (average|round == 3) %}
+                    {% set label = 'Bien' %}
+                {% endif %}
+
+                {% if (average|round == 4) %}
+                    {% set label = 'Super' %}
+                {% endif %}
+
+                {% if (average|round == 5) %}
+                    {% set label = 'Excellent' %}
+                {% endif %}
+
+        {# article haven't a vote #}
+        {% else %}
+            {% set label = 'Non noté' %}
+        {% endif %}
+
+        <p>{{label}}</p>        
+           
+    {% endfor %}   
+
+  
+{% endblock %}
+ 
