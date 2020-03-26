@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Article;
 use App\Entity\Vote;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,4 +37,6 @@ class MainController extends AbstractController
 
     }
 }
+
+
 
