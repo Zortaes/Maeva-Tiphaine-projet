@@ -5,14 +5,19 @@
 
 {% block body %}
 
-    
+<img src="{{ asset('build/images/imageHome.jpg') }}" alt="hands and flowers">
+
     <!-- 
         LAST ARTICLES (limit 5)
     -->
     {% for lastArticle in lastArticles %}
 
-        <h2>{{ lastArticle.title }}</h2>
-        <p> {{ lastArticle.user.viewUsername }}  </p>
+        <h2> {{ lastArticle.title }} </h2>
+        <p> {{ lastArticle.category.name}} </p>
+        <p> {{ lastArticle.category.color}} </p>
+        <p> {{ lastArticle.category.picture}} </p>
+        <p> {{ lastArticle.user.viewUsername }} </p>
+        <p> {{ lastArticle.summary}} </p>
 
 
 
@@ -58,6 +63,43 @@
            
     {% endfor %}   
 
+     
+    <!-- 
+        BEST ARTICLES (limit 5)
+    -->
+    {% for bestArticle in bestArticles %}
+        <h2>{{bestArticle.title}}</h2>
+        <p>{{bestArticle.category_name}}</p>
+        <p>{{bestArticle.category_color}}</p>
+        <p>{{bestArticle.category_picture}}</p>
+        <p>{{bestArticle.username}}</p>
+        <p> {{bestArticle.summary}} </p>
+
+                {% if (bestArticle.moyen|round == 1) %}
+                {% set label = 'Mediocre' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 2) %}
+                {% set label = 'Pas mal' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 3) %}
+                {% set label = 'Bien' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 4) %}
+                {% set label = 'Super' %}
+                {% endif %}
+
+                {% if (bestArticle.moyen|round == 5) %}
+                {% set label = 'Excellent' %}
+                {% endif %}
+
+        <p>  {{label}}</p>
+      
+ 
+      
+    {% endfor %}
   
 {% endblock %}
  

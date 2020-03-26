@@ -19,6 +19,27 @@ class VoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Vote::class);
     }
 
+
+    /**
+    * @return Article[] list of article by best vote, limit 5
+    */
+    public function findBestArticle()
+    {
+        $qb = $this->createQueryBuilder('v')
+        ->select('a.title, a.summary, u.username, c.name category_name, c.color category_color, c.picture category_picture, avg(v.vote_value)moyen')
+        ->innerJoin('App\Entity\Article', 'a', 'WITH', 'a = v.article')
+        ->innerJoin('App\Entity\Category', 'c', 'WITH', 'c = a.category')
+        ->innerJoin('App\Entity\User', 'u', 'WITH', 'u = a.user')
+        ->groupBy('v.article')
+        ->orderBy('moyen', 'DESC')
+        ->setMaxResults(5) 
+        ->getQuery()
+        ->getResult();
+        
+        return $qb; 
+    }
+
+
     // /**
     //  * @return Vote[] Returns an array of Vote objects
     //  */
