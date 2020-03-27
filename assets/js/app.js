@@ -8,6 +8,8 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.scss';
 
+require('../images/imageHome.jpg'); 
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';
 
@@ -35,14 +37,16 @@ var app = {
 
     openNav:function() 
     {
-    document.getElementById("mySidebar").style.width = "300px";
+    document.getElementById("mySidebar").style.width = "80%";
     document.getElementById("mySidebar").style.display = "absolute";
+    document.getElementById("overlay").style.display = "block";
     },
             
     /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
     closeNav:function() 
     {
     document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("overlay").style.display = "none";
     }
         
 }
