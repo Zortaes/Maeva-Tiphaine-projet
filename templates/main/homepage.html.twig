@@ -4,9 +4,21 @@
 
 {% block title %}Acceuil{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
 {% block body %}
 
-<img src="{{ asset('build/images/imageHome.jpg') }}" alt="hands and flowers">
+<div class="jumbotron jumbotron-fluid  jumbotron-size background-image-flowers">
+    <div class="container">
+      <h1 class="display-4">Fluid jumbotron</h1>
+      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+
 
     <!-- 
         LAST ARTICLES (limit 5)
@@ -102,6 +114,13 @@
       
     {% endfor %}
   
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('homepage') }}
+    
+     
 {% endblock %}
  
 
