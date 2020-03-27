@@ -18,8 +18,8 @@ class CategoryController extends AbstractController
     {
 
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        dd($categories);
-        return $this->render('_sidebar.html.twig', 
+        
+        return $this->render('_navbar.html.twig',
         [
             'categories' => $categories
         ]);
