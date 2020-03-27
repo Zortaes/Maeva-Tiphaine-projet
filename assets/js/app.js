@@ -8,7 +8,21 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.scss';
 
-require('../images/imageHome.jpg'); 
+require('../images/imageHome.jpg');
+require('../images/accessoires-bijoux.jpg');
+require('../images/arts.jpg');
+require('../images/animaux.jpg');
+require('../images/bricolage.jpg');
+require('../images/cosmetiques-beaute-et-soins.jpg');
+require('../images/decorations.jpg');
+require('../images/hygiene-corporelle.jpg');
+require('../images/jardin-jardinage.jpg');
+require('../images/jeux.jpg');
+require('../images/linge-de-maison.jpg');
+require('../images/menage-hygiene-maison.jpg');
+require('../images/recyclage.jpg');
+require('../images/vetements.jpg');
+
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';

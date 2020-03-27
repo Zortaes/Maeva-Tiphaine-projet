@@ -9,6 +9,16 @@
       "css": [
         "/build/app.css"
       ]
+    },
+    "homepage": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~homepage.js",
+        "/build/homepage.js"
+      ],
+      "css": [
+        "/build/homepage.css"
+      ]
     }
   }
 }
