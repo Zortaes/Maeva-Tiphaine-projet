@@ -5,5 +5,6 @@
   "build/homepage.js": "/build/homepage.js",
   "build/runtime.js": "/build/runtime.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/images/imageHome.jpg": "/build/images/imageHome.b846a7d2.jpg"
+  "build/images/imageHome.jpg": "/build/images/imageHome.b846a7d2.jpg",
+  "build/vendors~homepage.js": "/build/vendors~homepage.js"
 }

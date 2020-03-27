@@ -11,124 +11,152 @@
 
 {% block body %}
 
+
+
+<!-- 
+    JUMBOTRON (image-flowers)
+-->
 <div class="jumbotron jumbotron-fluid jumbotron-size-image-flowers background-image-flowers">
     <div class="container container-size-image-flowers">
-      <h1 class="display-4 title-image-flowers">Bienvenue Titre du site</h1>
+        <h1 class="display-4 title-image-flowers">Bienvenue Titre du site</h1>
         <p class="lead paragraph-image-flowers-1">
-            Cette application est un espace communautaire qui recense des recettes écologiques de produits destinés à la vie quotidienne à confectionner chez soi.
-        </p> 
+            Cette application est un espace communautaire qui recense des recettes écologiques de produits destinés à la
+            vie quotidienne à confectionner chez soi.
+        </p>
         <p class="lead paragraph-image-flowers-2">
             N’hésitez pas à nous rejoindre, que ce soit pour partager vos recettes ou pour en collecter.
         </p>
         <p class="lead paragraph-image-flowers-3">
-            Ensemble créons une plateforme qui propose des solutions écologique et souvent aussi économique pour un environnement plus sain.
+            Ensemble créons une plateforme qui propose des solutions écologique et souvent aussi économique pour un
+            environnement plus sain.
         </p>
     </div>
 </div>
 
+<!-- 
+    LAST ARTICLES (limit 5)
+-->
+<div class="container-fluid">
+
+    <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <div class="carousel-inner row w-100 mx-auto">
+
+            {% for lastArticle in lastArticles %}
 
 
-    <!-- 
-        LAST ARTICLES (limit 5)
-    -->
-    {% for lastArticle in lastArticles %}
+            <div class="carousel-item col-md-4 active">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ lastArticle.title }} </h4>
+                        <p>{{ lastArticle.category.name}} </p>
+                        <p> {{ lastArticle.category.color}} </p>
+                        <p> {{ lastArticle.category.picture}} </p>
+                        <p> {{ lastArticle.user.viewUsername }} </p>
+                        <p class="card-text">{{ lastArticle.summary}}</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
 
-        <h2> {{ lastArticle.title }} </h2>
-        <p> {{ lastArticle.category.name}} </p>
-        <p> {{ lastArticle.category.color}} </p>
-        <p> {{ lastArticle.category.picture}} </p>
-        <p> {{ lastArticle.user.viewUsername }} </p>
-        <p> {{ lastArticle.summary}} </p>
-
-
-
-        {% set sum = 0 %}
-
-        {# Sum of votes for one article #}
-        {% for votes in lastArticle.votes %}
+            {% set sum = 0 %}
+            {# Sum of votes for one article #}
+            {% for votes in lastArticle.votes %}
             {% set sum = sum + votes.voteValue %}
-        {% endfor %}
+            {% endfor %}
 
-        {# If article have a vote #}
-        {% if (sum != 0) %}
-            
+            {# If article have a vote #}
+            {% if (sum != 0) %}
+
             {# average #}
             {% set average = sum / lastArticle.votes|length %}
-        
-                {% if (average|round == 1) %}
-                    {% set label = 'Mediocre' %}
-                {% endif %}
-
-                {% if (average|round == 2) %}
-                    {% set label = 'Pas mal' %}
-                {% endif %}
-
-                {% if (average|round == 3) %}
-                    {% set label = 'Bien' %}
-                {% endif %}
-
-                {% if (average|round == 4) %}
-                    {% set label = 'Super' %}
-                {% endif %}
-
-                {% if (average|round == 5) %}
-                    {% set label = 'Excellent' %}
-                {% endif %}
-
-        {# article haven't a vote #}
-        {% else %}
+            {% if (average|round == 1) %}
+            {% set label = 'Mediocre' %}
+            {% endif %}
+            {% if (average|round == 2) %}
+            {% set label = 'Pas mal' %}
+            {% endif %}
+            {% if (average|round == 3) %}
+            {% set label = 'Bien' %}
+            {% endif %}
+            {% if (average|round == 4) %}
+            {% set label = 'Super' %}
+            {% endif %}
+            {% if (average|round == 5) %}
+            {% set label = 'Excellent' %}
+            {% endif %}
+            {# article haven't a vote #}
+            {% else %}
             {% set label = 'Non noté' %}
-        {% endif %}
+            {% endif %}
+            <p>{{label}}</p>
 
-        <p>{{label}}</p>        
-           
-    {% endfor %}   
+            {% endfor %}
 
-     
-    <!-- 
-        BEST ARTICLES (limit 5)
-    -->
-    {% for bestArticle in bestArticles %}
-        <h2>{{bestArticle.title}}</h2>
-        <p>{{bestArticle.category_name}}</p>
-        <p>{{bestArticle.category_color}}</p>
-        <p>{{bestArticle.category_picture}}</p>
-        <p>{{bestArticle.username}}</p>
-        <p> {{bestArticle.summary}} </p>
 
-                {% if (bestArticle.moyen|round == 1) %}
-                {% set label = 'Mediocre' %}
-                {% endif %}
+        </div>
 
-                {% if (bestArticle.moyen|round == 2) %}
-                {% set label = 'Pas mal' %}
-                {% endif %}
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
 
-                {% if (bestArticle.moyen|round == 3) %}
-                {% set label = 'Bien' %}
-                {% endif %}
+    </div>
 
-                {% if (bestArticle.moyen|round == 4) %}
-                {% set label = 'Super' %}
-                {% endif %}
+</div>
 
-                {% if (bestArticle.moyen|round == 5) %}
-                {% set label = 'Excellent' %}
-                {% endif %}
 
-        <p>  {{label}}</p>
-      
- 
-      
-    {% endfor %}
-  
+
+
+
+
+<!-- 
+                BEST ARTICLES (limit 5)
+            -->
+{% for bestArticle in bestArticles %}
+<h2>{{bestArticle.title}}</h2>
+<p>{{bestArticle.category_name}}</p>
+<p>{{bestArticle.category_color}}</p>
+<p>{{bestArticle.category_picture}}</p>
+<p>{{bestArticle.username}}</p>
+<p> {{bestArticle.summary}} </p>
+
+{% if (bestArticle.moyen|round == 1) %}
+{% set label = 'Mediocre' %}
+{% endif %}
+
+{% if (bestArticle.moyen|round == 2) %}
+{% set label = 'Pas mal' %}
+{% endif %}
+
+{% if (bestArticle.moyen|round == 3) %}
+{% set label = 'Bien' %}
+{% endif %}
+
+{% if (bestArticle.moyen|round == 4) %}
+{% set label = 'Super' %}
+{% endif %}
+
+{% if (bestArticle.moyen|round == 5) %}
+{% set label = 'Excellent' %}
+{% endif %}
+
+<p> {{label}}</p>
+
+{% endfor %}
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 {{ encore_entry_script_tags('homepage') }}
-    
-     
-{% endblock %}
- 
 
+
+{% endblock %}
