@@ -51,31 +51,70 @@ class AppFixtures extends Fixture
         
         $categoryNames =
         [
-            "Recyclage", 
-            "Accessoires/bijoux", 
-            "Décoration", 
-            "Cosmétiques / Beauté et Soins", 
-            "Hygiène corporelle", 
-            "Ménage/Hygiène maison", 
-            "Bricolage",
-            "Jardin/Jardinage",
-            "Animaux",
-            "Vêtements",
-            "Linge de maison",
-            "Arts",
-            "Jeux",
+            "Recyclage" => [
+                "recyclage.jpg",
+                "#3a6617"
+            ], 
+            "Accessoires/bijoux" => [
+                "accessoires_bijoux.jpg",
+                "#683ad8"
+            ], 
+            "Décoration"  => [
+                "decorations.jpg",
+                "#2193d1"
+            ], 
+            "Cosmétiques / Beauté et Soins" => [
+                "cosmetiques-beaute-et-soins.jpg",
+                "#a48084"
+            ],  
+            "Hygiène corporelle" => [
+                "hygiene-corporelle.jpg",
+                "#fff5ad"
+            ], 
+            "Ménage/Hygiène maison"=> [
+                "menage-hygiene-maison.jpg",
+                "#b2d4dd"
+            ],  
+            "Bricolage" => [
+                "bricolage.jpg",
+                "#ed0021"
+            ],  
+            "Jardin/Jardinage" => [
+                "jardin-jardinage.jpg",
+                "#b0eb7d"
+            ],  
+            "Animaux" => [
+                "animaux.jpg",
+                "#484848"
+            ],
+            "Vêtements" => [
+                "vetements.jpg",
+                "#da7423"
+            ],
+            "Linge de maison" => [
+                "linge-de-maison.jpg",
+                "#e69cc2"
+            ],
+            "Arts" => [
+                "arts.jpg",
+                "#343f6d"
+            ],
+            "Jeux" => [
+                "jeux.jpg",
+                "#a2a2a2"
+            ],
             
         ];
 
         $categories = []; 
 
         
-        foreach ($categoryNames as $categoryName) {
+        foreach ($categoryNames as $categoryName => $imageOrColor) {
             
             $category = new Category();
             $category->setName($categoryName);
-            $category->setColor($faker->hexcolor); 
-            $category->setPicture('image.jpg'); 
+            $category->setColor($imageOrColor[1]); 
+            $category->setPicture($imageOrColor[0]); 
             $category->setCreatedAt($faker->datetime);  
             
             $manager->persist($category); 

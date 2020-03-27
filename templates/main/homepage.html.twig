@@ -40,77 +40,90 @@
 
     <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
 
+    
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
+        
+       
         <div class="carousel-inner row w-100 mx-auto">
+        {% for lastArticle in lastArticles %}
 
-            {% for lastArticle in lastArticles %}
-
-
-            <div class="carousel-item col-md-4 active">
+            {% set active = '' %}
+            {% if (loop.first)  %}
+                {% set active = 'active' %}
+            {% endif %}
+            
+            <div class="carousel-item col-md-4 {{active}}">
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff"
-                        alt="Card image cap">
+                    <div>
+
+                    </div>
                     <div class="card-body">
                         <h4 class="card-title">{{ lastArticle.title }} </h4>
-                        <p>{{ lastArticle.category.name}} </p>
-                        <p> {{ lastArticle.category.color}} </p>
-                        <p> {{ lastArticle.category.picture}} </p>
-                        <p> {{ lastArticle.user.viewUsername }} </p>
+                        
+                        <p class="card-text">{{ lastArticle.category.name}} </p>
+                        <p class="card-text"> {{ lastArticle.category.color}} </p>
+                        <p class="card-text"> {{ lastArticle.category.picture}} </p>
+                        <p class="card-text"> {{ lastArticle.user.viewUsername }} </p>
                         <p class="card-text">{{ lastArticle.summary}}</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+
+                        {% set sum = 0 %}
+
+                        {# Sum of votes for one article #}
+                        {% for votes in lastArticle.votes %}
+                            {% set sum = sum + votes.voteValue %}
+                        {% endfor %}
+
+                        {# If article have a vote #}
+                        {% if (sum != 0) %}
+
+                        {# average #}
+                        {% set average = sum / lastArticle.votes|length %}
+                            {% if (average|round == 1) %}
+                            {% set label = 'Mediocre' %}
+                            {% endif %}
+                            {% if (average|round == 2) %}
+                            {% set label = 'Pas mal' %}
+                            {% endif %}
+                            {% if (average|round == 3) %}
+                            {% set label = 'Bien' %}
+                            {% endif %}
+                            {% if (average|round == 4) %}
+                            {% set label = 'Super' %}
+                            {% endif %}
+                            {% if (average|round == 5) %}
+                            {% set label = 'Excellent' %}
+                            {% endif %}
+                            {# article haven't a vote #}
+                            {% else %}
+                            {% set label = 'Non noté' %}
+                            {% endif %}
+
+
+                        <p>{{label}}</p>
+            
                     </div>
-                </div>
+                </div>      
             </div>
-
-            {% set sum = 0 %}
-            {# Sum of votes for one article #}
-            {% for votes in lastArticle.votes %}
-            {% set sum = sum + votes.voteValue %}
-            {% endfor %}
-
-            {# If article have a vote #}
-            {% if (sum != 0) %}
-
-            {# average #}
-            {% set average = sum / lastArticle.votes|length %}
-            {% if (average|round == 1) %}
-            {% set label = 'Mediocre' %}
-            {% endif %}
-            {% if (average|round == 2) %}
-            {% set label = 'Pas mal' %}
-            {% endif %}
-            {% if (average|round == 3) %}
-            {% set label = 'Bien' %}
-            {% endif %}
-            {% if (average|round == 4) %}
-            {% set label = 'Super' %}
-            {% endif %}
-            {% if (average|round == 5) %}
-            {% set label = 'Excellent' %}
-            {% endif %}
-            {# article haven't a vote #}
-            {% else %}
-            {% set label = 'Non noté' %}
-            {% endif %}
-            <p>{{label}}</p>
-
-            {% endfor %}
-
-
+           
+        {% endfor %}
         </div>
+       
+
 
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
+
         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
 
     </div>
-
+   
 </div>
 
 
