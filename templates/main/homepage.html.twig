@@ -36,43 +36,67 @@
 <!-- 
     LAST ARTICLES (limit 5)
 -->
-<div class="container-fluid">
+<h1 class="text-center mb-4">Nos derniers articles</h1>
 
-    <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
+<!-- Container Carousels -->
+<div class="container-fluid container-carousels">
 
-    
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        
-       
-        <div class="carousel-inner row w-100 mx-auto">
-        {% for lastArticle in lastArticles %}
+    <!-- Carousel animation -->
+    <div id="myCarousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+
+
+        <!-- Carousels -->
+        <div class="carousel-inner row  mx-auto carousel-size" role="listbox">
+
+            {# tcheck the 5 articles most recently #}
+            {% for lastArticle in lastArticles %}
 
             {% set active = '' %}
             {% if (loop.first)  %}
-                {% set active = 'active' %}
+            {% set active = 'active' %}
             {% endif %}
-            
-            <div class="carousel-item col-md-4 {{active}}">
-                <div class="card">
-                    <div>
 
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{ lastArticle.title }} </h4>
-                        
-                        <p class="card-text">{{ lastArticle.category.name}} </p>
-                        <p class="card-text"> {{ lastArticle.category.color}} </p>
-                        <p class="card-text"> {{ lastArticle.category.picture}} </p>
-                        <p class="card-text"> {{ lastArticle.user.viewUsername }} </p>
-                        <p class="card-text">{{ lastArticle.summary}}</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <!-- Carousels item with active if is the first element-->
+            <div class="carousel-item carousel-item-custum col-md-4 {{active}}">
+
+                <!-- Cards-->
+                <div class="card">
+
+                    <!-- image -->
+                    <img class="card-img-top img-fluid"
+                        src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
+                        alt="image represent category {{ lastArticle.category.name}}">
+
+                    <!-- block texts -->
+                    <div class="card-body-custum">
+
+                        <!-- title -->
+                        <h4 class="card-title-custum">
+                            <a href="#" class="link">
+                                {{ lastArticle.title }}
+                            </a>
+                        </h4>
+
+                        <!-- author -->
+                        <p class="card-paragraph card-paragraph-author">
+                            <a href="#" class="link">
+                                {{ lastArticle.user.viewUsername }}
+                            </a>
+                        </p>
+
+                        <!-- summary -->
+                        <p class="card-paragraph card-paragraph-summary">
+                            {{ lastArticle.summary}}
+                        </p>
+
 
 
                         {% set sum = 0 %}
 
                         {# Sum of votes for one article #}
                         {% for votes in lastArticle.votes %}
-                            {% set sum = sum + votes.voteValue %}
+                        {% set sum = sum + votes.voteValue %}
                         {% endfor %}
 
                         {# If article have a vote #}
@@ -80,36 +104,49 @@
 
                         {# average #}
                         {% set average = sum / lastArticle.votes|length %}
-                            {% if (average|round == 1) %}
-                            {% set label = 'Mediocre' %}
-                            {% endif %}
-                            {% if (average|round == 2) %}
-                            {% set label = 'Pas mal' %}
-                            {% endif %}
-                            {% if (average|round == 3) %}
-                            {% set label = 'Bien' %}
-                            {% endif %}
-                            {% if (average|round == 4) %}
-                            {% set label = 'Super' %}
-                            {% endif %}
-                            {% if (average|round == 5) %}
-                            {% set label = 'Excellent' %}
-                            {% endif %}
-                            {# article haven't a vote #}
-                            {% else %}
-                            {% set label = 'Non noté' %}
-                            {% endif %}
+                        {% set noteName = 'Noté :' %}
+
+                        {% if (average|round == 1) %}
+                        {% set label = 'Mediocre' %}
+                        {% endif %}
+
+                        {% if (average|round == 2) %}
+                        {% set label = 'Pas mal' %}
+                        {% endif %}
+
+                        {% if (average|round == 3) %}
+                        {% set label = 'Bien' %}
+                        {% endif %}
+
+                        {% if (average|round == 4) %}
+                        {% set label = 'Super' %}
+                        {% endif %}
+
+                        {% if (average|round == 5) %}
+                        {% set label = 'Excellent' %}
+                        {% endif %}
+
+                        {# article haven't a vote #}
+                        {% else %}
+                        {% set noteName = '' %}
+                        {% set label = 'Non noté' %}
+                        {% endif %}
 
 
-                        <p>{{label}}</p>
-            
+                        <p class="card-paragraph-note">
+                            {{noteName}} {{label}}
+                        </p>
+
+                        <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
+
                     </div>
-                </div>      
+                </div>
             </div>
-           
-        {% endfor %}
+
+            {# tcheck the 5 articles most recently #}
+            {% endfor %}
         </div>
-       
+
 
 
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
@@ -123,12 +160,96 @@
         </a>
 
     </div>
-   
+
 </div>
 
 
+<div class="container my-4">
+
+    
+
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+        <!--Controls-->
+        <div class="controls-top">
+            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+        </div>
+        <!--/.Controls-->
+
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+            <li data-target="#multi-item-example" data-slide-to="1"></li>
+            <li data-target="#multi-item-example" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
 
 
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+
+            {% for lastArticle in lastArticles %}
+
+
+            {% set active = '' %}
+            {% set classCard = 'clearfix d-none d-md-block' %}
+
+            {% if (loop.first)  %}
+            {% set active = 'active' %}
+            {% set classCard = '' %}
+            {% endif %}
+
+            <!--First slide-->
+            <div class="carousel-item {{active}}">
+
+                
+                <div class="row">
+                    {% for lastArticle in lastArticles %}
+                    <div class="col-md-4 {{classCard}}">
+                        <div class="card mb-2">
+                            <img class="card-img-top"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.title }}
+                                    </a>
+                                </h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <a class="btn btn-primary">Button</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    {# tcheck the 5 articles most recently #}
+                    {% endfor %}
+
+                 
+
+                    
+                </div>
+
+          
+            </div>
+            <!--/.First slide-->
+
+
+            {# tcheck the 5 articles most recently #}
+            {% endfor %}
+        </div>
+        <!--/.Slides-->
+
+    </div>
+    <!--/.Carousel Wrapper-->
+
+
+</div>
 
 
 <!-- 
