@@ -17,101 +17,84 @@ body {
   background-color: rgba(0,0,0,0.5);
 }
 
-/* navbar */
-.navbar
+/*scrollbar*/
+::-webkit-scrollbar 
 {
-  background-color: white;
+  width: 5px;
 }
 
-.titreNav
-{
-  color: black;
-  margin-left: 2%;
-  margin-right: 3%;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(180, 179, 179);
+  border-radius: 2px;
 }
 
-.toggleCategories
-{
-  font-weight: bold;
-  border: none;
-  background: transparent;
-  color : black;
-  outline: none;
-  margin: 0, 2em, 0.5em, 2em;    
-}
-.toggleCategories:focus
-{
-  outline: none;
-}
 
-.toggleCategories:hover
+/* NAVBAR */
+#siteNavbar
 {
-  color: #86c057;
-}
-
-.nav-item
-{
-  font-weight: bold;
-  border: none;
-  background: transparent;
-  color : black;
-  outline: none;
-  margin: 0, 2em, 0.5em, 2em;
-  a
-  {
-    outline: none;
-  }
-}
-.nav-item:hover
-{
-  color: #86c057;
-}
-.nav-item:focus
-{
-  outline: none;
-}
-
-#categoriestoggled
-{
-  position : absolute;
-  display : flex;
-  flex-direction : row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color : white;
-  margin: 0, 3em, 0.5em, 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 60px;
   
-  a
+  /* Button to open side bar for responsive */
+  #sideOpenbtn
   {
-    color : black;
-    padding: 1em;
+    margin: 12px;
+      .line1 {
+        width: 25px;
+        height: 1px;
+        background-color: grey;
+        margin: 20% 0;
+      }
+      
+      #line2 {
+        width: 19px;
+        height: 1px;
+        background-color: grey;
+        margin: 20% 0 0 3px;
+      }
+
+  }
+
+  #navTitle
+  {
+    width: 100%;
+    margin-top: 10px;
+    color: black;
     text-decoration: none;
   }
 
-  button
-    {
-      padding : 0 2em 0 2em;
-    }
-}
+  .navLinks
+  {
+    display: none;
+  }
 
-.connexion
-{
-  font-weight: bold;
-  border: solid 1px transparent;
-  border-radius: 5px;
-  background: transparent;
-  color : black;
-  margin: 0, 2em, 0.5em, 2em;
-  padding: 1em;
-} 
-.connexion:hover
-{
-  border: solid 1px #86c057;
-  color: #86c057;
-}
-.connexion:focus
-{
-  outline: none;
+  .show 
+  {
+    display: none;
+  }
+
+  #connexionBtn
+  {
+    font-weight: bold;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    background: transparent;
+    color : black;
+    margin: 0.5em 1.5em 0.5em 0.5em;
+  }
+  #connexionBtn:hover
+  {
+    border: solid 1px #86c057;
+    color: #86c057;
+  }
+  #connexionBtn:focus
+  {
+    outline: none;
+  }
+
 }
 
 /* The sidebar menu */
@@ -154,9 +137,9 @@ body {
     .sidebarCategorie
     {
       padding : 1em 0 1em 2em;
-    }
+    } 
   }
-  
+
   #categoriesNav
   {
     font-weight: bold;
@@ -176,6 +159,99 @@ body {
     background-color : transparent;
     outline :none;
   }
+  
+  @media only screen and (min-width:960px)
+  {
+    /* NAVBAR */
+    #siteNavbar
+    {
+      overflow: hidden;
+
+      /* btn desapear */
+      #sideOpenbtn
+      {
+      display: none;
+      }
+
+      #navTitle
+      {
+        max-width: 240px;
+        padding-left: 50px;
+      }
+
+      #linkList
+      {
+        display:flex;
+        flex-direction: row;
+        width: 100%;
+
+        .navLinks
+        {  
+          display: block !important;
+          font-weight: bold;
+          border: none;
+          outline: none;
+          color: black;
+          padding: 14px 16px;
+          background-color: inherit;
+          margin: 0; 
+        }
+      }
+
+      .subnav 
+      {
+        padding-top: 4px;
+        float: left;
+        overflow: hidden;
+        /* dropdown with categories not displayed at first*/
+        
+        .show {
+          display: none;
+          position: absolute;
+          left: 0;
+          background-color: white;
+          width: 100%;
+          z-index: 1;
+          padding: 2em;
+      }
+
+      }
+
+      /* show subnavbar that contain categories */
+      .subnav:hover .show 
+      {
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: 350px;
+        
+        a
+        {
+          display:block;
+          transition: transform 1s;
+          width: 25%;
+          color: rgb(0, 6, 51);
+          margin: 1%;
+          text-align: center;
+        }
+      }
+
+      .show a:hover
+      {
+        overflow: hidden;
+        transform: scale(1.5); 
+        text-decoration: none;
+        text-align: center;
+      }
+
+    }
+
+  }
+
+
+
+  
   
 
 
