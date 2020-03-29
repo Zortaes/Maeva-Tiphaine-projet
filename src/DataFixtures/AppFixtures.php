@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
                 "#3a6617"
             ], 
             "Accessoires/bijoux" => [
-                "accessoires_bijoux.jpg",
+                "accessoires-bijoux.jpg",
                 "#683ad8"
             ], 
             "Décoration"  => [

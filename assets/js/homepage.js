@@ -2,30 +2,37 @@
 
 import '../css/homepage.scss';
 
-$(document).ready(function() {
-    $("#myCarousel").on("slide.bs.carousel", function(e) {
-      var $e = $(e.relatedTarget);
-      var idx = $e.index();
-      var itemsPerSlide = 3;
-      var totalItems = $(".carousel-item").length;
-  
-      if (idx >= totalItems - (itemsPerSlide - 1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i = 0; i < it; i++) {
-          // append slides to end
-          if (e.direction == "left") {
-            $(".carousel-item")
-              .eq(i)
-              .appendTo(".carousel-inner");
-          } else {
-            $(".carousel-item")
-              .eq(0)
-              .appendTo($(this).find(".carousel-inner"));
-          }
-        }
-      }
-    });
-  });
-  
 
   
+
+var homepage = {
+
+   // property for matchMedia min-width:575.98px
+   breakSmall: window.matchMedia("(min-width: 767.98px)"),
+
+
+    /**
+     * init homepage
+     */
+    init:function() { 
+
+      console.log('init homepage');
+ 
+    
+      if (homepage.breakSmall.matches) { 
+      console.log('match small'); 
+        
+      $('#mobile-slide').remove(); 
+      $('#mobile-slide-2').remove(); 
+ 
+      }
+
+
+    } 
+
+
+
+}
+
+$(homepage.init);
+

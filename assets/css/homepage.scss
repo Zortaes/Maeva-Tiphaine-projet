@@ -233,66 +233,94 @@ JUMBOTRON BACKGROUND
 /****************************************************
                 Carousel Last Articles
  ***************************************************/
- @media (min-width: 768px) {
-    /* show 3 items */
-    .carousel-inner .active,
-    .carousel-inner .active + .carousel-item,
-    .carousel-inner .active + .carousel-item + .carousel-item {
-      display: block;
+
+/****
+CONTAINER CAROUSELS 
+****/
+.container-carousels-custum
+{
+    background-color: #bacf8e; 
+    padding-top: 1em;
+    padding-bottom: 1em; 
+    height: 45vh;   
+    
+}
+
+.container-size 
+{
+    width: 80%; 
+    margin: 2vh auto 6vh auto;
+}
+    
+/*** 
+ALL TEXT IN CARD (after image) 
+****/
+ .card-body-custum
+{
+    padding: 1vh 0 1vh 0;  
+    
+    /* Title */
+    .card-title-custum 
+    {
+        text-align: center; 
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: 0;  
     }
-  
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
-      transition: none;
+
+    /* All paragraph */
+    .card-paragraph
+    {
+        font-size: 0.9em;
+        margin: 0; 
     }
-  
-    .carousel-inner .carousel-item-next,
-    .carousel-inner .carousel-item-prev {
-      position: relative;
-      transform: translate3d(0, 0, 0);
+
+    .card-paragraph-author 
+    {
+        font-style: italic; 
+        text-align: center;
     }
-  
-    .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
-      position: absolute;
-      top: 0;
-      right: -33.3333%;
-      z-index: -1;
-      display: block;
-      visibility: visible;
+
+    .card-paragraph-summary 
+    {
+        margin: 1vh 3vw 0 3vw;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        overflow-wrap: break-word;
+
     }
-  
-    /* left or forward direction */
-    .active.carousel-item-left + .carousel-item-next.carousel-item-left,
-    .carousel-item-next.carousel-item-left + .carousel-item,
-    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
-    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
-      position: relative;
-      transform: translate3d(-100%, 0, 0);
-      visibility: visible;
+
+    /* title, author */
+    .link 
+    {
+        color: black; 
+
     }
-  
-    /* farthest right hidden item must be abso position for animations */
-    .carousel-inner .carousel-item-prev.carousel-item-right {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      display: block;
-      visibility: visible;
+    
+
+    .card-paragraph-note  
+    {
+
+        padding-top: 1vh;
+        text-align: center;
+        font-style: italic;
+        font-size: 0.7em;
+        margin: 0;
     }
-  
-    /* right or prev direction */
-    .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
-    .carousel-item-prev.carousel-item-right + .carousel-item,
-    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
-    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
-      position: relative;
-      transform: translate3d(100%, 0, 0);
-      visibility: visible;
-      display: block;
-      visibility: visible;
+
+    .btn-articleDetails
+    {
+        margin-top: 1vh; 
+        margin-left: 20vw; 
+        background-color: black; 
+        border-color: black; 
+        padding: 0 1vw 0 1vw; 
     }
-  }
+
+    
   
- 
+}
+
+   
+
