@@ -39,29 +39,31 @@ var app = {
 
         $(document).ready(function()
         {
-            $(".navbar-toggler").on("click", function(){
-                app.openNav(); 
+            $("#sideOpenbtn").on("click", function(){
+                app.openSideNav(); 
             });
 
             $(".closebtn").on("click", function(){
-                app.closeNav(); 
+                app.closeSideNav(); 
             });
+
         })
     },
 
-    openNav:function() 
+    openSideNav:function() 
     {
-    document.getElementById("mySidebar").style.width = "80%";
+    document.getElementById("mySidebar").style.width = "250px";
     document.getElementById("mySidebar").style.display = "absolute";
     document.getElementById("overlay").style.display = "block";
     },
             
     /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-    closeNav:function() 
+    closeSideNav:function() 
     {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("overlay").style.display = "none";
-    }
+    },
+
         
 }
 
