@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block title %}Acceuil{% endblock %}
 
 {% block stylesheets %}
@@ -14,7 +13,7 @@
 
 
 <!-- 
-    JUMBOTRON (image-flowers)
+JUMBOTRON (image-flowers)
 -->
 <div class="jumbotron jumbotron-fluid jumbotron-size-image-flowers background-image-flowers">
     <div class="container container-size-image-flowers">
@@ -34,139 +33,12 @@
 </div>
 
 <!-- 
-    LAST ARTICLES (limit 5)
+LAST ARTICLES (limit 5)
 -->
 <h1 class="text-center mb-4">Nos derniers articles</h1>
 
-<!-- Container Carousels -->
-<div class="container-fluid container-carousels">
+<div class="container my-4 container-carousels-custum">
 
-    <!-- Carousel animation -->
-    <div id="myCarousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-
-
-        <!-- Carousels -->
-        <div class="carousel-inner row  mx-auto carousel-size" role="listbox">
-
-            {# tcheck the 5 articles most recently #}
-            {% for lastArticle in lastArticles %}
-
-            {% set active = '' %}
-            {% if (loop.first)  %}
-            {% set active = 'active' %}
-            {% endif %}
-
-            <!-- Carousels item with active if is the first element-->
-            <div class="carousel-item carousel-item-custum col-md-4 {{active}}">
-
-                <!-- Cards-->
-                <div class="card">
-
-                    <!-- image -->
-                    <img class="card-img-top img-fluid"
-                        src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
-                        alt="image represent category {{ lastArticle.category.name}}">
-
-                    <!-- block texts -->
-                    <div class="card-body-custum">
-
-                        <!-- title -->
-                        <h4 class="card-title-custum">
-                            <a href="#" class="link">
-                                {{ lastArticle.title }}
-                            </a>
-                        </h4>
-
-                        <!-- author -->
-                        <p class="card-paragraph card-paragraph-author">
-                            <a href="#" class="link">
-                                {{ lastArticle.user.viewUsername }}
-                            </a>
-                        </p>
-
-                        <!-- summary -->
-                        <p class="card-paragraph card-paragraph-summary">
-                            {{ lastArticle.summary}}
-                        </p>
-
-
-
-                        {% set sum = 0 %}
-
-                        {# Sum of votes for one article #}
-                        {% for votes in lastArticle.votes %}
-                        {% set sum = sum + votes.voteValue %}
-                        {% endfor %}
-
-                        {# If article have a vote #}
-                        {% if (sum != 0) %}
-
-                        {# average #}
-                        {% set average = sum / lastArticle.votes|length %}
-                        {% set noteName = 'Noté :' %}
-
-                        {% if (average|round == 1) %}
-                        {% set label = 'Mediocre' %}
-                        {% endif %}
-
-                        {% if (average|round == 2) %}
-                        {% set label = 'Pas mal' %}
-                        {% endif %}
-
-                        {% if (average|round == 3) %}
-                        {% set label = 'Bien' %}
-                        {% endif %}
-
-                        {% if (average|round == 4) %}
-                        {% set label = 'Super' %}
-                        {% endif %}
-
-                        {% if (average|round == 5) %}
-                        {% set label = 'Excellent' %}
-                        {% endif %}
-
-                        {# article haven't a vote #}
-                        {% else %}
-                        {% set noteName = '' %}
-                        {% set label = 'Non noté' %}
-                        {% endif %}
-
-
-                        <p class="card-paragraph-note">
-                            {{noteName}} {{label}}
-                        </p>
-
-                        <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
-
-                    </div>
-                </div>
-            </div>
-
-            {# tcheck the 5 articles most recently #}
-            {% endfor %}
-        </div>
-
-
-
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-
-    </div>
-
-</div>
-
-
-<div class="container my-4">
-
-    
 
     <!--Carousel Wrapper-->
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -178,119 +50,377 @@
         </div>
         <!--/.Controls-->
 
+
         <!--Indicators-->
-        <ol class="carousel-indicators">
-            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-            <li data-target="#multi-item-example" data-slide-to="1"></li>
-            <li data-target="#multi-item-example" data-slide-to="2"></li>
-        </ol>
+        <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <!--/.Indicators-->
+        <!--Indicators-->
+        <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
         <!--/.Indicators-->
 
-
         <!--Slides-->
-        <div class="carousel-inner" role="listbox">
-
-            {% for lastArticle in lastArticles %}
-
-
-            {% set active = '' %}
-            {% set classCard = 'clearfix d-none d-md-block' %}
-
-            {% if (loop.first)  %}
-            {% set active = 'active' %}
-            {% set classCard = '' %}
-            {% endif %}
+        <div class="carousel-inner container-size" role="listbox">
 
             <!--First slide-->
-            <div class="carousel-item {{active}}">
+            <div class="carousel-item carousel-item-custum active">
 
-                
                 <div class="row">
-                    {% for lastArticle in lastArticles %}
-                    <div class="col-md-4 {{classCard}}">
+                    {% for lastArticle in lastArticles|slice(0, 3) %}
+
+
+                    {% set classAdd = 'clearfix d-none d-md-block' %}
+                    {% if (loop.first)  %}
+                    {% set classAdd = ''%}
+                    {% endif %}
+
+                    <div class="col-md-4 {{classAdd}}">
                         <div class="card mb-2">
-                            <img class="card-img-top"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
+
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
+                                alt="image represent category {{ lastArticle.category.name}}">
+
+                            <!-- All text -->
+                            <div class="card-body-custum">
+
                                 <!-- title -->
                                 <h4 class="card-title-custum">
                                     <a href="#" class="link">
                                         {{ lastArticle.title }}
                                     </a>
                                 </h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <a class="btn btn-primary">Button</a>
+
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.user.viewUsername }}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{ lastArticle.summary}}
+                                </p>
+
+
+
+                                {% set sum = 0 %}
+
+                                {# Sum of votes for one article #}
+                                {% for votes in lastArticle.votes %}
+                                {% set sum = sum + votes.voteValue %}
+                                {% endfor %}
+
+                                {# If article have a vote #}
+                                {% if (sum != 0) %}
+
+                                {# average #}
+                                {% set average = sum / lastArticle.votes|length %}
+                                {% set noteName = 'Noté :' %}
+
+                                {% if (average|round == 1) %}
+                                {% set label = 'Mediocre' %}
+                                {% endif %}
+
+                                {% if (average|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+
+                                {% if (average|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+
+                                {% if (average|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+
+                                {% if (average|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+                                {# article haven't a vote #}
+                                {% else %}
+                                {% set noteName = '' %}
+                                {% set label = 'Non noté' %}
+                                {% endif %}
+
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+
+                                <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
                             </div>
                         </div>
                     </div>
-                
-                    {# tcheck the 5 articles most recently #}
                     {% endfor %}
 
-                 
-
-                    
                 </div>
 
-          
             </div>
             <!--/.First slide-->
 
+            <!--Second slide-->
+            <div class="carousel-item carousel-item-custum">
 
-            {# tcheck the 5 articles most recently #}
-            {% endfor %}
+                <div class="row">
+
+                    {% for lastArticle in lastArticles|slice(3, 5) %}
+
+
+                    {% set classAdd = 'clearfix d-none d-md-block' %}
+                    {% if (loop.first)  %}
+                    {% set classAdd = ''%}
+                    {% endif %}
+                    <div class="col-md-4 {{classAdd}}">
+                        <div class="card mb-2">
+
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
+                                alt="image represent category {{ lastArticle.category.name}}">
+
+                            <!-- All text -->
+                            <div class="card-body-custum">
+
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.title }}
+                                    </a>
+                                </h4>
+
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.user.viewUsername }}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{ lastArticle.summary}}
+                                </p>
+
+
+
+                                {% set sum = 0 %}
+
+                                {# Sum of votes for one article #}
+                                {% for votes in lastArticle.votes %}
+                                {% set sum = sum + votes.voteValue %}
+                                {% endfor %}
+
+                                {# If article have a vote #}
+                                {% if (sum != 0) %}
+
+                                {# average #}
+                                {% set average = sum / lastArticle.votes|length %}
+                                {% set noteName = 'Noté :' %}
+
+                                {% if (average|round == 1) %}
+                                {% set label = 'Mediocre' %}
+                                {% endif %}
+
+                                {% if (average|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+
+                                {% if (average|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+
+                                {% if (average|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+
+                                {% if (average|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+                                {# article haven't a vote #}
+                                {% else %}
+                                {% set noteName = '' %}
+                                {% set label = 'Non noté' %}
+                                {% endif %}
+
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+
+                                <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+                <!--/.Second slide-->
+
+            </div>
+            <!--/.Second slide-->
+
+            <!--Mobile slide-->
+            <div id="mobile-slide" class="carousel-item carousel-item-custum">
+
+                <div class="row">
+
+                    {% for lastArticle in lastArticles|slice(4) %}
+
+                    <div class="col-md-4 ">
+                        <div class="card mb-2">
+
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
+                                alt="image represent category {{ lastArticle.category.name}}">
+
+                            <!-- All text -->
+                            <div class="card-body-custum">
+
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.title }}
+                                    </a>
+                                </h4>
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link">
+                                        {{ lastArticle.user.viewUsername }}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{ lastArticle.summary}}
+                                </p>
+
+
+
+                                {% set sum = 0 %}
+
+                                {# Sum of votes for one article #}
+                                {% for votes in lastArticle.votes %}
+                                {% set sum = sum + votes.voteValue %}
+                                {% endfor %}
+
+                                {# If article have a vote #}
+                                {% if (sum != 0) %}
+
+                                {# average #}
+                                {% set average = sum / lastArticle.votes|length %}
+                                {% set noteName = 'Noté :' %}
+
+                                {% if (average|round == 1) %}
+                                {% set label = 'Mediocre' %}
+                                {% endif %}
+
+                                {% if (average|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+
+                                {% if (average|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+
+                                {% if (average|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+
+                                {% if (average|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+                                {# article haven't a vote #}
+                                {% else %}
+                                {% set noteName = '' %}
+                                {% set label = 'Non noté' %}
+                                {% endif %}
+
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+
+                                <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+                <!--/.Second slide-->
+
+            </div>
+            <!--/ Mobile Slide-->
+
+
+
         </div>
-        <!--/.Slides-->
+        <!--/.Carousel Wrapper-->
+
 
     </div>
-    <!--/.Carousel Wrapper-->
+    <!-- /Carousel Wrapper-->
 
 
-</div>
 
 
-<!-- 
+
+    <!-- 
                 BEST ARTICLES (limit 5)
             -->
-{% for bestArticle in bestArticles %}
-<h2>{{bestArticle.title}}</h2>
-<p>{{bestArticle.category_name}}</p>
-<p>{{bestArticle.category_color}}</p>
-<p>{{bestArticle.category_picture}}</p>
-<p>{{bestArticle.username}}</p>
-<p> {{bestArticle.summary}} </p>
+    {% for bestArticle in bestArticles %}
+    <h2>{{bestArticle.title}}</h2>
+    <p>{{bestArticle.category_name}}</p>
+    <p>{{bestArticle.category_color}}</p>
+    <p>{{bestArticle.category_picture}}</p>
+    <p>{{bestArticle.username}}</p>
+    <p> {{bestArticle.summary}} </p>
 
-{% if (bestArticle.moyen|round == 1) %}
-{% set label = 'Mediocre' %}
-{% endif %}
+    {% if (bestArticle.moyen|round == 1) %}
+    {% set label = 'Mediocre' %}
+    {% endif %}
 
-{% if (bestArticle.moyen|round == 2) %}
-{% set label = 'Pas mal' %}
-{% endif %}
+    {% if (bestArticle.moyen|round == 2) %}
+    {% set label = 'Pas mal' %}
+    {% endif %}
 
-{% if (bestArticle.moyen|round == 3) %}
-{% set label = 'Bien' %}
-{% endif %}
+    {% if (bestArticle.moyen|round == 3) %}
+    {% set label = 'Bien' %}
+    {% endif %}
 
-{% if (bestArticle.moyen|round == 4) %}
-{% set label = 'Super' %}
-{% endif %}
+    {% if (bestArticle.moyen|round == 4) %}
+    {% set label = 'Super' %}
+    {% endif %}
 
-{% if (bestArticle.moyen|round == 5) %}
-{% set label = 'Excellent' %}
-{% endif %}
+    {% if (bestArticle.moyen|round == 5) %}
+    {% set label = 'Excellent' %}
+    {% endif %}
 
-<p> {{label}}</p>
+    <p> {{label}}</p>
 
-{% endfor %}
-{% endblock %}
+    {% endfor %}
+    {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags('homepage') }}
+    {% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homepage') }}
 
 
-{% endblock %}
+    {% endblock %}

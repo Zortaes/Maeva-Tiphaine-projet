@@ -237,58 +237,25 @@ JUMBOTRON BACKGROUND
 /****
 CONTAINER CAROUSELS 
 ****/
-.container-carousels
+.container-carousels-custum
 {
     background-color: #bacf8e; 
     padding-top: 1em;
-    padding-bottom: 1em;   
+    padding-bottom: 1em; 
+    height: 45vh;   
     
 }
 
-/****
-CAROUSEL
-****/
-.carousel-size
-
-{   
-    /* All card */  
-    @media (max-width: 575.98px) 
-    {  
-        width: 100%; 
-    }
-
-    @media (min-width: 575.98px) and (max-width: 1000px) 
-    { 
-         
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-          
-        .carousel-item-custum 
-        {
-            padding: 0;
-            margin-right: 0; 
-            width: 40vw; 
-        }
-            
-         /* show 2 items */
-        .active + .carousel-item-custum 
-        {
-        display: block;
-        }  
-        
-        
-        
-    }
-     
-      
-   
-} 
+.container-size 
+{
+    width: 80%; 
+    margin: 2vh auto 6vh auto;
+}
     
 /*** 
 ALL TEXT IN CARD (after image) 
 ****/
-.carousel-size .card-body-custum
+ .card-body-custum
 {
     padding: 1vh 0 1vh 0;  
     
