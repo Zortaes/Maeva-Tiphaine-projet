@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,14 +25,22 @@ class UserType extends AbstractType
             'username', 
             TextType::class,
             [
-                "label" => "Nom d'utilisateur"
+                'label' => "Nom d'utilisateur",
+                'constraints' => [
+                    new Length(["min" => 8, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 8 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 8 et 16 caractères"])
+                    ]
             ]
         )
         ->add(
             'email', 
             EmailType::class,
             [
-                "label" => "Email"
+                "label" => "Email",
+                'invalid_message' => 'L\'adresse email n\'est pas valide',
+                'constraints' => [
+                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),       
+                ]
+                                
             ]
         )
         ->add(
@@ -55,7 +62,7 @@ class UserType extends AbstractType
                 ],
                 'constraints' => [
                 new NotBlank(),
-                new Length(["min" => 6])
+                new Length(["min" => 8, "minMessage" => "Veuillez entrer un mot de passe entre 8 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un mot de passe entre 8 et 16 caractères"])
                 ]
             ]
         )
@@ -63,6 +70,8 @@ class UserType extends AbstractType
             'birth_date', 
             BirthdayType::class,
             [
+              
+                'format' => 'dd-MMMM-yyyy',
                 "label" => "Date d'anniversaire"
             ]
         )

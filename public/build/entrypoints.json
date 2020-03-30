@@ -16,6 +16,14 @@
       "js": [
         "/build/homepage.js"
       ]
+    },
+    "form": {
+      "css": [
+        "/build/form.css"
+      ],
+      "js": [
+        "/build/form.js"
+      ]
     }
   }
 }
