@@ -70,7 +70,6 @@ class UserType extends AbstractType
             'birth_date', 
             BirthdayType::class,
             [
-              
                 'format' => 'dd-MMMM-yyyy',
                 "label" => "Date d'anniversaire"
             ]

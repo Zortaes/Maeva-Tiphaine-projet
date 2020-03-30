@@ -15,10 +15,16 @@
 
 /* Form */
 .block-form-custum
-{
-
-   padding: 0.5em; 
+{  
    border: solid 2px lightgrey; 
+   padding: 0.5em; 
+
+   @media (min-width: 991.98px) 
+   { 
+        padding: 1em;
+        margin: auto;
+        width: 50%;        
+   }
  
 }
 
@@ -30,14 +36,13 @@ label, legend
     font-weight: bold;
 }
 
+
+/* Birth-Date Field*/
 .input-birth-date select
 {
     width: 30%; 
     display: flex;
-    margin: 0.2em;
-    
-     
-    
+    margin: 0.2em;        
 }
 
 /* Errors */
@@ -52,5 +57,13 @@ label span
 }
 
 
+
+button 
+{ 
+    margin-left: 20%;
+    margin-top: 1em;
+    width: 60%; 
+   
+}
 
 

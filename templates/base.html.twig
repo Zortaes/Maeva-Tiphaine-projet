@@ -11,12 +11,16 @@
             {{ encore_entry_link_tags('app') }}       
         {% endblock %}
 
-        {% if path("signup")%}
-            <p class="title-webSite">Titre du site</p>  
+        {% if unlessNavbar is defined %}
+
+            <p class="title-webSite">Titre du site</p>
+
         {% else %}
+
         <div id="sidebar">
         {{ render("/categorie/") }}
         </div>
+
         {% endif %}
 
     </head>
