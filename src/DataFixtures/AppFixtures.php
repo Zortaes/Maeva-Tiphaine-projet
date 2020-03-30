@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Vote;
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Services\Slugger;
 use App\Entity\ListIngredient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,10 +17,12 @@ class AppFixtures extends Fixture
 {
 
     private $encoder;
+    private $slugger;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder, Slugger $slugger)
     {
         $this->encoder = $encoder;
+        $this->slugger = $slugger;
     }
 
     public function load(ObjectManager $manager)
@@ -33,6 +36,7 @@ class AppFixtures extends Fixture
     
             $user = new User();
             $user->setUsername($faker->name);
+            $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
             $user->setBirthDate($faker->datetime);
             $user->setEmail($faker->email);
             $password = $this->encoder->encodePassword($user, 'faustine1');
@@ -113,6 +117,7 @@ class AppFixtures extends Fixture
             
             $category = new Category();
             $category->setName($categoryName);
+            $category->setSlug($this->slugger->sluggify($category->getName()));
             $category->setColor($imageOrColor[1]); 
             $category->setPicture($imageOrColor[0]); 
             $category->setCreatedAt($faker->datetime);  
@@ -130,6 +135,7 @@ class AppFixtures extends Fixture
 
             $article = new Article();
             $article->setTitle($faker->country);
+            $article->setSlug($this->slugger->sluggify($article->getTitle()));
             $article->setSummary($faker->sentence);
             $article->setInstruction($faker->paragraph);
             $article->setCreatedAt($faker->datetime); 
