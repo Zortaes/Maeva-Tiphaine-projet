@@ -1,11 +1,9 @@
 {
+  "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
   "build/homepage.css": "/build/homepage.css",
   "build/homepage.js": "/build/homepage.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-
-  "build/vendors~homepage.js": "/build/vendors~homepage.js",
-
   "build/images/accessoires-bijoux.jpg": "/build/images/accessoires-bijoux.058d8ef0.jpg",
   "build/images/animaux.jpg": "/build/images/animaux.a1234e59.jpg",
   "build/images/arts.jpg": "/build/images/arts.e73ee8d8.jpg",
@@ -19,8 +17,5 @@
   "build/images/linge-de-maison.jpg": "/build/images/linge-de-maison.022f251d.jpg",
   "build/images/menage-hygiene-maison.jpg": "/build/images/menage-hygiene-maison.40859839.jpg",
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
-
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
-  "build/app.css": "/build/app.css"
-
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
 }
