@@ -52,6 +52,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -255,5 +260,25 @@ class User implements UserInterface
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
