@@ -1,0 +1,69 @@
+
+/* Title after form */
+.title-webSite
+{
+    font-size: 2em; 
+    text-align: center;
+    margin-top: 2em;
+}
+
+/* ALL container of form */
+.container-form-custum
+{
+   margin-bottom: 3em;
+}
+
+/* Form */
+.block-form-custum
+{  
+   border: solid 2px lightgrey; 
+   padding: 0.5em; 
+
+   @media (min-width: 991.98px) 
+   { 
+        padding: 1em;
+        margin: auto;
+        width: 50%;        
+   }
+ 
+}
+
+
+/* Labels */
+label, legend 
+{
+    font-size: 1.2em!important; 
+    font-weight: bold;
+}
+
+
+/* Birth-Date Field*/
+.input-birth-date select
+{
+    width: 30%; 
+    display: flex;
+    margin: 0.2em;        
+}
+
+/* Errors */
+label span 
+{
+    font-size: 0.9em;
+    font-weight: normal;
+
+    span span:first-child {
+        display: none;
+        }
+}
+
+
+
+button 
+{ 
+    margin-left: 20%;
+    margin-top: 1em;
+    width: 60%; 
+   
+}
+
+
