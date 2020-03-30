@@ -118,4 +118,16 @@ class ListIngredient
     {
         return $this->article;
     }
+
+    /**
+     * Set the value of article
+     *
+     * @return  self
+     */ 
+    public function setArticle($article)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
 }

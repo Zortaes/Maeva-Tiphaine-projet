@@ -1,0 +1,358 @@
+
+/* Div containing averything */
+#articlePage
+{
+    width: 100%;
+
+    @media (min-width: 390px)
+    { 
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    @media (min-width: 767px) 
+    { 
+        width: 50%;
+        margin: 5% 0 5% 25%;
+    }
+}
+
+.articleTitle
+{
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.4em;   
+        
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 1.5em;
+        margin-top: 0.6em;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 1.6em;
+        margin-top: 1em;
+    }
+
+
+    @media (min-width: 767px) and (max-width: 991.98px) 
+    { 
+        font-size: 1.7em;
+        margin-top: 1.5em;
+    }
+
+
+    @media (min-width: 991.99px) and (max-width: 1500px) 
+    { 
+        font-size: 1.8em;
+        margin-top: 1.5em;
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+        font-size: 2em;
+        margin-top: 2em;
+    }
+}
+
+.theNote
+{
+    text-align: center;
+    font-size: 0.6em;
+    margin: 0.8em; 
+        
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 0.7em;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 0.8em;
+    }
+
+
+    @media (min-width: 767px) and (max-width: 991.98px) 
+    { 
+        font-size: 0.9em;
+        margin-bottom: 1.5em;
+    }
+
+
+    @media (min-width: 991.99px) and (max-width: 1500px) 
+    { 
+        font-size: 1em;
+        margin-bottom: 2em;
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+
+        font-size: 1.2em;
+        margin-bottom: 2em;
+    }
+}
+
+.articleDetails
+{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 17px;
+    font-size: 0.6em;
+    width: 100%;
+    margin-bottom: 1em;
+        
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 0.7em;
+        box-shadow: 0px 5px 20px black;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 0.8em;
+        box-shadow: 0px 5px 20px black;
+    }
+
+    @media (min-width: 767px) 
+    { 
+        font-size: 0.9em;
+        box-shadow: 0px 5px 20px black;
+    }
+
+    @media (min-width: 991.99px) 
+    { 
+        font-size: 1em;
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+        font-size: 1.2em;
+    }
+    
+
+}
+
+/* image */
+#articleImageDetail
+{
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+
+/* name of the author */
+.articleAuthor
+{
+    margin: 3%;
+}
+
+.articleAuthor a
+{
+    color: black;
+    text-decoration : none;
+    text-align: center;
+    font-size: 1.1em;
+    font-style: italic;
+
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 1.2em;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 1.3em;
+    }
+
+    @media (min-width: 767px) and (max-width: 991.98px) 
+    { 
+        font-size: 1.4em;
+    }
+
+
+    @media (min-width: 991.99px) and (max-width: 1500px) 
+    { 
+        font-size: 1.5em;
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+        font-size: 1.7em;
+    }
+}
+
+/* Name of the category */
+.articleCategory
+{
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.6em;
+
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 0.7em;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 0.8em;
+    }
+
+
+    @media (min-width: 767px) and (max-width: 991.98px) 
+    { 
+        font-size: 0.9em;    
+    }
+
+
+    @media (min-width: 991.99px) and (max-width: 1500px) 
+    { 
+        font-size: 1em;       
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+        font-size: 1.2em;
+    }
+}
+
+.fullSummary
+{
+    padding: 2em;
+}
+
+.ingredientInstruction
+{
+    padding: 0 2em 3em 2em;
+
+    @media (min-width: 767px)
+    { 
+        display: flex;
+        flex-direction: row;
+
+    }
+}
+
+.ingredientInstruction h3
+{
+    color: #768c3d;
+    font-size: 0.8em;
+    padding: 1em 0 1em 0;
+    @media (min-width: 390px) and (max-width: 550px) 
+    { 
+        font-size: 0.9em;
+    }
+
+    @media (min-width: 550px) and (max-width: 767px) 
+    { 
+        font-size: 1em;
+    }
+
+    @media (min-width: 767px) and (max-width: 991.98px) 
+    { 
+        font-size: 1.1em;
+    }
+
+    @media (min-width: 991.99px) and (max-width: 1500px) 
+    { 
+        font-size: 1.17em;
+    }
+
+    @media (min-width: 1500.01px)
+    { 
+        font-size: 1.4em;
+    }
+}
+
+.ingredient 
+{
+    @media (min-width: 767px)
+    { 
+    min-width: 30%;
+    border-right: 1px dotted grey;
+    }
+
+    ul
+    {
+    list-style-type: none;
+    }
+
+    li::before
+    {
+        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+        color: salmon; 
+        font-weight: bold; 
+        display: inline-block; 
+        width: 1em;
+        margin-left: -2em;  
+    }
+}
+
+.instruction
+{
+    @media (min-width: 767px)
+    { 
+        padding-left: 2em;
+    }
+    
+}
+
+.dropdownVote button
+{   
+    @media (max-width: 390px)
+    { 
+        margin: 0 0 10% 20%;
+        font-size: 1em;
+    }
+
+    margin: 0 25% 10% 25%;
+
+}
+
+@media (min-width: 767px)
+{ 
+    .voteFromDropdown
+    {
+        display: flex;
+        flex-direction: row;
+        width: 25%;
+    }
+
+    .dropdown-menu
+    {
+        width: 110%;
+        margin-left: -30%;
+        height: 50px;
+    }
+
+
+    .voteFromDropdown button
+    {
+        max-width: 10%;
+
+    }
+}
+
+.dropdownFlag
+{
+    position: absolute;
+    opacity: 30%;
+    margin: 2% 0 0 45%;
+
+    &:hover
+    {
+        opacity: 100%;
+    }
+}
+
+
+
+
+
+

@@ -177,6 +177,7 @@ class AppFixtures extends Fixture
             // get Reference article random
             $article = $this->getReference("article_" . random_int(1,30)); 
 
+            $listIngredient->setArticle($article);
             // Add this article in this ingredient
             $article->setUser($user);
 

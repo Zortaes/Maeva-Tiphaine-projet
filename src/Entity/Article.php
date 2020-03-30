@@ -69,6 +69,7 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article")
+     * @ORM\OrderBy({"disposition" = "ASC"})
      */
     private $ingredients;
 
