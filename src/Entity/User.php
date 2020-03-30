@@ -8,6 +8,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("username", message="Ce nom d'utilisateur existe déjà")
+ * @UniqueEntity("email", message="Cet email est déjà utilisé")
  */
 class User implements UserInterface
 {
@@ -20,6 +22,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Length(max=255)
      */
     private $username;
 
@@ -30,12 +33,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $avatar;
 
     /**
-     * 
      * @ORM\Column(type="date")
      */
     private $birth_date;
