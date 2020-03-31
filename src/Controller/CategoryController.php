@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="ListeDesCategory")
+     * @Route("/", name="CategoriesList")
      */
     public function categories()
     {
@@ -24,4 +24,18 @@ class CategoryController extends AbstractController
             'categories' => $categories
         ]);
     }
+
+    /**
+     * @Route("/{slug}", name="articleByCategory")
+     */
+    public function articleByCategory(Category $category)
+    {
+  
+        return $this->render('category/article_by_category.html.twig',
+        [
+            'category' => $category
+        ]);
+    }
+
+
 }

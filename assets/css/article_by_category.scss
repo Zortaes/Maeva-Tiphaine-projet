@@ -1,0 +1,138 @@
+
+
+/*************
+Title Category
+***************/
+.category-title {
+
+    margin-bottom: 2em;
+    margin-top: 2em; 
+
+   .category-title-p 
+    {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 2em;
+    text-shadow: 2px 1px 1px rgb(53, 52, 52);
+ 
+    } 
+}
+
+
+/*************
+Container 
+***************/
+.container-custum 
+{
+    width: 90%;
+    border: 2px solid lightgrey; 
+    margin: auto;
+    margin-bottom: 2em;
+    padding-bottom: 2em; 
+}
+
+/*********************************************
+                     CARDS 
+**********************************************/
+
+/*** Card Container ***/
+.card-custum 
+{
+    
+    margin: auto;
+    margin-top: 3em;
+    padding: 0;
+    box-shadow: 0px 5px 20px black;
+
+    @media (max-width: 450px) 
+    { 
+        width: 95%; 
+    }
+    
+    @media (min-width: 451px) and (max-width: 575.98px) 
+    { 
+        width: 80%; 
+    }
+
+    width: 50%;
+}  
+
+/*** 
+ALL TEXT 
+***/
+.card-body-custum 
+{
+    padding: 0.7em;
+
+    /* title */
+   .card-title-custum 
+    {
+        text-align: center;
+        font-weight: bold;  
+        margin: 0; 
+
+        @media (min-width: 1199.98px) 
+        { 
+           font-size: 1.3em;
+        }
+    } 
+
+    /* title (article title), author */
+    .link-custum 
+    {
+        color: black;
+    }
+
+    /* author */
+    .card-text-author 
+    {
+        text-align: center;
+        font-style: italic;
+
+        @media (min-width: 1199.98px) 
+        { 
+           font-size: 1.2em;
+        }
+    }
+
+    /* Paragraph summary and note*/
+    .card-paragraph 
+    {
+        padding-left: 2vw; 
+       
+        @media (max-width: 1199.98px) 
+        { 
+           font-size: 0.9em;
+        }
+
+        font-size: 1.1em;
+
+    } 
+
+    .card-paragraph-summary 
+    {
+      
+        height: 100px;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        overflow-wrap: break-word;
+    }
+
+    .btn-articleDetails 
+    {
+        
+        background-color: black;
+        border-color: black;
+        padding: 0 4vw 0 4vw;
+    }
+
+
+
+
+}
+
+
+
+  
