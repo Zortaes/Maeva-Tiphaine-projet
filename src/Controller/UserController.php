@@ -36,7 +36,7 @@ class UserController extends AbstractController
             $encodedPassword = $encoder->encodePassword($newUser, $plainPassword);
             $newUser->setPassword($encodedPassword);
 
-            /* Slug*/
+            /* Slug */
             $slugUsername = $form->get('username')->getData();
             $usernameSluged = $slugger->sluggify($slugUsername); 
             $newUser->setSlug($usernameSluged); 

@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ category.name}}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('article_by_category') }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="category-title">
+    <p class="category-title-p" style="color:{{ category.color }}">{{category.name}}</p>
+</div>
+
+<!-- Container Cards -->
+<div class="container container-custum row">
+    {% for article in category.articles %}
+
+
+    <div class="card card-custum col-sm-5">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ category.picture ) }} "
+            alt="image represent category {{ category.name}}">
+        <div class="card-body card-body-custum">
+            <h5 class="card-title card-title-custum">
+                <a href="#" class="link-custum">
+                   {{article.title}} 
+                </a>      
+            </h5>
+            <p class="card-text-author">
+                <a href="#" class="link-custum">
+                    {{article.user.viewUsername}}
+                </a>
+            </p>
+            <p class="card-paragraph card-paragraph-summary">
+                {{article.summary}} 
+            </p>
+
+            {% set sum = 0 %}
+
+            {# Sum of votes for one article #}
+            {% for votes in article.votes %}
+            {% set sum = sum + votes.voteValue %}
+            {% endfor %}
+
+            {# If article have a vote #}
+            {% if (sum != 0) %}
+
+            {# average #}
+            {% set average = sum / article.votes|length %}
+            {% set noteName = 'Noté :' %}
+
+            {% if (average|round == 1) %}
+            {% set label = 'Mediocre' %}
+            {% endif %}
+
+            {% if (average|round == 2) %}
+            {% set label = 'Pas mal' %}
+            {% endif %}
+
+            {% if (average|round == 3) %}
+            {% set label = 'Bien' %}
+            {% endif %}
+
+            {% if (average|round == 4) %}
+            {% set label = 'Super' %}
+            {% endif %}
+
+            {% if (average|round == 5) %}
+            {% set label = 'Excellent' %}
+            {% endif %}
+
+            {# article haven't a vote #}
+            {% else %}
+            {% set noteName = '' %}
+            {% set label = 'Non noté' %}
+            {% endif %}
+
+            
+            <p class=" card-paragraph card-paragraph-note">
+                {{noteName}} {{label}}
+            </p>
+
+            <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary btn-articleDetails">Lire la suite</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- /Container Cards -->
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('article_by_category') }}
+{% endblock %}

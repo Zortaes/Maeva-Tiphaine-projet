@@ -32,6 +32,15 @@
       "js": [
         "/build/form.js"
       ]
+    },
+    "article_by_category": {
+      "css": [
+        "/build/article_by_category.css"
+      ],
+      "js": [
+        "/build/article_by_category.js"
+
+      ]
     }
   }
 }
