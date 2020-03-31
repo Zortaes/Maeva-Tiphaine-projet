@@ -78,8 +78,8 @@
             <a href="#"><h2>{{ article.user.viewUsername}}</h2></a>
         </div>
 
-            <div class="articleCategory" style="color:{{ article.category.color }}">                              
-        <a href="#">{{ article.category.name }}</a>
+            <div class="articleCategory" >                              
+        <a href="#" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
         </div>
 
         <div class="fullSummary">
@@ -100,7 +100,7 @@
                 <p>{{ article.instruction }}</p>
             </div>
         </div>
-
+        <!--
             <div class="dropdownVote">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,7 +117,8 @@
                     </div>
                 </div>
             </div> 
-        
+        !-->
+
 </div>
 
 {% endblock %}

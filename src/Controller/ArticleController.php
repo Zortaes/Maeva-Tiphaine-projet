@@ -12,13 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/{slug}", name="articleDetails")
+     * @Route("/{slug}", methods={"GET"}, name="articleDetails")
+     * 
      */
     public function article(Article $article)
     {
+
         return $this->render('article/article_details.html.twig',
         [
             'article' => $article
         ]);
+       
     }
+
+    
 }
