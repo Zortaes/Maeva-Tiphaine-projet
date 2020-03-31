@@ -79,7 +79,7 @@
         </div>
 
             <div class="articleCategory" >                              
-        <a href="#" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
+        <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
         </div>
 
         <div class="fullSummary">

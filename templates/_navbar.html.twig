@@ -2,38 +2,60 @@
 
     <div id="siteNavbar">
         <button id="sideOpenbtn">
-        <div class="line1"></div>
-        <div id="line2"></div>
-        <div class="line1"></div>
+            <div class="line1"></div>
+            <div id="line2"></div>
+            <div class="line1"></div>
         </button>
-        <a id="navTitle" href="#"><h3>Titre du site</h3></a>
+        <a id="navTitle" href="{{path('homepage')}}"><h3>Titre du site</h3></a>
         <div id="linkList">
-        <button class="navLinks" href="#" >Accueil</button>
-        <div class="subnav">
-            <button class="navLinks" id="categoryNavBtn" href="#" >Catégories</button>
-            <div class="show">   
-                {% for category in categories %}
-                    <a class="sidebarCategorie" href="#">{{ category.name }}</a>
-                {% endfor %}
+            <button class="navLinks"><a href="{{path('homepage')}}">Accueil</a></button>
+            <div class="subnav">
+                <button class="navLinks" id="categoryNavBtn">Catégories</button>
+
+                <div class="show">   
+                    {% for category in categories %}
+                        <a class="sidebarCategorie" href="{{path('articleByCategory', {'slug':category.slug})}}">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
+
+            <button class="navLinks"><a href="#">Nous contacter</a></button>
         </div>
-        <button class="navLinks" href="#" >Nous contacter</button>
+        {% if app.user %}
+            <div class="mb-3 row">
+                Bonjour, {{ app.user.viewUsername }} <button id="connexionBtn"><a href="{{ path('logout') }}">Déconnexion</a></button>
+            </div>
+        {% else %} 
+        <a href="{{path('login')}}"><button id="connexionBtn">Connexion</button></a>
+        {% endif %}
         </div>
-        <button id="connexionBtn" href="#">Connexion</button>
-    </div>
 
     <div id="mySidebar" class="sidebar">
         <div id="bonjourSidebar">
-        <button class="closebtn">&times;</button>
-        <h5>Bonjour, veuillez vous identifier</h5>
+            <button class="closebtn">&times;</button>
+
+            {% if app.user %}
+                <h5>Bonjour, {{ app.user.viewUsername }}</h5>
+            {% else %} 
+                <h5>Bonjour, veuillez vous identifier</h5>
+            {% endif %}
+        
         </div>
         <h5 id="categoriesNav">Catégories</h5> 
-        <div id="sideList">   
-            {% for category in categories %}
-                <a class="sidebarCategorie" href="#">{{ category.name }}</a>
-            {% endfor %}
-            <a class="sideLinks" href="#"><h5>Nous contacter</h5></a>
-            <a class="sideLinks" href="#"><h5>Se connecter</h5></a>           
-            <a class="sideLinks" href="#"><h5>S'inscrire</h5></a>                    
-        </div>
+            <div id="sideList">  
+            
+                {% for category in categories %}
+                    <a class="sidebarCategorie" href="{{path('articleByCategory', {'slug':category.slug})}}">{{ category.name }}</a>
+                {% endfor %}
+
+                <a class="sideLinks" href="#"><h5>Nous contacter</h5></a>
+
+                {% if app.user %}
+                    <a class="sideLinks" href="{{path('logout')}}"><h5>Se déconnecter</h5></a>
+                {% else %} 
+                    <a class="sideLinks" href="{{path('login')}}"><h5>Se connecter</h5></a>           
+                    <a class="sideLinks" href="{{path('signup')}}"><h5>S'inscrire</h5></a>
+                {% endif %}
+                        
+            </div>
     </div>
