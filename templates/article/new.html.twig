@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Nouvel Article{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+
+{% block body %}
+{{form(form)}}
+
+
+<ul class="tags">
+        {% for tag in form.tags %}
+            <li>{{ form_row(tag.name) }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('form') }}
+{% endblock %}
+
+
+{% endblock %}

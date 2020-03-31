@@ -2,18 +2,59 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Article;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\Slugger;
+use App\Entity\ListIngredient;
+use App\Form\Type\ArticleType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 /**
  * @Route("/article")
  */
 class ArticleController extends AbstractController
 {
+
+     /**
+     * @Route("/nouveau", methods={"GET","POST"}, name="articleNew") 
+     */
+    public function articleNew(Request $request,  Slugger $slugger): Response
+    {
+
+        $newArticle = new Article();
+       
+        $formArticle = $this->createForm(ArticleType::class, $newArticle);
+        
+        $formArticle->handleRequest($request);
+
+        if ($formArticle->isSubmitted() && $formArticle->isValid()) {
+
+            /* Slug */
+            $slugArticle = $formArticle->get('Article')->getData();
+            $articleSluged = $slugger->sluggify($slugArticle); 
+            $newArticle->setSlug($articleSluged); 
+
+            $newArticle->setCreatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newArticle);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('article/new.html.twig', [
+            'newArticle' => $newArticle,
+            'form' => $formArticle->createView(),
+        ]);
+    }
+
     /**
-     * @Route("/{slug}", methods={"GET"}, name="articleDetails")
-     * 
+     * @Route("/{slug}", methods={"GET"}, name="articleDetails") 
      */
     public function article(Article $article)
     {
@@ -26,4 +67,7 @@ class ArticleController extends AbstractController
     }
 
     
+       
 }
+
+    

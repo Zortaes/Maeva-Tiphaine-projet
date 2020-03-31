@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -18,17 +20,20 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=22)
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=160)
+     * @Assert\NotBlank
      */
     private $summary;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $instruction;
 
@@ -83,6 +88,8 @@ class Article
         $this->ingredients = new ArrayCollection();
         $this->votes = new ArrayCollection();
     }
+
+   
 
     public function getId(): ?int
     {
