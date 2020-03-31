@@ -17,12 +17,21 @@
         "/build/homepage.js"
       ]
     },
+
     "article_details": {
       "css": [
         "/build/article_details.css"
       ],
       "js": [
         "/build/article_details.js"
+
+    "form": {
+      "css": [
+        "/build/form.css"
+      ],
+      "js": [
+        "/build/form.js"
+
       ]
     }
   }

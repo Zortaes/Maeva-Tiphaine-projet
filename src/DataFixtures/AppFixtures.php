@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
          for ($i = 0; $i < 10; $i++) {
     
             $user = new User();
-            $user->setUsername($faker->name);
+            $user->setUsername($faker->userName);
             $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
             $user->setBirthDate($faker->datetime);
             $user->setEmail($faker->email);
@@ -177,7 +177,8 @@ class AppFixtures extends Fixture
             // get Reference article random
             $article = $this->getReference("article_" . random_int(1,30)); 
 
-            $listIngredient->setArticle($article);
+            $listIngredient->setArticle($article); 
+
             // Add this article in this ingredient
             $article->setUser($user);
 
