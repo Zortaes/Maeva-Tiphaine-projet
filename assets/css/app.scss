@@ -185,13 +185,19 @@ body {
         flex-direction: row;
         width: 100%;
 
+        a
+        {
+          
+          color: black;
+          text-decoration: none;
+        }
+
         .navLinks
         {  
+          outline: none;
           display: block !important;
           font-weight: bold;
           border: none;
-          outline: none;
-          color: black;
           padding: 14px 16px;
           background-color: inherit;
           margin: 0; 
