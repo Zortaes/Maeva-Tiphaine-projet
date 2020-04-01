@@ -27,6 +27,12 @@ class ArticleController extends AbstractController
 
         $newArticle = new Article();
        
+        // dummy code - add some example tags to the task
+        // (otherwise, the template will render an empty list of tags
+        $ingredient1 = new ListIngredient();
+        $newArticle->getIngredients()->add($ingredient1);
+
+
         $formArticle = $this->createForm(ArticleType::class, $newArticle);
         
         $formArticle->handleRequest($request);
@@ -34,7 +40,7 @@ class ArticleController extends AbstractController
         if ($formArticle->isSubmitted() && $formArticle->isValid()) {
 
             /* Slug */
-            $slugArticle = $formArticle->get('Article')->getData();
+            $slugArticle = $formArticle->get('title')->getData();
             $articleSluged = $slugger->sluggify($slugArticle); 
             $newArticle->setSlug($articleSluged); 
 

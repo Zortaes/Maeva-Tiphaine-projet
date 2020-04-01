@@ -26,11 +26,12 @@
       ]
     },
     "form": {
+      "js": [
+        "/build/vendors~form.js",
+        "/build/form.js"
+      ],
       "css": [
         "/build/form.css"
-      ],
-      "js": [
-        "/build/form.js"
       ]
     },
     "article_by_category": {

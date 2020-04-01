@@ -10,21 +10,49 @@
 {% endblock %}
 
 {% block body %}
-{{form(form)}}
+<div class="container container-form-custum">
+    {{ form_start(form) }}
+
+    <div class="block-form-custum">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Ajouter un article</h1>
+        <div class="col-12">
+            {{ form_row(form.title)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.summary)}}
+
+        </div>
+        <div class="col-12 ">
+            {{ form_row(form.instruction)}}
+
+        </div>
+        <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
+            {{ form_row(form.ingredients)}}
+            
+           
+        </div>
+       
+       
 
 
-<ul class="tags">
-        {% for tag in form.tags %}
-            <li>{{ form_row(tag.name) }}</li>
-        {% endfor %}
-    </ul>
+        <div class="col-12">
+            {{ form_label(form.category)}}
+            {{ form_widget(form.category)}}
+        </div>
+        <div class="col-12">
+            {{ form_row(form.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+</div>
 
 
+
+{% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 {{ encore_entry_script_tags('form') }}
-{% endblock %}
-
-
 {% endblock %}

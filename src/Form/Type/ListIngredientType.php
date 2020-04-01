@@ -20,13 +20,6 @@ class ListIngredientType extends AbstractType
     {
         $builder
         ->add(
-            'disposition', 
-            IntegerType::class,
-            [
-                'label' => "Ordre",
-            ]
-        )
-        ->add(
             'quantity', 
             TextType::class,
             [

@@ -73,7 +73,7 @@ class Article
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article", cascade={"persist"})
      * @ORM\OrderBy({"disposition" = "ASC"})
      */
     private $ingredients;
