@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 /**
@@ -21,15 +22,21 @@ class ArticleController extends AbstractController
 
      /**
      * @Route("/nouveau", methods={"GET","POST"}, name="articleNew") 
+     * @IsGranted("ROLE_USER")
      */
     public function articleNew(Request $request,  Slugger $slugger): Response
     {
 
         $newArticle = new Article();
-       
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
         
-        $ingredient1 = new ListIngredient();
-        $newArticle->getIngredients()->add($ingredient1);
+        $ingredient = new ListIngredient();
+        $ingredient->setDisposition(1); 
+        $newArticle->getIngredients()->add($ingredient);
+
+      
 
 
         $formArticle = $this->createForm(ArticleType::class, $newArticle);
@@ -41,12 +48,47 @@ class ArticleController extends AbstractController
             /* Slug */
             $slugArticle = $formArticle->get('title')->getData();
             $articleSluged = $slugger->sluggify($slugArticle); 
-            $newArticle->setSlug($articleSluged); 
+            $newArticle->setSlug($articleSluged);
+        
+            $dataIngredient = $formArticle->get('ingredients')->getData();   
 
+           
+            foreach($dataIngredient as $key => $value) {
+                   
+                $disposition = $value->getDisposition();
+
+                if ($disposition === null) {
+                    
+                   $value->setDisposition(2); 
+                               
+                }
+            }
+
+       
+            $newArticle->setFlagged(0); 
+            $newArticle->setUser($user);
+           
+            $newArticle->addIngredient($ingredient); 
+
+            
             $newArticle->setCreatedAt(new DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
+           
             $entityManager->persist($newArticle);
+        
+            $entityManager->flush();
+
+          
+
+            foreach ($newArticle->getIngredients() as $ingredient) {
+                $ingredient->setArticle($newArticle); 
+            }
+
+           
+            $ingredient->setArticle($newArticle);
+            $entityManager->persist($ingredient);
+        
             $entityManager->flush();
 
             return $this->redirectToRoute('homepage');

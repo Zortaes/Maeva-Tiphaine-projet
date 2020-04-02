@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,9 +45,14 @@ class ListIngredient
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="ingredients")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="ingredients", cascade={"persist"})
      */
     private $article;
+
+    public function __construct() 
+    {
+        $this->setCreatedAt(new DateTime('now')); 
+    }
 
     public function getId(): ?int
     {

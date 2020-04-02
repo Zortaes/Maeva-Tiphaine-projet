@@ -56,8 +56,8 @@ class ArticleType extends AbstractType
             ]
         )
         ->add('ingredients', CollectionType::class, [
-            'required' => true,
             'entry_type' => ListIngredientType::class,
+            'required' => true,
             'entry_options' => ['label' => false],
             'allow_add' => true,
             'by_reference' => false,

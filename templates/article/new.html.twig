@@ -28,18 +28,16 @@
 
         </div>
         <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
-            {{ form_row(form.ingredients)}}
-            
-           
-        </div>
-       
-       
+            {{ form_row(form.ingredients)}}       
+        </div>    
 
 
         <div class="col-12">
             {{ form_label(form.category)}}
             {{ form_widget(form.category)}}
         </div>
+
+        
         <div class="col-12">
             {{ form_row(form.Envoyer) }}
         </div>

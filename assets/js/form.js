@@ -57,14 +57,17 @@ function addIngredientForm($collectionHolder, $newLinkDiv) {
     /* Replace '__name__' in the prototype's HTML to
     instead be a number based on how many items we have */
     newForm = newForm.replace(/__name__/g, index);
+    
 
     /* Increase the index with one for the next item */
     $collectionHolder.data('index', index + 1);
 
+   
     /* Display the form in the page in an div, before the "Add a Ingredient" link div */
-    var $newFormIngredient = $('<p></p>').append(newForm);
+    var $newFormIngredient = $('<div></div>').append(newForm);
     $newLinkDiv.before($newFormIngredient);
 
+  
     /* Add a delete link to the new form */
     addIngredientFormDeleteLink($newFormIngredient);
 }
