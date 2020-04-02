@@ -27,8 +27,7 @@ class ArticleController extends AbstractController
 
         $newArticle = new Article();
        
-        // dummy code - add some example tags to the task
-        // (otherwise, the template will render an empty list of tags
+        
         $ingredient1 = new ListIngredient();
         $newArticle->getIngredients()->add($ingredient1);
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ListIngredient;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -258,5 +259,15 @@ class Article
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function addIngredient(ListIngredient $listIngredient)
+    {
+        $this->ingredients->add($listIngredient);
+    }
+
+    public function removeIngredient(ListIngredient $listIngredient)
+    {
+        $this->ingredients->removeElement($listIngredient);
     }
 }

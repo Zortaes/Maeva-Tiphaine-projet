@@ -1,52 +1,83 @@
 import '../css/form.scss';
 
-$('form button').css({"background-color":"black", "border-color":"black"})
 
+$('form button').css({"background-color":"black", "border-color":"black"})
 
 var $collectionHolder;
 
-// setup an "add a tag" link
-var $addTagButton = $('<button type="button" class="add_ingredient_link">+</button>');
-var $newLinkDiv = $('<div></div>').append($addTagButton);
+
+
+/* setup an "add a Ingredient" link */ 
+var $addIngredientButton = $('<button type="button" class="add_ingredient_link">+</button>');
+var $newLinkDiv = $('<div></div>').append($addIngredientButton);
+
+
 
 jQuery(document).ready(function() {
-    // Get the ul that holds the collection of tags
+
+    /* Get the div that holds the collection of Ingredients */ 
     $collectionHolder = $('div.ingredients');
 
-    // add the "add a tag" anchor and li to the tags ul
+
+    /* Add a delete link to all of the existing Ingredient added */ 
+    $collectionHolder.find('div .ingredients').each(function() {
+        addIngredientFormDeleteLink($(this));
+    });
+
+
+    /* Add the "add a Ingredient" anchor and div to the Ingredients div */ 
     $collectionHolder.append($newLinkDiv);
 
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
+
+    /* Count the current form inputs we have (e.g. 2), use that as the new
+     index when inserting a new item (e.g. 2) */
     $collectionHolder.data('index', $collectionHolder.find('input').length);
 
-    $addTagButton.on('click', function(e) {
-        // add a new tag form (see next code block)
-        addTagForm($collectionHolder, $newLinkDiv);
+
+    $addIngredientButton.on('click', function(e) {
+
+        /* Add a new Ingredient form (see next code block) */ 
+        addIngredientForm($collectionHolder, $newLinkDiv);
+
     });
+
 });
 
-function addTagForm($collectionHolder, $newLinkLi) {
-    // Get the data-prototype explained earlier
+function addIngredientForm($collectionHolder, $newLinkDiv) {
+
+
+    /* Get the data-prototype */ 
     var prototype = $collectionHolder.data('prototype');
 
-    // get the new index
+    /* Get the new index */
     var index = $collectionHolder.data('index');
 
     var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your tags field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    // newForm = newForm.replace(/__name__label__/g, index);
-
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
+   
+    /* Replace '__name__' in the prototype's HTML to
+    instead be a number based on how many items we have */
     newForm = newForm.replace(/__name__/g, index);
 
-    // increase the index with one for the next item
+    /* Increase the index with one for the next item */
     $collectionHolder.data('index', index + 1);
 
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<p></p>').append(newForm);
-    $newLinkLi.before($newFormLi);
+    /* Display the form in the page in an div, before the "Add a Ingredient" link div */
+    var $newFormIngredient = $('<p></p>').append(newForm);
+    $newLinkDiv.before($newFormIngredient);
+
+    /* Add a delete link to the new form */
+    addIngredientFormDeleteLink($newFormIngredient);
+}
+
+function addIngredientFormDeleteLink($ingredientForm) {
+
+    var $removeFormButton = $('<button type="button">Delete this Ingredient</button>');
+    $ingredientForm.append($removeFormButton);
+
+    $removeFormButton.on('click', function(e) {
+
+        /* Remove the div for the Ingredient form */
+        $ingredientForm.remove();
+
+    });
 }
