@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Vote;
-use App\Form\Type\VoteType;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,42 +21,62 @@ class ArticleController extends AbstractController
      * 
      */
     public function article(Article $article)
-    {
+    {    
 
         return $this->render('article/article_details.html.twig',
         [
             'article' => $article
-        ]);    
+        ]);   
     }
 
     /**
-     * @Route("/{slug}/vote", methods={"GET","POST"}, name="vote")
-     *
-     * @param Article $article
-     * @param Request $request
-     * @return vote
+     * @Route("/{slug}/post", methods={"POST"}, name="vote")
+     * 
      */
-    public function vote(Article $article, Request $request)
+    public function vote(Article $article, Request $request, EntityManagerInterface $manager)
     {
-        $vote = new Vote();
-        $form = $this->createForm(VoteType::class, $vote);
-        $vote->setArticle($article);
-        $vote->setUser($this->getUser());
-        $vote->setCreatedAt(new DateTime('now'));
-        $form->handleRequest($request);
+        if($request != 'POST')
+        {
+            http_response_code(403);
+        }
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
+        $vote_value = $request->request->get('userVote');
+
+        $vote = $this->getDoctrine()->getRepository(Vote::class)->findOneBy([
+            "user" => $this->getUser(),
+            "article" => $article
+            ]);
+        
+        if($vote)
+        {
+            $vote->setVoteValue($vote_value);
+            $vote->setUpdatedAt(new DateTime('now'));
             $manager->persist($vote);
             $manager->flush();
         }
+        else
 
-        
-        return $this->render('article/_vote.html.twig',
-        [
-            'form' => $form->createView(),
-        ]);    
-    }
+            $vote = new Vote();
 
+            if($vote_value >= 1 && $vote_value <= 5)
+            {
+                
+
+                $vote->setVoteValue($vote_value);
+                $vote->setArticle($article);
+                $vote->setUser($this->getUser());
+                $vote->setCreatedAt(new DateTime('now'));
+                $manager->persist($vote);
+                $manager->flush();
+
+            }
+            else
+            {
+                throw new Exception('La valeur n\'est pas bonne');
+            }
+
+        return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug() ], 301);
+       
+    }   
     
 }

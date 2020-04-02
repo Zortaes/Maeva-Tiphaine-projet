@@ -100,27 +100,37 @@
                 <p>{{ article.instruction }}</p>
             </div>
         </div>
-        <!--
-            <div class="dropdownVote">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Comment trouvez vous cet article ?
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <div class="voteFromDropdown">
-                            <button class="dropdown-item" type="button">Médiocre</button>
-                            <button class="dropdown-item" type="button">Pas mal</button>
-                            <button class="dropdown-item" type="button">Bien</button>
-                            <button class="dropdown-item" type="button">Super</button>
-                            <button class="dropdown-item" type="button">Excellent</button>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        !-->
-    {{ render(path('vote', {'slug': article.slug})) }}
 
+    {% if app.user %}
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <form action="{{ path('vote', {'slug' : article.slug}) }}" id="help"  method="post">
+                <button class="dropdown-item" type="submit" name="userVote" value="1">Médiocre</button>
+                <button class="dropdown-item" type="submit" name="userVote" value="2">Pas mal</button>
+                <button class="dropdown-item" type="submit" name="userVote" value="3">Bien</button>
+                <button class="dropdown-item" type="submit" name="userVote" value="4">Super</button>
+                <button class="dropdown-item" type="submit" name="userVote" value="5">Excellent</button>
+            </form>            
+        </div>
+    </div>
+    <div class="spinner-border" role="status" style="display:none">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    {% else %} 
+    <p> Veuillez vous connecter pour donner votre avi sur cet article </p>
+    {% endif %}
 </div>
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('article_details') }}    
+{% endblock %}
 
 {% endblock %}
 
