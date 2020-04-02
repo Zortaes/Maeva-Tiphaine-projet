@@ -303,53 +303,6 @@
     
 }
 
-.dropdownVote button
-{   
-    @media (max-width: 390px)
-    { 
-        margin: 0 0 10% 20%;
-        font-size: 1em;
-    }
-
-    margin: 0 25% 10% 25%;
-
-}
-
-@media (min-width: 767px)
-{ 
-    .voteFromDropdown
-    {
-        display: flex;
-        flex-direction: row;
-        width: 25%;
-    }
-
-    .dropdown-menu
-    {
-        width: 110%;
-        margin-left: -30%;
-        height: 50px;
-    }
-
-
-    .voteFromDropdown button
-    {
-        max-width: 10%;
-
-    }
-}
-
-.dropdownFlag
-{
-    position: absolute;
-    opacity: 30%;
-    margin: 2% 0 0 45%;
-
-    &:hover
-    {
-        opacity: 100%;
-    }
-}
 
 
 

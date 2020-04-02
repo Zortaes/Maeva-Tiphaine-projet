@@ -35,7 +35,6 @@ var $ = require('jquery');
 var app = {
     init:function() 
     {
-        console.log('init');
 
         $(document).ready(function()
         {
