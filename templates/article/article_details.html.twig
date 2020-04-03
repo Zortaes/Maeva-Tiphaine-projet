@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-{{ parent() }}
-{{ encore_entry_link_tags('article_details') }}
-{% endblock %}
+    {% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('article_details') }}
+    {% endblock %}
 
 {% block body %}
 
@@ -25,7 +25,7 @@
 
             {# average #}
             {% set average = sum / article.votes|length %}
-            {% set noteName = 'Noté :' %}
+            {% set noteName = 'Noté par la communauté :' %}
 
             {% if (average|round == 1) %}
                 {% set label = 'Mediocre' %}
@@ -61,9 +61,8 @@
             <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.category.picture ) }} "
             alt="image represent category {{ article.category.name}}"> 
         
-            <div class="dropdownFlag">
-                <div class="dropdown">
-                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown position-absolute m-3">
+                    <button class="btn btn-light btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -72,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+
 
         <div class="articleAuthor">
             <a href="#"><h2>{{ article.user.viewUsername}}</h2></a>
@@ -83,12 +82,12 @@
         </div>
 
         <div class="fullSummary">
-            {{ article.summary }}
+            <p>{{ article.summary }}</p>
         </div>
 
         <div class="ingredientInstruction">
             <div class="ingredient">
-            <h3>Ingrédients</h3>
+                <h3>Ingrédients</h3>
                 <ul>
                     {% for ingredientList in article.ingredients %}
                         <li>{{ ingredientList.quantity }} {{ ingredientList.ingredient }}</li>
@@ -102,37 +101,66 @@
         </div>
 
     {% if app.user %}
+    
+        {% if vote %}
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="{{ path('vote', {'slug' : article.slug}) }}" id="help"  method="post">
-                <button class="dropdown-item" type="submit" name="userVote" value="1">Médiocre</button>
-                <button class="dropdown-item" type="submit" name="userVote" value="2">Pas mal</button>
-                <button class="dropdown-item" type="submit" name="userVote" value="3">Bien</button>
-                <button class="dropdown-item" type="submit" name="userVote" value="4">Super</button>
-                <button class="dropdown-item" type="submit" name="userVote" value="5">Excellent</button>
-            </form>            
+        <div class="UserThoughs">    
+                {% if (vote.voteValue == 1) %}
+                    {% set label = 'Mediocre' %}
+                {% endif %}
+
+                {% if (vote.voteValue == 2) %}
+                    {% set label = 'Pas mal' %}
+                {% endif %}
+
+                {% if (vote.voteValue == 3) %}
+                    {% set label = 'Bien' %}
+                {% endif %}
+
+                {% if (vote.voteValue == 4) %}
+                    {% set label = 'Super' %}
+                {% endif %}
+
+                {% if (vote.voteValue == 5) %}
+                    {% set label = 'Excellent' %}
+                {% endif %}
+            
+                <p>Vous avez trouvé cet article {{label}}</p>
+            </div>
+        {% endif %}
+
+        <div class="dropdown text-center">
+            <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Que pensez-vous de cet article ?
+            </button>
+            <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-vote-custom">
+                    <form action="{{ path('vote', {'slug' : article.slug}) }}" method="post">
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3 active" type="submit" name="userVote" id="mediocre" value="1">Médiocre</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="2">Pas mal</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="3">Bien</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="4">Super</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="spinner-border" role="status" style="display:none">
-        <span class="sr-only">Loading...</span>
-    </div>
 
     {% else %} 
-    <p> Veuillez vous connecter pour donner votre avi sur cet article </p>
+        <p class="UserThoughs"> Connectez-vous pour donner votre avi sur cet article </p>
     {% endif %}
-    </div>
+
+    <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
 </div>
 
+
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('article_details') }}    
-{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('article_details') }} 
+    {% endblock %}
 
 
 
