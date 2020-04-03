@@ -11,11 +11,16 @@ JUMBOTRON SIZE
     /*****
     All container jumbotron
     ******/ 
+
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 35px 24px rgba(0,0,0,0.22);
+    margin-bottom: 1.8em;
+
     @media (max-width: 991.98px) 
-    { 
-        height: 33vh; 
+    {     
+        height: 40vh; 
         width: 100vw; 
         padding: 2.5vh 1vw 0 1vw;
+     
     }
     @media (min-width: 991.99px) and (max-width: 1000px) 
     { 
@@ -24,10 +29,7 @@ JUMBOTRON SIZE
     }
     
     padding-left: 4vw; 
-    height: 50vh; 
-    
-    
-       
+    height: 50vh;     
 
         /* Container of text */
         .container-size-image-flowers 
@@ -42,7 +44,7 @@ JUMBOTRON SIZE
 
             @media (max-width: 550px) 
             { 
-                font-size: 1.5em; 
+                font-size: 1.6em; 
             }
 
             @media (min-width: 550px) and (max-width: 767px) 
@@ -63,13 +65,9 @@ JUMBOTRON SIZE
         p 
         {
             color: white; 
+          
         
-            @media (max-width: 390px) 
-            { 
-                font-size: 0.6em;
-            }
-        
-            @media (min-width: 390px) and (max-width: 550px) 
+            @media  (max-width: 550px) 
             { 
               font-size: 0.7em;
             }
@@ -126,13 +124,8 @@ JUMBOTRON SIZE
         .paragraph-image-flowers-2 
         {
            
-            @media (max-width: 680px) 
-            { 
-                margin-right: 27vw;  
-            }
 
-
-            @media (min-width: 680px) and (max-width: 767px) 
+            @media (max-width: 767px) 
             { 
                 margin-right: 15vw; 
             }
@@ -164,7 +157,7 @@ JUMBOTRON SIZE
         {
             @media (max-width: 390px) 
             { 
-               margin-right: 55vw;  
+               display: none; 
             }
 
             @media (min-width: 390px) and (max-width: 550px) 
@@ -231,26 +224,66 @@ JUMBOTRON BACKGROUND
 
 
 /****************************************************
-                Carousel Last Articles
+        Carousel Last Articles and Best Article
  ***************************************************/
+
+.title-custum
+{  
+    color: #81964d; 
+    font-weight: bold;
+
+    @media (max-width: 1000px)
+    {
+      font-size: 1.7em;  
+    }
+     
+    font-size: 2em;
+    
+}
+
+/* Title best article */
+.best-article
+{
+    margin-top: 2em;    
+}
 
 /****
 CONTAINER CAROUSELS 
 ****/
-.container-carousels-custum
+.container-first-carousel
 {
-    background-color: #bacf8e; 
-    padding-top: 1em;
-    padding-bottom: 1em; 
-    height: 45vh;   
+    background-color: #bacf8e;   
     
+    .carousel-indicator-custum li
+    {
+       
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #404040;
+       
+    }
 }
 
-.container-size 
+/****
+ CONTAINER OF ALL SLIDES 
+****/
+.container-slides-custum
 {
     width: 80%; 
-    margin: 2vh auto 6vh auto;
+    margin: 2vh auto 1vh auto;
+    
+
+    /* One slide */
+    .carousel-item-custum 
+    {
+     
+        padding-bottom: 1.2em; 
+        border: 1em solid  #bacf8e; 
+    }
 }
+
+
     
 /*** 
 ALL TEXT IN CARD (after image) 
@@ -259,7 +292,7 @@ ALL TEXT IN CARD (after image)
 {
     padding: 1vh 0 1vh 0;  
     
-    /* Title */
+    /* Title card */
     .card-title-custum 
     {
         text-align: center; 
@@ -283,7 +316,8 @@ ALL TEXT IN CARD (after image)
 
     .card-paragraph-summary 
     {
-        margin: 1vh 3vw 0 3vw;
+        height: 100px;
+        margin: 1vh 3vw 0 5vw;
         max-height: 40px;
         overflow: hidden;
         text-overflow: ellipsis; 
@@ -312,7 +346,6 @@ ALL TEXT IN CARD (after image)
     .btn-articleDetails
     {
         margin-top: 1vh; 
-        margin-left: 20vw; 
         background-color: black; 
         border-color: black; 
         padding: 0 1vw 0 1vw; 

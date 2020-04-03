@@ -33,42 +33,43 @@ JUMBOTRON (image-flowers)
 </div>
 
 <!-- 
-LAST ARTICLES (limit 5)
+LAST ARTICLES
 -->
-<h1 class="text-center mb-4">Nos derniers articles</h1>
+<h1 class="text-center mb-4 title-custum">Nos derniers articles</h1>
 
-<div class="container my-4 container-carousels-custum">
+<div class="container-fluid my-4 container-first-carousel d-flex flex-column justify-content-center">
 
 
     <!--Carousel Wrapper-->
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
         <!--Controls-->
-        <div class="controls-top">
-            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-        </div>
-        <!--/.Controls-->
-
-
-        <!--Indicators-->
         <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
-        </a>
-        <!--/.Indicators-->
-        <!--Indicators-->
+        </a> 
+        <!--/.Controls-->
+        <!--Controls-->
         <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+        <!--/.Controls-->
+
+
+        <!--Indicators-->    
+        <ol class="carousel-indicators carousel-indicator-custum">
+            <li data-target="#multi-item-example" data-slide-to="0"  class="active"></li>
+            <li data-target="#multi-item-example" data-slide-to="1" ></li>
+            <li data-target="#multi-item-example" data-slide-to="2" ></li>
+        </ol>  
         <!--/.Indicators-->
 
         <!--Slides-->
-        <div class="carousel-inner container-size" role="listbox">
+        <div class="carousel-inner container-slides-custum" role="listbox">
 
             <!--First slide-->
-            <div class="carousel-item carousel-item-custum active">
+            <div class="carousel-item carousel-item-custum  active">
 
                 <div class="row">
                     {% for lastArticle in lastArticles|slice(0, 3) %}
@@ -156,7 +157,11 @@ LAST ARTICLES (limit 5)
                                     {{noteName}} {{label}}
                                 </p>
 
-                                <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                <div class="d-flex justify-content-center">
+                                     <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                </div>
+
+                               
                             </div>
                         </div>
                     </div>
@@ -168,7 +173,7 @@ LAST ARTICLES (limit 5)
             <!--/.First slide-->
 
             <!--Second slide-->
-            <div class="carousel-item carousel-item-custum">
+            <div class="carousel-item carousel-item-custum  ">
 
                 <div class="row">
 
@@ -256,7 +261,10 @@ LAST ARTICLES (limit 5)
                                     {{noteName}} {{label}}
                                 </p>
 
-                                <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                <div class="d-flex justify-content-center">
+                                   <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -272,11 +280,11 @@ LAST ARTICLES (limit 5)
             <!--/.Second slide-->
 
             <!--Mobile slide-->
-            <div id="mobile-slide" class="carousel-item carousel-item-custum">
+            <div id="mobile-slide" class="carousel-item carousel-item-custum  ">
 
                 <div class="row">
 
-                    {% for lastArticle in lastArticles|slice(4) %}
+                    {% for lastArticle in lastArticles|slice(5) %}
 
                     <div class="col-md-4 ">
                         <div class="card mb-2">
@@ -353,8 +361,10 @@ LAST ARTICLES (limit 5)
                                 <p class="card-paragraph-note">
                                     {{noteName}} {{label}}
                                 </p>
-
-                                <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -372,50 +382,315 @@ LAST ARTICLES (limit 5)
 
 
         </div>
-        <!--/.Carousel Wrapper-->
+        <!--/.Slides -->
 
 
     </div>
-    <!-- /Carousel Wrapper-->
+    <!-- /.Carousel Wrapper-->
+
+</div>
+
+
+
+<!-- 
+BEST ARTICLES 
+-->
+<h1 class="text-center mb-4 title-custum best-article">Nos meilleurs articles</h1>
+
+<div class="container-fluid my-4 container-first-carousel d-flex flex-column justify-content-center">
+
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example-2" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#multi-item-example-2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a> 
+        <!--/.Controls-->
+        <!--Controls-->
+        <a class="carousel-control-next" href="#multi-item-example-2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--/.Controls-->
+
+
+        <!--Indicators-->    
+        <ol class="carousel-indicators carousel-indicator-custum">
+            <li data-target="#multi-item-example-2" data-slide-to="0"  class="active"></li>
+            <li data-target="#multi-item-example-2" data-slide-to="1" ></li>
+            <li data-target="#multi-item-example-2" data-slide-to="2" ></li>
+        </ol>  
+        <!--/.Indicators-->
+
+        <!--Slides-->
+        <div class="carousel-inner container-slides-custum" role="listbox">
+
+            <!--First slide-->
+            <div class="carousel-item carousel-item-custum  active">
+
+                <div class="row">
+                    {% for bestArticle in bestArticles|slice(0, 3) %}
+
+
+                    {% set classAdd = 'clearfix d-none d-md-block' %}
+                    {% if (loop.first)  %}
+                    {% set classAdd = ''%}
+                    {% endif %}
+
+                    <div class="col-md-4 {{classAdd}}">
+                        <div class="card mb-2">
+
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{bestArticle.category_name}}">
+
+                            <!-- All text -->
+                            <div class="card-body-custum">
+
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.title}}
+                                    </a>
+                                </h4>
+
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.username}}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{bestArticle.summary}}
+                                </p>
+
+                                {% set noteName = 'voté' %}
+
+                                {% if (bestArticle.moyen|round == 1) %}
+                                {% set label = 'Mediocre' %}        
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+
+                                <div class="d-flex justify-content-center">
+                                     <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                </div>
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+            <!--/.First slide-->
+
+            <!--Second slide-->
+            <div class="carousel-item carousel-item-custum  ">
+
+                <div class="row">
+
+                    {% for bestArticle in bestArticles|slice(3, 5) %}
+
+
+                    {% set classAdd = 'clearfix d-none d-md-block' %}
+                    {% if (loop.first)  %}
+                    {% set classAdd = ''%}
+                    {% endif %}
+                    <div class="col-md-4 {{classAdd}}">
+                        <div class="card mb-2">
+
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{bestArticle.category_name}}">
+
+                            <!-- All text -->
+                            <div class="card-body-custum">
+
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.title}}
+                                    </a>
+                                </h4>
+
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.username}}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{bestArticle.summary}}
+                                </p>
+
+                                {% set noteName = 'voté' %}
+
+                                {% if (bestArticle.moyen|round == 1) %}
+                                {% set label = 'Mediocre' %}        
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+
+                                <div class="d-flex justify-content-center">
+                                   <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
 
 
 
+                </div>
+                <!--/.Second slide-->
 
-    <!-- 
-                BEST ARTICLES (limit 5)
-            -->
-    {% for bestArticle in bestArticles %}
-    <h2>{{bestArticle.title}}</h2>
-    <p>{{bestArticle.category_name}}</p>
-    <p>{{bestArticle.category_color}}</p>
-    <p>{{bestArticle.category_picture}}</p>
-    <p>{{bestArticle.username}}</p>
-    <p> {{bestArticle.summary}} </p>
+            </div>
+            <!--/.Second slide-->
 
-    {% if (bestArticle.moyen|round == 1) %}
-    {% set label = 'Mediocre' %}
-    {% endif %}
+            <!--Mobile slide-->
+            <div id="mobile-slide-2" class="carousel-item carousel-item-custum  ">
 
-    {% if (bestArticle.moyen|round == 2) %}
-    {% set label = 'Pas mal' %}
-    {% endif %}
+                <div class="row">
 
-    {% if (bestArticle.moyen|round == 3) %}
-    {% set label = 'Bien' %}
-    {% endif %}
+                    {% for bestArticle in bestArticles|slice(5) %}
 
-    {% if (bestArticle.moyen|round == 4) %}
-    {% set label = 'Super' %}
-    {% endif %}
+                    <div class="col-md-4 ">
+                        <div class="card mb-2">
 
-    {% if (bestArticle.moyen|round == 5) %}
-    {% set label = 'Excellent' %}
-    {% endif %}
+                            <!-- image -->
+                            <img class="card img-fluid"
+                                src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{bestArticle.category_name}}">
 
-    <p> {{label}}</p>
+                            <!-- All text -->
+                            <div class="card-body-custum">
 
-    {% endfor %}
+                                <!-- title -->
+                                <h4 class="card-title-custum">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.title}}
+                                    </a>
+                                </h4>
+                                <!-- author -->
+                                <p class="card-paragraph card-paragraph-author">
+                                    <a href="#" class="link-custum">
+                                        {{bestArticle.username}}
+                                    </a>
+                                </p>
+
+                                <!-- summary -->
+                                <p class="card-paragraph card-paragraph-summary">
+                                    {{bestArticle.summary}}
+                                </p>
+
+
+                                {% set noteName = 'voté' %}
+
+                                {% if (bestArticle.moyen|round == 1) %}
+                                {% set label = 'Mediocre' %}        
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 2) %}
+                                {% set label = 'Pas mal' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 3) %}
+                                {% set label = 'Bien' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 4) %}
+                                {% set label = 'Super' %}
+                                {% endif %}
+                            
+                                {% if (bestArticle.moyen|round == 5) %}
+                                {% set label = 'Excellent' %}
+                                {% endif %}
+
+                                <p class="card-paragraph-note">
+                                    {{noteName}} {{label}}
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+                <!--/.Second slide-->
+
+            </div>
+            <!--/ Mobile Slide-->
+
+
+
+        </div>
+        <!--/.Slides -->
+
+
+    </div>
+    <!-- /.Carousel Wrapper-->
+
+</div>
+
+  
+    
     {% endblock %}
 
     {% block javascripts %}
