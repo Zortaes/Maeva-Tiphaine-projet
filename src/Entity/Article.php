@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\ListIngredient;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -18,17 +21,20 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=22)
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=160)
+     * @Assert\NotBlank
      */
     private $summary;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $instruction;
 
@@ -68,7 +74,7 @@ class Article
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\ListIngredient", mappedBy="article", cascade={"persist"})
      * @ORM\OrderBy({"disposition" = "ASC"})
      */
     private $ingredients;
@@ -83,6 +89,8 @@ class Article
         $this->ingredients = new ArrayCollection();
         $this->votes = new ArrayCollection();
     }
+
+   
 
     public function getId(): ?int
     {
@@ -251,5 +259,15 @@ class Article
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function addIngredient(ListIngredient $listIngredient)
+    {
+        $this->ingredients->add($listIngredient);
+    }
+
+    public function removeIngredient(ListIngredient $listIngredient)
+    {
+        $this->ingredients->removeElement($listIngredient);
     }
 }
