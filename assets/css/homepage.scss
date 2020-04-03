@@ -14,7 +14,7 @@ JUMBOTRON SIZE
 
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 35px 24px rgba(0,0,0,0.22);
     margin-bottom: 1.8em;
-    
+
     @media (max-width: 991.98px) 
     {     
         height: 40vh; 
@@ -232,8 +232,13 @@ JUMBOTRON BACKGROUND
     font-size: 1.7em;
     color: #81964d; 
     font-weight: bold;
-}
 
+    
+}
+.best-article
+{
+    margin-top: 2em;    
+}
 /****
 CONTAINER CAROUSELS 
 ****/
@@ -303,6 +308,7 @@ ALL TEXT IN CARD (after image)
 
     .card-paragraph-summary 
     {
+        height: 100px;
         margin: 1vh 3vw 0 5vw;
         max-height: 40px;
         overflow: hidden;

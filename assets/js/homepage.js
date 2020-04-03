@@ -23,9 +23,7 @@ var homepage = {
       console.log('match small'); 
         
       $('#mobile-slide').remove(); 
-      $('#mobile-slide-2').remove(); 
-
-      
+      $('#mobile-slide-2').remove();  
  
       }
 
