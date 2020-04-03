@@ -32,12 +32,10 @@ class ArticleController extends AbstractController
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
         
+        /* For the first ingredient */
         $ingredient = new ListIngredient();
         $ingredient->setDisposition(1); 
         $newArticle->getIngredients()->add($ingredient);
-
-      
-
 
         $formArticle = $this->createForm(ArticleType::class, $newArticle);
         
@@ -50,45 +48,38 @@ class ArticleController extends AbstractController
             $articleSluged = $slugger->sluggify($slugArticle); 
             $newArticle->setSlug($articleSluged);
         
+            /* Get all of ingredients, in collection of Article */
             $dataIngredient = $formArticle->get('ingredients')->getData();   
 
-           
             foreach($dataIngredient as $key => $value) {
                    
                 $disposition = $value->getDisposition();
+                
+                /* All ingredient except first ingredient */
+                if ($disposition === null) { 
+                
+                    /* in order */
+                   $value->setDisposition($key); 
 
-                if ($disposition === null) {
-                    
-                   $value->setDisposition(2); 
-                               
                 }
             }
-
-       
-            $newArticle->setFlagged(0); 
-            $newArticle->setUser($user);
            
-            $newArticle->addIngredient($ingredient); 
-
-            
+            /* Add Flagged to false, User author, ingredients and created At*/
+            $newArticle->setFlagged(0); 
+            $newArticle->setUser($user);           
+            $newArticle->addIngredient($ingredient);   
             $newArticle->setCreatedAt(new DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-           
-            $entityManager->persist($newArticle);
-        
-            $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();     
+            $entityManager->persist($newArticle);    
+            $entityManager->flush();        
 
-          
-
+            /* Add relation with Article in ListIngredient */
             foreach ($newArticle->getIngredients() as $ingredient) {
                 $ingredient->setArticle($newArticle); 
             }
 
-           
-            $ingredient->setArticle($newArticle);
-            $entityManager->persist($ingredient);
-        
+            $entityManager->persist($ingredient);     
             $entityManager->flush();
 
             return $this->redirectToRoute('homepage');
