@@ -26,7 +26,7 @@
             alt="image represent category {{ category.name}}">
         <div class="card-body card-body-custum">
             <h5 class="card-title card-title-custum">
-                <a href="#" class="link-custum">
+                <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
                    {{article.title}} 
                 </a>      
             </h5>

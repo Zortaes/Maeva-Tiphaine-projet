@@ -37,7 +37,7 @@ LAST ARTICLES
 -->
 <h1 class="text-center mb-4 title-custum">Nos derniers articles</h1>
 
-<div class="container-fluid my-4 container-first-carousel d-flex flex-column justify-content-center">
+<div class="container-fluid my-4 container-carousel-custum d-flex flex-column justify-content-center">
 
 
     <!--Carousel Wrapper-->
@@ -93,7 +93,7 @@ LAST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleDetails', {'slug':lastArticle.slug})}}" class="link-custum">
                                         {{ lastArticle.title }}
                                     </a>
                                 </h4>
@@ -158,7 +158,7 @@ LAST ARTICLES
                                 </p>
 
                                 <div class="d-flex justify-content-center">
-                                     <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                     <a class="btn btn-primary btn-articleDetails" href="{{path('articleDetails', {'slug':lastArticle.slug})}}" role="button">En savoir plus</a>
                                 </div>
 
                                
@@ -197,7 +197,7 @@ LAST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleDetails', {'slug':lastArticle.slug})}}" class="link-custum">
                                         {{ lastArticle.title }}
                                     </a>
                                 </h4>
@@ -262,7 +262,7 @@ LAST ARTICLES
                                 </p>
 
                                 <div class="d-flex justify-content-center">
-                                   <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                   <a class="btn btn-primary  btn-articleDetails" href="{{path('articleDetails', {'slug':lastArticle.slug})}}" role="button">En savoir plus</a> 
                                 </div>
                                 
                             </div>
@@ -299,7 +299,7 @@ LAST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleDetails', {'slug':lastArticle.slug})}}" class="link-custum">
                                         {{ lastArticle.title }}
                                     </a>
                                 </h4>
@@ -362,7 +362,7 @@ LAST ARTICLES
                                     {{noteName}} {{label}}
                                 </p>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                    <a class="btn btn-primary  btn-articleDetails" href="{{path('articleDetails', {'slug':lastArticle.slug})}}" role="button">En savoir plus</a> 
                                 </div>
                                
                             </div>
@@ -397,7 +397,7 @@ BEST ARTICLES
 -->
 <h1 class="text-center mb-4 title-custum best-article">Nos meilleurs articles</h1>
 
-<div class="container-fluid my-4 container-first-carousel d-flex flex-column justify-content-center">
+<div class="container-fluid my-4 container-carousel-custum d-flex flex-column justify-content-center">
 
     <!--Carousel Wrapper-->
     <div id="multi-item-example-2" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -452,7 +452,7 @@ BEST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleDetails', {'slug':bestArticle.slug})}}" class="link-custum">
                                         {{bestArticle.title}}
                                     </a>
                                 </h4>
@@ -497,7 +497,7 @@ BEST ARTICLES
                                 </p>
 
                                 <div class="d-flex justify-content-center">
-                                     <a class="btn btn-primary btn-articleDetails" href="#" role="button">En savoir plus</a>
+                                     <a class="btn btn-primary btn-articleDetails" href="{{path('articleDetails', {'slug':bestArticle.slug})}}" role="button">En savoir plus</a>
                                 </div>
 
                                
@@ -512,7 +512,7 @@ BEST ARTICLES
             <!--/.First slide-->
 
             <!--Second slide-->
-            <div class="carousel-item carousel-item-custum  ">
+            <div class="carousel-item carousel-item-custum">
 
                 <div class="row">
 
@@ -536,8 +536,8 @@ BEST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
-                                        {{bestArticle.title}}
+                                    <a href="{{path('articleDetails', {'slug':bestArticle.slug})}}" class="link-custum">
+                                        {{bestArticle.title}} 
                                     </a>
                                 </h4>
 
@@ -581,7 +581,7 @@ BEST ARTICLES
                                 </p>
 
                                 <div class="d-flex justify-content-center">
-                                   <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                   <a class="btn btn-primary  btn-articleDetails" href="{{path('articleDetails', {'slug':bestArticle.slug})}}" role="button">En savoir plus</a> 
                                 </div>
                                 
                             </div>
@@ -618,7 +618,7 @@ BEST ARTICLES
 
                                 <!-- title -->
                                 <h4 class="card-title-custum">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleDetails', {'slug':bestArticle.slug})}}" class="link-custum">
                                         {{bestArticle.title}}
                                     </a>
                                 </h4>
@@ -661,7 +661,7 @@ BEST ARTICLES
                                     {{noteName}} {{label}}
                                 </p>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary  btn-articleDetails" href="#" role="button">En savoir plus</a> 
+                                    <a class="btn btn-primary  btn-articleDetails" href="{{path('articleDetails', {'slug':bestArticle.slug})}}" role="button">En savoir plus</a> 
                                 </div>
                                
                             </div>

@@ -6,10 +6,12 @@ use App\Entity\ListIngredient;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @UniqueEntity("title", message="Ce titre existe déjà, veuillez en choisir un autre")
  */
 class Article
 {
@@ -21,7 +23,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=22)
+     * @ORM\Column(type="string", length=22, unique=true)
      * @Assert\NotBlank
      */
     private $title;

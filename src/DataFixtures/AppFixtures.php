@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
          for ($i = 0; $i < 10; $i++) {
     
             $user = new User();
-            $user->setUsername($faker->userName);
+            $user->setUsername($faker->firstNameMale);
             $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
             $user->setBirthDate($faker->datetime);
             $user->setEmail($faker->email);
@@ -134,7 +134,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 40; $i++) {
 
             $article = new Article();
-            $article->setTitle($faker->country);
+            $article->setTitle($faker->text(20));
             $article->setSlug($this->slugger->sluggify($article->getTitle()));
             $article->setSummary($faker->sentence);
             $article->setInstruction($faker->paragraph);
