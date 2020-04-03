@@ -24,6 +24,8 @@ var homepage = {
         
       $('#mobile-slide').remove(); 
       $('#mobile-slide-2').remove(); 
+
+      
  
       }
 
