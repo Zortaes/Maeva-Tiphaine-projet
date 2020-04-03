@@ -224,21 +224,29 @@ JUMBOTRON BACKGROUND
 
 
 /****************************************************
-                Carousel Last Articles
+        Carousel Last Articles and Best Article
  ***************************************************/
 
 .title-custum
-{
-    font-size: 1.7em;
+{  
     color: #81964d; 
     font-weight: bold;
 
+    @media (max-width: 1000px)
+    {
+      font-size: 1.7em;  
+    }
+     
+    font-size: 2em;
     
 }
+
+/* Title best article */
 .best-article
 {
     margin-top: 2em;    
 }
+
 /****
 CONTAINER CAROUSELS 
 ****/
@@ -284,7 +292,7 @@ ALL TEXT IN CARD (after image)
 {
     padding: 1vh 0 1vh 0;  
     
-    /* Title */
+    /* Title card */
     .card-title-custum 
     {
         text-align: center; 

@@ -32,7 +32,7 @@ class VoteRepository extends ServiceEntityRepository
         ->innerJoin('App\Entity\User', 'u', 'WITH', 'u = a.user')
         ->groupBy('v.article')
         ->orderBy('moyen', 'DESC')
-        ->setMaxResults(5) 
+        ->setMaxResults(6) 
         ->getQuery()
         ->getResult();
         

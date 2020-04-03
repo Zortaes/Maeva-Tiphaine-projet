@@ -33,7 +33,7 @@ JUMBOTRON (image-flowers)
 </div>
 
 <!-- 
-LAST ARTICLES (limit 5)
+LAST ARTICLES
 -->
 <h1 class="text-center mb-4 title-custum">Nos derniers articles</h1>
 
@@ -284,7 +284,7 @@ LAST ARTICLES (limit 5)
 
                 <div class="row">
 
-                    {% for lastArticle in lastArticles|slice(4) %}
+                    {% for lastArticle in lastArticles|slice(5) %}
 
                     <div class="col-md-4 ">
                         <div class="card mb-2">
@@ -392,11 +392,8 @@ LAST ARTICLES (limit 5)
 
 
 
-
-
-
 <!-- 
-BEST ARTICLES (limit 5)
+BEST ARTICLES 
 -->
 <h1 class="text-center mb-4 title-custum best-article">Nos meilleurs articles</h1>
 
@@ -606,7 +603,7 @@ BEST ARTICLES (limit 5)
 
                 <div class="row">
 
-                    {% for bestArticle in bestArticles|slice(4) %}
+                    {% for bestArticle in bestArticles|slice(5) %}
 
                     <div class="col-md-4 ">
                         <div class="card mb-2">
