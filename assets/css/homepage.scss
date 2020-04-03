@@ -297,8 +297,15 @@ ALL TEXT IN CARD (after image)
     {
         text-align: center; 
         font-weight: bold;
-        font-size: 1.2em;
+       
         margin: 0;  
+        @media (max-width: 1000px) 
+        {
+            font-size: 1em; 
+        }
+
+        font-size: 1.2em; 
+
     }
 
     /* All paragraph */
