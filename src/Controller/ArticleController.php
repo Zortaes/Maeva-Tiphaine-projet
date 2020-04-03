@@ -22,10 +22,15 @@ class ArticleController extends AbstractController
      */
     public function article(Article $article)
     {    
+        $vote = $this->getDoctrine()->getRepository(Vote::class)->findOneBy([
+            "user" => $this->getUser(),
+            "article" => $article
+            ]);
 
         return $this->render('article/article_details.html.twig',
         [
-            'article' => $article
+            'article' => $article,
+            'vote' => $vote
         ]);   
     }
 
@@ -60,15 +65,12 @@ class ArticleController extends AbstractController
 
             if($vote_value >= 1 && $vote_value <= 5)
             {
-                
-
                 $vote->setVoteValue($vote_value);
                 $vote->setArticle($article);
                 $vote->setUser($this->getUser());
                 $vote->setCreatedAt(new DateTime('now'));
                 $manager->persist($vote);
                 $manager->flush();
-
             }
             else
             {

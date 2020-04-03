@@ -1,13 +1,16 @@
 
-/* Div containing averything */
+/*******************************
+Main Div that contain everything
+*******************************/
+
 #articlePage
 {
     width: 100%;
 
     @media (min-width: 390px)
     { 
-        width: 90%;
-        margin-left: 5%;
+        width: 80%;
+        margin-left: 10%;
     }
 
     @media (min-width: 767px) 
@@ -17,125 +20,43 @@
     }
 }
 
+
+/*******************************
+Title and Note Out of the card
+*******************************/
 .articleTitle
 {
+    color: #9eb66b;
     text-align: center;
-    margin-top: 0.5em;
-    font-size: 1.4em;   
+    margin-top: calc(0.5em + 1vw);
+    font-size:  calc(1em + 1vw);  
         
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 1.5em;
-        margin-top: 0.6em;
-    }
-
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 1.6em;
-        margin-top: 1em;
-    }
-
-
-    @media (min-width: 767px) and (max-width: 991.98px) 
-    { 
-        font-size: 1.7em;
-        margin-top: 1.5em;
-    }
-
-
-    @media (min-width: 991.99px) and (max-width: 1500px) 
-    { 
-        font-size: 1.8em;
-        margin-top: 1.5em;
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-        font-size: 2em;
-        margin-top: 2em;
-    }
 }
 
 .theNote
 {
     text-align: center;
-    font-size: 0.6em;
+    font-size:  calc(0.4em + 1vw);
     margin: 0.8em; 
         
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 0.7em;
-    }
-
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 0.8em;
-    }
-
-
-    @media (min-width: 767px) and (max-width: 991.98px) 
-    { 
-        font-size: 0.9em;
-        margin-bottom: 1.5em;
-    }
-
-
-    @media (min-width: 991.99px) and (max-width: 1500px) 
-    { 
-        font-size: 1em;
-        margin-bottom: 2em;
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-
-        font-size: 1.2em;
-        margin-bottom: 2em;
-    }
 }
 
+
+/*****
+CARD
+*****/
 .articleDetails
 {
     display: flex;
     flex-direction: column;
     border: 2px solid white;
     border-radius: 17px;
-    font-size: 0.6em;
     width: 100%;
     margin-bottom: 1em;
-        
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 0.7em;
-        box-shadow: 0px 5px 20px black;
-    }
-
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 0.8em;
-        box-shadow: 0px 5px 20px black;
-    }
-
-    @media (min-width: 767px) 
-    { 
-        font-size: 0.9em;
-        box-shadow: 0px 5px 20px black;
-    }
-
-    @media (min-width: 991.99px) 
-    { 
-        font-size: 1em;
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-        font-size: 1.2em;
-    }
-    
-
+    box-shadow: 0px 5px 20px black;
 }
 
-/* image */
+/* IMAGE */
 #articleImageDetail
 {
     width: 100%;
@@ -146,86 +67,49 @@
 }
 
 
-/* name of the author */
-.articleAuthor
+/* NAME OF THE AUTHOR */
+.articleAuthor 
 {
-    margin: 3%;
-}
-
-.articleAuthor a
-{
-    color: black;
-    text-decoration : none;
-    text-align: center;
-    font-size: 1.1em;
-    font-style: italic;
-
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 1.2em;
+    h2
+    {
+        font-size: calc(1.5em + 1vw)
     }
 
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 1.3em;
-    }
-
-    @media (min-width: 767px) and (max-width: 991.98px) 
-    { 
-        font-size: 1.4em;
-    }
-
-
-    @media (min-width: 991.99px) and (max-width: 1500px) 
-    { 
-        font-size: 1.5em;
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-        font-size: 1.7em;
+    a{
+        color: black;
+        text-decoration : none;
+        text-align: center;        
+        font-style: italic;  
     }
 }
 
-/* Name of the category */
+/* NAME OF THE CATEGORY */
 .articleCategory
 {
     text-align: center;
     font-weight: 500;
-    font-size: 0.6em;
+    font-size: calc(0.8em + 1.2vw);
 
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 0.7em;
-    }
-
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 0.8em;
-    }
-
-
-    @media (min-width: 767px) and (max-width: 991.98px) 
-    { 
-        font-size: 0.9em;    
-    }
-
-
-    @media (min-width: 991.99px) and (max-width: 1500px) 
-    { 
-        font-size: 1em;       
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-        font-size: 1.2em;
-    }
 }
 
+/* SUMMARY */
 .fullSummary
 {
     padding: 2em;
+    margin: 3em 4em 3em 4em;
+    border: solid 1px #FF876E;
+    border-radius: 30px;
+    font-size: calc(0.5em + 1vw);
+
+    @media (min-width: 767px)
+    { 
+        font-size: 1em;
+    }
 }
+
+/***************************
+INGREDIENTS AND INSTRCUTIONS
+***************************/
 
 .ingredientInstruction
 {
@@ -241,32 +125,14 @@
 
 .ingredientInstruction h3
 {
-    color: #768c3d;
+    color: #FF876E;
     font-size: 0.8em;
     padding: 1em 0 1em 0;
-    @media (min-width: 390px) and (max-width: 550px) 
-    { 
-        font-size: 0.9em;
-    }
+    font-size: calc(1.17em + 1vw);
 
-    @media (min-width: 550px) and (max-width: 767px) 
-    { 
-        font-size: 1em;
-    }
-
-    @media (min-width: 767px) and (max-width: 991.98px) 
-    { 
-        font-size: 1.1em;
-    }
-
-    @media (min-width: 991.99px) and (max-width: 1500px) 
+    @media (min-width: 767px)
     { 
         font-size: 1.17em;
-    }
-
-    @media (min-width: 1500.01px)
-    { 
-        font-size: 1.4em;
     }
 }
 
@@ -281,27 +147,128 @@
     ul
     {
     list-style-type: none;
+    padding: 0 !important;
+    font-size: calc(0.5em + 1vw);
+
+        @media (min-width: 767px)
+        { 
+            font-size: 1em;
+        }
     }
 
     li::before
     {
         content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-        color: salmon; 
+        color: #FF876E; 
         font-weight: bold; 
         display: inline-block; 
-        width: 1em;
-        margin-left: -2em;  
+        width: 1em; 
+
     }
 }
 
 .instruction
 {
+    font-size: calc(0.5em + 1vw);
+
     @media (min-width: 767px)
     { 
         padding-left: 2em;
+        font-size: 1em;
     }
     
 }
+
+/*******
+VOTES
+*******/
+
+/*  telling what people have voted */
+.UserThoughs
+{
+    font-size: 0.6em;
+    margin: 2em;
+    font-style: italic;
+}
+
+/* dropdown */
+#dropdownMenuButton
+{ 
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+    border-radius: 10px;
+    font-size: calc(0.6em + 1vw);
+
+    @media (min-width: 767px)
+    { 
+        font-size: 1em;
+    }
+
+
+    &:hover
+    {
+        border-color: #799440 !important;
+        transition: 1s;
+        background-color: #799440  !important;
+    }
+}
+
+.dropdown-menu
+{
+    margin-top: 1%;
+    border: none;
+    font-size: calc(0.5em + 1vw);
+    margin-left: -10%;
+}
+
+.dropdown-vote-custom
+{
+    box-shadow: 2px 2px 20px rgb(128, 127, 127);
+    border-radius: 30px;
+
+    #mediocre
+    {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+    
+    #excellent
+    {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    button
+    {   
+        font-size: calc(0.6em + 1vw);
+        border: none;
+        background-color: transparent;
+        transition: 0.8s;
+
+        &:hover
+        {
+            transform: scale(1.2);
+            transition: 0.8s;
+        }
+
+        @media (min-width: 767px)
+        { 
+            font-size: 0.7em;
+        }
+    }
+
+}
+
+/* creation's date*/
+.dateDeCreation
+{
+    text-align: right;
+    font-size: 0.6em;
+    padding: 1em 2em 0 0;
+    border-top: 1px solid rgb(173, 172, 172);
+}
+
 
 
 
