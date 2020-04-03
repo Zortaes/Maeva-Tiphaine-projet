@@ -1,53 +1,40 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Connexion{% endblock %}
-
 {% block stylesheets %}
 {{ encore_entry_link_tags('form') }}
 {% endblock %}
-
 {% block body %}
 <div class="container container-form-custum">
     <form action="{{ path('login') }}" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
         </div>
     {% endif %}
-
-
-    
     <div class="block-form-custum">
-       
         <h1 class="h4 mb-3 font-weight-normal text-center">Se connecter</h1>
         <div class="col-12 mt-4 mb-4">
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
         </div>
-
         <div class="col-12 mt-4 mb-4">
             <label for="inputPassword">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control" required>
         </div>
-
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}">
-
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html
-
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" name="_remember_me"> Remember me
                 </label>
             </div>
         #}
-
         <button class="btn btn-lg btn-dark mt-4 mb-4" type="submit">
             Continuer
         </button>
@@ -55,10 +42,8 @@
     </form>
 
 </div>
-
 <div class="container w-100 text-center">
     <p class="h5 mb-3 font-weight-normal text-center">Pas encore membre ?</p>
     <a class="btn btn-dark w-50 mt-4 mb-4" href="{{path('signup')}}" role="button">Créez vous un compte</a>
 </div>
-
 {% endblock %}

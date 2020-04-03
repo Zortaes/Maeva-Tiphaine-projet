@@ -1,4 +1,6 @@
 
+
+
 body {
     background-color: white;
     position: relative;
@@ -253,10 +255,71 @@ body {
 
     }
 
-
+   
   }
 
 
+
+
+/**************************** 
+        CONTAINER BODY
+****************************/
+  .all-body-container 
+  {
+    margin-bottom: 10em;
+  }
+
+
+
+
+/*************************** 
+            FOOTER
+****************************/
+footer {
+  position: absolute;
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  background-color: #cccccc;
+  height: 15vh; 
+
+  .footer-link-custum p
+   {
+
+    @media (max-width: 375px)
+    {
+      font-size: 0.8em; 
+    }
+     padding-left: 1em;
+     padding-top: 1em; 
+     
+   }
+
+   .link-title
+   {
+     font-weight: bold;
+   }
+
+   a 
+   {
+     color: black; 
+     transition: 0.8s;
+     
+   }
+
+   a:hover 
+   {
+    text-decoration: none;
+    color: #81964d; 
+    transition: 0.8s;
+   }
+
+}
+
+ 
+
+   
+ 
 
   
   

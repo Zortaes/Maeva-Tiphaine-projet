@@ -153,10 +153,14 @@
     <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
 </div>
 
+
+{% endblock %}
+
+
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('article_details') }} 
     {% endblock %}
 
-{% endblock %}
+
 
