@@ -52,6 +52,7 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             'newUser' => $newUser,
+            'unlessFooter' => true, 
             'unlessNavbar' => true,
             'form' => $form->createView(),
         ]);
