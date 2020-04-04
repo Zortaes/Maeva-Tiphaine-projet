@@ -11,6 +11,7 @@ use App\Form\Type\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Vote;
+use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Routing\Annotation\Route;
@@ -113,15 +114,13 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/post", methods={"POST"}, name="vote")
+     * @Route("/{slug}/vote", methods={"POST"}, name="vote")
+     * @IsGranted("ROLE_USER")
      * 
+     * @return Vote, return a int for vote_value when a user vote for an article
      */
     public function vote(Article $article, Request $request, EntityManagerInterface $manager)
     {
-        if($request != 'POST')
-        {
-            http_response_code(403);
-        }
 
         $vote_value = $request->request->get('userVote');
 
@@ -159,6 +158,33 @@ class ArticleController extends AbstractController
        
     }   
     
+    /**
+     * @Route("/{slug}/signaler", methods={"POST"}, name="flag")
+     * @IsGranted("ROLE_USER")
+     * 
+     * @return Flagged, return a boolean when the article get flagged
+     */
+    public function flag(Article $article, Request $request, EntityManagerInterface $manager)
+    {
+        $flag = $request->request->get('flag');
+
+        if(filter_var($flag, FILTER_VALIDATE_BOOLEAN))
+        {
+        
+            $article->setFlagged(true);
+            $manager->persist($article);
+            $manager->flush();
+
+            $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande.');
+
+            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug() ], 301);
+
+        }
+        else
+        
+            throw new Exception('La valeur n\'est pas bonne');
+        
+    }
        
 }
 
