@@ -113,15 +113,10 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/post", methods={"POST"}, name="vote")
-     * 
+     * @Route("/{slug}/post", methods={"POST"}, name="vote") 
      */
     public function vote(Article $article, Request $request, EntityManagerInterface $manager)
     {
-        if($request != 'POST')
-        {
-            http_response_code(403);
-        }
 
         $vote_value = $request->request->get('userVote');
 

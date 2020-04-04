@@ -1,66 +1,50 @@
 {% extends 'base.html.twig' %}
-
     {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('article_details') }}
     {% endblock %}
-
 {% block body %}
-
 <div id="articlePage">
-
     <h1 class="articleTitle">
         {{ article.title }}
     </h1>
-
     <div class="theNote">
         {% set sum = 0 %}
         {# Sum of votes for one article #}
         {% for votes in article.votes %}
         {% set sum = sum + votes.voteValue %}
         {% endfor %}
-
         {# If article have a vote #}
         {% if (sum != 0) %}
-
             {# average #}
             {% set average = sum / article.votes|length %}
             {% set noteName = 'Noté par la communauté :' %}
-
             {% if (average|round == 1) %}
                 {% set label = 'Mediocre' %}
             {% endif %}
-
             {% if (average|round == 2) %}
                 {% set label = 'Pas mal' %}
             {% endif %}
-
             {% if (average|round == 3) %}
                 {% set label = 'Bien' %}
             {% endif %}
-
             {% if (average|round == 4) %}
                 {% set label = 'Super' %}
             {% endif %}
-
             {% if (average|round == 5) %}
                 {% set label = 'Excellent' %}
             {% endif %}
-
             {# article doesn't have a vote #}
             {% else %}
                 {% set noteName = '' %}
                 {% set label = 'Non noté' %}
         {% endif %}
-
         {{noteName}} {{label}}
     </div>
-
     <div class="articleDetails">
             <!-- image -->
             <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.category.picture ) }} "
             alt="image represent category {{ article.category.name}}"> 
-        
                 <div class="dropdown position-absolute m-3">
                     <button class="btn btn-light btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
@@ -71,20 +55,15 @@
                         </div>
                     </div>
                 </div>
-
-
         <div class="articleAuthor">
             <a href="#"><h2>{{ article.user.viewUsername}}</h2></a>
         </div>
-
             <div class="articleCategory" >                              
         <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
         </div>
-
         <div class="fullSummary">
             <p>{{ article.summary }}</p>
         </div>
-
         <div class="ingredientInstruction">
             <div class="ingredient">
                 <h3>Ingrédients</h3>
@@ -99,36 +78,27 @@
                 <p>{{ article.instruction }}</p>
             </div>
         </div>
-
     {% if app.user %}
-    
         {% if vote %}
-
         <div class="UserThoughs">    
                 {% if (vote.voteValue == 1) %}
                     {% set label = 'Mediocre' %}
                 {% endif %}
-
                 {% if (vote.voteValue == 2) %}
                     {% set label = 'Pas mal' %}
                 {% endif %}
-
                 {% if (vote.voteValue == 3) %}
                     {% set label = 'Bien' %}
                 {% endif %}
-
                 {% if (vote.voteValue == 4) %}
                     {% set label = 'Super' %}
                 {% endif %}
-
                 {% if (vote.voteValue == 5) %}
                     {% set label = 'Excellent' %}
                 {% endif %}
-            
                 <p>Vous avez trouvé cet article {{label}}</p>
             </div>
         {% endif %}
-
         <div class="dropdown text-center">
             <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Que pensez-vous de cet article ?
@@ -145,22 +115,14 @@
                 </div>
             </div>
         </div>
-
-    {% else %} 
-        <p class="UserThoughs"> Connectez-vous pour donner votre avi sur cet article </p>
-    {% endif %}
-
-    <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
+        {% else %} 
+            <p class="UserThoughs"> Connectez-vous pour donner votre avi sur cet article </p>
+        {% endif %}
+        <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
+    </div>
 </div>
-
-
-{% endblock %}
-
-
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('article_details') }} 
     {% endblock %}
-
-
-
+{% endblock %}

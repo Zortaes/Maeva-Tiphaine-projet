@@ -3,6 +3,7 @@
   "build/app.js": "/build/app.js",
   "build/article_by_category.css": "/build/article_by_category.css",
   "build/article_by_category.js": "/build/article_by_category.js",
+  "build/article_details.css": "/build/article_details.css",
   "build/article_details.js": "/build/article_details.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
@@ -15,7 +16,7 @@
   "build/images/arts.jpg": "/build/images/arts.e73ee8d8.jpg",
   "build/images/bricolage.jpg": "/build/images/bricolage.38ecf90a.jpg",
   "build/images/cosmetiques-beaute-et-soins.jpg": "/build/images/cosmetiques-beaute-et-soins.04bdae80.jpg",
-  "build/images/decorations.jpg": "/build/images/decorations.650b47db.jpg",
+  "build/images/decorations.jpg": "/build/images/decorations.9746c738.jpg",
   "build/images/hygiene-corporelle.jpg": "/build/images/hygiene-corporelle.dd852fbc.jpg",
   "build/images/imageHome.jpg": "/build/images/imageHome.b846a7d2.jpg",
   "build/images/jardin-jardinage.jpg": "/build/images/jardin-jardinage.5e821b2d.jpg",
@@ -24,6 +25,5 @@
   "build/images/menage-hygiene-maison.jpg": "/build/images/menage-hygiene-maison.40859839.jpg",
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
-  "build/article_details.css": "/build/article_details.css"
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
+  "build/images/arbre-form.png": "/build/images/arbre-form.f9fd0985.png"
 }

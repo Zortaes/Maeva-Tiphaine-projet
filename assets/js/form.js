@@ -1,11 +1,13 @@
 import '../css/form.scss';
 
 
-$('form button').css({"background-color":"black", "border-color":"black"})
+$('form button').css({"background-color":"#212529", "border-color":"#212529"})
 
+
+/********************
+ Form Add a Article 
+ *********************/
 var $collectionHolder;
-
-
 
 /* setup an "add a Ingredient" link */ 
 var $addIngredientButton = $('<button type="button" class="add_ingredient_link">+</button>');
