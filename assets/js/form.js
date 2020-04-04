@@ -76,7 +76,7 @@ function addIngredientForm($collectionHolder, $newLinkDiv) {
 
 function addIngredientFormDeleteLink($ingredientForm) {
 
-    var $removeFormButton = $('<button type="button">Delete this Ingredient</button>');
+    var $removeFormButton = $('<button type="button">Supprimer l\'ingrédient</button>');
     $ingredientForm.append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {

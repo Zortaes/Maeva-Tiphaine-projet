@@ -70,7 +70,7 @@ class UserType extends AbstractType
             'birth_date', 
             BirthdayType::class,
             [
-              
+                'invalid_message' => 'Veuillez entrer une date valide', 
                 'format' => 'dd-MM-yyyy',
                 "label" => "Date d'anniversaire"
             ]

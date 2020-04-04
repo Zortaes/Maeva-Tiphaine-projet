@@ -58,7 +58,16 @@ label span
         }
 }
 
+/* Errors */
+legend span 
+{
+    font-size: 0.9em;
+    font-weight: normal;
 
+    span span:first-child {
+        display: none;
+    }
+}
 
 .block-form-custum button 
 { 
