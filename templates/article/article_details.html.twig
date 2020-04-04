@@ -7,6 +7,12 @@
 
 {% block body %}
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
 <div id="articlePage">
 
     <h1 class="articleTitle">
@@ -62,12 +68,14 @@
             alt="image represent category {{ article.category.name}}"> 
         
                 <div class="dropdown position-absolute m-3">
-                    <button class="btn btn-light btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <div class="voteFromDropdown">
-                            <button class="dropdown-item" type="button">Signaler l'article</button>
+                    <div class="dropdown-menu p-0 mt-1" aria-labelledby="dropdownMenu2">
+                        <div class="dropdown-flag-custom"> 
+                            <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
+                                <button class="dropdown-item" type="submit" name="flag" value="true">Signaler l'article</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -128,6 +136,7 @@
                 <p>Vous avez trouvé cet article {{label}}</p>
             </div>
         {% endif %}
+    {% endif %} 
 
         <div class="dropdown text-center">
             <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,21 +155,15 @@
             </div>
         </div>
 
-    {% else %} 
-        <p class="UserThoughs"> Connectez-vous pour donner votre avi sur cet article </p>
-    {% endif %}
-
-    <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
+        <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
+    </div>
 </div>
-
-
-{% endblock %}
-
 
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('article_details') }} 
     {% endblock %}
 
+{% endblock %}
 
 

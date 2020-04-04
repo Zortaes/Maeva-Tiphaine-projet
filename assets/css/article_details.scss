@@ -186,7 +186,7 @@ VOTES
 /*  telling what people have voted */
 .UserThoughs
 {
-    font-size: 0.6em;
+    font-size: 1em;
     margin: 2em;
     font-style: italic;
 }
@@ -220,6 +220,7 @@ VOTES
     border: none;
     font-size: calc(0.5em + 1vw);
     margin-left: -10%;
+    border-radius: 30px;
 }
 
 .dropdown-vote-custom
@@ -241,6 +242,8 @@ VOTES
 
     button
     {   
+        outline: none;
+        border-radius: 20px;
         font-size: calc(0.6em + 1vw);
         border: none;
         background-color: transparent;
@@ -260,6 +263,33 @@ VOTES
 
 }
 
+.dropdown-flag-custom
+{
+    box-shadow: 2px 2px 20px rgb(128, 127, 127);
+    border-radius: 30px;
+
+    button
+    {   
+        border-radius: 20px;
+        font-size: calc(0.6em + 1vw);
+        border: none;
+        background-color: transparent;
+        transition: 0.8s;
+        outline: none;
+
+        &:hover
+        {
+            background-color: rgb(207, 207, 207);
+            transition: 0.8s;
+        }
+
+        @media (min-width: 767px)
+        { 
+            font-size: 0.7em;
+        }
+    }
+
+}
 /* creation's date*/
 .dateDeCreation
 {
