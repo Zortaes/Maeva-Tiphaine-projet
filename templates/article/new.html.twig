@@ -10,9 +10,13 @@
 {% endblock %}
 
 {% block body %}
+
+<!-- Bloc form container -->
 <div class="container container-form-custum">
+
     {{ form_start(form) }}
 
+    <!-- Bloc form  -->
     <div class="block-form-custum">
         <h1 class="h4 mb-3 font-weight-normal text-center">Ajouter un article</h1>
         <div class="col-12">
@@ -27,8 +31,13 @@
             {{ form_row(form.instruction)}}
 
         </div>
-        <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
-            {{ form_row(form.ingredients)}}       
+        
+       
+     
+        <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">   
+
+              {{ form_row(form.ingredients)}}
+                   
         </div>    
 
 
@@ -38,13 +47,16 @@
         </div>
 
         
-        <div class="col-12">
+        <div class="col-12 validateBtn">
             {{ form_row(form.Envoyer) }}
         </div>
     </div>
+     <!-- Bloc form  -->
+
     {{ form_end(form) }}
 
 </div>
+<!-- /Bloc form container-->
 
 
 

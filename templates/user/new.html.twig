@@ -34,7 +34,7 @@
                     {{ form_widget(form.birth_date)}}  
                 </div>  
             </div>
-            <div class="col-12">
+            <div class="col-12 validateBtn">
                 {{ form_row(form.Envoyer) }}
             </div>
         </div>
@@ -45,6 +45,3 @@
 
 {% endblock %}
 
-{% block javascripts %}
-{{ encore_entry_script_tags('form') }}
-{% endblock %}
