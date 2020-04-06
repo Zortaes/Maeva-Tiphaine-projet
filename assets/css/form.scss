@@ -5,6 +5,7 @@
     font-size: 2em; 
     text-align: center;
     margin-top: 2em;
+    color: #81964d;
 }
 
 /* ALL container of form */
@@ -66,4 +67,59 @@ label span
    
 }
 
+/**********
+LOGIN FORM  
+**********/
+.erreurLogin
+{
+    text-align: center;
+    padding: 2em;
+    border: solid 1px rgb(250, 115, 115);
+    width: 50%;
+    border-radius: 20px;
+    margin: 2em auto 2em auto;
+}
 
+
+/* Button to validate form */
+.validateBtn
+{
+    button
+    {
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+
+        &:hover
+        {
+            border-color: #799440 !important;
+            transition: 1s;
+            background-color: #799440  !important;
+        }
+
+    }
+
+    a
+    {
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+    
+        &:hover
+        {
+            border-color: #799440 !important;
+            transition: 1s;
+            background-color: #799440  !important;
+        }
+    }
+
+    #redirectBtn
+    {
+        width: 100% !important;
+       
+        @media (min-width: 992px)
+        {
+            width: 50% !important;
+        }
+    }
+}
