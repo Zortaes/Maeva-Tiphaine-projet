@@ -1,7 +1,7 @@
 import '../css/form.scss';
 
 
-$('form button').css({"background-color":"#212529", "border-color":"#212529"})
+
 
 
 /********************
@@ -10,7 +10,7 @@ $('form button').css({"background-color":"#212529", "border-color":"#212529"})
 var $collectionHolder;
 
 /* setup an "add a Ingredient" link */ 
-var $addIngredientButton = $('<button type="button" class="add_ingredient_link">+</button>');
+var $addIngredientButton = $('<button type="button" class="add_ingredient_link">ajouter un ingrédient</button>').addClass('btn btn-primary button-add-ingredient');
 var $newLinkDiv = $('<div></div>').append($addIngredientButton);
 
 
@@ -59,6 +59,7 @@ function addIngredientForm($collectionHolder, $newLinkDiv) {
     /* Replace '__name__' in the prototype's HTML to
     instead be a number based on how many items we have */
     newForm = newForm.replace(/__name__/g, index);
+     
     
 
     /* Increase the index with one for the next item */
@@ -66,7 +67,7 @@ function addIngredientForm($collectionHolder, $newLinkDiv) {
 
    
     /* Display the form in the page in an div, before the "Add a Ingredient" link div */
-    var $newFormIngredient = $('<div></div>').append(newForm);
+    var $newFormIngredient = $('<div></div>').append(newForm).addClass('other-ingredient');
     $newLinkDiv.before($newFormIngredient);
 
   
@@ -76,7 +77,7 @@ function addIngredientForm($collectionHolder, $newLinkDiv) {
 
 function addIngredientFormDeleteLink($ingredientForm) {
 
-    var $removeFormButton = $('<button type="button">Supprimer l\'ingrédient</button>');
+    var $removeFormButton = $('<button type="button">supprimer l\'ingrédient</button>').addClass('btn btn-primary  button-delete-ingredient');
     $ingredientForm.append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {
