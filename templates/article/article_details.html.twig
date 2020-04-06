@@ -4,6 +4,13 @@
     {{ encore_entry_link_tags('article_details') }}
     {% endblock %}
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
 <div id="articlePage">
     <h1 class="articleTitle">
         {{ article.title }}
@@ -46,20 +53,23 @@
             <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.category.picture ) }} "
             alt="image represent category {{ article.category.name}}"> 
                 <div class="dropdown position-absolute m-3">
-                    <button class="btn btn-light btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <div class="voteFromDropdown">
-                            <button class="dropdown-item" type="button">Signaler l'article</button>
+                    <div class="dropdown-menu p-0 mt-1" aria-labelledby="dropdownMenu2">
+                        <div class="dropdown-flag-custom"> 
+                            <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
+                                <button class="dropdown-item" type="submit" name="flag" value="true">Signaler l'article</button>
+                            </form>
                         </div>
                     </div>
                 </div>
         <div class="articleAuthor">
-            <a href="#"><h2>{{ article.user.viewUsername}}</h2></a>
+            <a href="#"><h3>{{ article.user.viewUsername}}</h3></a>
         </div>
-            <div class="articleCategory" >                              
-        <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
+
+        <div class="articleCategory" >                              
+            <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
         </div>
         <div class="fullSummary">
             <p>{{ article.summary }}</p>
@@ -103,6 +113,7 @@
             <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Que pensez-vous de cet article ?
             </button>
+            
             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                 <div class="dropdown-vote-custom">
                     <form action="{{ path('vote', {'slug' : article.slug}) }}" method="post">
@@ -110,19 +121,19 @@
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="2">Pas mal</button>
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="3">Bien</button>
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="4">Super</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>       
                     </form>
                 </div>
             </div>
         </div>
-        {% else %} 
-            <p class="UserThoughs"> Connectez-vous pour donner votre avi sur cet article </p>
-        {% endif %}
+
         <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
     </div>
 </div>
+{% endblock %}
+
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('article_details') }} 
     {% endblock %}
-{% endblock %}
+
