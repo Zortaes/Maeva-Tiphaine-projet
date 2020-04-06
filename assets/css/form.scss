@@ -1,5 +1,9 @@
 
-/* Title after form */
+ 
+
+/******************
+ TITLE BEFORE FORM 
+ ******************/
 .title-webSite
 {
     font-size: 2em; 
@@ -8,17 +12,26 @@
     color: #81964d;
 }
 
-/* ALL container of form */
+
+
+/**********************
+ ALL container of form 
+ **********************/
 .container-form-custum
 {
    margin-bottom: 3em;
 }
 
-/* Form */
+
+
+/*************
+ FORM
+ ************/
 .block-form-custum
 {  
    border: solid 2px lightgrey; 
    padding: 0.5em; 
+   margin-top: 4em;
 
    @media (min-width: 991.98px) 
    { 
@@ -30,7 +43,9 @@
 }
 
 
-/* Labels */
+/***********
+ Labels 
+ **********/
 label, legend 
 {
     font-size: 1.2em!important; 
@@ -38,15 +53,9 @@ label, legend
 }
 
 
-/* Birth-Date Field*/
-.input-birth-date select
-{
-    width: 30%; 
-    display: flex;
-    margin: 0.2em;        
-}
-
-/* Errors */
+/********
+ ERRORS
+ ********/
 label span 
 {
     font-size: 0.9em;
@@ -58,7 +67,9 @@ label span
 }
 
 
-
+/********
+ BUTTON 
+ ********/
 .block-form-custum button 
 { 
     margin-left: 20%;
@@ -67,9 +78,60 @@ label span
    
 }
 
-/**********
-LOGIN FORM  
-**********/
+
+/*****************************
+ For signup form - birth-date
+ ****************************/
+ .input-birth-date select
+ {
+     
+     width: 40%; 
+     display: flex;
+     margin: 0.2em;  
+ 
+     @media (min-width: 370px) { 
+         width: 30%;
+     }
+     
+           
+ }
+ 
+ /***************************************
+  For signup form - error widget birth-date
+  ***************************************/
+ legend + div {
+ 
+    .is-invalid {
+         margin-bottom: 4em;
+     }
+    
+     div  {
+         border: none!important;  
+         background-image: none!important; 
+     }
+ }
+ 
+ /*************************************
+  For signup form - error text birth-date
+  *************************************/
+ legend span 
+ {
+     font-size: 0.9em;
+     font-weight: normal;
+ 
+     span span:first-child {
+         display: none;
+     }
+ }
+
+
+
+
+
+
+/***********************
+Form login form - error  
+************************/
 .erreurLogin
 {
     text-align: center;
@@ -81,7 +143,9 @@ LOGIN FORM
 }
 
 
-/* Button to validate form */
+/*****************************
+ Button color to validate form 
+ *****************************/
 .validateBtn
 {
     button
@@ -99,6 +163,7 @@ LOGIN FORM
 
     }
 
+    /** for login form **/
     a
     {
     background-color: #9eb66b !important;
@@ -113,6 +178,7 @@ LOGIN FORM
         }
     }
 
+    /** for login form **/
     #redirectBtn
     {
         width: 100% !important;
@@ -122,4 +188,90 @@ LOGIN FORM
             width: 50% !important;
         }
     }
+
 }
+
+
+
+
+
+/******************************
+Form article form - ingredients 
+******************************/
+
+
+fieldset {
+    margin-bottom: 0!important; 
+}
+
+.button-add-ingredient
+{
+    background-color: white!important; 
+    border-color: #9eb66b!important; 
+    box-shadow: none!important;
+    color: black!important; 
+    padding: 1px 5px 1px 5px;
+    margin-bottom: 1em; 
+
+}
+
+.button-delete-ingredient {
+    background-color: white!important; 
+    border-color: #de6262!important; 
+    box-shadow: none!important;
+    color: black!important; 
+    padding: 1px 5px 1px 5px;
+    margin-bottom: 1em; 
+}
+
+
+fieldset > div
+{
+    border-bottom: 2px solid lightgrey;
+
+    fieldset div 
+    {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        
+
+        div 
+        {
+
+           width: 45%; 
+           display: flex; 
+           flex-direction: column;
+           text-align: center;
+          
+        }
+     
+    }
+
+ 
+}
+
+.other-ingredient 
+{
+    border-bottom: 2px solid lightgrey; 
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.other-ingredient div
+{
+  
+    font-size: 0.9em;
+    display: flex; 
+    justify-content: space-between;
+    
+    div 
+    {
+        width: 45%; 
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+    }
+    
+}
+
