@@ -25,7 +25,7 @@ security:
                 invalidate_session: true
                 # where to redirect after logout
                 # target: app_any_route
-
+            
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -37,3 +37,4 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/vote, roles: ROLE_USER }
