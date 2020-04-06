@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block title %}Connexion{% endblock %}
+
 {% block stylesheets %}
 {{ encore_entry_link_tags('form') }}
 {% endblock %}
+
 {% block body %}
+
 <div class="container container-form-custum">
     <form action="{{ path('login') }}" method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="erreurLogin">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
     {% if app.user %}
         <div class="mb-3">
@@ -35,15 +38,20 @@
                 </label>
             </div>
         #}
-        <button class="btn btn-lg btn-dark mt-4 mb-4" type="submit">
-            Continuer
-        </button>
+            <div class="validateBtn">
+            <button class="btn btn-lg btn-dark mt-4 mb-4" type="submit">
+                Continuer
+            </button>
+            </div>
+        
     </div>
     </form>
 
 </div>
 <div class="container w-100 text-center">
     <p class="h5 mb-3 font-weight-normal text-center">Pas encore membre ?</p>
-    <a class="btn btn-dark w-50 mt-4 mb-4" href="{{path('signup')}}" role="button">Créez vous un compte</a>
+    <div class="validateBtn" >
+        <a class="btn btn-dark mt-4 mb-4" id="redirectBtn" href="{{path('signup')}}" role="button">Créez vous un compte</a>
+    </div>
 </div>
 {% endblock %}

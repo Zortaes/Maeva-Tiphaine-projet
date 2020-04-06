@@ -82,11 +82,11 @@
 
 
         <div class="articleAuthor">
-            <a href="#"><h2>{{ article.user.viewUsername}}</h2></a>
+            <a href="#"><h3>{{ article.user.viewUsername}}</h3></a>
         </div>
 
-            <div class="articleCategory" >                              
-        <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
+        <div class="articleCategory" >                              
+            <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
         </div>
 
         <div class="fullSummary">
@@ -142,6 +142,7 @@
             <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Que pensez-vous de cet article ?
             </button>
+            
             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                 <div class="dropdown-vote-custom">
                     <form action="{{ path('vote', {'slug' : article.slug}) }}" method="post">
@@ -149,7 +150,7 @@
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="2">Pas mal</button>
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="3">Bien</button>
                         <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="4">Super</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>       
                     </form>
                 </div>
             </div>
