@@ -41,6 +41,14 @@
       "js": [
         "/build/article_by_category.js"
       ]
+    },
+    "about": {
+      "css": [
+        "/build/about.css"
+      ],
+      "js": [
+        "/build/about.js"
+      ]
     }
   }
 }

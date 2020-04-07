@@ -21,7 +21,7 @@ class ArticleRepository extends ServiceEntityRepository
 
 
     /**
-    * @return Article[] list of last article, limit 5
+    * @return Article[] list of last article, limit 6
     */
     public function findByLastArticle() 
     {

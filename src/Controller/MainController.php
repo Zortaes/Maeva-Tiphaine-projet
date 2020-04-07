@@ -15,8 +15,8 @@ class MainController extends AbstractController
     /**
      * @Route("/", methods={"GET"}, name="homepage")
      * 
-     * @return Article[] $lastArticles list of last article (limit 5)
-     * @return Article[] $bestArticles list of best Articles (limit 5)
+     * @return Article[] $lastArticles list of last article (limit 6)
+     * @return Article[] $bestArticles list of best Articles (limit 6)
      */
     public function homepage()
     {
@@ -33,6 +33,17 @@ class MainController extends AbstractController
             'lastArticles' => $lastArticles,
             'bestArticles' => $bestArticles
             ]);
+   
+
+    }
+
+    /**
+     * @Route("/a-propos", methods={"GET"}, name="a_propos")
+     */
+    public function about()
+    {   
+
+        return $this->render('main/about.html.twig');
    
 
     }
