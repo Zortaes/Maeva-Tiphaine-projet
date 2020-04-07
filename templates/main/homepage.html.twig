@@ -11,7 +11,11 @@
 {% block body %}
 
 
-
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success position-absolute w-100 text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
 <!-- 
 JUMBOTRON (image-flowers)
 -->
@@ -31,6 +35,7 @@ JUMBOTRON (image-flowers)
         </p>
     </div>
 </div>
+
 
 <!-- 
 LAST ARTICLES
