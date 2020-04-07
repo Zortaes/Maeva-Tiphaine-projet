@@ -185,6 +185,26 @@ class ArticleController extends AbstractController
             throw new Exception('La valeur n\'est pas bonne');
         
     }
+
+    /**
+     * @Route("/{slug}/supprimer", name="article_delete")
+     * 
+     * @return Article deleted
+     */
+    public function delete(Article $article)
+    {  
+
+        $this->denyAccessUnlessGranted('DELETE', $article);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($article);
+        $manager->flush();
+
+        $this->addFlash("info", "L'article a bien été supprimé");
+
+        return $this->redirectToRoute('homepage');
+
+    }
        
 }
 

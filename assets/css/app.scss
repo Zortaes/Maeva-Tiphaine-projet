@@ -6,7 +6,9 @@ body {
     position: relative;
 }
 
-/*NAVBAR AND SIDEBAR CSS*/
+/*********************
+NAVBAR AND SIDEBAR CSS
+*********************/
 
 #overlay 
 {
@@ -36,7 +38,10 @@ body {
 }
 
 
-/* NAVBAR */
+/******
+ NAVBAR 
+*******/
+
 #siteNavbar
 {
   display: flex;
@@ -49,20 +54,22 @@ body {
   #sideOpenbtn
   {
     margin: 12px;
-      .line1 {
-        width: 25px;
-        height: 2px;
-        background-color: grey;
-        margin: 20% 0;
-      }
+
+    .line1 
+    {
+      width: 25px;
+      height: 2px;
+      background-color: grey;
+      margin: 20% 0;
+    }
       
-      #line2 
-      {
-        width: 19px;
-        height: 1px;
-        background-color: grey;
-        margin: 20% 0 0 3px;
-      }
+    #line2 
+    {
+      width: 19px;
+      height: 1px;
+      background-color: grey;
+      margin: 20% 0 0 3px;
+    }
 
   }
 
@@ -112,6 +119,7 @@ body {
       border: solid 1px #86c057;
       color: #86c057;
     }
+
     &:focus
     {
       outline: none;
@@ -127,7 +135,8 @@ body {
 
 
 /* The sidebar menu */
-.sidebar {
+.sidebar 
+{
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -139,7 +148,8 @@ body {
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 
-    #bonjourSidebar{
+    #bonjourSidebar
+    {
       border: #9eb66b 2px solid;
       border-radius: 20px;
       margin: 1em 0.5em 2em 0.5em;
@@ -149,8 +159,6 @@ body {
         color: rgb(104, 103, 103);
       }
     }
-
-
 
     #sideList
     {
@@ -175,7 +183,7 @@ body {
     {
       padding : 1em 0 1em 2em;
     } 
-  }
+}
 
   #categoriesNav
   {

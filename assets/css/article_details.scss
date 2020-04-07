@@ -61,11 +61,73 @@ CARD
 {
     width: 100%;
     height: auto;
-    position: relative;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
 
+
+/* SIGNALEMENT ET SUPPRESION D'UN ARTICLE */
+
+/* DROPDOWN BUTTON */
+.dropdown-flag-custom
+{
+    position: absolute;
+    margin-top: 1%;
+    right: 2%;
+    @media (min-width: 390px)
+    { 
+        right: 12%;
+    }
+    @media (min-width: 767px) 
+    { 
+        right: 27%;
+    }
+
+}
+
+/* DROPDOWN MENU WITH CHOICES*/
+.dropdown-menu-flag-custom
+{
+    box-shadow: 2px 2px 20px rgb(128, 127, 127);
+    border-radius: 30px;
+    text-align: left;
+    padding:  1em;
+
+    @media (min-width: 1199px)
+    { 
+        width: 120%;
+        padding:  0.5em;
+    }
+
+    button
+    {   
+        font-size: calc(0.6em + 1vw);
+        border: none;
+        background-color: transparent;
+        outline: none;
+        
+
+        @media (min-width: 767px)
+        { 
+            font-size: 0.7em;
+        }
+    }
+
+    a
+    {   
+        padding-left: 0.5em;
+        font-size: calc(0.6em + 1vw);
+        border: none;
+        background-color: transparent;
+        color: black;
+        text-decoration: none;
+        
+        @media (min-width: 767px)
+        { 
+            font-size: 0.7em;
+        }
+    }
+}
 
 /* NAME OF THE AUTHOR */
 .articleAuthor 
@@ -270,33 +332,6 @@ VOTES
 
 }
 
-.dropdown-flag-custom
-{
-    box-shadow: 2px 2px 20px rgb(128, 127, 127);
-    border-radius: 30px;
-
-    button
-    {   
-        border-radius: 20px;
-        font-size: calc(0.6em + 1vw);
-        border: none;
-        background-color: transparent;
-        transition: 0.8s;
-        outline: none;
-
-        &:hover
-        {
-            background-color: rgb(207, 207, 207);
-            transition: 0.8s;
-        }
-
-        @media (min-width: 767px)
-        { 
-            font-size: 0.7em;
-        }
-    }
-
-}
 /* creation's date*/
 .dateDeCreation
 {
