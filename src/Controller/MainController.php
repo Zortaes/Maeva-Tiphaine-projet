@@ -38,7 +38,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/a-propos", methods={"GET"}, name="a_propos")
+     * @Route("/a-propos", methods={"GET"}, name="about")
      */
     public function about()
     {   
