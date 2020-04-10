@@ -21,6 +21,11 @@
 
 <div>
   <h2 class="text-center mb-3">Vos articles</h2>
+  
+  {% if articles is empty %}
+      <p class="text-center">Vous n'avez pas encore créer d'article</p>
+  {% else %}
+  
   <table class="table">
     <thead>
       <tr>
@@ -34,7 +39,8 @@
       </tr>
     </thead>
     <tbody> 
-       
+    
+   
     {% for article in articles %}
 
     <tr > 
@@ -98,7 +104,7 @@
     
     </tr>
     {% endfor %}
-      
+    {% endif %}  
     </tbody>
   </table>
 </div>
