@@ -28,7 +28,7 @@
             <button class="navProfil">Bonjour, {{ app.user.viewUsername }} &#9662</button>
 
             <div class="showUserNav">   
-                    <a class="sidebarCategorie" href="#">Mon profil</a>
+                    <a class="sidebarCategorie" href="{{path('showProfil')}}">Mon profil</a>
                     <a class="sidebarCategorie" href="{{path('logout')}}">Déconnexion</a>
             </div>
         </div>  
@@ -64,7 +64,7 @@
                 <a class="sideLinks" href="{{path('articleNew')}}"><h5>Ajouter un article</h5></a>
 
                 {% if app.user %}
-                    <a class="sideLinks" href="{{path('logout')}}"><h5>Mon profil</h5></a>
+                    <a class="sideLinks" href="{{path('showProfil')}}"><h5>Mon profil</h5></a>
                     <a class="sideLinks" href="{{path('logout')}}"><h5>Se déconnecter</h5></a>
                 {% else %} 
                     <a class="sideLinks" href="{{path('login')}}"><h5>Se connecter</h5></a>           

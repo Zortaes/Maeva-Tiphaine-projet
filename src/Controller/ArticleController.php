@@ -189,7 +189,9 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{slug}/supprimer", name="article_delete")
      * 
-     * @return Article deleted
+     * Delete an Article
+     * 
+     * @return $this Redirect to route homepage
      */
     public function delete(Article $article)
     {  
