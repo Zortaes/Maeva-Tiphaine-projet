@@ -21,7 +21,7 @@ class VoteRepository extends ServiceEntityRepository
 
 
     /**
-    * @return Article[] list of article by best vote, limit 5
+    * @return Article[] list of article by best vote, limit 6
     */
     public function findBestArticle()
     {

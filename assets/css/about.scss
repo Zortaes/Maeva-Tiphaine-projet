@@ -1,0 +1,232 @@
+
+
+/**************
+FIRST CONTAINER
+***************/
+.container-all-about
+{
+    margin-top: 3em;
+    width: 100%;
+
+}
+
+.block-questions
+{
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    text-align: center; 
+    margin-top: 1em;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 12px; 
+    
+    
+}
+
+.list-group-about-custum
+{
+ 
+    width: 90%; 
+    margin: auto;
+
+    .list-item-about-custum
+    {
+
+    border-color: #adc37e!important;
+
+    }
+
+    .list-group-item.active 
+    {
+
+    background-color: #adc37e!important;
+
+    }
+}
+
+.block-response 
+{
+    text-align: justify;
+    padding-right: 1.8em;
+    padding-left: 1.8em;
+    padding-top: 1em;
+
+    @media (min-width: 400px) and (max-width: 670px)
+    { 
+        padding-right: 2.7em;
+        padding-left: 2.7em;
+    }
+
+    @media (min-width: 671px) 
+    { 
+        padding-right: 3.7em;
+        padding-left: 3.7em;
+    }
+
+    @media (min-width: 1500px) 
+    { 
+       
+        padding-right: 6em;
+    }
+ 
+}
+
+/**************
+SECOND CONTAINER
+***************/
+.container-all-us
+{
+    margin-top: 2em;
+    padding: 1em;
+
+    @media (min-width: 992px) 
+    { 
+        width: 90%; 
+        margin: auto;
+        margin-top: 3em;     
+    }
+
+    @media (min-width: 1200px) and (max-width: 1499px)
+    { 
+        width: 75%;     
+    }
+
+    @media (min-width: 1500px) 
+    { 
+        width: 60%;     
+    }
+  
+  
+}
+
+.block-developer
+{
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    .img-about-custum 
+    {
+        width: 100%;
+       
+    }
+
+    .img-about-logo-custum 
+    {
+        width: 20%;
+        float: left;
+
+        @media (min-width: 576px) and (max-width: 670px)
+        { 
+            width: 25%; 
+        }
+
+        @media (min-width: 870px) 
+        { 
+            width: 18%; 
+        }
+
+        @media (min-width: 1679px) 
+        {   
+            width: 15%;      
+        }
+        
+        
+    }
+
+    .name-developers 
+    {
+        font-size: 1em; 
+        font-weight: bold;
+        text-align: center;
+
+        @media (min-width: 400px) and (max-width: 575.98px)
+        { 
+            font-size: 1.3em;
+        }
+
+
+        @media (min-width: 576px) and (max-width: 670px)
+        { 
+            font-size: 0.8em;
+        }
+
+        @media (min-width: 800px) 
+        { 
+            font-size: 1.3em;      
+        }
+
+
+
+    }
+
+    .aboutUs-p
+    {
+        font-size: 1em;
+
+        @media (min-width: 400px) and (max-width: 499px)
+        { 
+            font-size: 1.3em;
+        }
+
+        @media (min-width: 500px) 
+        { 
+            font-size: 1.5em;
+        }
+
+        @media (min-width: 550px) and (max-width: 575.98px)
+        { 
+            margin-top: 1em;
+        }
+
+        @media (min-width: 576px) 
+        { 
+            font-size: 0.8em;
+            margin-top: 0;
+          
+        }
+
+        @media (min-width: 671px) and (max-width: 799px)
+        { 
+            font-size: 1em;      
+        }
+
+        @media (min-width: 800px) 
+        { 
+            font-size: 1.3em;      
+        }
+
+        @media (min-width: 1124px) and (max-width: 1199.98px)
+        {   
+            margin-top: 1em;        
+        }
+
+        @media (min-width: 1679px) 
+        {   
+            margin-top: 1em;        
+        }
+        
+    }
+
+    .aboutUs-link
+    {
+        color: black; 
+        margin-left: 3px;
+
+        @media (min-width: 400px) and (max-width: 575.98px)
+        { 
+            font-size: 1.3em;
+            margin-left: 0.5em;
+        }
+
+        @media (min-width: 576px) and (max-width: 670px)
+        { 
+            font-size: 0.8em;
+            margin-left: 3px;
+        }
+
+        @media (min-width: 671px) 
+        {          
+            margin-left: 0.5em;
+        }
+    }
+}

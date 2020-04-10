@@ -22,6 +22,9 @@ require('../images/linge-de-maison.jpg');
 require('../images/menage-hygiene-maison.jpg');
 require('../images/recyclage.jpg');
 require('../images/vetements.jpg');
+require('../images/tiphaine.jpeg');
+require('../images/maeva.jpg');
+require('../images/logoLinkedin.jpg');
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
