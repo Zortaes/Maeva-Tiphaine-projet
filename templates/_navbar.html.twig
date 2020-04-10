@@ -33,6 +33,8 @@
             </div>
         </div>  
 
+        <a href="{{path('logout')}}"><button id="deconnexionBtn">Déconnexion</button></a>
+
         {% else %} 
         <a href="{{path('login')}}"><button id="connexionBtn">Connexion</button></a>
         {% endif %}
