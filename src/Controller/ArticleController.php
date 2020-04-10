@@ -3,20 +3,21 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\Article;
+use Exception;
 
+use App\Entity\Vote;
+use App\Entity\Article;
 use App\Services\Slugger;
 use App\Entity\ListIngredient;
 use App\Form\Type\ArticleType;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Vote;
-use Doctrine\Common\Collections\Expr\Value;
-use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
@@ -195,7 +196,7 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article)
     {  
-
+        
         $this->denyAccessUnlessGranted('DELETE', $article);
 
         $manager = $this->getDoctrine()->getManager();
@@ -204,7 +205,7 @@ class ArticleController extends AbstractController
 
         $this->addFlash("info", "L'article a bien été supprimé");
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('showProfil');
 
     }
        
