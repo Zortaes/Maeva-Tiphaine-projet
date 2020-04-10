@@ -43,6 +43,9 @@
       ]
     },
     "about": {
+      "css": [
+        "/build/about.css"
+      ],
       "js": [
         "/build/about.js"
       ]

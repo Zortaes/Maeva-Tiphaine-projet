@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Modifier un Article{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+
+{% block body %}
+
+<!-- Bloc form container -->
+<div class="container container-form-custum">
+
+    {{ form_start(form) }}
+
+    <!-- Bloc form  -->
+    <div class="block-form-custum">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Modifier un article</h1>
+        <div class="col-12">
+            {{ form_row(form.title)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.summary)}}
+
+        </div>
+        <div class="col-12 ">
+            {{ form_row(form.instruction)}}
+
+        </div>
+        
+       
+        
+        <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">   
+        
+              {{ form_row(form.ingredients)}}
+                
+        </div> 
+
+
+
+        <div class="col-12">
+            {{ form_label(form.category)}}
+            {{ form_widget(form.category)}}
+        </div>
+
+        
+        <div class="col-12 validateBtn">
+            {{ form_row(form.Envoyer) }}
+        </div>
+    </div>
+     <!-- Bloc form  -->
+
+    {{ form_end(form) }}
+
+</div>
+<!-- /Bloc form container-->
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('form') }}
+{% endblock %}

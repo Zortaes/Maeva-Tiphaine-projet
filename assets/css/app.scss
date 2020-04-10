@@ -4,7 +4,12 @@
 body {
     background-color: white;
     position: relative;
+    height: 100%;
+   
 }
+
+
+
 
 /*********************
 NAVBAR AND SIDEBAR CSS
@@ -414,6 +419,7 @@ NAVBAR AND SIDEBAR CSS
   .all-body-container 
   {
     margin-bottom: 10em;
+    
   }
 
 
@@ -422,11 +428,11 @@ NAVBAR AND SIDEBAR CSS
 /*************************** 
             FOOTER
 ****************************/
-footer {
+.container-footer-custum {
   position: absolute;
   bottom: 0; 
-  left: 0; 
-  right: 0;
+  
+  
   background-color: #cccccc;
   height: 15vh; 
 

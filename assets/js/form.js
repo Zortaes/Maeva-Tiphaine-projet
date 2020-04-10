@@ -43,6 +43,7 @@ jQuery(document).ready(function() {
 
     });
 
+
 });
 
 function addIngredientForm($collectionHolder, $newLinkDiv) {

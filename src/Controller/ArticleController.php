@@ -96,6 +96,99 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/{slug}/modifier", methods={"GET","POST"}, name="articleUpdate")
+     *
+     * @return Article edited
+     */
+    public function articleUpdate(Article $article, Request $request, Slugger $slugger)
+    {
+        //$this->denyAccessUnlessGranted('EDIT', $article);
+
+        // order the existing ingredient into array
+        $originalIngredient = $article->getIngredients()->toArray();
+
+        // create form and handle
+        $formArticle = $this->createForm(ArticleType::class, $article);  
+        $formArticle->handleRequest($request);
+
+        $dataIngredient = $formArticle->get('ingredients')->getData();   
+
+        if ($formArticle->isSubmitted() && $formArticle->isValid()) 
+        {
+
+            /* Slug */
+            $slugArticle = $formArticle->get('title')->getData();
+            $articleSluged = $slugger->sluggify($slugArticle); 
+            $article->setSlug($articleSluged);
+          
+
+            $entityManager = $this->getDoctrine()->getManager();
+             
+            
+            foreach ($originalIngredient as $ingredient) 
+            {
+
+                $article->setIngredients($dataIngredient);
+                $article->setupdatedAt(new DateTime('now'));
+
+            }
+
+            foreach($dataIngredient as $key => $value) 
+            {
+                   
+                $disposition = $value->getDisposition();
+                
+                /* All ingredient except first ingredient */
+                if ($disposition === null) 
+                { 
+                
+                    /* in order */
+                   $value->setDisposition($key); 
+
+                }
+            }
+
+            $entityManager->persist($article);    
+            $entityManager->flush(); 
+            
+                foreach ($originalIngredient as $ingredient) 
+                {
+                    /* Add updated at in ListIngredient */
+                    foreach ($article->getIngredients() as $ingredient) 
+                    {
+                        $ingredient->setUpdatedAt(new DateTime('now')); 
+                    }
+                }
+
+                foreach($dataIngredient as $key => $value) 
+                {
+                               /* Add relation with Article in ListIngredient */
+                    foreach ($article->getIngredients() as $ingredient) 
+                    {
+                        $ingredient->setArticle($article); 
+                    }    
+
+                }
+
+            
+                $entityManager->persist($ingredient);    
+                $entityManager->flush(); 
+
+                return $this->redirectToRoute('homepage');
+        }   
+            
+        
+        
+        return $this->render('article/edit.html.twig', [
+            'originalIngredient' => $originalIngredient,
+            'article' => $article,
+            'form' => $formArticle->createView(),
+        ]);
+    }
+
+
     /**
      * @Route("/{slug}", methods={"GET", "POST"}, name="articleDetails")
      */

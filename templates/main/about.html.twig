@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}A propos{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('about') }}
+{% endblock %}
+
+{% block body %}
+
+<!-- First Container -->
+<div class="container-all-about">
+
+    <div class="row">
+
+        <div class="col-12 col-md-6 block-questions">
+
+            <div class="list-group list-group-about-custum" id="list-tab" role="tablist">
+
+                <a class="list-group-item list-group-item-action list-item-about-custum active"
+                    id="list-firstQuestion-list" data-toggle="list" href="#list-firstQuestion" role="tab"
+                    aria-controls="firstQuestion">
+
+                    Pourquoi ce site internet ?
+
+                </a>
+
+                <a class="list-group-item list-group-item-action list-item-about-custum" id="list-secondQuestion-list"
+                    data-toggle="list" href="#list-secondQuestion" role="tab" aria-controls="secondQuestion">
+
+                    Suis-je obligé d’être un pur « écolo » pour visiter ce site ?
+
+                </a>
+
+                <a class="list-group-item list-group-item-action list-item-about-custum" id="list-thirdQuestion-list"
+                    data-toggle="list" href="#list-thirdQuestion" role="tab" aria-controls="thirdQuestion">
+
+                    Y aura-t-il une suite au site ? (par exemple, j’aimerais pouvoir poster mon avis sur des articles
+
+                </a>
+
+                <a class="list-group-item list-group-item-action list-item-about-custum" id="list-fourthQuestion-list"
+                    data-toggle="list" href="#list-fourthQuestion" role="tab" aria-controls="fourthQuestion">
+
+                    Que faire si je trouve des contenus qui me semble suspicieux ?
+
+                </a>
+
+                <a class="list-group-item list-group-item-action list-item-about-custum" id="list-fifthQuestion-list"
+                    data-toggle="list" href="#list-fifthQuestion" role="tab" aria-controls="fifthQuestion">
+
+                    Dois-je sortir ma carte bleue ?
+
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-12 col-md-6 block-response">
+
+            <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active" id="list-firstQuestion" role="tabpanel"
+                    aria-labelledby="list-firstQuestion-list">
+
+                    Très sensibilisée à la situation de la planète et à notre responsabilité vis-à-vis d’elle, nous avons créé cette application afin de pouvoir regrouper toute personne intéressée de près ou de loin à des changements d’habitudes simples. Des petits curieux jusqu’aux personnalités impliquées voulant partager leurs idées, nous voulons faire de ce projet un espace communautaire où chacun d’entre vous pourra y trouver son compte ! 😊 
+
+                </div>
+
+                <div class="tab-pane fade" id="list-secondQuestion" role="tabpanel"
+                    aria-labelledby="list-secondQuestion-list">
+
+                    Bien évidemment non ! Ce site est ouvert à tous, personnes intéressées par des changements ou voulant tout simplement feuilleter son contenu. L’objectif est de partager entre nous nos idées, sans donner de leçon de morale, où chacun pourra prendre ce qu’il lui donne envie. 😊 
+
+                </div>
+
+                <div class="tab-pane fade" id="list-thirdQuestion" role="tabpanel"
+                    aria-labelledby="list-thirdQuestion-list">
+
+                    Oui, il est prévu dans une prochaine version l’ajout de commentaires sur les articles. Nous avons également pensé à développer d’autres fonctionnalités, comme l’ajout de vos propres images sur les articles, la possibilité d’avoir un avatar, un système de barre de recherche, et bien plus encore ! 
+                    Nous sommes également ouvertes à toutes questions et suggestions de votre part. Pour se faire, vous pouvez nous contacter  <a href="#">ici</a>. 
+
+
+                </div>
+                <div class="tab-pane fade" id="list-fourthQuestion" role="tabpanel"
+                    aria-labelledby="list-fourthQuestion-list">
+
+                    En haut de chaque page d’article dont vous pouvez voir le contenu en détail, se trouve trois petits points sur lesquels vous pouvez cliquer. Ceci vous donne la possibilité de signaler un article, et de là, nous pourrons juger les éventuelles sanctions à apporter. Nous rappelons également qu’il est interdit de partager des contenus offensants/illicites, ou des recettes de fabrications dangereuses pour tout être vivant ou matériel. Pour plus d’informations vous pouvez consulter nos <a href="#">mentions légales</a>.
+                    
+                </div>
+                <div class="tab-pane fade" id="list-fifthQuestion" role="tabpanel"
+                    aria-labelledby="list-fifthQuestion-list">
+
+                    La réponse est évidente, non !
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /First Container -->
+
+<!-- Second Container -->
+<div class="container-all-us row justify-content-sm-center">
+
+    <div class="row col-sm-6">
+        <div class="col-6 block-developer">
+            <img class="card img-fluid img-about-custum" src="{{ asset('build/images/tiphaine.jpeg')}}"
+                alt="image of the woman developer">
+            <h2 class="name-developers">
+                Tiphaine
+            </h2>
+        </div>
+
+        <div class="col-6 block-developer">
+            <p class="aboutUs-p">
+                Développeuse web Fullstack, spécialisée en Symfony
+            </p>
+            <a href="https://www.linkedin.com/in/tiphaine-surygala/?locale=fr_FR" class="aboutUs-link">
+                Linkedin
+                <img class="card img-fluid img-about-logo-custum" src="{{ asset('build/images/logoLinkedin.jpg')}}"
+                    alt="logo Linkedin">
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row col-sm-6">
+
+        <div class="col-6 block-developer">
+
+            <img class="card img-fluid img-about-custum" src="{{ asset('build/images/maeva.jpg')}}"
+                alt="image of the woman developer">
+            <h2 class="name-developers">
+                Maéva
+            </h2>
+
+        </div>
+
+        <div class="col-6 block-developer">
+            <p class="aboutUs-p">
+                Développeuse web Fullstack, spécialisée en Symfony
+            </p>
+
+            <a href="http://www.linkedin.com/in/maéva-simao" class="aboutUs-link">
+                Linkedin
+                <img class="card img-fluid img-about-logo-custum" src="{{ asset('build/images/logoLinkedin.jpg')}}"
+                    alt="logo Linkedin">
+            </a>
+        </div>
+
+    </div>
+</div>
+<!-- /Second Container -->
+{% endblock %}
