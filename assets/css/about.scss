@@ -1,10 +1,12 @@
 
+
 /**************
 FIRST CONTAINER
 ***************/
 .container-all-about
 {
     margin-top: 3em;
+    width: 100%;
 
 }
 
@@ -59,6 +61,12 @@ FIRST CONTAINER
     { 
         padding-right: 3.7em;
         padding-left: 3.7em;
+    }
+
+    @media (min-width: 1500px) 
+    { 
+       
+        padding-right: 6em;
     }
  
 }
