@@ -11,6 +11,34 @@ h2
     font-weight: bold; 
 }
 
+.dropdown-account-custum 
+{
+
+   
+    button 
+    {     
+        font-weight: bold;
+    }
+
+    button:hover 
+    {
+        color: #b2ce6c;
+    }
+
+    .btn:focus 
+    {
+        box-shadow: none;
+    }
+
+    .account-delete 
+    {
+        font-size: 1em;
+        color: #e97062;
+    }
+   
+    
+}
+
 
 .article-voted
 {
@@ -171,6 +199,7 @@ tr
 
     .container-parameters-option 
     {
+       
         box-shadow: 2px 2px 20px #807f7f;
         border-radius: 30px;
         padding: 0.2em 0.5em 0.2em 0.5em;
@@ -183,8 +212,9 @@ tr
 /***
  link-option for mobile
  **/
-.container-parameters-option a {
-  
+.container-parameters-option a 
+{
+    color: black;
     padding: 0.5em;
     font-size: calc(0.6em + 1vw);
     border: none;

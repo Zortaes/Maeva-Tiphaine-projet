@@ -11,12 +11,36 @@
 
 {% block body %}
 
+ 
+
 <!-- Block "Information générales" -->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
+
   <h2>Information générales</h2>
   <p>Pseudo : {{user.viewUsername}}</p>
   <p>Adresse email : {{user.email}}</p>
   <p>Date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
+  <!-- Dropdown for options account -->
+  <div class="dropdown dropdown-account-custum text-center">
+      
+    <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Paramètres du compte
+    </button>
+
+  
+    <div class="dropdown-menu p-0 dropdown-menu-custum text-center" aria-labelledby="dropdownMenuButton">
+
+      <div class="container-parameters-option">
+        <a class="account-delete" href="{{path('deleteAccount', {'slug' : user.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?')">
+          Supprimer le compte
+        </a>       
+      </div>
+
+    </div>
+   
+  </div> 
+<!-- /Dropdown for options account -->
 </div>
 <!-- / Block "Information générales" -->
 
@@ -60,7 +84,9 @@
             {{article.summary}}
           </td>
 
-          <td class="mobile-option">
+          <td class="mobile-option">  
+            
+            <!-- Dropdown for mobile -->
             <div class="dropdown text-center">
 
               <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
@@ -68,7 +94,7 @@
                 <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters"> 
               </button>
 
-              <!-- Dropdown for mobile -->
+            
               <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
 
                 <div class="container-parameters-option" >
@@ -84,8 +110,9 @@
                 </div>
 
               </div>
-              <!-- /Dropdown for mobile -->
-            </div>
+             
+            </div> 
+            <!-- /Dropdown for mobile -->
           </td>
 
           <td class="desktop-option">   
@@ -135,5 +162,7 @@
   </div>
   <!-- /Block articles voted -->
 {% endif %}
+
+
 
 {% endblock %}

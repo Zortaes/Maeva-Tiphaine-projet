@@ -80,4 +80,30 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET", "POST"})
+     * 
+     */
+    public function deleteAccount()
+    {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        $user = $this->getUser();  
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($user);
+        $manager->flush();
+
+        $this->addFlash("info", "L'article a bien été supprimé");
+
+        return $this->redirectToRoute('homepage');
+
+       
+       
+       
+       
+      
+       
+    }
+
 }
