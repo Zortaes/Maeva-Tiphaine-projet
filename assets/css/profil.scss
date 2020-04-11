@@ -17,6 +17,9 @@ h2
     font-size: 1.2em; 
 }
 
+/***
+ Links in table and in the block articleVoted
+ **/
 .desktop-option, .article-voted  
 {
             
@@ -28,7 +31,9 @@ h2
          
 }
 
-
+/***
+ Links for "supprimer"
+ **/
 .article-delete 
 {
     color: #de6262!important;
@@ -92,7 +97,9 @@ icon dropdown
 
 
 
-
+/*** 
+text in table
+****/
 tr 
 {
     text-align: center;
@@ -101,9 +108,7 @@ tr
     @media (min-width: 380px) 
     {
         font-size: 1em; 
-    }
-
-   
+    }  
 }
 
 /***
@@ -176,12 +181,11 @@ tr
 }
 
 /***
- link-option
+ link-option for mobile
  **/
 .container-parameters-option a {
   
     padding: 0.5em;
-    color: black;
     font-size: calc(0.6em + 1vw);
     border: none;
     background-color: transparent;

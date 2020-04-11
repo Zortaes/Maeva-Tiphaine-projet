@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
-use App\Entity\Vote;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
@@ -73,20 +72,11 @@ class UserController extends AbstractController
         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
             "user" => $user
         ]);
-
-        
-
-        /** @var VoteRepository */
-        $vote = $this->getDoctrine()->getRepository(Vote::class)->findBy([
-            "user" => $user
-        ]);
-
       
         
         return $this->render('user/profil.html.twig', [
           'user' => $user, 
-          'articles' => $articles, 
-          'vote' => $vote,
+          'articles' => $articles,         
         ]);
     }
 
