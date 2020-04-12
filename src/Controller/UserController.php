@@ -11,6 +11,8 @@ use App\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -81,28 +83,51 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET", "POST"})
+     * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET"})
      * 
      */
-    public function deleteAccount()
+    public function deleteAccount(User $userParam)
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         
-        $user = $this->getUser();  
-        $manager = $this->getDoctrine()->getManager();
-        $manager->remove($user);
-        $manager->flush();
+        $userCurrent = $this->getUser();  
+       
 
-        $this->addFlash("info", "L'article a bien été supprimé");
+        if ($userCurrent === $userParam)
+        {
+            $manager = $this->getDoctrine()->getManager();
 
-        return $this->redirectToRoute('homepage');
 
-       
-       
-       
-       
+            /** @var ArticleRepository */
+            $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+            "user" => $userCurrent
+            ]);
       
+            foreach ($articles as $article) 
+            {
+                $manager->remove($article);
+            }
+
+            $manager->remove($userParam);
+            
+            $session = new Session();
+            $session->invalidate();
+
+            $manager->flush();
+
+            $this->addFlash("info", "Votre compte a bien été supprimé");
+
+           
+
+            return $this->redirectToRoute('homepage');
+        }
+        
+        else 
+
+        {
+            throw new Exception('La valeur n\'est pas bonne');
+        }      
        
     }
 
