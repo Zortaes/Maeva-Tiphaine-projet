@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Mon profil{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent()}}
+{{ encore_entry_link_tags('profil') }}
+{% endblock %}
+
+{% block body %}
+
+ 
+
+<!-- Block "Information générales" -->
+<div class="d-flex flex-column align-items-center mt-5 mb-4">
+
+  <h2>Information générales</h2>
+  <p>Pseudo : {{user.viewUsername}}</p>
+  <p>Adresse email : {{user.email}}</p>
+  <p>Date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
+  <!-- Dropdown for options account -->
+  <div class="dropdown dropdown-account-custum text-center">
+      
+    <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Paramètres du compte
+    </button>
+
+  
+    <div class="dropdown-menu p-0 dropdown-menu-custum text-center" aria-labelledby="dropdownMenuButton">
+
+      <div class="container-parameters-option">
+        <a class="account-delete" href="{{path('deleteAccount', {'slug' : user.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?')">
+          Supprimer le compte
+        </a>       
+      </div>
+
+    </div>
+   
+  </div> 
+<!-- /Dropdown for options account -->
+</div>
+<!-- / Block "Information générales" -->
+
+<!-- Block "Vos articles" -->
+<div>
+  <h2 class="text-center mb-3">Vos articles</h2>
+  
+  {% if articles is empty %}
+      <p class="text-center">Vous n'avez pas encore créer d'article</p>
+  {% else %}
+  
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Sommaire</th>
+          <th scope="col" class="mobile-option">Option</th>
+          <th scope="col" class="desktop-option">Details</th>
+          <th scope="col" class="desktop-option">Modifier</th>
+          <th scope="col" class="desktop-option">Supprimer</th>
+        </tr>
+      </thead>
+      <tbody> 
+      
+      
+      {% for article in articles %}
+      <tr>     
+
+          <th scope="row" >
+            <img class="image-category" src="{{ asset("build/images/" ~ article.category.picture ) }} "
+              alt="image represent category {{article.category.name}}">
+          </th>
+
+          <td >
+            {{article.title}}
+          </td>
+
+          <td>
+            {{article.summary}}
+          </td>
+
+          <td class="mobile-option">  
+            
+            <!-- Dropdown for mobile -->
+            <div class="dropdown text-center">
+
+              <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters"> 
+              </button>
+
+            
+              <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
+
+                <div class="container-parameters-option" >
+                  <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+                    Details
+                  </a>
+                  <a href="#">
+                    Modifier
+                  </a>
+                  <a class="article-delete" href="{{path('article_delete', {'slug' : article.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
+                    Supprimer
+                  </a>       
+                </div>
+
+              </div>
+             
+            </div> 
+            <!-- /Dropdown for mobile -->
+          </td>
+
+          <td class="desktop-option">   
+            <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+              Voir les details
+            </a>
+          </td>
+          <td class="desktop-option">
+              <a href="#">
+                Modifier l'article
+              </a>
+          </td>
+          <td class="desktop-option">
+              <a class="article-delete" href="{{path('article_delete', {'slug' : article.slug}) }}"  value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
+                  Supprimer l'article
+              </a>   
+          </td>     
+    
+      </tr>
+      {% endfor %}
+
+    {% endif %}  
+    </tbody>
+  </table>
+</div>
+<!-- /Block "Vos articles" -->
+
+<hr>
+
+<h2 class="text-center mt-5 mb-4">Les articles que vous avez voté</h2>
+
+{% if user.votes is empty %}
+
+  <p class="text-center">Vous n'avez pas encore voté d'article </p>
+
+  {% else %}
+
+  <!-- Block articles voted -->
+  <div class="w-75 mx-auto d-flex justify-content-center flex-wrap">  
+  {% for articlevoted in user.votes %}
+    <p class="px-3 article-voted">
+      <a href="{{path('articleDetails', {'slug' : articlevoted.article.slug}) }}">
+         {{articlevoted.article.title}}
+      </a>    
+    </p>  
+  {% endfor %}
+  </div>
+  <!-- /Block articles voted -->
+{% endif %}
+
+
+
+{% endblock %}

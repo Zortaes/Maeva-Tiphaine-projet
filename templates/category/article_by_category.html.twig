@@ -16,8 +16,16 @@
     <p class="category-title-p" style="color:{{ category.color }}">{{category.name}}</p>
 </div>
 
+
+{% if category.articles is empty %}
+
+<p class="text-center">Il n'y a pas encore d'article de cette catégorie</p>
+  
+{% else %}
+  
 <!-- Container Cards -->
 <div class="container container-custum row">
+
     {% for article in category.articles %}
 
 
@@ -90,6 +98,8 @@
         </div>
     </div>
     {% endfor %}
+
+    {% endif %}
 </div>
 <!-- /Container Cards -->
 {% endblock %}
