@@ -97,6 +97,112 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/{slug}/modifier", methods={"GET","POST"}, name="article_update")
+     *
+     * @return Article edited
+     */
+    public function articleUpdate(Article $article, Request $request, Slugger $slugger)
+    {
+        $this->denyAccessUnlessGranted('EDIT', $article);
+
+        // order the existing ingredient into array
+        $originalIngredient = $article->getIngredients()->toArray();
+
+        // create form and handle
+        $formArticle = $this->createForm(ArticleType::class, $article);  
+        $formArticle->handleRequest($request);
+
+        $dataIngredient = $formArticle->get('ingredients')->getData();   
+
+
+
+        if ($formArticle->isSubmitted() && $formArticle->isValid()) 
+        {
+
+            /* Slug */
+            $slugArticle = $formArticle->get('title')->getData();
+            $articleSluged = $slugger->sluggify($slugArticle); 
+            $article->setSlug($articleSluged);
+          
+
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            /* remove from db ingredients that are no more in the recipe*/
+            foreach ($originalIngredient as $ingredient) {
+                if (!$article->getIngredients()->contains($ingredient)) {
+                    $entityManager->remove($ingredient);
+                }
+            }
+            
+            /* for any already existing ingredient, set them to db from ARTICLE entity */
+            foreach ($originalIngredient as $ingredient)
+            {
+
+                $article->setIngredients($dataIngredient);
+                $article->setupdatedAt(new DateTime('now'));
+
+            }
+
+            /* for any new ingredients, set disposition corresponding to their key value */
+            foreach($dataIngredient as $key => $value) 
+            {
+                   
+                $disposition = $value->getDisposition();
+                
+                /* All ingredient except first ingredient */
+                if ($disposition === null) 
+                { 
+                
+                    /* in order */
+                   $value->setDisposition($key); 
+
+                }
+            }
+
+            $entityManager->persist($article);    
+            $entityManager->flush(); 
+            
+
+                /* Add relation with Article in ListIngredient */
+                foreach ($originalIngredient as $ingredient) 
+                {
+                    /* Add updated at in ListIngredient */
+                    foreach ($article->getIngredients() as $ingredient) 
+                    {
+                        $ingredient->setUpdatedAt(new DateTime('now')); 
+                    }
+                }
+
+                /* Add relation with Article in ListIngredient for any new ingredient */
+                foreach($dataIngredient as $key => $value) 
+                {
+                    
+                    foreach ($article->getIngredients() as $ingredient) 
+                    {
+                        $ingredient->setArticle($article);
+                    }
+
+                }
+
+            
+                $entityManager->persist($ingredient);    
+                $entityManager->flush(); 
+
+                return $this->redirectToRoute('articleDetails', array('slug'=> $article->getSlug()));
+        }   
+            
+        
+        
+        return $this->render('article/edit.html.twig', [
+            'originalIngredient' => $originalIngredient,
+            'article' => $article,
+            'form' => $formArticle->createView(),
+        ]);
+    }
+
+
     /**
      * @Route("/{slug}", methods={"GET", "POST"}, name="articleDetails")
      */
