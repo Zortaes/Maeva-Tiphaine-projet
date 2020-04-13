@@ -11,7 +11,11 @@
 
 {% block body %}
 
- 
+{% for message in app.flashes('info') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <!-- Block "Information générales" -->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
@@ -22,119 +26,152 @@
   <p>Date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
   <!-- Dropdown for options account -->
   <div class="dropdown dropdown-account-custum text-center">
-      
-    <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Paramètres du compte
     </button>
 
-  
+
     <div class="dropdown-menu p-0 dropdown-menu-custum text-center" aria-labelledby="dropdownMenuButton">
 
       <div class="container-parameters-option">
-        <a class="account-delete" href="{{path('deleteAccount', {'slug' : user.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?')">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary account-delete " data-toggle="modal"
+          data-target="#modalDeleteAccount">
           Supprimer le compte
-        </a>       
+        </button>
+
       </div>
 
     </div>
-   
-  </div> 
-<!-- /Dropdown for options account -->
+
+  </div>
+  <!-- /Dropdown for options account -->
 </div>
 <!-- / Block "Information générales" -->
+
+
 
 <!-- Block "Vos articles" -->
 <div>
   <h2 class="text-center mb-3">Vos articles</h2>
-  
+
   {% if articles is empty %}
-      <p class="text-center">Vous n'avez pas encore créer d'article</p>
+  <p class="text-center">Vous n'avez pas encore créer d'article</p>
   {% else %}
-  
-    <table class="table">
 
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Sommaire</th>
-          <th scope="col" class="mobile-option">Option</th>
-          <th scope="col" class="desktop-option">Details</th>
-          <th scope="col" class="desktop-option">Modifier</th>
-          <th scope="col" class="desktop-option">Supprimer</th>
-        </tr>
-      </thead>
-      <tbody> 
-      
-      
-      {% for article in articles %}
-      <tr>     
+  <table class="table">
 
-          <th scope="row" >
-            <img class="image-category" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-              alt="image represent category {{article.category.name}}">
-          </th>
-
-          <td >
-            {{article.title}}
-          </td>
-
-          <td>
-            {{article.summary}}
-          </td>
-
-          <td class="mobile-option">  
-            
-            <!-- Dropdown for mobile -->
-            <div class="dropdown text-center">
-
-              <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters"> 
-              </button>
-
-            
-              <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
-
-                <div class="container-parameters-option" >
-                  <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
-                    Details
-                  </a>
-                  <a href="#">
-                    Modifier
-                  </a>
-                  <a class="article-delete" href="{{path('article_delete', {'slug' : article.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
-                    Supprimer
-                  </a>       
-                </div>
-
-              </div>
-             
-            </div> 
-            <!-- /Dropdown for mobile -->
-          </td>
-
-          <td class="desktop-option">   
-            <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
-              Voir les details
-            </a>
-          </td>
-          <td class="desktop-option">
-              <a href="#">
-                Modifier l'article
-              </a>
-          </td>
-          <td class="desktop-option">
-              <a class="article-delete" href="{{path('article_delete', {'slug' : article.slug}) }}"  value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
-                  Supprimer l'article
-              </a>   
-          </td>     
-    
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Sommaire</th>
+        <th scope="col" class="mobile-option">Option</th>
+        <th scope="col" class="desktop-option">Details</th>
+        <th scope="col" class="desktop-option">Modifier</th>
+        <th scope="col" class="desktop-option">Supprimer</th>
       </tr>
+    </thead>
+    <tbody>
+
+
+      {% for article in articles %}
+      <tr>
+
+        <th scope="row">
+          <img class="image-category" src="{{ asset("build/images/" ~ article.category.picture ) }} "
+            alt="image represent category {{article.category.name}}">
+        </th>
+
+        <td>
+          {{article.title}}
+        </td>
+
+        <td>
+          {{article.summary}}
+        </td>
+
+        <td class="mobile-option">
+
+          <!-- Dropdown for mobile -->
+          <div class="dropdown text-center">
+
+            <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters">
+            </button>
+
+
+            <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
+
+              <div class="container-parameters-option">
+                <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+                  Details
+                </a>
+                <a href="#">
+                  Modifier
+                </a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
+                  data-target="#modalDeleteArticle-{{article.id}}">
+                  Supprimer
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+          <!-- /Dropdown for mobile -->
+        </td>
+
+        <td class="desktop-option">
+          <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+            Voir les details
+          </a>
+        </td>
+        <td class="desktop-option">
+          <a href="#">
+            Modifier l'article
+          </a>
+        </td>
+        <td class="desktop-option">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
+            data-target="#modalDeleteArticle-{{article.id}}">
+            Supprimer l'article
+          </button>
+        </td>
+
+      </tr>
+
+      <!-- Modal Delete article -->
+      <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment l'article {{article.title}}?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary button-yes-custum">
+                <a href="{{path('article_delete', {'slug' : article.slug}) }}">
+                  Oui
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {% endfor %}
 
-    {% endif %}  
+      {% endif %}
     </tbody>
   </table>
 </div>
@@ -146,23 +183,57 @@
 
 {% if user.votes is empty %}
 
-  <p class="text-center">Vous n'avez pas encore voté d'article </p>
+<p class="text-center">Vous n'avez pas encore voté d'article </p>
 
-  {% else %}
+{% else %}
 
-  <!-- Block articles voted -->
-  <div class="w-75 mx-auto d-flex justify-content-center flex-wrap">  
+<!-- Block articles voted -->
+<div class="w-75 mx-auto d-flex justify-content-center flex-wrap">
   {% for articlevoted in user.votes %}
-    <p class="px-3 article-voted">
-      <a href="{{path('articleDetails', {'slug' : articlevoted.article.slug}) }}">
-         {{articlevoted.article.title}}
-      </a>    
-    </p>  
+  <p class="px-3 article-voted">
+    <a href="{{path('articleDetails', {'slug' : articlevoted.article.slug}) }}">
+      {{articlevoted.article.title}}
+    </a>
+  </p>
   {% endfor %}
-  </div>
-  <!-- /Block articles voted -->
+</div>
+<!-- /Block articles voted -->
 {% endif %}
 
+<!-- Modal Delete account -->
+<div class="modal fade modal-container-custum" id="modalDeleteAccount" tabindex="-1" role="dialog"
+  aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer votre compte ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tous vos articles ainsi que votre contribution aux votes seront aussi supprimés.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary button-yes-custum">
+          <a href="{{path('deleteAccount', {'slug' : user.slug}) }}">
+            Oui
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+{{ parent() }}
+
+{{ encore_entry_script_tags('profil') }}
 
 {% endblock %}
