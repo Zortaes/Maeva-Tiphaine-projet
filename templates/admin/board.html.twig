@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Admin Board{% endblock %}
+
+{% block stylesheets %}
+{{ parent()}}
+{{ encore_entry_link_tags('board') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="d-flex flex-column flex-md-row">
+    <div class="card card-custum">
+        <img class="card img-fluid" src="{{ asset("build/images/iconUser.png") }} "
+            alt="image represent icon user avatar">
+        <div class="card-body">
+            <h5 class="card-title text-center">Tous les utilisateurs</h5>
+            <a href="#" class="btn btn-primary">Voir</a>
+        </div>
+    </div>
+
+    <div class="card card-custum">
+        <img class="card img-fluid" src="{{ asset("build/images/articlesFlag.jpg") }} "
+            alt="image represent an alert for articles flags">
+        <div class="card-body">
+            <h5 class="card-title text-center">Tous les articles signalés</h5>
+            <a href="#" class="btn btn-primary">Voir</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
