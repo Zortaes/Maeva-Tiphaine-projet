@@ -35,9 +35,24 @@
        
         
         <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">   
-        
-              {{ form_row(form.ingredients)}}
-                
+
+            {{ form_label(form.ingredients) }}
+
+            {% for originalIngredient in form.ingredients %}
+                <div class="existingIngredients">
+
+                    {{ form_errors(originalIngredient) }}
+
+                    {{ form_widget(originalIngredient) }}
+
+                    {{ form_help(originalIngredient) }} 
+
+                </div>
+           
+            {% endfor %}
+            
+            <button type="button" class="btn btn-primary deleteExistingIngredient"> supprimer cet ingrédient</button>
+       
         </div> 
 
 

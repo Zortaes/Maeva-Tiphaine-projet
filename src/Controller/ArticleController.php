@@ -17,7 +17,7 @@ use Exception;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use Symfony\Component\Validator\Constraints\Blank;
 
 /**
  * @Route("/article")
@@ -98,13 +98,13 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/{slug}/modifier", methods={"GET","POST"}, name="articleUpdate")
+     * @Route("/{slug}/modifier", methods={"GET","POST"}, name="article_update")
      *
      * @return Article edited
      */
     public function articleUpdate(Article $article, Request $request, Slugger $slugger)
     {
-        //$this->denyAccessUnlessGranted('EDIT', $article);
+        $this->denyAccessUnlessGranted('EDIT', $article);
 
         // order the existing ingredient into array
         $originalIngredient = $article->getIngredients()->toArray();
@@ -114,6 +114,8 @@ class ArticleController extends AbstractController
         $formArticle->handleRequest($request);
 
         $dataIngredient = $formArticle->get('ingredients')->getData();   
+
+
 
         if ($formArticle->isSubmitted() && $formArticle->isValid()) 
         {
@@ -125,9 +127,16 @@ class ArticleController extends AbstractController
           
 
             $entityManager = $this->getDoctrine()->getManager();
-             
             
-            foreach ($originalIngredient as $ingredient) 
+            /* remove from db ingredients that are no more in the recipe*/
+            foreach ($originalIngredient as $ingredient) {
+                if (!$article->getIngredients()->contains($ingredient)) {
+                    $entityManager->remove($ingredient);
+                }
+            }
+            
+            /* for any already existing ingredient, set them to db from ARTICLE entity */
+            foreach ($originalIngredient as $ingredient)
             {
 
                 $article->setIngredients($dataIngredient);
@@ -135,6 +144,7 @@ class ArticleController extends AbstractController
 
             }
 
+            /* for any new ingredients, set disposition corresponding to their key value */
             foreach($dataIngredient as $key => $value) 
             {
                    
@@ -153,6 +163,8 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);    
             $entityManager->flush(); 
             
+
+                /* Add relation with Article in ListIngredient */
                 foreach ($originalIngredient as $ingredient) 
                 {
                     /* Add updated at in ListIngredient */
@@ -162,13 +174,14 @@ class ArticleController extends AbstractController
                     }
                 }
 
+                /* Add relation with Article in ListIngredient for any new ingredient */
                 foreach($dataIngredient as $key => $value) 
                 {
-                               /* Add relation with Article in ListIngredient */
+                    
                     foreach ($article->getIngredients() as $ingredient) 
                     {
-                        $ingredient->setArticle($article); 
-                    }    
+                        $ingredient->setArticle($article);
+                    }
 
                 }
 
@@ -176,7 +189,7 @@ class ArticleController extends AbstractController
                 $entityManager->persist($ingredient);    
                 $entityManager->flush(); 
 
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('articleDetails', array('slug'=> $article->getSlug()));
         }   
             
         

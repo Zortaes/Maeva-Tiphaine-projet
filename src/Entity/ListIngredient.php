@@ -25,12 +25,13 @@ class ListIngredient
 
     /**
      * @ORM\Column(type="string", length=20)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="change ce putain de message")
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank(message="article.field.not_blank")
      */
     private $ingredient;
 
