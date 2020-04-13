@@ -43,11 +43,9 @@
       ]
     },
     "about": {
-
       "css": [
         "/build/about.css"
       ],
-
       "js": [
         "/build/about.js"
       ]
@@ -58,6 +56,14 @@
       ],
       "js": [
         "/build/profil.js"
+      ]
+    },
+    "board": {
+      "css": [
+        "/build/board.css"
+      ],
+      "js": [
+        "/build/board.js"
       ]
     }
   }
