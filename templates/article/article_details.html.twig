@@ -54,17 +54,25 @@
             alt="image represent category {{ article.category.name}}"> 
             <div class="dropdown-flag-custom">
                 <div class="dropdown m-3">
+                
                     <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
                     </button>
+
                     <div class="dropdown-menu p-0 mt-1" aria-labelledby="dropdownMenu2">
                         <div class="dropdown-menu-flag-custom"> 
                             <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
                                 <button type="submit" name="flag" value="true">Signaler l'article</button>
                             </form>
+
+                            {% if is_granted('EDIT', article) %}
+                                <a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a>                                                      
+                            {% endif %}
+
                             {% if is_granted('DELETE', article) %}
                                 <a href="{{ path('article_delete', {'slug' : article.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">Supprimer l'article</a>                            
                             {% endif %}
+
                         </div>
                     </div>
                 </div>

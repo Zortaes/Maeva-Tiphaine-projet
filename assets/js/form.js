@@ -2,11 +2,9 @@ import '../css/form.scss';
 
 
 
-
-
-/********************
- Form Add a Article 
- *********************/
+/*************************
+ Form new Article and edit
+ ************************/
 var $collectionHolder;
 
 /* setup an "add a Ingredient" link */ 
@@ -14,9 +12,39 @@ var $addIngredientButton = $('<button type="button" class="add_ingredient_link">
 var $newLinkDiv = $('<div></div>').append($addIngredientButton);
 
 
-
 jQuery(document).ready(function() {
 
+    /************
+    EDIT ARTICLE
+    ************/
+
+   console.log($(".existingIngredients").find('input').length); 
+
+    /* if 1 input left remove delete button*/
+    if($(".existingIngredients").find('input').length == 3)
+    {
+        $('.deleteExistingIngredient').remove("button");
+    }
+
+    /* delete existing article*/
+    $(".deleteExistingIngredient").on('click', function(e) {
+
+        /* Remove the last ingredient of the existing ingredient's list */
+        $('.existingIngredients').children().last().remove();
+
+            /* if 1 input left remove delete button*/
+        if($(".existingIngredients").find('input').length == 3)
+        {
+            $('.deleteExistingIngredient').remove("button");
+        }
+
+    });
+
+
+    /*********************
+    ADD NEW INGREDIENT DIV
+    *********************/
+    
     /* Get the div that holds the collection of Ingredients */ 
     $collectionHolder = $('div.ingredients');
 
@@ -42,6 +70,7 @@ jQuery(document).ready(function() {
         addIngredientForm($collectionHolder, $newLinkDiv);
 
     });
+
 
 });
 
