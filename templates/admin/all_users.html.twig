@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
 {{ parent()}}
-{{ encore_entry_link_tags('profil') }}
+{{ encore_entry_link_tags('tables') }}
 {% endblock %}
 
 {% block body %}
@@ -59,7 +59,7 @@
                 <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
   
                   <div class="container-parameters-option" >
-                    <a href="#">
+                    <a href="{{ path('userDetails', {'id' : user.id }) }}">
                       Details
                     </a>
                     <a href="#">
@@ -77,7 +77,7 @@
             </td>
   
             <td class="desktop-option">   
-              <a href="#">
+              <a href="{{ path('userDetails', {'id' : user.id }) }}">
                 Voir l'utilisateur en détails
               </a>
             </td>

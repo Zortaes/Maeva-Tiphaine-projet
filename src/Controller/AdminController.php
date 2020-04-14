@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Entity\Article;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +39,31 @@ class AdminController extends AbstractController
             'users' => $users, 
         ]);
     }
+
+     /**
+     * @Route("/utilisateurs/{id}", name="userDetails")
+     */
+    public function userDetails(User $user)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /** @var UserRepository */
+        $user = $this->getDoctrine()->getRepository(User::class)->find($user);
+        
+
+         /** @var ArticleRepository */
+         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+            "user" => $user
+        ]);
+
+        
+        return $this->render('admin/user_details.html.twig', 
+        [
+            'articles' => $articles, 
+            'user' => $user, 
+        ]);
+    }
+
 
 
 

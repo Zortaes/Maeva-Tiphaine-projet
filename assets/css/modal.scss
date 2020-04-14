@@ -1,0 +1,37 @@
+/******************************************************************************
+                                MODALS
+*******************************************************************************/
+
+  
+/***
+ for btn "oui"
+ **/
+ .modal-container-custum 
+ {
+     .button-yes-custum 
+     {  
+        background-color: #81964d;
+        border-color: #81964d;
+        
+     }
+
+     .button-yes-custum:hover 
+     {  
+        background-color: #de6262;
+        border-color: #de6262;
+            
+     }
+
+     .button-yes-custum a 
+     { 
+        color: white;            
+     }
+
+     .button-yes-custum a:hover
+     { 
+        text-decoration: none;            
+     }
+
+     
+    
+ }
