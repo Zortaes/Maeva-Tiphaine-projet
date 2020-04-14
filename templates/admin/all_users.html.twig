@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Admin Board{% endblock %}
+
+{% block stylesheets %}
+{{ parent()}}
+{{ encore_entry_link_tags('profil') }}
+{% endblock %}
+
+{% block body %}
+
+<table class="table mt-4">
+
+        <thead>
+          <tr>
+            <th scope="col" style="background-color:#87a53e">Id</th>
+            <th scope="col" style="background-color:#87a53e">Username</th>
+            <th scope="col" style="background-color:#87a53e">Roles</th>
+            <th scope="col" class="mobile-option" style="background-color:#87a53e">Option</th>
+            <th scope="col" class="desktop-option" style="background-color:#87a53e">Details</th>
+            <th scope="col" class="desktop-option" style="background-color:#87a53e">Modifier</th>
+            <th scope="col" class="desktop-option" style="background-color:#87a53e">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody> 
+        
+        
+        {% for user in users %}
+        <tr>     
+  
+            <th scope="row" >
+              {{user.id}}
+            </th>
+  
+            <td>
+                {{user.viewUsername}}
+            </td> 
+
+            <td>
+                {% for role in user.roles %}
+                    {{role}}
+                {% endfor %}
+            </td>
+  
+            
+  
+            <td class="mobile-option">  
+              
+              <!-- Dropdown for mobile -->
+              <div class="dropdown text-center">
+  
+                <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters"> 
+                </button>
+  
+              
+                <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
+  
+                  <div class="container-parameters-option" >
+                    <a href="#">
+                      Details
+                    </a>
+                    <a href="#">
+                      Modifier
+                    </a>
+                    <a class="article-delete" href="#" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
+                      Supprimer
+                    </a>       
+                  </div>
+  
+                </div>
+               
+              </div> 
+              <!-- /Dropdown for mobile -->
+            </td>
+  
+            <td class="desktop-option">   
+              <a href="#">
+                Voir l'utilisateur en détails
+              </a>
+            </td>
+            <td class="desktop-option">
+                <a href="#">
+                  Modifier l'utilisateur
+                </a>
+            </td>
+            <td class="desktop-option">
+                <a class="article-delete" href="#"  value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
+                    Supprimer l'utilisateur
+                </a>   
+            </td>     
+      
+        </tr>
+        {% endfor %}
+     
+    
+{% endblock %}

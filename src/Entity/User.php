@@ -72,12 +72,12 @@ class User implements UserInterface
     private $updated_at;
 
     /**
-     * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
 
     /**
-    * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user")
+    * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user", cascade={"remove"})
     */
     private $votes;
 

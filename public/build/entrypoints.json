@@ -49,6 +49,22 @@
       "js": [
         "/build/about.js"
       ]
+    },
+    "profil": {
+      "css": [
+        "/build/profil.css"
+      ],
+      "js": [
+        "/build/profil.js"
+      ]
+    },
+    "board": {
+      "css": [
+        "/build/board.css"
+      ],
+      "js": [
+        "/build/board.js"
+      ]
     }
   }
 }
