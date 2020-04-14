@@ -5,11 +5,14 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -30,6 +33,15 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $recaptcha = new \ReCaptcha\ReCaptcha(GOOGLE_RECAPTCHA_SECRET);
+            $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')
+                  ->verify($gRecaptchaResponse, $remoteIp);
+            if ($resp->isSuccess()) {
+            // Verified!
+            } else {
+             $errors = $resp->getErrorCodes();
+            }
 
             /* Password */
             $plainPassword = $form->get('plain_password')->getData();
@@ -56,6 +68,76 @@ class UserController extends AbstractController
             'unlessNavbar' => true,
             'form' => $form->createView(),
         ]);
+    }
+
+     /**
+     * @Route("/mon-profil", name="showProfil", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function showProfil()
+    {
+        
+        $user = $this->getUser(); 
+
+         /** @var ArticleRepository */
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+            "user" => $user
+        ]);
+      
+        
+        return $this->render('user/profil.html.twig', [
+          'user' => $user, 
+          'articles' => $articles,         
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET"})
+     * 
+     */
+    public function deleteAccount(User $userParam)
+    {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        $userCurrent = $this->getUser();  
+       
+
+        if ($userCurrent === $userParam)
+        {
+            $manager = $this->getDoctrine()->getManager();
+
+
+            /** @var ArticleRepository */
+            $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+            "user" => $userCurrent
+            ]);
+      
+            foreach ($articles as $article) 
+            {
+                $manager->remove($article);
+            }
+
+            $manager->remove($userParam);
+            
+            $session = new Session();
+            $session->invalidate();
+
+            $manager->flush();
+
+            $this->addFlash("info", "Votre compte a bien été supprimé");
+
+           
+
+            return $this->redirectToRoute('homepage');
+        }
+        
+        else 
+
+        {
+            throw new Exception('La valeur n\'est pas bonne');
+        }      
+       
     }
 
 }

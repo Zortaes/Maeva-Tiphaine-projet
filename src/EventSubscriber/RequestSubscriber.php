@@ -29,6 +29,7 @@ class RequestSubscriber implements EventSubscriberInterface
             || 'vote' === $request->attributes->get('_route')
             || 'flag' === $request->attributes->get('_route')
             || 'signup' === $request->attributes->get('_route')
+          
         ) 
         {
             return;

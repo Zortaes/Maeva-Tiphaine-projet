@@ -4,7 +4,12 @@
 body {
     background-color: white;
     position: relative;
+    height: 100%;
+   
 }
+
+
+
 
 /*********************
 NAVBAR AND SIDEBAR CSS
@@ -54,20 +59,22 @@ NAVBAR AND SIDEBAR CSS
   #sideOpenbtn
   {
     margin: 12px;
+    border: 0 !important;
+    background-color: white;
 
     .line1 
     {
       width: 25px;
       height: 2px;
-      background-color: grey;
+      background-color: #81964d;
       margin: 20% 0;
     }
       
     #line2 
     {
       width: 19px;
-      height: 1px;
-      background-color: grey;
+      height: 2px;
+      background-color: #81964d;
       margin: 20% 0 0 3px;
     }
 
@@ -111,8 +118,9 @@ NAVBAR AND SIDEBAR CSS
     border-radius: 5px;
     background: transparent;
     color : black;
-    margin: 0.5em 1.5em 0.5em 0.5em;
+    margin: 1em 1.5em 0.5em 0.5em;
     padding: 0.5em;
+    font-size: 0.8em;
   
     &:hover
     {
@@ -125,6 +133,31 @@ NAVBAR AND SIDEBAR CSS
       outline: none;
     }
   }
+
+  #deconnexionBtn
+  {
+    
+      font-weight: bold;
+      border: solid 1px transparent;
+      border-radius: 5px;
+      background: transparent;
+      color : black;
+      margin: 1em 1.5em 0.5em 0.5em;
+      padding: 0.5em;
+      font-size: 0.8em;
+    
+      &:hover
+      {
+        border: solid 1px #86c057;
+        color: #86c057;
+      }
+  
+      &:focus
+      {
+        outline: none;
+      }
+    }
+  
 
   .userNav
   {
@@ -206,14 +239,18 @@ NAVBAR AND SIDEBAR CSS
     outline :none;
   }
   
+  
   @media only screen and (min-width:960px)
   {
-    /* NAVBAR */
+    /******
+    NAVBAR 
+    ******/
+
     #siteNavbar
     {
       overflow: hidden;
 
-      /* btn desapear */
+      /* SIDEBAR btn desapear */
       #sideOpenbtn
       {
       display: none;
@@ -225,6 +262,9 @@ NAVBAR AND SIDEBAR CSS
         padding-left: 50px;
       }
 
+      /***********************************************
+      NAV LINKS CATEGORIES CONTACT AJOUT ARTICLE appear
+      ************************************************/
       #linkList
       {
         display:flex;
@@ -298,7 +338,11 @@ NAVBAR AND SIDEBAR CSS
         color: #86c057 !important;
       } 
 
-    }
+    
+
+    /*******************************
+    USER NAV MENU DECONNEXION PROFIL
+    *******************************/
 
     .userNav 
       {
@@ -355,6 +399,12 @@ NAVBAR AND SIDEBAR CSS
           color: #86c057 !important;
         } 
       }
+    
+      #deconnexionBtn
+      {
+        display:none;
+      }
+    }
 
   }
   
@@ -369,6 +419,8 @@ NAVBAR AND SIDEBAR CSS
   .all-body-container 
   {
     margin-bottom: 10em;
+    min-height: 100vh;
+    
   }
 
 
@@ -377,11 +429,11 @@ NAVBAR AND SIDEBAR CSS
 /*************************** 
             FOOTER
 ****************************/
-footer {
+.container-footer-custum {
   position: absolute;
   bottom: 0; 
-  left: 0; 
-  right: 0;
+  
+  
   background-color: #cccccc;
   height: 15vh; 
 

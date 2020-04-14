@@ -29,6 +29,11 @@ Encore
     .addEntry('form', './assets/js/form.js')
     .addEntry('article_by_category', './assets/js/article_by_category.js')
     .addEntry('about', './assets/js/about.js')
+    .addEntry('profil', './assets/js/profil.js')
+    .addEntry('board', './assets/js/board.js')
+    .addEntry('user_details', './assets/js/user_details.js')
+    .addEntry('modal', './assets/js/modal.js')
+    .addEntry('tables', './assets/js/tables.js')
 
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')

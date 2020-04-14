@@ -1,0 +1,65 @@
+
+
+/******************************************************************************
+                                 PROFIL
+*******************************************************************************/
+
+h2
+{
+    font-size: 1.7em; 
+    color: #81964d; 
+    font-weight: bold; 
+}
+
+
+.dropdown-account-custum 
+{ 
+    /* Btn "paramètres du compte" */
+    button 
+    {     
+        font-weight: bold;
+    }
+
+    /* Btn "paramètres du compte" */
+    button:hover 
+    {
+        color: #b2ce6c;
+    }
+
+    .btn:focus 
+    {
+        box-shadow: none;
+    }
+
+    /* Btn "Supprimer le compte" */
+    .container-parameters-option .account-delete 
+    {
+        font-size: 1em;
+        color: #e97062;
+        font-weight: bold;
+        background-color: white; 
+        border: none; 
+        padding: 0;
+        border-radius: 12px;
+    }
+ 
+    /* Btn "Supprimer le compte" */
+    .container-parameters-option 
+    button:hover 
+    {
+        color: #a2564d;
+        background-color: white;
+    }
+    
+}
+
+
+.article-voted
+{
+    font-size: 1.2em; 
+}
+
+
+
+
+

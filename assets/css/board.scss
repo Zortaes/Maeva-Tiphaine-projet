@@ -1,0 +1,54 @@
+.card-custum
+{
+    width: 90%;
+    margin: auto;
+    margin-top: 2em;
+
+    @media (min-width: 450px) and (max-width: 600px)
+    {
+        width: 70%;  
+    }
+
+    @media (min-width: 600px) and (max-width: 768px)
+    {
+        width: 50%;  
+    }
+
+    @media (min-width: 768px) 
+    { 
+        width: 40%; 
+    }
+
+    @media (min-width: 1200px) 
+    { 
+        h5 
+        {
+            font-size: 1.8em;
+        }
+    }
+
+    a 
+    {
+        padding: 0 4vw 0 4vw;
+        background-color: #81964d; 
+        border: #81964d; 
+        margin-left: 42%; 
+
+        @media (min-width: 600px) 
+        {
+            margin-left: 37%;  
+        }
+
+        @media (min-width: 1200px) 
+        { 
+            font-size: 1.2em;
+        }
+
+
+    }
+
+    a:hover {
+       
+        background-color: #677e2d; 
+    }
+}

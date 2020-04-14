@@ -233,6 +233,18 @@ class Article
     }
 
     /**
+     * Set the value of ingredients
+     *
+     * @return  self
+     */ 
+    public function setIngredients($ingredients)
+    {
+        $this->ingredients = $ingredients;
+
+        return $this;
+    }
+
+    /**
      * Get the value of votes
      */ 
     public function getVotes()
@@ -272,4 +284,6 @@ class Article
     {
         $this->ingredients->removeElement($listIngredient);
     }
+
+
 }

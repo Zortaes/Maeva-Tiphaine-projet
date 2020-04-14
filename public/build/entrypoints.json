@@ -1,12 +1,11 @@
 {
   "entrypoints": {
-    "app": {
-      "js": [
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "about": {
       "css": [
-        "/build/app.css"
+        "/build/about.css"
+      ],
+      "js": [
+        "/build/about.js"
       ]
     },
     "homepage": {
@@ -42,12 +41,53 @@
         "/build/article_by_category.js"
       ]
     },
-    "about": {
+    "app": {
+      "js": [
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
       "css": [
-        "/build/about.css"
+        "/build/app.css"
+      ]
+    },
+    "profil": {
+      "css": [
+        "/build/profil.css"
       ],
       "js": [
-        "/build/about.js"
+        "/build/profil.js"
+      ]
+    },
+    "board": {
+      "css": [
+        "/build/board.css"
+      ],
+      "js": [
+        "/build/board.js"
+      ]
+    },
+    "user_details": {
+      "css": [
+        "/build/user_details.css"
+      ],
+      "js": [
+        "/build/user_details.js"
+      ]
+    },
+    "modal": {
+      "css": [
+        "/build/modal.css"
+      ],
+      "js": [
+        "/build/modal.js"
+      ]
+    },
+    "tables": {
+      "css": [
+        "/build/tables.css"
+      ],
+      "js": [
+        "/build/tables.js"
       ]
     }
   }
