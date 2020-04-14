@@ -15,6 +15,7 @@
     {{ form_start(form) }}
     
         <div class="block-form-custum">
+
         <h1 class="h4 mb-3 font-weight-normal text-center">S'inscrire</h1>
             <div class="col-12">
                 {{ form_row(form.username)}}
@@ -38,10 +39,27 @@
                 {{ form_row(form.Envoyer) }}
             </div>
         </div>
+
+
     {{ form_end(form) }}
 
 </div>
+{% endblock %}
+
+{% block javascripts %}
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?render=_reCAPTCHA_site_key"></script>
+<script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'});
+        });
+</script>
+
 
 
 {% endblock %}
+
+
 
