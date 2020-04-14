@@ -11,15 +11,16 @@ h2
     font-weight: bold; 
 }
 
-.dropdown-account-custum 
-{
 
-   
+.dropdown-account-custum 
+{ 
+    /* Btn "paramètres du compte" */
     button 
     {     
         font-weight: bold;
     }
 
+    /* Btn "paramètres du compte" */
     button:hover 
     {
         color: #b2ce6c;
@@ -30,12 +31,25 @@ h2
         box-shadow: none;
     }
 
-    .account-delete 
+    /* Btn "Supprimer le compte" */
+    .container-parameters-option .account-delete 
     {
         font-size: 1em;
         color: #e97062;
+        font-weight: bold;
+        background-color: white; 
+        border: none; 
+        padding: 0;
+        border-radius: 12px;
     }
-   
+ 
+    /* Btn "Supprimer le compte" */
+    .container-parameters-option 
+    button:hover 
+    {
+        color: #a2564d;
+        background-color: white;
+    }
     
 }
 
@@ -59,24 +73,47 @@ h2
          
 }
 
-/***
- Links for "supprimer"
- **/
-.article-delete 
-{
-    color: #de6262!important;
-}
+
 
 /******************************************************************************
                             TABLE "vos articles"
 *******************************************************************************/
+
+/***
+ Links "supprimer" in the table
+ **/
+.article-delete 
+{
+    color: #de6262!important;
+    border-color: white;
+    background-color: white;
+    padding: 0;
+    border-radius: 12px; 
+    font-size: calc(0.6em + 1vw);
+
+    @media (min-width: 768px) 
+    { 
+        font-size: 1em; 
+    }  
+  
+}
+
+.article-delete:hover 
+{
+    color: #a2564d;
+    background-color: white;  
+    text-decoration: underline; 
+    border-color: white;
+  
+}
 
 
 
 /***
  image of article 
  **/
- th {
+ th 
+ {
 
     @media (max-width: 400px) 
     { 
@@ -160,6 +197,7 @@ tr
  **/
 .mobile-option button 
 {
+    
     @media (max-width: 400px) 
     { 
         width: 100%; 
@@ -212,7 +250,7 @@ tr
 /***
  link-option for mobile
  **/
-.container-parameters-option a 
+.container-parameters-option a
 {
     color: black;
     padding: 0.5em;
@@ -222,7 +260,40 @@ tr
    
 }
 
-
+/******************************************************************************
+                                MODALS
+*******************************************************************************/
 
   
- 
+/***
+ for btn "oui"
+ **/
+ .modal-container-custum 
+ {
+     .button-yes-custum 
+     {  
+        background-color: #81964d;
+        border-color: #81964d;
+        
+     }
+
+     .button-yes-custum:hover 
+     {  
+        background-color: #de6262;
+        border-color: #de6262;
+            
+     }
+
+     .button-yes-custum a 
+     { 
+        color: white;            
+     }
+
+     .button-yes-custum a:hover
+     { 
+        text-decoration: none;            
+     }
+
+     
+    
+ }
