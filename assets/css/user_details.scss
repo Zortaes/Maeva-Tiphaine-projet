@@ -1,0 +1,63 @@
+
+
+/********
+CARD 
+********/
+.card-custum 
+{  
+   
+    text-align: center;
+    box-shadow: 2px 2px 20px rgb(128, 127, 127);
+    width: 90%; 
+    margin: auto; 
+    margin-top: 2em; 
+
+    @media (min-width: 500px) and (max-width: 1200px)
+    { 
+       width: 70%; 
+    }
+
+    @media (min-width: 1200px)
+    { 
+       width: 50%; 
+    }
+
+    .title-custum 
+    {
+        margin-top: 1em; 
+    }
+
+    a 
+    {
+        color: black; 
+        font-size: 0.8em; 
+    }
+
+    a:hover 
+    {
+        text-decoration: underline; 
+    }
+
+    .link-delete
+    {
+        color: #de6262!important; 
+    }
+}
+
+
+
+h2
+{
+    font-size: 2em; 
+    color: #81964d; 
+    font-weight: bold; 
+}
+
+
+.articles-user
+{
+    a 
+    {
+        color: black; 
+    }
+}
