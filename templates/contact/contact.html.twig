@@ -3,6 +3,11 @@
 
 {% block title %}Contact{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+
 {% block body %}
 
 <!-- Block form container -->
@@ -38,5 +43,9 @@
 <!-- /Block form container-->
 
 
+{% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('form') }}
 {% endblock %}
