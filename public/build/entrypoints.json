@@ -8,13 +8,12 @@
         "/build/about.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "homepage": {
       "css": [
-        "/build/app.css"
+        "/build/homepage.css"
+      ],
+      "js": [
+        "/build/homepage.js"
       ]
     },
     "article_details": {
@@ -42,12 +41,13 @@
         "/build/article_by_category.js"
       ]
     },
-    "homepage": {
-      "css": [
-        "/build/homepage.css"
-      ],
+    "app": {
       "js": [
-        "/build/homepage.js"
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "profil": {

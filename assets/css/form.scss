@@ -134,7 +134,25 @@ label span
      }
  }
 
+/*************************************
+  For signup form - 
+  *************************************/
+ .info-signup 
+ {
+    text-align: justify; 
+    padding: 0.5em; 
+    font-size: 0.8em;
+    color: #bdbdbd; 
+    
 
+   @media (min-width: 991.98px) 
+   { 
+        padding: 1em;
+        margin: auto;
+        width: 50%;        
+   }
+
+ }
 
 
 

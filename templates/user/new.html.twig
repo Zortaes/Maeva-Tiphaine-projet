@@ -43,7 +43,7 @@
                 'options' : {
                 'theme': 'light',
                 'type': 'image',
-                'size': 'short'
+                'size': 'normal'
                 },
              } }) }} 
         </div>
@@ -57,14 +57,16 @@
 
     {{ form_end(form) }}
 
+    <div class="info-signup" >
+        <p>
+           En créant ce compte, vous avez pris connaissance que la modification de vos données (hors suppression) ne pourra se  faire que par le biais des administrateurs en les contactant directement <a href="#">ici</a>.
+        </p>
+    </div>
+
 </div>
-{% endblock %}
-
-{% block javascripts %}
-
-{{ parent() }}
-
 
 
 {% endblock %}
+
+
 
