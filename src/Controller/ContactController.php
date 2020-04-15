@@ -27,14 +27,22 @@ class ContactController extends AbstractController
 
         if ($formContact->isSubmitted() && $formContact->isValid()) 
         {
+            $sender = $formContact('email')->getdata();
+            $title = $formContact('title')->getdata();
+            $message = $formContact('message')->getdata();
+
             $email = (new Email())
-                ->from('email')
+                ->from($sender)
                 ->to('la.rubrique.ecolo@gmail.com')
-                ->subject('title')
-                ->text('message')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
+                ->subject($title)
+                ->text($message);
 
             $mailer->send($email);
+
+            
+            $contact->setEmail($sender); 
+            $contact->setTitle($title);
+            $contact->setMessage($message);
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($contact);
