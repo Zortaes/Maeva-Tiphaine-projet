@@ -65,6 +65,30 @@
       "js": [
         "/build/board.js"
       ]
+    },
+    "user_details": {
+      "css": [
+        "/build/user_details.css"
+      ],
+      "js": [
+        "/build/user_details.js"
+      ]
+    },
+    "modal": {
+      "css": [
+        "/build/modal.css"
+      ],
+      "js": [
+        "/build/modal.js"
+      ]
+    },
+    "tables": {
+      "css": [
+        "/build/tables.css"
+      ],
+      "js": [
+        "/build/tables.js"
+      ]
     }
   }
 }
