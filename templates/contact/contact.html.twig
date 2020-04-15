@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+
+{% block body %}
+
+<!-- Block form container -->
+<div class="container container-form-custum">
+
+    {{ form_start(form) }}
+
+    <!-- Block form  -->
+    <div class="block-form-custum">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Nous contacter</h1>
+        
+         <div class="col-12 ">
+            {{ form_row(form.email)}}
+        </div>
+
+        <div class="col-12">
+            {{ form_row(form.title)}}
+        </div>
+
+        <div class="col-12">
+            {{ form_row(form.message)}}
+        </div>
+        
+        <div class="col-12 validateBtn">
+            {{ form_row(form.Envoyer) }}
+        </div>
+    </div>
+     <!-- Block form  -->
+
+    {{ form_end(form) }}
+
+</div>
+<!-- /Block form container-->
+
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('form') }}
+{% endblock %}
