@@ -31,7 +31,7 @@ class ContactController extends AbstractController
             $title = $formContact->get('title')->getdata();
             $message = $formContact->get('message')->getdata();
 
-            
+
             $contact->setCreatedAt(new DateTime('now'));
 
             $manager = $this->getDoctrine()->getManager();
@@ -48,7 +48,7 @@ class ContactController extends AbstractController
             $mailer->send($email);
 
 
-            $this->addFlash("success", "Nous avons bien reçu votre email, nous traîtons votre demande, merci de votre patience");
+            $this->addFlash("successEmail", "Nous avons bien reçu votre email, nous traîtons votre demande, merci de votre patience");
             return $this->redirectToRoute('homepage');
             
         }
