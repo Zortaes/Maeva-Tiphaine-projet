@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 
 class ContactType extends AbstractType
 {
@@ -44,6 +45,20 @@ class ContactType extends AbstractType
                    new Length(["max" => 10000, "maxMessage" => "Veuillez entrer un message plus court"]),      
                 ]
             ])
+
+        ->add('recaptcha', EWZRecaptchaType::class, array(
+            'attr'        => array(
+                'options' => array(
+                    'theme' => 'light',
+                    'type'  => 'image',
+                    'size'  => 'normal'
+                )
+            ),
+            'mapped'      => false,
+            'constraints' => array(
+                new RecaptchaTrue()
+            )
+        ))
 
         ->add('Envoyer', SubmitType::class);
         

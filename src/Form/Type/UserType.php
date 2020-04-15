@@ -5,12 +5,14 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -75,6 +77,19 @@ class UserType extends AbstractType
                 "label" => "Date d'anniversaire"
             ]
         )
+        ->add('recaptcha', EWZRecaptchaType::class, array(
+            'attr'        => array(
+                'options' => array(
+                    'theme' => 'light',
+                    'type'  => 'image',
+                    'size'  => 'normal'
+                )
+            ),
+            'mapped'      => false,
+            'constraints' => array(
+                new RecaptchaTrue()
+            )
+        ))
         ->add('Envoyer', SubmitType::class)
         ;
     }

@@ -32,16 +32,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $recaptcha = new \ReCaptcha\ReCaptcha(GOOGLE_RECAPTCHA_SECRET);
-            $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')
-                  ->verify($gRecaptchaResponse, $remoteIp);
-            if ($resp->isSuccess()) {
-            // Verified!
-            } else {
-             $errors = $resp->getErrorCodes();
-            }
+        if ($form->isSubmitted() && $form->isValid()) {        
 
             /* Password */
             $plainPassword = $form->get('plain_password')->getData();
