@@ -10,35 +10,49 @@
 {% block body %}
 
 
- 
+
 <div class="container container-form-custum">
     {{ form_start(form) }}
-    
-        <div class="block-form-custum">
+
+    <div class="block-form-custum">
 
         <h1 class="h4 mb-3 font-weight-normal text-center">S'inscrire</h1>
-            <div class="col-12">
-                {{ form_row(form.username)}}
-         
-            </div>
-            <div class="col-12">
-                {{ form_row(form.email)}}
-         
-            </div>
-            <div class="col-12">
-                {{ form_row(form.plain_password)}}
-         
-            </div>
-            <div class="col-12">
-                {{ form_label(form.birth_date)}} 
-                <div class="input-birth-date">
-                    {{ form_widget(form.birth_date)}}  
-                </div>  
-            </div>
-            <div class="col-12 validateBtn">
-                {{ form_row(form.Envoyer) }}
+        <div class="col-12">
+            {{ form_row(form.username)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.email)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.plain_password)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_label(form.birth_date)}}
+            <div class="input-birth-date">
+                {{ form_widget(form.birth_date)}}
             </div>
         </div>
+
+        <div class="mt-4 ml-4" style="transform:scale(0.80);-webkit-transform:scale(0.70);transform-origin:0 0;-webkit-transform-origin:0 0;">
+           {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+            {{ form_widget(form.recaptcha, { 'attr': {
+                'options' : {
+                'theme': 'light',
+                'type': 'image',
+                'size': 'short'
+                },
+             } }) }} 
+        </div>
+        
+
+        <div class="col-12 validateBtn">
+            {{ form_row(form.Envoyer) }}
+        </div>
+    </div>
 
 
     {{ form_end(form) }}
@@ -48,18 +62,9 @@
 
 {% block javascripts %}
 
-
-
-<script src="https://www.google.com/recaptcha/api.js?render=_reCAPTCHA_site_key"></script>
-<script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute('reCAPTCHA_site_key', {action: 'homepage'});
-        });
-</script>
+{{ parent() }}
 
 
 
 {% endblock %}
-
-
 
