@@ -36,6 +36,12 @@ class ContactController extends AbstractController
 
             $mailer->send($email);
 
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($contact);
+            $manager->flush();
+
+            $this->addFlash("success", "Nous avons bien reçu votre email, nous traîtons votre demande, merci de votre patience");
+            return $this->redirectToRoute('homepage');
             
         }
 

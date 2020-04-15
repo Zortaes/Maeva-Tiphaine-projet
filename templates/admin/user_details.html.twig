@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Admin Board{% endblock %}
+
+{% block stylesheets %}
+{{ parent()}}
+{{ encore_entry_link_tags('user_details') }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="card card-custum">
+    <div class="card-body">
+      <img class="card img-fluid" src="{{ asset("build/images/iconUser.png") }} "
+          alt="image represent icon user avatar">
+      <h5 class="card-title title-custum">{{user.viewUsername}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">id {{user.id}}</h6>
+      <p class="card-text">email : {{user.email}}</p>
+      <p class="card-text">date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
+      {% for role in user.roles %}
+        <p class="card-text">{{role}}</p>  
+      {% endfor %}  
+      <p class="card-text">Profil créé le : {{user.createdAt|date("d/m/Y", "Europe/Paris")}}</p> 
+      <a href="#" class="card-link">Modifier</a>
+      <a href="#" class="card-link link-delete">Supprimer</a>
+    </div>
+  </div>
+
+  <h2 class="text-center mt-5 mb-4">Les articles de {{user.viewUsername}}</h2>
+
+
+    {% if articles is empty %}
+          
+        <p class="text-center"> L'utilisateur n'a pas écrit d'article </p>
+
+    {% else %}
+    <!-- Block articles users -->
+    <div class="w-75 mx-auto d-flex justify-content-center flex-wrap">
+
+    
+    {% for article in articles %}
+    <p class="px-3 articles-user">
+      <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+        {{article.title}}
+      </a>
+    </p>
+    {% endfor %}
+  </div>
+  <!-- /Block articles users -->
+    {% endif %}
+{% endblock %}

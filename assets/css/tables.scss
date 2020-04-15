@@ -1,0 +1,216 @@
+/******************************************************************************
+                                    TABLES 
+*******************************************************************************/
+
+/***
+ Links in table and in the block articleVoted
+ **/
+ .desktop-option, .article-voted  
+ {
+             
+     a 
+     {
+     color: black;
+    
+     }   
+          
+ }
+ 
+/***
+ Links "supprimer" in the table
+ **/
+.article-delete 
+{
+    color: #de6262!important;
+    border-color: white;
+    background-color: white;
+    padding: 0;
+    border-radius: 12px; 
+    font-size: calc(0.6em + 1vw);
+
+    @media (min-width: 768px) 
+    { 
+        font-size: 1em; 
+    }  
+  
+}
+
+.article-delete:hover 
+{
+    color: #a2564d;
+    background-color: white;  
+    text-decoration: underline; 
+    border-color: white;
+  
+}
+
+.article-delete:focus 
+{
+   
+    background-color: white;   
+    border-color: white;
+    box-shadow: none;
+  
+}
+
+
+
+
+
+
+/***
+ image of article 
+ **/
+ th 
+ {
+
+    @media (max-width: 400px) 
+    { 
+        width: 100%; 
+    }
+
+    width: 20%;
+
+    .image-category
+    {
+        width: 100%;
+   
+    } 
+   
+ }
+
+.mobile-option 
+{
+    @media (min-width: 768px) 
+    { 
+        display: none;
+    }
+}
+
+.desktop-option 
+{
+    @media (max-width: 767.98px) 
+    { 
+        display: none;
+    }
+}
+
+
+
+/*************************************************
+            DROPDOWN PARAMETERS FOR MOBILE
+************************************************/
+
+/*** 
+icon dropdown 
+****/
+.dropdown-toggle::after
+{
+    display: none;
+}
+
+
+
+/*** 
+text in table
+****/
+tr 
+{
+    text-align: center;
+    font-size: 0.8em;
+
+    @media (min-width: 380px) 
+    {
+        font-size: 1em; 
+    }  
+}
+
+/***
+ remove border and box-shadow to button 
+ **/
+.mobile-option > div
+{
+    button 
+    {
+        border: none;
+    }
+
+    .btn:focus 
+    {
+        box-shadow: none;
+    }
+}
+
+/***
+ icon parameters
+ **/
+.mobile-option button 
+{
+    
+    @media (max-width: 400px) 
+    { 
+        width: 100%; 
+    }
+
+    @media (min-width: 400px) and (max-width: 500px) 
+    { 
+        width: 60%;
+    }
+
+    @media (min-width: 500px) and (max-width: 600px) 
+    { 
+        width: 50%;
+    }
+
+    @media (min-width: 600px) and (max-width: 700px) 
+    { 
+        width: 40%;
+    }
+
+    width: 30%;
+
+    .image-parameters 
+    {
+        width: 100%;
+
+    }
+
+}
+
+/***
+ menu and container to link option
+ **/
+.dropdown-menu-custum 
+{
+    border: none;
+
+    .container-parameters-option 
+    {
+       
+        box-shadow: 2px 2px 20px #807f7f;
+        border-radius: 30px;
+        padding: 0.2em 0.5em 0.2em 0.5em;
+        display: flex;
+        justify-content: center; 
+
+    }
+}
+
+/***
+ link-option for mobile
+ **/
+.container-parameters-option a
+{
+    color: black;
+    padding: 0.5em;
+    font-size: calc(0.6em + 1vw);
+    border: none;
+    background-color: transparent;
+   
+}
+
+
+.background-table 
+{
+    background-color: #93b935; 
+}
