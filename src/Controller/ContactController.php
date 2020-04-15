@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\Type\ContactType;
-
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +31,14 @@ class ContactController extends AbstractController
             $title = $formContact->get('title')->getdata();
             $message = $formContact->get('message')->getdata();
 
+
+            $contact->setCreatedAt(new DateTime('now'));
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($contact);
+            $manager->flush();
+
+
             $email = (new Email())
                 ->from($sender)
                 ->to('la.rubrique.ecolo@gmail.com')
@@ -40,15 +48,7 @@ class ContactController extends AbstractController
             $mailer->send($email);
 
 
-            $contact->setEmail($sender); 
-            $contact->setTitle($title);
-            $contact->setMessage($message);
-
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($contact);
-            $manager->flush();
-
-            $this->addFlash("success", "Nous avons bien reçu votre email, nous traîtons votre demande, merci de votre patience");
+            $this->addFlash("successEmail", "Nous avons bien reçu votre email, nous traîtons votre demande, merci de votre patience");
             return $this->redirectToRoute('homepage');
             
         }
