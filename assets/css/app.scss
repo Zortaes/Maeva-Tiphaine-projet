@@ -1,11 +1,17 @@
-
+html body
+{
+  height: 100%;
+}
 
 
 body {
     background-color: white;
     position: relative;
     height: 100%;
-   
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
 }
 
 
@@ -432,7 +438,8 @@ NAVBAR AND SIDEBAR CSS
 .container-footer-custum {
   position: absolute;
   bottom: 0; 
-  
+  margin-bottom: 0;
+  flex-shrink: 0;
   
   background-color: #cccccc;
   height: 15vh; 

@@ -18,7 +18,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <button class="navLinks"><a href="#">Nous contacter</a></button>
+            <button class="navLinks"><a href="{{path('contact')}}">Nous contacter</a></button>
             <button class="navLinks"><a href="{{path('articleNew')}}">Ajouter un article</a></button>
         </div>
 
@@ -62,7 +62,7 @@
                     <a class="sidebarCategorie" href="{{path('articleByCategory', {'slug':category.slug})}}">{{ category.name }}</a>
                 {% endfor %}
 
-                <a class="sideLinks" href="#"><h5>Nous contacter</h5></a>
+                <a class="sideLinks" href="{{path('contact')}}"><h5>Nous contacter</h5></a>
                 <a class="sideLinks" href="{{path('articleNew')}}"><h5>Ajouter un article</h5></a>
 
                 {% if app.user %}
