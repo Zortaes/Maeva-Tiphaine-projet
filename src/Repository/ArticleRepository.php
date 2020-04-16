@@ -33,6 +33,20 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
+
+    /**
+    * @return Article[] list of last articles flagged
+    */
+    public function findByArticlesFlag($flag) 
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.flagged = :val')
+            ->setParameter('val', $flag)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

@@ -64,6 +64,25 @@ class AdminController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/articles/signalement", name="articlesFlagged")
+     */
+    public function articleFlagged()
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+  
+
+         /** @var ArticleRepository */
+         $articlesFlagged = $this->getDoctrine()->getRepository(Article::class)->findByArticlesFlag(1); 
+
+        
+        return $this->render('admin/articles_flag.html.twig', 
+        [
+            'articles' => $articlesFlagged, 
+        ]);
+    }
+
+
 
 
 
