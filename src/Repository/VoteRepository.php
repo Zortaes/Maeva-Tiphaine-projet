@@ -26,7 +26,7 @@ class VoteRepository extends ServiceEntityRepository
     public function findBestArticle()
     {
         $qb = $this->createQueryBuilder('v')
-        ->select('a.title, a.summary, a.slug, u.username, c.name category_name, c.color category_color, c.picture category_picture, avg(v.vote_value)moyen')
+        ->select('a.title, a.summary, a.slug, u.username, u.slug user_slug, c.name category_name, c.color category_color, c.picture category_picture, avg(v.vote_value)moyen')
         ->innerJoin('App\Entity\Article', 'a', 'WITH', 'a = v.article')
         ->innerJoin('App\Entity\Category', 'c', 'WITH', 'c = a.category')
         ->innerJoin('App\Entity\User', 'u', 'WITH', 'u = a.user')
