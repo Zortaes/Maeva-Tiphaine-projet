@@ -39,7 +39,7 @@ Articles signalés
                 </a>      
             </h5>
             <p class="card-text-author">
-                <a href="#" class="link-custum">
+                <a href="{{path('articleByUser', {'slug':article.user.slug})}}" class="link-custum">
                     {{article.user.viewUsername}}
                 </a>
             </p>
