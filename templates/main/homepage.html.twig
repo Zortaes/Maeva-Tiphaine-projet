@@ -104,7 +104,7 @@ LAST ARTICLES
 
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
                                         {{ lastArticle.user.viewUsername }}
                                     </a>
                                 </p>
@@ -208,7 +208,7 @@ LAST ARTICLES
 
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
                                         {{ lastArticle.user.viewUsername }}
                                     </a>
                                 </p>
@@ -309,7 +309,7 @@ LAST ARTICLES
                                 </h4>
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
                                         {{ lastArticle.user.viewUsername }}
                                     </a>
                                 </p>
@@ -463,7 +463,7 @@ BEST ARTICLES
 
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
                                         {{bestArticle.username}}
                                     </a>
                                 </p>
@@ -547,7 +547,7 @@ BEST ARTICLES
 
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
                                         {{bestArticle.username}}
                                     </a>
                                 </p>
@@ -628,7 +628,7 @@ BEST ARTICLES
                                 </h4>
                                 <!-- author -->
                                 <p class="card-paragraph card-paragraph-author">
-                                    <a href="#" class="link-custum">
+                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
                                         {{bestArticle.username}}
                                     </a>
                                 </p>

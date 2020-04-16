@@ -131,4 +131,23 @@ class UserController extends AbstractController
        
     }
 
+    /**
+     * @Route("/{slug}/articles", name="articleByUser")
+     *
+     * @param User $user
+     * @return Articles by user
+     */
+    public function articleByUser(User $user)
+    {
+
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+            "user" => $user
+        ]);
+
+        return $this->render('user/article_by_user.html.twig',
+        [
+            'user' => $user,
+            'articles' => $articles
+        ]);
+    }
 }
