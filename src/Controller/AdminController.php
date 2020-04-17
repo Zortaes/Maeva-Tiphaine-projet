@@ -5,9 +5,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Article;
+use Exception;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin")
@@ -64,7 +66,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/articles/signalement", name="articlesFlagged")
      */
     public function articleFlagged()
@@ -82,7 +84,60 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+    * @Route("/utilisateur/{id}/ban", name="banUser")
+    *
+    * @param User $user
+    * @return User is_banned = true
+    */
+    public function banUser(User $user)
+    {
+        $user->setIsBanned(true);
 
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->persist($user);
+
+        $manager->flush();
+
+        $this->addFlash("successUserBanned", "Ce compte a bien été banni");
+
+        return $this->redirectToRoute('showUsers');
+    }
+
+    /**
+     * @Route("/utilisateur/{id}/supprimer", name="deleteUser")
+     *
+     * @param User $user
+     */
+    public function deleteUser(User $user)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    
+            $manager = $this->getDoctrine()->getManager();
+    
+
+                /** @var ArticleRepository */
+                $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
+                "user" => $user
+                ]);
+      
+            foreach ($articles as $article) 
+            {
+                $manager->remove($article);
+            }
+
+            $manager->remove($user);
+
+            $manager->flush();
+
+            $this->addFlash("infoUserDelete", "Ce compte a bien été supprimé");
+
+
+            return $this->redirectToRoute('showUsers');
+ 
+    }
 
 
 

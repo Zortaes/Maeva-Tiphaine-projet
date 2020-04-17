@@ -2,11 +2,12 @@
     {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('article_details') }}
+    {{ encore_entry_link_tags('modal') }}
     {% endblock %}
 {% block body %}
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+        <div class="alert alert-success text-center">
             {{ message }}
         </div>
     {% endfor %}
@@ -70,7 +71,11 @@
                             {% endif %}
 
                             {% if is_granted('DELETE', article) %}
-                                <a href="{{ path('article_delete', {'slug' : article.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">Supprimer l'article</a>                            
+                                    <!-- Button trigger modal -->
+                                <button type="button" class="btn article-delete" data-toggle="modal"
+                                    data-target="#modalDeleteArticle-{{article.id}}">
+                                    Supprimer
+                                </button>                      
                             {% endif %}
 
                         </div>
@@ -144,6 +149,30 @@
         <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
     </div>
 </div>
+
+    <!-- Modal Delete article -->
+      <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article "{{article.title}}" ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary button-yes-custum">
+                <a href="{{path('article_delete', {'slug' : article.slug}) }}">
+                  Oui
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 {% endblock %}
 
     {% block javascripts %}

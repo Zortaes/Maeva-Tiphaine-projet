@@ -309,7 +309,7 @@ class ArticleController extends AbstractController
         $manager->remove($article);
         $manager->flush();
 
-        $this->addFlash("info", "L'article a bien été supprimé");
+        $this->addFlash("successArticleDelete", "L'article a bien été supprimé");
 
         return $this->redirectToRoute('showProfil');
 

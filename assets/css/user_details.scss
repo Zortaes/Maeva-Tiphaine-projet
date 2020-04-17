@@ -40,8 +40,19 @@ CARD
 
     .link-delete
     {
-        color: #de6262!important; 
+        color: #de6262!important;
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 0.8em; 
+        
     }
+
+    .link-delete:hover
+    {
+        text-decoration: underline;
+    }
+
+    
 }
 
 

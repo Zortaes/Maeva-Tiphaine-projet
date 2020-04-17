@@ -72,6 +72,11 @@ class User implements UserInterface
     private $updated_at;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_banned;
+
+    /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
@@ -83,6 +88,7 @@ class User implements UserInterface
 
     public function __construct() 
     {
+        $this->is_banned = false;
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         
@@ -283,6 +289,26 @@ class User implements UserInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_banned
+     */ 
+    public function getIsBanned()
+    {
+        return $this->is_banned;
+    }
+
+    /**
+     * Set the value of is_banned
+     *
+     * @return  self
+     */ 
+    public function setIsBanned($is_banned)
+    {
+        $this->is_banned = $is_banned;
 
         return $this;
     }

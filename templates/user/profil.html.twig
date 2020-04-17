@@ -13,7 +13,7 @@
 
 {% block body %}
 
-{% for message in app.flashes('info') %}
+{% for message in app.flashes('successArticleDelete') %}
     <div class="alert alert-success w-100 text-center mt-4">
         {{ message }}
     </div>
@@ -214,7 +214,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Tous vos articles ainsi que votre contribution aux votes seront aussi supprimés.
+        Tous vos articles ainsi que votre contributions aux votes seront aussi supprimés.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
