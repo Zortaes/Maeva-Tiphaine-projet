@@ -1,0 +1,44 @@
+.title-custum 
+{
+    text-align: center;
+    font-size: 2em;
+    color: #81964d; 
+    text-shadow: 2px 1px 1px rgb(53, 52, 52);
+    font-weight: bold;
+    margin-bottom: 1em; 
+}
+
+
+.container-legalMention, .container-CGU
+{
+    width: 90%;
+    margin: auto;
+    margin-top: 4em; 
+    @media (min-width: 992px) 
+    { 
+        width: 70%; 
+    }
+
+}
+
+.container-legalMention h3, .container-CGU h3 
+{
+    text-align: center;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+.container-legalMention p, .container-CGU p 
+{
+    margin-top: 0.5em;
+    text-indent: 8%;
+    text-align: justify; 
+
+
+}
+
+.info-article-4 li 
+{
+    width: 80%;
+    margin: auto;
+}

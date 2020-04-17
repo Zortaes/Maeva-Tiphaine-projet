@@ -47,6 +47,17 @@ class MainController extends AbstractController
    
 
     }
+
+    /**
+     * @Route("/mention-legales", methods={"GET"}, name="legalMention")
+     */
+    public function legalMention()
+    {   
+
+        return $this->render('main/legal_mention.html.twig');
+   
+
+    }
 }
 
 
