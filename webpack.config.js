@@ -32,8 +32,10 @@ Encore
     .addEntry('profil', './assets/js/profil.js')
     .addEntry('board', './assets/js/board.js')
     .addEntry('user_details', './assets/js/user_details.js')
+    .addEntry('legalMention', './assets/js/legalMention.js')
     .addEntry('modal', './assets/js/modal.js')
     .addEntry('tables', './assets/js/tables.js')
+   
 
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
