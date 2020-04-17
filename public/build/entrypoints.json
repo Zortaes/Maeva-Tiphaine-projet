@@ -74,14 +74,6 @@
         "/build/user_details.js"
       ]
     },
-    "legalMention": {
-      "css": [
-        "/build/legalMention.css"
-      ],
-      "js": [
-        "/build/legalMention.js"
-      ]
-    },
     "modal": {
       "css": [
         "/build/modal.css"

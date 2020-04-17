@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -90,6 +91,18 @@ class UserType extends AbstractType
                 new RecaptchaTrue()
             )
         ))
+        ->add(
+            'condition', 
+            CheckboxType::class,
+            [
+                'mapped' => false,
+                'required' => true, 
+                'label' => "J'accepte les conditions générales d'utilisations", 
+                'help' => 'En cochant cette case, vous reconnaissez avoir lu nos <a href="">conditions générales d\'utilisation</a>',
+                'help_html' => true,
+
+            ]
+        )
         ->add('Envoyer', SubmitType::class)
         ;
     }
