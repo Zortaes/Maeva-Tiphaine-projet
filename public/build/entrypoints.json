@@ -1,13 +1,5 @@
 {
   "entrypoints": {
-    "about": {
-      "css": [
-        "/build/about.css"
-      ],
-      "js": [
-        "/build/about.js"
-      ]
-    },
     "app": {
       "js": [
         "/build/vendors~app.js",
@@ -15,6 +7,14 @@
       ],
       "css": [
         "/build/app.css"
+      ]
+    },
+    "homepage": {
+      "css": [
+        "/build/homepage.css"
+      ],
+      "js": [
+        "/build/homepage.js"
       ]
     },
     "article_details": {
@@ -42,12 +42,12 @@
         "/build/article_by_category.js"
       ]
     },
-    "homepage": {
+    "about": {
       "css": [
-        "/build/homepage.css"
+        "/build/about.css"
       ],
       "js": [
-        "/build/homepage.js"
+        "/build/about.js"
       ]
     },
     "profil": {

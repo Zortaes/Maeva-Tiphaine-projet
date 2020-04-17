@@ -32,7 +32,7 @@
                 </a>      
             </h5>
             <p class="card-text-author">
-                <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" class="link-custum">
+                <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" class="link-custum" style="color:{{ article.category.color }}">
                     {{article.category.name}}
                 </a>
             </p>

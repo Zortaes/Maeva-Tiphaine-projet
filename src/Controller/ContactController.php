@@ -28,7 +28,7 @@ class ContactController extends AbstractController
         if ($formContact->isSubmitted() && $formContact->isValid()) 
         {
             $sender = $formContact->get('email')->getdata();
-            $title = $formContact->get('title')->getdata();
+            $subject = $formContact->get('subject')->getdata();
             $message = $formContact->get('message')->getdata();
 
 
@@ -42,7 +42,7 @@ class ContactController extends AbstractController
             $email = (new Email())
                 ->from($sender)
                 ->to('la.rubrique.ecolo@gmail.com')
-                ->subject($title)
+                ->subject($subject)
                 ->text($message);
 
             $mailer->send($email);

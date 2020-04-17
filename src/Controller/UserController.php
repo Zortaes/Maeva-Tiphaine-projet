@@ -116,10 +116,6 @@ class UserController extends AbstractController
 
             $manager->flush();
 
-            $this->addFlash("info", "Votre compte a bien été supprimé");
-
-           
-
             return $this->redirectToRoute('homepage');
         }
         
@@ -150,4 +146,6 @@ class UserController extends AbstractController
             'articles' => $articles
         ]);
     }
+
+    
 }

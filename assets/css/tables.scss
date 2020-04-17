@@ -42,15 +42,23 @@
     text-decoration: underline; 
     border-color: white;
   
+    button
+    {
+        text-decoration: underline;
+    }
 }
 
 .article-delete:focus 
 {
    
-    background-color: white;   
-    border-color: white;
+    background-color: white !important;   
+    border-color: white !important;
     box-shadow: none;
   
+    button
+    {
+        outline: none !important;
+    }
 }
 
 
