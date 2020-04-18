@@ -4,21 +4,18 @@ namespace App\Controller;
 
 use DateTime;
 use Exception;
-
 use App\Entity\Vote;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Entity\ListIngredient;
 use App\Form\Type\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 /**
  * @Route("/article")
@@ -39,11 +36,17 @@ class ArticleController extends AbstractController
      */
     public function articleNew(Request $request,  Slugger $slugger): Response
     {
+        // si l'utilsateur a été banni, il sera déconnecté
+        if($this->getUser()->getIsBanned() == true)
+        {
+            return $this->redirectToRoute('logout');
+        }
 
         $newArticle = new Article();
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
+
         
         /* For the first ingredient */
         $ingredient = new ListIngredient();
@@ -118,7 +121,14 @@ class ArticleController extends AbstractController
      */
     public function articleUpdate(Article $article, Request $request, Slugger $slugger)
     {
+
         $this->denyAccessUnlessGranted('EDIT', $article);
+
+        // si l'utilsateur a été banni, il sera déconnecté
+        if($this->getUser()->getIsBanned() == true)
+        {
+            return $this->redirectToRoute('logout');
+        }
 
         // order the existing ingredient into array
         $originalIngredient = $article->getIngredients()->toArray();
@@ -255,10 +265,19 @@ class ArticleController extends AbstractController
     public function vote(Article $article, Request $request, EntityManagerInterface $manager)
     {
 
+        $user = $this->getUser();
+
+        // si l'utilisateur a été banni, l'action sera annulée et il sera déconnecté
+        if($this->getUser()->getIsBanned() == true)
+        {
+            throw new CustomUserMessageAuthenticationException();
+            return $this->redirectToRoute('logout');
+        } 
+
         $vote_value = $request->request->get('userVote');
 
         $vote = $this->getDoctrine()->getRepository(Vote::class)->findOneBy([
-            "user" => $this->getUser(),
+            "user" => $user,
             "article" => $article
             ]);
         
@@ -277,7 +296,7 @@ class ArticleController extends AbstractController
             {
                 $vote->setVoteValue($vote_value);
                 $vote->setArticle($article);
-                $vote->setUser($this->getUser());
+                $vote->setUser($user);
                 $vote->setCreatedAt(new DateTime('now'));
                 $manager->persist($vote);
                 $manager->flush();
@@ -334,8 +353,15 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article)
     {  
-        
+        // si l'utilisateur a été banni, l'action sera annulée et il sera déconnecté
+        if($this->getUser()->getIsBanned() == true)
+        {
+            throw new CustomUserMessageAuthenticationException();
+            return $this->redirectToRoute('logout');
+        } 
+
         $this->denyAccessUnlessGranted('DELETE', $article);
+
 
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($article);

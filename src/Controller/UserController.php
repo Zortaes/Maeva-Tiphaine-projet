@@ -80,6 +80,12 @@ class UserController extends AbstractController
         
         $user = $this->getUser(); 
 
+        // si l'utilsateur a été banni, il sera déconnecté
+        if($user->getIsBanned() == true)
+        {
+            return $this->redirectToRoute('logout');
+        }
+
          /** @var ArticleRepository */
         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
             "user" => $user

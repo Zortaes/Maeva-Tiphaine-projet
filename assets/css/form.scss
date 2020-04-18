@@ -163,6 +163,24 @@ Form signup form - checkbox
 }
 
 
+/****************
+Form login form   
+****************/
+.aideLogin
+{
+    font-size: 0.9em;
+    text-align: center;
+    a 
+    {
+        color: #81964d;
+
+        &:hover
+        {
+            color: #677e2d;
+        }
+    } 
+}
+
 /***********************
 Form login form - error  
 ************************/

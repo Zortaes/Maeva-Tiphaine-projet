@@ -4,14 +4,11 @@ namespace App\Controller;
 
 
 use DateTime;
-use Exception;
 use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
-use App\Form\Type\UserType;
 use App\Form\Type\EditUserType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -164,15 +161,41 @@ class AdminController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * @Route("/article/{id}/enlever-signalement", methods={"GET"}, name="deleteFlag")
+     *
+     * @param User $user
+     * @return Article flagged = false
+     */
+    public function deleteFlag(Article $article)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $article->setFlagged(false);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($article);
+
+        $manager->flush();
+
+        $this->addFlash("successFlagDeleted", "Cet article n'est plus signalé");
+
+        return $this->redirectToRoute('articlesFlagged');
+    }
+
 
     /**
-    * @Route("/utilisateur/{id}/ban", name="banUser")
+    * @Route("/utilisateur/{id}/ban", methods={"GET"}, name="banUser")
     *
-    * @param User $user that we want ban 
+    * @param User $user that we want banned 
     * @return User is_banned = true
     */
     public function banUser(User $user)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user->setIsBanned(true);
 
         $manager = $this->getDoctrine()->getManager();
@@ -187,9 +210,32 @@ class AdminController extends AbstractController
     }
 
 
+    /**
+    * @Route("/utilisateur/{id}/unban", methods={"GET"}, name="unbanUser")
+    *
+    * @param User $user
+    * @return User is_banned = false
+    */
+    public function unbanUser(User $user)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user->setIsBanned(false);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->persist($user);
+
+        $manager->flush();
+
+        $this->addFlash("successUserUnbanned", "Ce compte a bien été débanni");
+
+        return $this->redirectToRoute('showUsers');
+    }
+
 
     /**
-     * @Route("/utilisateur/{id}/supprimer", name="deleteUser")
+     * @Route("/utilisateur/{id}/supprimer", methods={"GET"}, name="deleteUser")
      *
      * @param User $user that we want delete
      * 
@@ -223,7 +269,5 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('showUsers');
  
     }
-
-
 
 }

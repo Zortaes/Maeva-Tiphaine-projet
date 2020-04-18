@@ -17,6 +17,19 @@
     </div>
 {% endfor %}
 
+{% for message in app.flashes('successUserBanned') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('successUserUnbanned') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
 <table class="table mt-4">
 
         <thead>
@@ -25,15 +38,15 @@
             <th scope="col" class="background-table">Username</th>
             <th scope="col" class="background-table">Roles</th>
             <th scope="col" class="mobile-option background-table">Option</th>
-            <th scope="col" class="desktop-option background-table">Details</th>
             <th scope="col" class="desktop-option background-table">Modifier</th>
+            <th scope="col" class="desktop-option background-table">Bannir</th>
             <th scope="col" class="desktop-option background-table">Supprimer</th>
           </tr>
         </thead>
         <tbody> 
         
         
-        {% for user in users %}
+      {% for user in users %}
         <tr>     
   
             <th scope="row" >
@@ -41,7 +54,10 @@
             </th>
   
             <td>
-                {{user.viewUsername}}
+                {{user.viewUsername}} </br>
+                <a href="{{ path('userDetails', {'id' : user.id }) }}">
+                Détails
+                </a>
             </td> 
 
             <td>
@@ -66,12 +82,20 @@
                 <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
   
                   <div class="container-parameters-option" >
-                    <a href="{{ path('userDetails', {'id' : user.id }) }}">
-                      Details
-                    </a>
                     <a href="{{path('editUser', {'id' : user.id}) }}">
                       Modifier
                     </a>
+                    {% if (user.isBanned) %}
+                    <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+                    data-target="#modalUnbanAccount-{{ user.id }}">
+                      débannir
+                    </button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+                    data-target="#modalBanAccount-{{ user.id }}">
+                      Bannir
+                    </button>
+                    {% endif %}
                     <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
                     data-target="#modalDeleteAccount-{{ user.id }}">
                       Supprimer
@@ -85,25 +109,34 @@
             </td>
   
             <td class="desktop-option">   
-              <a href="{{ path('userDetails', {'id' : user.id }) }}">
-                Voir l'utilisateur en détails
+              <a href="#">
+                Modifier l'utilisateur
               </a>
             </td>
             <td class="desktop-option">
-                <a href="{{path('editUser', {'id' : user.id}) }}">
-                  Modifier l'utilisateur
-                </a>
+              {% if (user.isBanned) %}
+                <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+                data-target="#modalUnbanAccount-{{ user.id }}">
+                  débannir
+                </button>
+              {% else %}
+                <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+                data-target="#modalBanAccount-{{ user.id }}">
+                  Bannir l'utilisateur
+                </button>
+              {% endif %}
             </td>
             <td class="desktop-option">
-                <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
-                data-target="#modalDeleteAccount-{{ user.id }}">
+              <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
+              data-target="#modalDeleteAccount-{{ user.id }}">
                 Supprimer l'utilisateur
-                </button>  
+              </button>  
             </td>     
-      
+
         </tr>
 
 
+<!-- MODALS -->
         <!-- Modal Delete an account -->
         <div class="modal fade modal-container-custum" id="modalDeleteAccount-{{ user.id }}" tabindex="-1" role="dialog"
           aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
@@ -129,7 +162,61 @@
             </div>
           </div>
         </div>
-        {% endfor %}
+
+
+        <!-- Modal Ban an account -->
+        <div class="modal fade modal-container-custum" id="modalBanAccount-{{ user.id }}" tabindex="-1" role="dialog"
+          aria-labelledby="modalBanAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir bannir l'utilisateur {{ user.viewUsername }} dont l'id est {{ user.id }} ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Cet utilisateur ne pourra plus se connecter et accéder à ses données personnelles et ne pourra plus publier d'article.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary button-yes-custum">
+                  <a href="{{path('banUser', {'id' : user.id}) }}">
+                    Oui
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal unban an account -->
+        <div class="modal fade modal-container-custum" id="modalUnbanAccount-{{ user.id }}" tabindex="-1" role="dialog"
+        aria-labelledby="modalUnbanAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir débannir l'utilisateur {{ user.viewUsername }} dont l'id est {{ user.id }} ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Cet utilisateur pourra de nouveau se connecter et accéder à ses données personnelles ainsi que publier des articles.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary button-yes-custum">
+                  <a href="{{path('unbanUser', {'id' : user.id}) }}">
+                    Oui
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
      
     
 {% endblock %}

@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Entity\Vote;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\SerializerInterface;
+
 
 class MainController extends AbstractController
 {
@@ -46,7 +46,6 @@ class MainController extends AbstractController
     {   
 
         return $this->render('main/about.html.twig');
-   
 
     }
 

@@ -53,6 +53,56 @@ CARD
     }
 
     
+    /*********
+    BAN BUTTON
+    **********/
+    .user-ban
+    {
+        color: #e92c84!important;
+        border-color: white;
+        background-color: white;
+        padding: 0.5em;
+        border-radius: 12px; 
+        font-size: calc(0.6em + 1vw);
+        outline: none !important;
+
+        @media (min-width: 768px) 
+        { 
+            font-size: 1em; 
+        } 
+    }
+
+    .user-ban:hover 
+    {
+        color: #a2564d;
+        background-color: white;  
+        text-decoration: underline; 
+        border-color: white;
+    
+        button
+        {
+            text-decoration: underline;
+        }
+    }
+
+    .user-ban:focus 
+    {
+        background-color: white !important;   
+        border-color: white !important;
+        box-shadow: none;
+    }
+
+    .alreadyBanned
+    {
+        border: none;
+        background-color: white;
+        font-size: calc(0.6em + 1vw);
+        @media (min-width: 768px) 
+        { 
+            font-size: 1em; 
+        } 
+    }
+    
 }
 
 
