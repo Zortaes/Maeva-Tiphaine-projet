@@ -5,11 +5,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Article;
-use Exception;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Security;
+
 
 /**
  * @Route("/admin")
@@ -102,11 +101,35 @@ class AdminController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * @Route("/article/{id}/enlever-signalement", methods={"GET"}, name="deleteFlag")
+     *
+     * @param User $user
+     * @return Article flagged = false
+     */
+    public function deleteFlag(Article $article)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $article->setFlagged(false);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($article);
+
+        $manager->flush();
+
+        $this->addFlash("successFlagDeleted", "Cet article n'est plus signalé");
+
+        return $this->redirectToRoute('articlesFlagged');
+    }
+
 
     /**
-    * @Route("/utilisateur/{id}/ban", name="banUser")
+    * @Route("/utilisateur/{id}/ban", methods={"GET"}, name="banUser")
     *
-    * @param User $user that we want ban 
+    * @param User $user that we want banned 
     * @return User is_banned = true
     */
     public function banUser(User $user)
@@ -128,7 +151,7 @@ class AdminController extends AbstractController
 
 
     /**
-    * @Route("/utilisateur/{id}/unban", name="unbanUser")
+    * @Route("/utilisateur/{id}/unban", methods={"GET"}, name="unbanUser")
     *
     * @param User $user
     * @return User is_banned = false
@@ -150,8 +173,9 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('showUsers');
     }
 
+
     /**
-     * @Route("/utilisateur/{id}/supprimer", name="deleteUser")
+     * @Route("/utilisateur/{id}/supprimer", methods={"GET"}, name="deleteUser")
      *
      * @param User $user that we want delete
      * 
@@ -185,7 +209,5 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('showUsers');
  
     }
-
-
 
 }

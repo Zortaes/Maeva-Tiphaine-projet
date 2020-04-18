@@ -8,6 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.scss';
 
+require('../images/favicon.ico');
 require('../images/imageHome.jpg');
 require('../images/accessoires-bijoux.jpg');
 require('../images/arts.jpg');

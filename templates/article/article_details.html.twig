@@ -70,6 +70,9 @@
                             <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
                                 <button type="submit" name="flag" value="true">Signaler l'article</button>
                             </form>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a>                                                     
+                            {% endif %}
 
                             {% if is_granted('EDIT', article) %}
                                 <a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a>                                                      
