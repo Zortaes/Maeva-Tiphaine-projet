@@ -15,6 +15,12 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
+     * 
+     * @param MailerInterface $mailer 
+     * @param Request $request
+     * 
+     * @return $this template for contact -> GET 
+     * @return $this redirect to route homepage -> POST
      */
     public function sendEmail(MailerInterface $mailer, Request $request)
     {

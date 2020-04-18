@@ -39,6 +39,8 @@ class MainController extends AbstractController
 
     /**
      * @Route("/a-propos", methods={"GET"}, name="about")
+     * 
+     * @return $this template for about 
      */
     public function about()
     {   
@@ -50,6 +52,8 @@ class MainController extends AbstractController
 
     /**
      * @Route("/mention-legales", methods={"GET"}, name="legalMention")
+     * 
+     * @return $this template for legal mention 
      */
     public function legalMention()
     {   
