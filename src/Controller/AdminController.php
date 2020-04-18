@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Services\Slugger;
+use App\Form\Type\EditUserType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/admin")
@@ -78,6 +82,62 @@ class AdminController extends AbstractController
             'user' => $user, 
         ]);
     }
+
+
+
+    /**
+     * @Route("/utilisateurs/{id}/modifier", name="editUser")
+     * 
+     * @param User $user that we want edit
+     * @param Request $request
+     * @param Slugger $slugger 
+     * 
+     * @return User edited  
+     */
+    public function editUser(User $user, UserPasswordEncoderInterface $encoder, Request $request, Slugger $slugger)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+         // create form and handle
+         $form = $this->createForm(EditUserType::class, $user);  
+         $form->handleRequest($request);
+
+
+         if ($form->isSubmitted() && $form->isValid()) {        
+
+            /* Password */
+            $plainPassword = $form->get('plain_password')->getData();
+
+            if(!empty($plainPassword)) 
+            {
+                 $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encodedPassword); 
+            }
+          
+
+            /* Slug */
+            $slugUsername = $form->get('viewUsername')->getData();
+            $usernameSluged = $slugger->sluggify($slugUsername); 
+            $user->setSlug($usernameSluged); 
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('userDetails', ['id' => $user->getId()]);
+        }
+
+        return $this->render('admin/edit_user.html.twig', [
+            'userEdit' => $user,
+            'unlessFooter' => true, 
+            'unlessNavbar' => true,
+            'form' => $form->createView(),
+        ]);
+    }
+ 
+    
 
 
 

@@ -75,7 +75,7 @@
                 <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
   
                   <div class="container-parameters-option" >
-                    <a href="#">
+                    <a href="{{path('editUser', {'id' : user.id}) }}">
                       Modifier
                     </a>
                     {% if (user.isBanned) %}
