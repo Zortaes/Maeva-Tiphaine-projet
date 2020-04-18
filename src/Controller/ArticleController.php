@@ -29,6 +29,13 @@ class ArticleController extends AbstractController
      /**
      * @Route("/nouveau", methods={"GET","POST"}, name="articleNew") 
      * @IsGranted("ROLE_USER")
+     * 
+     * @param Request $request -> POST
+     * @param Slugger $slugger -> POST 
+     * 
+     * @return $this template for new Article -> Get
+     * @return $this redirect to route Article Details -> POST 
+     * 
      */
     public function articleNew(Request $request,  Slugger $slugger): Response
     {
@@ -88,7 +95,7 @@ class ArticleController extends AbstractController
             $entityManager->persist($ingredient);     
             $entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('articleDetails', ['slug' => $newArticle->getSlug()]);
         }
 
         return $this->render('article/new.html.twig', [
@@ -98,8 +105,14 @@ class ArticleController extends AbstractController
     }
 
 
+
+
     /**
      * @Route("/{slug}/modifier", methods={"GET","POST"}, name="article_update")
+     * 
+     * @param Request $request -> POST
+     * @param Slugger $slugger -> POST 
+     * @param Article $article that we want edited 
      *
      * @return Article edited
      */
@@ -203,8 +216,14 @@ class ArticleController extends AbstractController
     }
 
 
+
+
     /**
      * @Route("/{slug}", methods={"GET", "POST"}, name="articleDetails")
+     * 
+     * @param Article $article that we want show details 
+     * 
+     * @return Article details 
      */
     public function article(Article $article)
     {    
@@ -220,9 +239,16 @@ class ArticleController extends AbstractController
         ]);   
     }
 
+
+
+
     /**
      * @Route("/{slug}/vote", methods={"POST"}, name="vote")
      * @IsGranted("ROLE_USER")
+     * 
+     * @param Article $article that we want vote 
+     * @param Request $request 
+     * @param EntityManagerInterface $manager 
      * 
      * @return Vote, return a int for vote_value when a user vote for an article
      */
@@ -265,9 +291,15 @@ class ArticleController extends AbstractController
        
     }   
     
+
+
     /**
      * @Route("/{slug}/signaler", methods={"POST"}, name="flag")
      * @IsGranted("ROLE_USER")
+     * 
+     * @param Article $article that we want flag 
+     * @param Request $request 
+     * @param EntityManagerInterface $manager 
      * 
      * @return Flagged, return a boolean when the article get flagged
      */
@@ -296,7 +328,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{slug}/supprimer", name="article_delete")
      * 
-     * Delete an Article
+     * @param Article $article that we want delete 
      * 
      * @return $this Redirect to route homepage
      */

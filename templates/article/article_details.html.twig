@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
     {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('article_details') }}
     {{ encore_entry_link_tags('modal') }}
     {% endblock %}
+
+
 {% block body %}
 
     {% for message in app.flashes('success') %}
