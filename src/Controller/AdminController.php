@@ -92,6 +92,8 @@ class AdminController extends AbstractController
     */
     public function banUser(User $user)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user->setIsBanned(true);
 
         $manager = $this->getDoctrine()->getManager();
@@ -101,6 +103,30 @@ class AdminController extends AbstractController
         $manager->flush();
 
         $this->addFlash("successUserBanned", "Ce compte a bien été banni");
+
+        return $this->redirectToRoute('showUsers');
+    }
+
+
+    /**
+    * @Route("/utilisateur/{id}/unban", name="unbanUser")
+    *
+    * @param User $user
+    * @return User is_banned = false
+    */
+    public function unbanUser(User $user)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user->setIsBanned(false);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->persist($user);
+
+        $manager->flush();
+
+        $this->addFlash("successUserUnbanned", "Ce compte a bien été débanni");
 
         return $this->redirectToRoute('showUsers');
     }
