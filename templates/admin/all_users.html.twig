@@ -69,7 +69,7 @@
                     <a href="{{ path('userDetails', {'id' : user.id }) }}">
                       Details
                     </a>
-                    <a href="#">
+                    <a href="{{path('editUser', {'id' : user.id}) }}">
                       Modifier
                     </a>
                     <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
@@ -90,7 +90,7 @@
               </a>
             </td>
             <td class="desktop-option">
-                <a href="#">
+                <a href="{{path('editUser', {'id' : user.id}) }}">
                   Modifier l'utilisateur
                 </a>
             </td>
