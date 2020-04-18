@@ -11,8 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="CategoriesList")
+     * 
+     * @return Category[] List of categories in the navbar 
      */
     public function categories()
     {
@@ -25,8 +29,14 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/{slug}", name="articleByCategory")
+     * 
+     * @param Category $category that we want details (articles in this category)
+     * 
+     * @return Category details of this category 
      */
     public function articleByCategory(Category $category)
     {

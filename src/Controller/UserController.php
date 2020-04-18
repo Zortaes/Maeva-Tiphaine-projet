@@ -25,6 +25,13 @@ class UserController extends AbstractController
 
     /**
      * @Route("/inscription", name="signup", methods={"GET","POST"})
+     * 
+     * @param Request $request -> POST 
+     * @param UserPasswordEncoderInterface $encoder -> POST 
+     * @param Slugger $slugger -> POST 
+     * 
+     * @return $this template form for signup -> GET 
+     * @return $this redirect to route homepage -> POST 
      */
     public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger): Response
     {
@@ -61,9 +68,12 @@ class UserController extends AbstractController
         ]);
     }
 
+
      /**
      * @Route("/mon-profil", name="showProfil", methods={"GET"})
      * @IsGranted("ROLE_USER")
+     * 
+     * @return $this profil of the user 
      */
     public function showProfil()
     {
@@ -90,6 +100,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET"})
+     * 
+     * @param User $userParam that we want delete, to compare with the user connected
+     * 
+     * @return $this redirect to route homepage 
      * 
      */
     public function deleteAccount(User $userParam)
@@ -136,7 +150,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{slug}/articles", name="articleByUser")
      *
-     * @param User $user
+     * @param User $user that we want sho all his articles
      * @return Articles by user
      */
     public function articleByUser(User $user)

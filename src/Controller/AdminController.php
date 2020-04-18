@@ -17,8 +17,12 @@ use Symfony\Component\Security\Core\Security;
  */
 class AdminController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="adminBoard")
+     * 
+     * @return $this template admin Board 
      */
     public function adminBoard()
     {
@@ -26,8 +30,12 @@ class AdminController extends AbstractController
         return $this->render('admin/board.html.twig');
     }
 
+
+
      /**
      * @Route("/utilisateurs", name="showUsers")
+     * 
+     * @return User[] all Users 
      */
     public function showUsers()
     {
@@ -42,8 +50,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+
      /**
      * @Route("/utilisateurs/{id}", name="userDetails")
+     * 
+     * @param User $user that we want show details
+     * 
+     * @return User details  
      */
     public function userDetails(User $user)
     {
@@ -66,8 +80,12 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/articles/signalement", name="articlesFlagged")
+     * 
+     * @return Article[] list of articles flagged 
      */
     public function articleFlagged()
     {
@@ -84,10 +102,11 @@ class AdminController extends AbstractController
         ]);
     }
 
+
     /**
     * @Route("/utilisateur/{id}/ban", name="banUser")
     *
-    * @param User $user
+    * @param User $user that we want ban 
     * @return User is_banned = true
     */
     public function banUser(User $user)
@@ -134,7 +153,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/utilisateur/{id}/supprimer", name="deleteUser")
      *
-     * @param User $user
+     * @param User $user that we want delete
+     * 
+     * @return $this redirect to route on the list of Users 
      */
     public function deleteUser(User $user)
     {
