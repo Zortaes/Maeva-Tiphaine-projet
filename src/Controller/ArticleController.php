@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 /**
  * @Route("/article")
@@ -270,7 +269,6 @@ class ArticleController extends AbstractController
         /* logout User if he is banned */
         if($this->getUser()->getIsBanned() == true)
         {
-            throw new CustomUserMessageAuthenticationException();
             return $this->redirectToRoute('logout');
         } 
 
@@ -363,7 +361,7 @@ class ArticleController extends AbstractController
         /* logout User if he is banned */
         if($this->getUser()->getIsBanned() == true)
         {
-            throw new CustomUserMessageAuthenticationException();
+            
             return $this->redirectToRoute('logout');
         } 
 

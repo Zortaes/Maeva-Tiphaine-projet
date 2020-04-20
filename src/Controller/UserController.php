@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -75,7 +76,7 @@ class UserController extends AbstractController
      * 
      * @return $this profil of the user 
      */
-    public function showProfil()
+    public function showProfil(PaginatorInterface $paginator, Request $request)
     {
         
         $user = $this->getUser(); 
@@ -86,10 +87,14 @@ class UserController extends AbstractController
             return $this->redirectToRoute('logout');
         }
 
-         /** @var ArticleRepository */
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
-            "user" => $user
-        ]);
+
+        $articles = $paginator->paginate
+        (
+            /** @var ArticleRepository */
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
       
         
         return $this->render('user/profil.html.twig', [
@@ -153,12 +158,16 @@ class UserController extends AbstractController
      * @param User $user that we want sho all his articles
      * @return Articles by user
      */
-    public function articleByUser(User $user)
+    public function articleByUser(User $user, PaginatorInterface $paginator, Request $request)
     {
 
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
-            "user" => $user
-        ]);
+        $articles = $paginator->paginate
+        (
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
+
 
         return $this->render('user/article_by_user.html.twig',
         [
