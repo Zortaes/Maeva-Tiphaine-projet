@@ -174,12 +174,19 @@
       {% endfor %}
 
       {% endif %}
+    
     </tbody>
   </table>
 </div>
+
+<div class="pagination-custum">
+{{ knp_pagination_render(articles) }}
+</div>
+
 <!-- /Block "Vos articles" -->
 
 <hr>
+
 
 <h2 class="text-center mt-5 mb-4">Les articles que vous avez voté</h2>
 

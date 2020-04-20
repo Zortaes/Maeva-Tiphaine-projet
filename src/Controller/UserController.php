@@ -76,21 +76,25 @@ class UserController extends AbstractController
      * 
      * @return $this profil of the user 
      */
-    public function showProfil()
+    public function showProfil(PaginatorInterface $paginator, Request $request)
     {
         
         $user = $this->getUser(); 
 
-        // si l'utilsateur a été banni, il sera déconnecté
+        // if user is banned he is being logged out
         if($user->getIsBanned() == true)
         {
             return $this->redirectToRoute('logout');
         }
 
-         /** @var ArticleRepository */
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
-            "user" => $user
-        ]);
+
+        $articles = $paginator->paginate
+        (
+            /** @var ArticleRepository */
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6// Nombre de résultats par page
+        );
       
         
         return $this->render('user/profil.html.twig', [
