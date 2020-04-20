@@ -44,9 +44,9 @@ class CategoryController extends AbstractController
     {
 
         $articlesByCategory = $paginator->paginate(
-            $category->getArticles(), // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6// Nombre de résultats par page
+            $category->getArticles(), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
         );
 
          

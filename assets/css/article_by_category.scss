@@ -145,6 +145,21 @@ ALL TEXT
 
 }
 
+/*** 
+Pagination
+***/
+.pagination-custum 
+{
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em; 
+    color: #3a6617; 
+    
 
-
+    .page a, .last a, .next a, .previous a, .first a
+    {
+        padding: 0.1em;
+        color: black!important; 
+    }
+}
   
