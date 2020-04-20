@@ -33,12 +33,22 @@ class AppFixtures extends Fixture
          /* USERS */
 
          for ($i = 0; $i < 10; $i++) {
-    
+
             $user = new User();
-            $user->setUsername($faker->firstNameMale);
+            
+            if ($i === 0) 
+            {
+                $user->setUsername('UserTest');
+                $user->setEmail('UserTest@usertest.com');
+            }
+            else 
+            {
+                $user->setUsername($faker->firstNameMale);
+                $user->setEmail($faker->email); 
+            } 
+
             $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
             $user->setBirthDate($faker->datetime);
-            $user->setEmail($faker->email);
             $password = $this->encoder->encodePassword($user, 'faustine1');
             $user->setPassword($password);
             $user->setAvatar('img.jpg');
@@ -134,7 +144,15 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 40; $i++) {
 
             $article = new Article();
-            $article->setTitle($faker->text(20));
+
+            if ($i === 0) {
+                $article->setTitle('ArticleTest');
+            }
+            else 
+            {
+               $article->setTitle($faker->text(20)); 
+            } 
+
             $article->setSlug($this->slugger->sluggify($article->getTitle()));
             $article->setSummary($faker->sentence);
             $article->setInstruction($faker->paragraph);

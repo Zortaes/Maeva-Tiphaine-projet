@@ -15,6 +15,12 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
+     * 
+     * @param MailerInterface $mailer 
+     * @param Request $request
+     * 
+     * @return $this template for contact -> GET 
+     * @return $this redirect to route homepage -> POST
      */
     public function sendEmail(MailerInterface $mailer, Request $request)
     {
@@ -28,7 +34,7 @@ class ContactController extends AbstractController
         if ($formContact->isSubmitted() && $formContact->isValid()) 
         {
             $sender = $formContact->get('email')->getdata();
-            $title = $formContact->get('title')->getdata();
+            $subject = $formContact->get('subject')->getdata();
             $message = $formContact->get('message')->getdata();
 
 
@@ -41,8 +47,9 @@ class ContactController extends AbstractController
 
             $email = (new Email())
                 ->from($sender)
+                ->replyTo($sender)
                 ->to('la.rubrique.ecolo@gmail.com')
-                ->subject($title)
+                ->subject($subject)
                 ->text($message);
 
             $mailer->send($email);

@@ -30,7 +30,7 @@ class ContactType extends AbstractType
                 ]                                
             ])
 
-        ->add('title', TextType::class,
+        ->add('subject', TextType::class,
             [
                 "label" => "Titre du message",
                 'constraints' => [

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Modification utilisateur{% endblock %}
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container container-form-custum">
+    {{ form_start(form) }}
+
+    <div class="block-form-custum">
+
+        <h1 class="h4 mb-3 font-weight-normal text-center">Modifier l'utilisateur</h1>
+        <div class="col-12">
+            {{ form_row(form.viewUsername)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.email)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(form.plain_password)}}
+
+        </div>
+        <div class="col-12">
+            {{ form_label(form.birth_date)}}
+            <div class="input-birth-date">
+                {{ form_widget(form.birth_date)}}
+            </div>
+        </div>
+        
+        <div class="col-12">
+            {{ form_row(form.roles)}}
+        </div>
+
+        <div class="col-12 validateBtn">
+            {{ form_row(form.Envoyer) }}
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
+
+</div>
+
+
+{% endblock %}
+

@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,13 @@ class UserController extends AbstractController
 
     /**
      * @Route("/inscription", name="signup", methods={"GET","POST"})
+     * 
+     * @param Request $request -> POST 
+     * @param UserPasswordEncoderInterface $encoder -> POST 
+     * @param Slugger $slugger -> POST 
+     * 
+     * @return $this template form for signup -> GET 
+     * @return $this redirect to route homepage -> POST 
      */
     public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger): Response
     {
@@ -61,19 +69,32 @@ class UserController extends AbstractController
         ]);
     }
 
+
      /**
      * @Route("/mon-profil", name="showProfil", methods={"GET"})
      * @IsGranted("ROLE_USER")
+     * 
+     * @return $this profil of the user 
      */
-    public function showProfil()
+    public function showProfil(PaginatorInterface $paginator, Request $request)
     {
         
         $user = $this->getUser(); 
 
-         /** @var ArticleRepository */
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
-            "user" => $user
-        ]);
+        /* logout User if he is banned */
+        if($user->getIsBanned() == true)
+        {
+            return $this->redirectToRoute('logout');
+        }
+
+
+        $articles = $paginator->paginate
+        (
+            /** @var ArticleRepository */
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
       
         
         return $this->render('user/profil.html.twig', [
@@ -84,6 +105,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/supMonCompte", name="deleteAccount", methods={"GET"})
+     * 
+     * @param User $userParam that we want delete, to compare with the user connected
+     * 
+     * @return $this redirect to route homepage 
      * 
      */
     public function deleteAccount(User $userParam)
@@ -116,10 +141,6 @@ class UserController extends AbstractController
 
             $manager->flush();
 
-            $this->addFlash("info", "Votre compte a bien été supprimé");
-
-           
-
             return $this->redirectToRoute('homepage');
         }
         
@@ -131,4 +152,29 @@ class UserController extends AbstractController
        
     }
 
+    /**
+     * @Route("/{slug}/articles", name="articleByUser")
+     *
+     * @param User $user that we want sho all his articles
+     * @return Articles by user
+     */
+    public function articleByUser(User $user, PaginatorInterface $paginator, Request $request)
+    {
+
+        $articles = $paginator->paginate
+        (
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
+
+
+        return $this->render('user/article_by_user.html.twig',
+        [
+            'user' => $user,
+            'articles' => $articles
+        ]);
+    }
+
+    
 }

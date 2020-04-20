@@ -6,6 +6,7 @@
 {% block stylesheets %}
 {{ parent()}}
 {{ encore_entry_link_tags('user_details') }}
+{{ encore_entry_link_tags('modal') }}
 {% endblock %}
 
 
@@ -24,8 +25,105 @@
       {% endfor %}  
       <p class="card-text">Profil créé le : {{user.createdAt|date("d/m/Y", "Europe/Paris")}}</p> 
       <a href="#" class="card-link">Modifier</a>
-      <a href="#" class="card-link link-delete">Supprimer</a>
+      
+      {% if (user.isBanned) %}
+        <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+        data-target="#modalUnbanAccount-{{ user.id }}">
+          débannir
+        </button>
+      {% else %}
+        <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+          data-target="#modalBanAccount-{{ user.id }}">
+            Bannir
+        </button>
+      {% endif %}
+
+      <button type="button" class="btn btn-primary link-delete" data-toggle="modal"
+      data-target="#modalDeleteAccount-{{ user.id }}">
+        Supprimer
+      </button>  
     </div>
+
+<!-- MODALS -->
+
+    <!-- Modal Ban an account -->
+        <div class="modal fade modal-container-custum" id="modalBanAccount-{{ user.id }}" tabindex="-1" role="dialog"
+          aria-labelledby="modalBanAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir bannir l'utilisateur {{ user.viewUsername }} dont l'id est {{ user.id }} ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Cet utilisateur ne pourra plus se connecter et accéder à ses données personnelles et ne pourra plus publier d'article.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary button-yes-custum">
+                  <a href="{{path('banUser', {'id' : user.id}) }}">
+                    Oui
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- Modal unban an account -->
+        <div class="modal fade modal-container-custum" id="modalUnbanAccount-{{ user.id }}" tabindex="-1" role="dialog"
+        aria-labelledby="modalUnbanAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir débannir l'utilisateur {{ user.viewUsername }} dont l'id est {{ user.id }} ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Cet utilisateur pourra de nouveau se connecter et accéder à ses données personnelles ainsi que publier des articles.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary button-yes-custum">
+                  <a href="{{path('unbanUser', {'id' : user.id}) }}">
+                    Oui
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- Modal Delete an account -->
+        <div class="modal fade modal-container-custum" id="modalDeleteAccount-{{ user.id }}" tabindex="-1" role="dialog"
+          aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir supprimer l'utilisateur {{ user.viewUsername }} dont l'id est {{ user.id }} ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Tous les articles de cet utilisateur ainsi que ses contributions aux votes seront aussi supprimés.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary button-yes-custum">
+                  <a href="{{path('deleteUser', {'id' : user.id}) }}">
+                    Oui
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
   </div>
 
   <h2 class="text-center mt-5 mb-4">Les articles de {{user.viewUsername}}</h2>

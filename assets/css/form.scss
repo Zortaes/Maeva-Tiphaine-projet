@@ -134,10 +134,52 @@ label span
      }
  }
 
+/*************************************
+  For signup form - info 
+  *************************************/
+ .info-signup 
+ {
+    text-align: justify; 
+    padding: 0.5em; 
+    font-size: 0.8em;
+    color: #bdbdbd; 
+    
+
+   @media (min-width: 991.98px) 
+   { 
+        padding: 1em;
+        margin: auto;
+        width: 50%;        
+   }
+
+ }
+
+/***********************
+Form signup form - checkbox  
+************************/
+.condition-signup
+{
+    font-size: 0.8em;
+}
 
 
+/****************
+Form login form   
+****************/
+.aideLogin
+{
+    font-size: 0.9em;
+    text-align: center;
+    a 
+    {
+        color: #81964d;
 
-
+        &:hover
+        {
+            color: #677e2d;
+        }
+    } 
+}
 
 /***********************
 Form login form - error  

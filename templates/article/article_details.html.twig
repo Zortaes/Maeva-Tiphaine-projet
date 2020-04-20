@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
     {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('article_details') }}
+    {{ encore_entry_link_tags('modal') }}
     {% endblock %}
+
+
 {% block body %}
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+        <div class="alert alert-success text-center">
             {{ message }}
         </div>
     {% endfor %}
@@ -64,13 +70,20 @@
                             <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
                                 <button type="submit" name="flag" value="true">Signaler l'article</button>
                             </form>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a>                                                     
+                            {% endif %}
 
                             {% if is_granted('EDIT', article) %}
                                 <a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a>                                                      
                             {% endif %}
 
                             {% if is_granted('DELETE', article) %}
-                                <a href="{{ path('article_delete', {'slug' : article.slug}) }}" value="Delete" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">Supprimer l'article</a>                            
+                                    <!-- Button trigger modal -->
+                                <button type="button" class="btn article-delete" data-toggle="modal"
+                                    data-target="#modalDeleteArticle-{{article.id}}">
+                                    Supprimer
+                                </button>                      
                             {% endif %}
 
                         </div>
@@ -78,7 +91,7 @@
                 </div>
             </div>
         <div class="articleAuthor">
-            <a href="#"><h3>{{ article.user.viewUsername}}</h3></a>
+            <a href="{{path('articleByUser', {'slug':article.user.slug})}}"><h3>{{ article.user.viewUsername}}</h3></a>
         </div>
 
         <div class="articleCategory" >                              
@@ -144,6 +157,30 @@
         <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
     </div>
 </div>
+
+    <!-- Modal Delete article -->
+      <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article "{{article.title}}" ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary button-yes-custum">
+                <a href="{{path('article_delete', {'slug' : article.slug}) }}">
+                  Oui
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 {% endblock %}
 
     {% block javascripts %}

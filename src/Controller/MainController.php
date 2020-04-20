@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Entity\Vote;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\SerializerInterface;
+
 
 class MainController extends AbstractController
 {
@@ -39,11 +39,25 @@ class MainController extends AbstractController
 
     /**
      * @Route("/a-propos", methods={"GET"}, name="about")
+     * 
+     * @return $this template for about 
      */
     public function about()
     {   
 
         return $this->render('main/about.html.twig');
+
+    }
+
+    /**
+     * @Route("/mention-legales", methods={"GET"}, name="legalMention")
+     * 
+     * @return $this template for legal mention 
+     */
+    public function legalMention()
+    {   
+
+        return $this->render('main/legal_mention.html.twig');
    
 
     }
