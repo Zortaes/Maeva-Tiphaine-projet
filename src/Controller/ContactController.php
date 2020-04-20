@@ -47,6 +47,7 @@ class ContactController extends AbstractController
 
             $email = (new Email())
                 ->from($sender)
+                ->replyTo($sender)
                 ->to('la.rubrique.ecolo@gmail.com')
                 ->subject($subject)
                 ->text($message);
