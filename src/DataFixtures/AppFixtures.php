@@ -33,12 +33,22 @@ class AppFixtures extends Fixture
          /* USERS */
 
          for ($i = 0; $i < 10; $i++) {
-    
+
             $user = new User();
-            $user->setUsername($faker->firstNameMale);
+            
+            if ($i === 0) 
+            {
+                $user->setUsername('UserTest');
+                $user->setEmail('UserTest@usertest.com');
+            }
+            else 
+            {
+                $user->setUsername($faker->firstNameMale);
+                $user->setEmail($faker->email); 
+            } 
+
             $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
             $user->setBirthDate($faker->datetime);
-            $user->setEmail($faker->email);
             $password = $this->encoder->encodePassword($user, 'faustine1');
             $user->setPassword($password);
             $user->setAvatar('img.jpg');
