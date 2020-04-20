@@ -14,14 +14,33 @@ JUMBOTRON SIZE
 
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 35px 24px rgba(0,0,0,0.22);
     margin-bottom: 3.8em;
+   
+    
 
-    @media (max-width: 991.98px) 
+    @media (max-width: 500px) 
     {     
         height: 40vh; 
         width: 100vw; 
         padding: 2.5vh 1vw 0 1vw;
      
     }
+
+    @media (min-width: 500px) and (max-width: 600px) 
+    {     
+        height: 40vh; 
+        width: 100vw; 
+        padding: 0.5vh 1vw 0 1vw;
+     
+    }
+
+    @media (min-width: 600px) and (max-width: 991.98px) 
+    {     
+        height: 40vh; 
+        width: 100vw; 
+        padding: 1.5vh 1vw 0 1vw;
+     
+    }
+ 
     @media (min-width: 991.99px) and (max-width: 1000px) 
     { 
         height: 35vh; 
@@ -63,7 +82,7 @@ JUMBOTRON SIZE
             @media (min-width: 767px) and (max-width: 1500px) 
             { 
                 font-size: 2em; 
-                margin-top: 1em;
+                margin-top: 0.5em;
             }
 
 
@@ -74,6 +93,7 @@ JUMBOTRON SIZE
         p 
         {
             color: white; 
+           
           
         
             @media  (max-width: 350px) 
@@ -87,13 +107,13 @@ JUMBOTRON SIZE
             }
 
 
-            @media (min-width: 767px) and (max-width: 991.98px) 
+            @media (min-width: 767px) and (max-width: 1006px) 
             { 
                 font-size: 0.9em;
             }
 
 
-            @media (min-width: 991.99px) and (max-width: 1500px) 
+            @media (min-width: 1006px) and (max-width: 1500px) 
             { 
                 font-size: 1em;
             }
@@ -103,6 +123,8 @@ JUMBOTRON SIZE
 
         /* Paragraph 1 */
         .paragraph-image-flowers-1 {
+
+         
             @media (max-width: 767px) 
             { 
                 margin-right: 0vw; 
@@ -118,11 +140,37 @@ JUMBOTRON SIZE
             }
 
 
-            @media (min-width: 991.99px) and (max-width: 1500px) 
+            @media (min-width: 991.99px) and (max-width: 1000px) 
             { 
-                padding-top: 1vw; 
+                
+                margin-right: 35vw;
+            }
+
+            @media (min-width: 1000px) and (max-width: 1040px) 
+            { 
+                
+                margin-right: 45vw;
+            }
+
+
+            @media (min-width: 1040px) and (max-width: 1200px) 
+            { 
+                
+                margin-right: 40vw;
+            }
+
+            @media (min-width: 1200px) and (max-width: 1226px) 
+            {  
+                margin-right: 41vw;
+            }
+
+            @media (min-width: 1226px) and (max-width: 1500px) 
+            { 
+                
                 margin-right: 30vw;
             }
+
+
 
             padding-top: 2vw;
             margin-right: 10vw;    
@@ -153,12 +201,24 @@ JUMBOTRON SIZE
             { 
                 margin-right: 15vw;
             }
+            
 
-            @media (min-width: 991.99px) and (max-width: 1500px) 
+            @media (min-width: 991.99px) and (max-width: 1040px) 
             {  
-                margin-right: 30vw;
+                margin-right: 45vw;
             }
 
+            @media (min-width: 1040px) and (max-width: 1100px) 
+            {  
+                margin-right: 40vw;
+            }
+
+
+            @media (min-width: 1100px) and (max-width: 1500px) 
+            { 
+                
+                margin-right: 30vw;
+            }
 
             margin-right: 10vw; 
             
@@ -200,10 +260,31 @@ JUMBOTRON SIZE
             }
 
 
-            @media (min-width: 991.99px) and (max-width: 1500px) 
+            @media (min-width: 991.99px) and (max-width: 1100px) 
             {  
-                margin-right: 32vw; 
+                margin-right: 45vw; 
             }
+
+
+            @media (min-width: 1100px) and (max-width: 1200px) 
+            { 
+                
+                margin-right: 31vw;
+            }
+
+            @media (min-width: 1200px) and (max-width: 1226px) 
+            { 
+                
+                margin-right: 40vw;
+            }
+
+
+            @media (min-width: 1226px) and (max-width: 1500px) 
+            { 
+                
+                margin-right: 31vw;
+            }
+
 
             margin-right: 10vw; 
           
@@ -221,7 +302,7 @@ JUMBOTRON BACKGROUND
     background-position: bottom right; 
     background-repeat: no-repeat; 
 
-    @media (max-width: 1500px) 
+    @media (max-width: 1000px) 
     { 
         
         background-size: cover;  

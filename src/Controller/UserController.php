@@ -80,7 +80,7 @@ class UserController extends AbstractController
         
         $user = $this->getUser(); 
 
-        // si l'utilsateur a été banni, il sera déconnecté
+        /* logout User if he is banned */
         if($user->getIsBanned() == true)
         {
             return $this->redirectToRoute('logout');
