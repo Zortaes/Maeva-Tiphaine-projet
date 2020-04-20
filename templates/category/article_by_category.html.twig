@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{{ category.name}}
+{{ categoryInfo.name}}
 {% endblock %}
 
 {% block stylesheets %}
@@ -13,11 +13,11 @@
 {% block body %}
 
 <div class="category-title">
-    <p class="category-title-p" style="color:{{ category.color }}">{{category.name}}</p>
+    <p class="category-title-p" style="color:{{ categoryInfo.color }}">{{categoryInfo.name}}</p>
 </div>
 
 
-{% if category.articles is empty %}
+{% if category is empty %}
 
 <p class="text-center">Il n'y a pas encore d'article de cette catégorie</p>
   
@@ -26,12 +26,12 @@
 <!-- Container Cards -->
 <div class="container container-custum row">
 
-    {% for article in category.articles %}
+    {% for article in category %}
 
 
     <div class="card card-custum col-sm-5">
-        <img class="card img-fluid" src="{{ asset("build/images/" ~ category.picture ) }} "
-            alt="image represent category {{ category.name}}">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ categoryInfo.picture ) }} "
+            alt="image represent category {{ categoryInfo.name}}">
         <div class="card-body card-body-custum">
             <h5 class="card-title card-title-custum">
                 <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
@@ -99,8 +99,10 @@
     </div>
     {% endfor %}
 
+    
     {% endif %}
 </div>
+{{ knp_pagination_render(category) }}
 <!-- /Container Cards -->
 {% endblock %}
 
