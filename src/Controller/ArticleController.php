@@ -360,8 +360,7 @@ class ArticleController extends AbstractController
     {  
         /* logout User if he is banned */
         if($this->getUser()->getIsBanned() == true)
-        {
-            
+        {      
             return $this->redirectToRoute('logout');
         } 
 
