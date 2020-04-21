@@ -310,7 +310,7 @@ NAVBAR AND SIDEBAR CSS
           left: 0;
           background-color: white;
           width: 100%;
-          z-index: 1;
+          z-index: 3;
           padding: 2em;
         }
 
@@ -375,7 +375,7 @@ NAVBAR AND SIDEBAR CSS
           right: 0;
           background-color: white;
           width: 200px;
-          z-index: 1;
+          z-index: 3;
           padding: 1em;
         }
 
@@ -414,8 +414,19 @@ NAVBAR AND SIDEBAR CSS
 
   }
   
+@media only screen and (min-width:2100px)
+{
 
+  #linkList
+  {
+    width: 90% !important;
+  }
 
+  .subnav:hover .show 
+  {
+    height: 400px !important;
+  }
+}       
 
 
 

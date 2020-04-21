@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Acceuil{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -138,7 +138,7 @@ LAST ARTICLES
                                 {% set noteName = 'Noté :' %}
 
                                 {% if (average|round == 1) %}
-                                {% set label = 'Mediocre' %}
+                                {% set label = 'Médiocre' %}
                                 {% endif %}
 
                                 {% if (average|round == 2) %}
@@ -242,7 +242,7 @@ LAST ARTICLES
                                 {% set noteName = 'Noté :' %}
 
                                 {% if (average|round == 1) %}
-                                {% set label = 'Mediocre' %}
+                                {% set label = 'Médiocre' %}
                                 {% endif %}
 
                                 {% if (average|round == 2) %}
@@ -343,7 +343,7 @@ LAST ARTICLES
                                 {% set noteName = 'Noté :' %}
 
                                 {% if (average|round == 1) %}
-                                {% set label = 'Mediocre' %}
+                                {% set label = 'Médiocre' %}
                                 {% endif %}
 
                                 {% if (average|round == 2) %}
@@ -480,10 +480,10 @@ BEST ARTICLES
                                     {{bestArticle.summary}}
                                 </p>
 
-                                {% set noteName = 'voté' %}
+                                {% set noteName = 'noté' %}
 
                                 {% if (bestArticle.moyen|round == 1) %}
-                                {% set label = 'Mediocre' %}        
+                                {% set label = 'Médiocre' %}        
                                 {% endif %}
                             
                                 {% if (bestArticle.moyen|round == 2) %}
@@ -564,10 +564,10 @@ BEST ARTICLES
                                     {{bestArticle.summary}}
                                 </p>
 
-                                {% set noteName = 'voté' %}
+                                {% set noteName = 'noté' %}
 
                                 {% if (bestArticle.moyen|round == 1) %}
-                                {% set label = 'Mediocre' %}        
+                                {% set label = 'Médiocre' %}        
                                 {% endif %}
                             
                                 {% if (bestArticle.moyen|round == 2) %}
@@ -646,10 +646,10 @@ BEST ARTICLES
                                 </p>
 
 
-                                {% set noteName = 'voté' %}
+                                {% set noteName = 'noté' %}
 
                                 {% if (bestArticle.moyen|round == 1) %}
-                                {% set label = 'Mediocre' %}        
+                                {% set label = 'Médiocre' %}        
                                 {% endif %}
                             
                                 {% if (bestArticle.moyen|round == 2) %}
