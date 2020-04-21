@@ -1,6 +1,7 @@
 {
   "build/about.css": "/build/about.css",
   "build/about.js": "/build/about.js",
+  "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
   "build/article_by_category.css": "/build/article_by_category.css",
   "build/article_by_category.js": "/build/article_by_category.js",
@@ -44,6 +45,5 @@
   "build/images/menage-hygiene-maison.jpg": "/build/images/menage-hygiene-maison.40859839.jpg",
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/tiphaine.jpeg": "/build/images/tiphaine.c6703936.jpeg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
-  "build/app.css": "/build/app.css"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
 }
