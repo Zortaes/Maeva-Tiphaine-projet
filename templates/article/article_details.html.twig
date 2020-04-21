@@ -33,7 +33,7 @@
             {% set average = sum / article.votes|length %}
             {% set noteName = 'Noté par la communauté :' %}
             {% if (average|round == 1) %}
-                {% set label = 'Mediocre' %}
+                {% set label = 'Médiocre' %}
             {% endif %}
             {% if (average|round == 2) %}
                 {% set label = 'Pas mal' %}
@@ -110,7 +110,7 @@
                 </ul> 
             </div>
             <div class="instruction">
-                <h3>Instruction</h3>
+                <h3>Instructions</h3>
                 <p>{{ article.instruction }}</p>
             </div>
         </div>
@@ -118,7 +118,7 @@
         {% if vote %}
         <div class="UserThoughs">    
                 {% if (vote.voteValue == 1) %}
-                    {% set label = 'Mediocre' %}
+                    {% set label = 'Médiocre' %}
                 {% endif %}
                 {% if (vote.voteValue == 2) %}
                     {% set label = 'Pas mal' %}
