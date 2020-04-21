@@ -81,7 +81,7 @@ class UserController extends AbstractController
         
         $user = $this->getUser(); 
 
-        // if user is banned he is being logged out
+        /* logout User if he is banned */
         if($user->getIsBanned() == true)
         {
             return $this->redirectToRoute('logout');
@@ -91,9 +91,9 @@ class UserController extends AbstractController
         $articles = $paginator->paginate
         (
             /** @var ArticleRepository */
-            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6// Nombre de résultats par page
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
         );
       
         
@@ -163,9 +163,9 @@ class UserController extends AbstractController
 
         $articles = $paginator->paginate
         (
-            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6// Nombre de résultats par page
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
         );
 
 

@@ -266,8 +266,8 @@ class ArticleController extends AbstractController
 
         $user = $this->getUser();
 
-        // si l'utilisateur a été banni, l'action sera annulée et il sera déconnecté
-        if($user->getIsBanned() == true)
+        /* logout User if he is banned */
+        if($this->getUser()->getIsBanned() == true)
         {
             return $this->redirectToRoute('logout');
         } 
@@ -322,6 +322,13 @@ class ArticleController extends AbstractController
      */
     public function flag(Article $article, Request $request, EntityManagerInterface $manager)
     {
+
+         /* logout User if he is banned */
+         if($this->getUser()->getIsBanned() == true)
+        {
+             return $this->redirectToRoute('logout');
+        } 
+
         $flag = $request->request->get('flag');
 
         if(filter_var($flag, FILTER_VALIDATE_BOOLEAN))
@@ -351,7 +358,7 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article)
     {  
-        // si l'utilisateur a été banni, l'action sera annulée et il sera déconnecté
+        /* logout User if he is banned */
         if($this->getUser()->getIsBanned() == true)
         {      
             return $this->redirectToRoute('logout');
