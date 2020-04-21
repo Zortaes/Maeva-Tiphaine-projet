@@ -24,7 +24,7 @@
         <p class="card-text">{{role}}</p>  
       {% endfor %}  
       <p class="card-text">Profil créé le : {{user.createdAt|date("d/m/Y", "Europe/Paris")}}</p> 
-      <a href="#" class="card-link">Modifier</a>
+      <a href="{{path('editUser', {'id' : user.id}) }}" class="card-link">Modifier</a>
       
       {% if (user.isBanned) %}
         <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
