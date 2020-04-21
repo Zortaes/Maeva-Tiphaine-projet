@@ -353,8 +353,7 @@ class ArticleController extends AbstractController
     {  
         // si l'utilisateur a été banni, l'action sera annulée et il sera déconnecté
         if($this->getUser()->getIsBanned() == true)
-        {
-            
+        {      
             return $this->redirectToRoute('logout');
         } 
 
