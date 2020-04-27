@@ -30,7 +30,7 @@ class EditUserType extends AbstractType
             [ 
                 'label' => "Nom d'utilisateur",
                 'constraints' => [
-                    new Length(["min" => 8, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 8 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 8 et 16 caractères"])
+                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères"])
                     ]
             ]
         )
