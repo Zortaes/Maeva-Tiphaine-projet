@@ -24,10 +24,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    
     App\EventSubscriber\MaintenanceKernelSubscriber:
         arguments:
-            $displayMaintenanceMessage: "%env(bool:DISPLAY_MAINTENANCE_MESSAGE)%"
-            $maintenanceMessage: "%env(string:MAINTENANCE_MESSAGE)%"
+            $displayMaintenanceMessage: ['%env(bool:DISPLAY_MAINTENANCE_MESSAGE)%', '%env(MAINTENANCE_MESSAGE)%']
+    
     
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
