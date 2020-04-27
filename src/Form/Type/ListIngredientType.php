@@ -39,7 +39,7 @@ class ListIngredientType extends AbstractType
             [
                 "label" => "Ingrédient",
                 'constraints' => [
-                    new Length(["max" => 20, "maxMessage" => "Veuillez renseigner un ingrédient inférieure à 20 caractères"])  
+                    new Length(["max" => 40, "maxMessage" => "Veuillez renseigner un ingrédient inférieure à 40 caractères"])
                 ]
                                 
             ]
