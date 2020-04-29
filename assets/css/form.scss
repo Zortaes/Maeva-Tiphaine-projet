@@ -256,6 +256,13 @@ fieldset {
     margin-bottom: 0!important; 
 }
 
+@media (max-width: 768px)
+{ 
+    .instruction-new textarea
+    {
+        min-height: 250px;
+    }
+}
 .button-add-ingredient
 {
     background-color: white!important; 

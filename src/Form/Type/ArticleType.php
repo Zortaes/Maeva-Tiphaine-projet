@@ -31,7 +31,7 @@ class ArticleType extends AbstractType
             [
                 'label' => "Titre",
                 'constraints' => [
-                    new Length( ["max" => 22, "maxMessage" => "Veuillez entrer un titre inférieur à 22 caractères"])
+                    new Length( ["max" => 40, "maxMessage" => "Veuillez entrer un titre inférieur à 40 caractères"])
                     ]
             ]
         )
