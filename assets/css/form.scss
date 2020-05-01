@@ -9,16 +9,19 @@
     font-size: 2em; 
     text-align: center;
     margin-top: 2em;
-    
 
-    a {
-       color: #81964d; 
-    }
 
-    a:hover {
-        text-decoration: none;
-        color: #677e2d; 
+    img
+    {
+        @media (min-width: 2000px) 
+        { 
+           
+            max-width: 20%; 
+                   
+        } 
     }
+   
+
 }
 
 
@@ -29,7 +32,7 @@
 .container-form-custum
 {
    margin-bottom: 3em;
-   margin-top: 3em;
+   margin-top: 2em;
 }
 
 
