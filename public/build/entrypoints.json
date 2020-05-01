@@ -1,12 +1,11 @@
 {
   "entrypoints": {
-    "app": {
-      "js": [
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "about": {
       "css": [
-        "/build/app.css"
+        "/build/about.css"
+      ],
+      "js": [
+        "/build/about.js"
       ]
     },
     "homepage": {
@@ -42,12 +41,13 @@
         "/build/article_by_category.js"
       ]
     },
-    "about": {
-      "css": [
-        "/build/about.css"
-      ],
+    "app": {
       "js": [
-        "/build/about.js"
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "profil": {
