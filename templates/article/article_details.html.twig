@@ -65,27 +65,28 @@
                     ...
                     </button>
 
-                    <div class="dropdown-menu p-0 mt-1" aria-labelledby="dropdownMenu2">
-                        <div class="dropdown-menu-flag-custom"> 
-                            <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
-                                <button type="submit" name="flag" value="true">Signaler l'article</button>
-                            </form>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a>                                                     
-                            {% endif %}
+                    <div class="dropdown-menu option-article p-0 mt-1 " aria-labelledby="dropdownMenu2">
+                        <div class="dropdown-menu-flag-custom">
+                            <ul>
+                                <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
+                                <li><button type="submit" name="flag" value="true">Signaler l'article</button></li>
+                                </form>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a></li>                                                     
+                                {% endif %}
 
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a>                                                      
-                            {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a></li>                                                      
+                                {% endif %}
 
-                            {% if is_granted('ROLE_ADMIN') %}
-                                    <!-- Button trigger modal -->
-                                <button type="button" class="btn article-delete" data-toggle="modal"
-                                    data-target="#modalDeleteArticle-{{article.id}}">
-                                    Supprimer
-                                </button>                      
-                            {% endif %}
-
+                                {% if is_granted('ROLE_ADMIN') %}
+                                        <!-- Button trigger modal -->
+                                    <li><button type="button" class="btn article-delete" data-toggle="modal"
+                                        data-target="#modalDeleteArticle-{{article.id}}">
+                                        Supprimer
+                                    </button></li>                    
+                                {% endif %}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -111,7 +112,7 @@
             </div>
             <div class="instruction">
                 <h3>Instructions</h3>
-                <p>{{ article.instruction }}</p>
+                <p>{{ article.instruction|nl2br }}</p>
             </div>
         </div>
     {% if app.user %}

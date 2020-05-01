@@ -110,7 +110,7 @@ class AdminController extends AbstractController
 
             if(!empty($plainPassword)) 
             {
-                 $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                $encodedPassword = $encoder->encodePassword($user, $plainPassword);
                 $user->setPassword($encodedPassword); 
             }
           

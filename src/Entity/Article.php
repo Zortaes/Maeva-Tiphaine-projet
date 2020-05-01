@@ -23,7 +23,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=22, unique=true)
+     * @ORM\Column(type="string", length=40, unique=true)
      * @Assert\NotBlank
      */
     private $title;
