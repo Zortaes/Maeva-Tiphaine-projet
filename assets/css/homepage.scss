@@ -15,7 +15,6 @@ JUMBOTRON SIZE
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 35px 24px rgba(0,0,0,0.22);
     margin-bottom: 3.8em;
    
-    
 
     @media (max-width: 500px) 
     {     
@@ -46,9 +45,18 @@ JUMBOTRON SIZE
         height: 35vh; 
         padding: 2vh 1vw 0 1vw;
     }
-    
+
     padding-left: 4vw; 
-    height: 50vh;     
+    height: 50vh;
+    
+    @media (min-height: 950px)
+    { 
+        height: 40vh;
+    }
+    
+ 
+    
+
 
         /* Container parent of text */
         .container-size-image-flowers 
@@ -172,12 +180,13 @@ JUMBOTRON BACKGROUND
     @media (max-width: 1000px) 
     { 
         
-        background-size: cover;  
-        background-repeat: no-repeat; 
+        background-size: cover;
+        background-repeat: no-repeat;
        
     }
 
-    background-color: #201920
+    background-color: #201920;
+    opacity: 0.90;
     
 
 
@@ -257,8 +266,15 @@ ALL TEXT IN CARD (after image)
     {
         text-align: center; 
         font-weight: bold;
-       
-        margin: 0;  
+        height: 30px !important;
+        padding: 0.4em;
+        margin: 0; 
+
+        @media screen and (min-width: 768px) and (max-width: 809px)
+        {
+            font-size: 0.9em !important;
+        }
+
         @media (max-width: 1000px) 
         {
             font-size: 1em; 
@@ -277,6 +293,7 @@ ALL TEXT IN CARD (after image)
 
     .card-paragraph-author 
     {
+        margin-top: 1.5em !important;
         font-style: italic; 
         text-align: center;
     }
@@ -316,10 +333,18 @@ ALL TEXT IN CARD (after image)
         background-color: black; 
         border-color: black; 
         padding: 0 1vw 0 1vw; 
-    }
-
-    
+    }    
   
+}
+
+/*************************** 
+    maintenance message
+****************************/
+.maintenance-message 
+{
+ 
+    width: 100%;
+    margin-top: 0!important;
 }
 
    

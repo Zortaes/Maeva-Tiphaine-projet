@@ -7,7 +7,8 @@
             <div class="line1"></div>
         </button>
         
-        <a id="navTitle" href="{{path('homepage')}}"><h3>La Rubrique Écolo</h3></a>
+        <a id="navTitle" href="{{path('homepage')}}"> <img class="col-12 logo-navbar" src="{{ asset("build/images/Logo.jpg") }} "
+            alt="image represent our logo"></a>
         <div id="linkList">
             <div class="subnav">
                 <button class="navLinks">Catégories</button>
@@ -19,7 +20,7 @@
                 </div>
             </div>
             <button class="navLinks"><a href="{{path('contact')}}">Nous contacter</a></button>
-            <button class="navLinks"><a href="{{path('articleNew')}}">Ajouter un article</a></button>
+            <button class="navLinks"><a href="{{path('articleNew')}}" id="addArticleNavBtn">Ajouter un article</a></button>
         </div>
 
         {% if app.user %}
@@ -54,6 +55,9 @@
             {% endif %}
         
         </div>
+        <div>
+            <a class="sideLinks" href="{{path('articleNew')}}" id="addArticleSidebarBtn"><h5>Ajouter un article</h5></a>
+        </div>
 
         <h5 id="categoriesNav">Catégories</h5> 
             <div id="sideList">  
@@ -63,7 +67,6 @@
                 {% endfor %}
 
                 <a class="sideLinks" href="{{path('contact')}}"><h5>Nous contacter</h5></a>
-                <a class="sideLinks" href="{{path('articleNew')}}"><h5>Ajouter un article</h5></a>
 
                 {% if app.user %}
                     <a class="sideLinks" href="{{path('showProfil')}}"><h5>Mon profil</h5></a>

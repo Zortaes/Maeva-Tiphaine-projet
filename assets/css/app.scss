@@ -64,7 +64,7 @@ NAVBAR AND SIDEBAR CSS
   /* Button to open side bar for responsive */
   #sideOpenbtn
   {
-    margin: 12px;
+    margin: 12px 0 12px 12px;
     border: 0 !important;
     background-color: white;
 
@@ -89,22 +89,11 @@ NAVBAR AND SIDEBAR CSS
   #navTitle
   {
     width: 100%;
-    color: black;
-    text-decoration: none;
-
-    h3{
-      font-weight: bold;
+    a
+    {
       margin-top: 18px;
-      font-size: 1em;
-      @media only screen and (min-width:576px)
-      {
-        font-weight: bold;
-        font-size: 1.17em;
-        margin-top: 18px;
-      }
     }
-    
-    
+      
   }
 
   .navLinks
@@ -124,7 +113,7 @@ NAVBAR AND SIDEBAR CSS
     border-radius: 5px;
     background: transparent;
     color : black;
-    margin: 1em 1.5em 0.5em 0.5em;
+    margin: 1em 0.5em 0.5em 0.5em;
     padding: 0.5em;
     font-size: 0.8em;
   
@@ -173,7 +162,9 @@ NAVBAR AND SIDEBAR CSS
 }
 
 
-/* The sidebar menu */
+/******
+SIDEBAR 
+*******/
 .sidebar 
 {
     height: 100%; /* 100% Full-height */
@@ -191,12 +182,22 @@ NAVBAR AND SIDEBAR CSS
     {
       border: #9eb66b 2px solid;
       border-radius: 20px;
-      margin: 1em 0.5em 2em 0.5em;
+      margin: 1em 0.5em 1em 0.5em;
       padding: 1em;
       h5
       {
         color: rgb(104, 103, 103);
       }
+    }
+
+      #addArticleSidebarBtn h5
+    {
+      font-weight: bolder;
+      color: #799440;
+      padding : 1em;
+      text-decoration: none;
+      margin: 0 0 10% 7%;
+      
     }
 
     #sideList
@@ -209,12 +210,12 @@ NAVBAR AND SIDEBAR CSS
 
       a
       {
-      outline:none;
-      margin-left: 5%;
-      display : flex;
-      flex-direction: column;
-      color: rgb(104, 103, 103);
-      text-decoration: none;
+        outline:none;
+        margin-left: 5%;
+        display : flex;
+        flex-direction: column;
+        color: rgb(104, 103, 103);
+        text-decoration: none;
       }
     }
 
@@ -265,7 +266,6 @@ NAVBAR AND SIDEBAR CSS
       #navTitle
       {
         max-width: 240px;
-        padding-left: 50px;
       }
 
       /***********************************************
@@ -279,20 +279,26 @@ NAVBAR AND SIDEBAR CSS
 
         a
         {
-          
+          font-weight: 400;
           color: black;
           text-decoration: none;
         }
 
         .navLinks
-        {  
+        { 
+          font-weight: 400;
           outline: none;
           display: block !important;
-          font-weight: bold;
           border: none;
           padding: 14px 16px;
           background-color: inherit;
           margin: 0; 
+        }
+
+        #addArticleNavBtn
+        {
+          font-style: italic;
+          font-weight: 500;
         }
       }
 
@@ -428,11 +434,87 @@ NAVBAR AND SIDEBAR CSS
   }
 }       
 
+/** 
+Logo 
+**/
+.logo-navbar 
+{
+  margin: 1em 1.5em 0.5em 0.5em; 
+  
+  @media (min-width: 375px)
+  {
+    width: 80%; 
+    margin: 0.8em 2.5em 0.5em 2em; 
+  }
+
+  @media (min-width: 450px)
+  {  
+    width: 70%; 
+    margin: 0.8em 3em 0.5em 3em; 
+  }
+
+  @media (min-width: 480px)
+  {  
+    width: 55%; 
+    margin: 1em 4em 0.5em 5em;
+  }
+
+  @media (min-width: 550px)
+  {  
+    width: 48%; 
+    margin: 1em 4em 0.5em 7em;
+  }
+
+  @media (min-width: 640px)
+  {  
+    width: 40%; 
+    margin: 1em 4em 0.5em 9em;
+  }
+
+  @media (min-width: 700px)
+  {  
+    width: 35%; 
+    margin: 1em 4em 0.5em 11em;
+  }
+
+  @media (min-width: 760px)
+  {  
+    width: 30%; 
+    margin: 1em 4em 0.5em 13em;
+  }
+
+  @media (min-width: 800px)
+  {  
+    margin: 1em 4em 0.5em 14em;
+  }
+
+  @media (min-width: 860px)
+  {  
+    width: 28%; 
+    margin: 0.8em 4em 0.5em 16em;
+  }
+
+  @media (min-width: 911px)
+  {  
+    margin: 0.8em 4em 0.5em 18em;
+  }
+  
+  @media (min-width: 960px)
+  {  
+    width: 95%; 
+    margin: 0.4em 0 0.5em 0.5em; 
+  }
+  
+  
+  
+  
+}
 
 
-/**************************** 
-        CONTAINER BODY
-****************************/
+
+/**************************************** 
+              CONTAINER BODY
+*****************************************/
   .all-body-container 
   {
     margin-bottom: 10em;
@@ -443,9 +525,9 @@ NAVBAR AND SIDEBAR CSS
 
 
 
-/*************************** 
-            FOOTER
-****************************/
+/*************************************** 
+                FOOTER
+***************************************/
 .container-footer-custum {
   position: absolute;
   bottom: 0; 
@@ -486,6 +568,22 @@ NAVBAR AND SIDEBAR CSS
     transition: 0.8s;
    }
 
+}
+
+/*************************** 
+    maintenance message
+****************************/
+.maintenance-message 
+{
+  background-color: rgb(255, 155, 155); 
+  text-align: center; 
+  font-size: 1.2em; 
+  padding: 1em;  
+  width: 50%; 
+  margin: auto; 
+  margin-top: 1em;
+   
+  
 }
 
  

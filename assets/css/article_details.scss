@@ -92,11 +92,41 @@ CARD
     border-radius: 30px;
     text-align: left;
     padding:  1em;
+    background-color:white;
+
+    @media (min-width: 577px)
+    { 
+        margin-left: -20% !important;
+        width: 120%;
+        padding:  1em;
+    }
+
+    @media (min-width: 768px)
+    { 
+        width: 100%;
+        padding:  1em;
+    }
 
     @media (min-width: 1199px)
     { 
-        width: 170%;
-        padding:  0.5em;
+        width: 140%;
+        padding:  1em;
+    }
+
+    @media (min-width: 2242px)
+    { 
+        width: 160%;
+    }
+
+    ul
+    {
+        list-style: none;
+        margin-left: -2.5em;
+
+        @media (min-width: 1199px)
+        { 
+            margin-left: -1.5em;
+        }
     }
 
     button
@@ -215,13 +245,15 @@ INGREDIENTS AND INSTRCUTIONS
     @media (min-width: 767px)
     { 
     min-width: 30%;
+    max-width: 35%;
     border-right: 1px dotted grey;
     }
 
     ul
     {
     list-style-type: none;
-    padding: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 1em;
     font-size: calc(0.5em + 1vw);
 
         @media (min-width: 767px)
@@ -229,6 +261,7 @@ INGREDIENTS AND INSTRCUTIONS
             font-size: 1em;
         }
     }
+
 
     li::before
     {

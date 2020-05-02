@@ -29,6 +29,7 @@ require('../images/logoLinkedin.jpg');
 require('../images/iconparam.png');
 require('../images/articlesFlag.jpg');
 require('../images/iconUser.png');
+require('../images/Logo.jpg');
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
