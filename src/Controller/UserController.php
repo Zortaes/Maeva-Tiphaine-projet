@@ -8,8 +8,10 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use Symfony\Component\Mime\Email;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -34,7 +36,7 @@ class UserController extends AbstractController
      * @return $this template form for signup -> GET 
      * @return $this redirect to route homepage -> POST 
      */
-    public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger): Response
+    public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger, MailerInterface $mailer): Response
     {
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
@@ -52,12 +54,30 @@ class UserController extends AbstractController
             $usernameSluged = $slugger->sluggify($slugUsername); 
             $newUser->setSlug($usernameSluged); 
 
+            // generate token for validation
+            $random = bin2hex(openssl_random_pseudo_bytes(64));
+
+            $newUser->setValidation($random); 
             $newUser->setCreatedAt(new DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newUser);
             $entityManager->flush();
 
+           
+            $subject = 'Confirmation de votre compte'; 
+            $message = "Confirme ta soeur stp, fais pas le con, tiens voici le lien http://127.0.0.1:8001/" . $newUser->getId() . "/" . $newUser->getValidation() ."/validation"; 
+
+            $email = (new Email())
+            ->from('la.rubrique.ecolo@gmail.com')
+            ->replyTo('la.rubrique.ecolo@gmail.com')
+            ->to($newUser->getEmail())
+            ->subject($subject)
+            ->text($message);
+
+            $mailer->send($email);
+
+            $this->addFlash("requestValidationEmail", "Faire un message pour dire d'aller dans leur boite mail");
             return $this->redirectToRoute('login');
         }
 
