@@ -9,6 +9,7 @@ use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
 use Symfony\Component\Mime\Email;
+use App\Services\EmailConfirmation;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -32,11 +33,17 @@ class UserController extends AbstractController
      * @param Request $request -> POST 
      * @param UserPasswordEncoderInterface $encoder -> POST 
      * @param Slugger $slugger -> POST 
+     * @param MailerInteface $mailer -> POST
      * 
      * @return $this template form for signup -> GET 
      * @return $this redirect to route homepage -> POST 
      */
-    public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger, MailerInterface $mailer): Response
+    public function signup(
+        Request $request, 
+        UserPasswordEncoderInterface $encoder, 
+        Slugger $slugger, 
+        MailerInterface $mailer, 
+        EmailConfirmation $confirmation): Response
     {
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
@@ -54,30 +61,26 @@ class UserController extends AbstractController
             $usernameSluged = $slugger->sluggify($slugUsername); 
             $newUser->setSlug($usernameSluged); 
 
-            // generate token for validation
-            $random = bin2hex(openssl_random_pseudo_bytes(64));
-
-            $newUser->setValidation($random); 
+         
+            $newUser->setValidation($confirmation->tokenSignup()); 
             $newUser->setCreatedAt(new DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newUser);
             $entityManager->flush();
 
-           
-            $subject = 'Confirmation de votre compte'; 
-            $message = "Confirme ta soeur stp, fais pas le con, tiens voici le lien http://127.0.0.1:8001/" . $newUser->getId() . "/" . $newUser->getValidation() ."/validation"; 
+            $message = $confirmation->message($newUser->getId(), $newUser->getValidation()); 
 
             $email = (new Email())
             ->from('la.rubrique.ecolo@gmail.com')
             ->replyTo('la.rubrique.ecolo@gmail.com')
             ->to($newUser->getEmail())
-            ->subject($subject)
-            ->text($message);
+            ->subject($confirmation->subject())
+            ->html($message);
 
             $mailer->send($email);
 
-            $this->addFlash("requestValidationEmail", "Faire un message pour dire d'aller dans leur boite mail");
+            $this->addFlash("requestValidationEmail", "Un mail vous a été envoyé pour la confirmation de votre compte, veuillez valider votre inscription depuis votre boîte de réception <" . $newUser->getEmail() . ">");
             return $this->redirectToRoute('login');
         }
 
