@@ -8,8 +8,13 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use Symfony\Component\Mime\Email;
+use App\Services\EmailConfirmation;
+use Symfony\Component\Mime\Address;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -30,17 +35,24 @@ class UserController extends AbstractController
      * @param Request $request -> POST 
      * @param UserPasswordEncoderInterface $encoder -> POST 
      * @param Slugger $slugger -> POST 
+     * @param MailerInteface $mailer -> POST
+     * @param EmailConfirmation $email -> POST
      * 
      * @return $this template form for signup -> GET 
-     * @return $this redirect to route homepage -> POST 
+     * @return $this redirect to route login and send email -> POST 
      */
-    public function signup(Request $request, UserPasswordEncoderInterface $encoder, Slugger $slugger): Response
-    {
+    public function signup(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        Slugger $slugger,
+        MailerInterface $mailer,
+        EmailConfirmation $confirmation
+    ): Response {
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {        
+        if ($form->isSubmitted() && $form->isValid()) {
 
             /* Password */
             $plainPassword = $form->get('plain_password')->getData();
@@ -49,8 +61,11 @@ class UserController extends AbstractController
 
             /* Slug */
             $slugUsername = $form->get('username')->getData();
-            $usernameSluged = $slugger->sluggify($slugUsername); 
-            $newUser->setSlug($usernameSluged); 
+            $usernameSluged = $slugger->sluggify($slugUsername);
+            $newUser->setSlug($usernameSluged);
+
+            /* Add token for signup */
+            $newUser->setValidation($confirmation->tokenSignup());
 
             $newUser->setCreatedAt(new DateTime('now'));
 
@@ -58,19 +73,38 @@ class UserController extends AbstractController
             $entityManager->persist($newUser);
             $entityManager->flush();
 
+            /* email */
+            $email = (new TemplatedEmail())
+                ->from('la.rubrique.ecolo@gmail.com')
+                ->to(new Address($newUser->getEmail()))
+                ->subject($confirmation->subject())
+
+                // path of the Twig template to render
+                ->htmlTemplate('email/_signup.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'id' => $newUser->getId(),
+                    'token' => $newUser->getValidation(),
+                ]);
+                
+            $mailer->send($email);
+
+            $this->addFlash("requestValidationEmail", "Un mail vous a été envoyé pour la confirmation de votre compte, veuillez valider votre inscription depuis votre boîte de réception <" . $newUser->getEmail() . ">");
+
             return $this->redirectToRoute('login');
         }
 
         return $this->render('user/new.html.twig', [
             'newUser' => $newUser,
-            'unlessFooter' => true, 
+            'unlessFooter' => true,
             'unlessNavbar' => true,
             'form' => $form->createView(),
         ]);
     }
 
 
-     /**
+    /**
      * @Route("/mon-profil", name="showProfil", methods={"GET"})
      * @IsGranted("ROLE_USER")
      * 
@@ -78,28 +112,26 @@ class UserController extends AbstractController
      */
     public function showProfil(PaginatorInterface $paginator, Request $request)
     {
-        
-        $user = $this->getUser(); 
+
+        $user = $this->getUser();
 
         /* logout User if he is banned */
-        if($user->getIsBanned() == true)
-        {
+        if ($user->getIsBanned() == true) {
             return $this->redirectToRoute('logout');
         }
 
 
-        $articles = $paginator->paginate
-        (
-            /** @var ArticleRepository */
-            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
-            $request->query->getInt('page', 1), // number current page in URL, 1 if no
-            6 // number of result
-        );
-      
-        
+        $articles = $paginator->paginate(
+                /** @var ArticleRepository */
+                $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+                $request->query->getInt('page', 1), // number current page in URL, 1 if no
+                6 // number of result
+            );
+
+
         return $this->render('user/profil.html.twig', [
-          'user' => $user, 
-          'articles' => $articles,         
+            'user' => $user,
+            'articles' => $articles,
         ]);
     }
 
@@ -115,41 +147,34 @@ class UserController extends AbstractController
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        
-        $userCurrent = $this->getUser();  
-       
 
-        if ($userCurrent === $userParam)
-        {
+        $userCurrent = $this->getUser();
+
+
+        if ($userCurrent === $userParam) {
             $manager = $this->getDoctrine()->getManager();
 
 
             /** @var ArticleRepository */
             $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
-            "user" => $userCurrent
+                "user" => $userCurrent
             ]);
-      
-            foreach ($articles as $article) 
-            {
+
+            foreach ($articles as $article) {
                 $manager->remove($article);
             }
 
             $manager->remove($userParam);
-            
+
             $session = new Session();
             $session->invalidate();
 
             $manager->flush();
 
             return $this->redirectToRoute('homepage');
-        }
-        
-        else 
-
-        {
+        } else {
             throw new Exception('La valeur n\'est pas bonne');
-        }      
-       
+        }
     }
 
     /**
@@ -161,20 +186,19 @@ class UserController extends AbstractController
     public function articleByUser(User $user, PaginatorInterface $paginator, Request $request)
     {
 
-        $articles = $paginator->paginate
-        (
-            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
-            $request->query->getInt('page', 1), // number current page in URL, 1 if no
-            6 // number of result
+        $articles = $paginator->paginate(
+                $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+                $request->query->getInt('page', 1), // number current page in URL, 1 if no
+                6 // number of result
+            );
+
+
+        return $this->render(
+            'user/article_by_user.html.twig',
+            [
+                'user' => $user,
+                'articles' => $articles
+            ]
         );
-
-
-        return $this->render('user/article_by_user.html.twig',
-        [
-            'user' => $user,
-            'articles' => $articles
-        ]);
     }
-
-    
 }

@@ -77,6 +77,16 @@ class User implements UserInterface
     private $is_banned;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $validation;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validate;
+
+    /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
@@ -89,6 +99,7 @@ class User implements UserInterface
     public function __construct() 
     {
         $this->is_banned = false;
+        $this->validate = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         
@@ -309,6 +320,46 @@ class User implements UserInterface
     public function setIsBanned($is_banned)
     {
         $this->is_banned = $is_banned;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validation
+     */ 
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set the value of validation
+     *
+     * @return  self
+     */ 
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validate
+     */ 
+    public function getValidate()
+    {
+        return $this->validate;
+    }
+
+    /**
+     * Set the value of validate
+     *
+     * @return  self
+     */ 
+    public function setValidate($validate)
+    {
+        $this->validate = $validate;
 
         return $this;
     }
