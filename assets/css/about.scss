@@ -97,13 +97,14 @@ SECOND CONTAINER
   
   
 }
-
+//All the developper card
 .block-developer
 {
     margin-top: 1em;
     margin-bottom: 1em;
 
-    //Photos
+
+    //Pictures
     .img-about-custum 
     {
         width: 100%;
@@ -116,42 +117,65 @@ SECOND CONTAINER
         width: 20%;
         float: left;
 
-        @media (min-width: 576px) and (max-width: 670px)
+        @media (min-width: 400px) and (max-width: 767px)
         { 
-            width: 25%;
+            width: 15%;
         }
 
-        @media (min-width: 870px) 
+        @media (min-width: 768px) and (max-width: 991px)
         { 
             width: 18%;
         }
 
-        @media (min-width: 1679px) 
-        {   
-            width: 15%;   
+        @media (min-width: 992px) and (max-width: 1199px)
+        { 
+            width: 18%;
         }
-        
-        
-    }
 
+        @media (min-width: 1200px)
+        { 
+            width: 18%;
+        }
+
+    }
+    //Linkedin link
+    .aboutUs-link
+    {
+        color: black; 
+        margin-left: 3px;
+
+        @media (min-width: 400px) and (max-width: 767px)
+        { 
+            font-size: 1em;
+            margin-left: 0.5em;
+        }
+
+        @media (min-width: 768px) and (max-width: 991px)
+        { 
+            font-size: 1.1em;
+            margin-left: 3px;
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px)
+        { 
+            font-size: 1em;
+            margin-left: 3px;
+        }
+
+        @media (min-width: 1200px)
+        { 
+            font-size: 1.2em;
+            margin-left: 3px;
+        }
+    }
+    //
     .name-developers 
     {
         font-size: 1em;
         font-weight: bold;
         text-align: center;
 
-        @media (min-width: 400px) and (max-width: 575.98px)
-        { 
-            font-size: 1.3em;
-        }
-
-
-        @media (min-width: 576px) and (max-width: 799px)
-        { 
-            font-size: 1em;
-        }
-
-        @media (min-width: 800px) and (max-width: 1199px)
+        @media (min-width: 400px)
         { 
             font-size: 1em;
         }
@@ -164,81 +188,33 @@ SECOND CONTAINER
 
 
     }
-
+    //Little text next to the pictures
     .aboutUs-p
     {
         font-size: 1em;
 
-        @media (min-width: 400px) and (max-width: 499px)
+        @media (min-width: 400px) and (max-width: 767px)
         { 
-            font-size: 1.3em;
+            font-size: 1em;
         }
 
-        @media (min-width: 500px)
+        @media (min-width: 768px) and (max-width: 991px)
         { 
-            font-size: 1.5em;
-        }
-
-        @media (min-width: 550px) and (max-width: 575.98px)
-        { 
-            margin-top: 1em;
-        }
-
-        @media (min-width: 576px) and (max-width: 670px)
-        { 
-            font-size: 1.5em;
+            font-size: 1.1em;
             margin-top: 0;
-          
         }
 
-        @media (min-width: 671px) and (max-width: 799px)
+        @media (min-width: 992px) and (max-width: 1199px)
         { 
             font-size: 1em;
             margin-top: 0;
         }
 
-        @media (min-width: 800px) and (max-width: 1200px)
-        { 
-            font-size: 1em;
-            margin-top: 0;
-        }
-
-        @media (min-width: 1201px) and (max-width: 1678px)
-        
+        @media (min-width: 1200px)
         {   
-            font-size: 1.3em;
-            margin-top: 1em;
-        }
-
-        @media (min-width: 1679px)
-        {   
-            font-size: 1.3em;
+            font-size: 1.2em;
             margin-top: 1em;
         }
         
-    }
-
-    .aboutUs-link
-    {
-        color: black; 
-        margin-left: 3px;
-
-        @media (min-width: 400px) and (max-width: 575.98px)
-        { 
-            font-size: 1.3em;
-            margin-left: 0.5em;
-        }
-
-        @media (min-width: 576px) and (max-width: 670px)
-        { 
-            font-size: 1.3em;
-            margin-left: 3px;
-        }
-
-        @media (min-width: 671px) 
-        {          
-            font-size: 1.3em;
-            margin-left: 0.5em;
-        }
-    }
+    }  
 }
