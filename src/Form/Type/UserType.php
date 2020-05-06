@@ -78,7 +78,7 @@ class UserType extends AbstractType
                 "label" => "Date d'anniversaire"
             ]
         )
-        /*->add('recaptcha', EWZRecaptchaType::class, array(
+        ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
                     'theme' => 'light',
@@ -90,7 +90,7 @@ class UserType extends AbstractType
             'constraints' => array(
                 new RecaptchaTrue()
             )
-        ))*/
+        ))
         ->add(
             'condition', 
             CheckboxType::class,
