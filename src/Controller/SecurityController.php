@@ -46,9 +46,13 @@ class SecurityController extends AbstractController
 
         if ($user->getValidation() === $string) 
         {
-            $user->setValidate(1);
+            $user->setValidate(true);
 
-            $this->addFlash("validationEmail", "Faire un message pour dire que c'est ok");
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash("validationEmail", "Votre validation a été prise en compte, vous pouvez à présent vous connecter");
 
             return $this->redirectToRoute('login'); 
           
