@@ -15,7 +15,6 @@ JUMBOTRON SIZE
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 35px 24px rgba(0,0,0,0.22);
     margin-bottom: 3.8em;
    
-    
 
     @media (max-width: 500px) 
     {     
@@ -46,9 +45,18 @@ JUMBOTRON SIZE
         height: 35vh; 
         padding: 2vh 1vw 0 1vw;
     }
-    
+
     padding-left: 4vw; 
-    height: 50vh;     
+    height: 50vh;
+    
+    @media (min-height: 950px)
+    { 
+        height: 40vh;
+    }
+    
+ 
+    
+
 
         /* Container parent of text */
         .container-size-image-flowers 

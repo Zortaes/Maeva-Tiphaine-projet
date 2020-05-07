@@ -72,6 +72,11 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
+        if (!$user->getValidate()) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException("Veuillez valider votre inscription depuis votre boîte de réception <" . $user->getEmail() . ">");
+        }
+
         return $user;
     }
 

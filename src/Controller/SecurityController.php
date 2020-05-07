@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -35,6 +36,35 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername, 
             'error' => $error
         ]);
+    }
+
+    /**
+     * @Route("/{id}/{string}/validation", name="validate")
+     */
+    public function validate(User $user, $string)
+    {
+
+        if ($user->getValidation() === $string) 
+        {
+            $user->setValidate(true);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash("validationEmail", "Votre validation a été prise en compte, vous pouvez à présent vous connecter");
+
+            return $this->redirectToRoute('login'); 
+          
+        }
+
+        else 
+        {
+            throw new \LogicException('Invalid'); 
+        }
+       
+       
+
     }
 
     /**
