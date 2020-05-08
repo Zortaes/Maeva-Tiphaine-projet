@@ -23,6 +23,11 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $facebook_id;
+
+    /**
      * @ORM\Column(type="string", length=16, unique=true)
      * @Assert\NotBlank
      */
@@ -40,7 +45,7 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      * @Assert\NotBlank
      */
     private $birth_date;
@@ -77,6 +82,16 @@ class User implements UserInterface
     private $is_banned;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $validation;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validate;
+
+    /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
@@ -89,6 +104,7 @@ class User implements UserInterface
     public function __construct() 
     {
         $this->is_banned = false;
+        $this->validate = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         
@@ -309,6 +325,66 @@ class User implements UserInterface
     public function setIsBanned($is_banned)
     {
         $this->is_banned = $is_banned;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validation
+     */ 
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set the value of validation
+     *
+     * @return  self
+     */ 
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validate
+     */ 
+    public function getValidate()
+    {
+        return $this->validate;
+    }
+
+    /**
+     * Set the value of validate
+     *
+     * @return  self
+     */ 
+    public function setValidate($validate)
+    {
+        $this->validate = $validate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of facebook_id
+     */ 
+    public function getFacebook_id()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set the value of facebook_id
+     *
+     * @return  self
+     */ 
+    public function setFacebook_id($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
 
         return $this;
     }

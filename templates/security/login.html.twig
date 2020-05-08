@@ -30,6 +30,17 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
+{% for message in app.flashes('requestValidationEmail') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('validationEmail') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <div class="container container-form-custum">
     <form action="{{ path('login') }}" method="post">
@@ -40,9 +51,9 @@
     <div class="block-form-custum">
         <h1 class="h4 mb-3 font-weight-normal text-center">Se connecter</h1>
 
-        <div class="fb-login-button" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""><a href="{{ path('connect_facebook_start') }}">
-    Facebook
-</a></div>
+        <div class="fb-login-button" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""><a href="{{ path('connect_facebook') }}">
+            Facebook
+        </a></div>
 
         <div class="col-12 mt-4 mb-4">
             <label for="inputEmail">Email</label>
