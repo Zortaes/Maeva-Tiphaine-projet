@@ -163,39 +163,45 @@ Pagination
     font-size: 1.2em; 
 
     .pagination 
-    {
-        border: 1px solid black;
-        border-radius: 12px; 
-    }
-     
-
-    .current 
-    {
-       background-color : #9eb66b; 
-    }
-    
+    {  
+       
+        display: flex; 
+        justify-content: space-around; 
+    } 
 
     .page , .last , .next , .previous , .first, .current
     {
-          border-right: 1px solid black;    
+       
           display: flex; 
           flex-direction: column;
-          justify-content:center;
+          justify-content: center;
+
            
     }
     
-    
-
-    
-
     .page a, .last a, .next a, .previous a, .first a, .current 
     {
-        padding: 0.5em;
+    
         color: black!important;
       
     }
 
+    .page a,  .next a, .previous a, .current 
+    {
+        
+    
+        padding: 0.3em;
+        border-radius: 12px;
+       
+      
+    }
 
+
+    .current 
+    {
+       
+        background-color : #9eb66b; 
+    }
    
 
 }
