@@ -28,7 +28,7 @@ class User implements UserInterface
     private $facebook_id;
 
     /**
-     * @ORM\Column(type="string", length=16, unique=true)
+     * @ORM\Column(type="string", length=55, unique=true)
      * @Assert\NotBlank
      */
     private $username;
@@ -46,7 +46,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\NotBlank
      */
     private $birth_date;
 

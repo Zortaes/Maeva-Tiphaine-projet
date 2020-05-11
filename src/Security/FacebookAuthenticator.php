@@ -7,10 +7,10 @@ use App\Services\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
-use KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient;
 use League\OAuth2\Client\Provider\FacebookUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -61,35 +61,73 @@ class FacebookAuthenticator extends SocialAuthenticator
         $facebookUser = $this->getFacebookClient()
             ->fetchUserFromToken($credentials);
 
-        $email = $facebookUser->getEmail();
+        /** @var FacebookUser ID $fbId */
         $fbId = $facebookUser->getId();
 
+        /** @var FacebookUser Email $email */
+        $email = $facebookUser->getEmail();
+
+        // check for facebook_id in database and compare
         $existingUser = $this->em->getRepository(User::class)
         ->findOneBy(['facebook_id' => $fbId]);
         
+        // if a user has this id in db
         if ($existingUser) 
         {
             $user = $existingUser;
 
         } else {
+            // check users email in database and compare
+            $existingEmail = $this->em->getRepository(User::class)
+            ->findOneBy(['email' => $email]);
 
-            $user = new User();
-            $user->setFacebook_id($fbId);
+            // if a user has the same email in db
+            if ($existingEmail) 
+            {
+                $user = $existingEmail;
 
-            $user->setEmail($email);
+                $user->setFacebook_id($fbId);
 
-            $user->setusername($facebookUser->getFirstName());
+                $this->em->persist($user);
+                $this->em->flush();
+            }
+            /** 
+             * if no facebook ID correspond
+             * or no email correspond
+            */
+            else
+            {
 
-            $user->setPassword('no password');
+                $user = new User();
+                $user->setFacebook_id($fbId);
 
-            $slugUsername = $facebookUser->getFirstName();
-            $usernameSluggified = $this->slugger->sluggify($slugUsername);
-            $user->setSlug($usernameSluggified);
+                $user->setEmail($email);
 
-            $user->setCreatedAt(new \DateTime('now'));
+                $facebookName = $facebookUser->getFirstName();
 
-            $this->em->persist($user);
-            $this->em->flush();
+                $existingUsername = $this->em->getRepository(User::class)
+                ->findOneBy(['username' => $facebookName]);
+
+                if($existingUsername)
+                {
+                    $user->setusername($facebookName . substr(uniqid(rand(),1), 0, 5));
+                }else{
+                    $user->setusername($facebookName);
+                }
+
+                $user->setPassword('no password');
+
+                $slugUsername = $facebookUser->getFirstName();
+                $usernameSluggified = $this->slugger->sluggify($slugUsername);
+                $user->setSlug($usernameSluggified);
+
+                $user->setCreatedAt(new \DateTime('now'));
+
+                $user->setValidate(1);
+
+                $this->em->persist($user);
+                $this->em->flush();
+            }
         }
     
         return $user;
@@ -123,7 +161,7 @@ class FacebookAuthenticator extends SocialAuthenticator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function start(Request $request, \Symfony\Component\Security\Core\Exception\AuthenticationException $authException = null)
+    public function start(Request $request, AuthenticationException $authException = null)
     {
         return new RedirectResponse('login');
     }
@@ -139,12 +177,13 @@ class FacebookAuthenticator extends SocialAuthenticator
      *
      * @param Request $request
      * @param \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
-     *
      * @return \Symfony\Component\HttpFoundation\Response|null
      */
-    public function onAuthenticationFailure(Request $request, \Symfony\Component\Security\Core\Exception\AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        // TODO: Implement onAuthenticationFailure() method.
+        //$message = strtr($exception->getMessageKey(), $exception->getMessageData());
+
+        //return new Response($message, Response::HTTP_FORBIDDEN);
     }
 
     /**
