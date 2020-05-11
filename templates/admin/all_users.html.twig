@@ -7,6 +7,7 @@
 {{ parent()}}
 {{ encore_entry_link_tags('tables') }}
 {{ encore_entry_link_tags('modal') }}
+{{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
 {% block body %}
@@ -30,6 +31,7 @@
 {% endfor %}
 
 
+
 <table class="table mt-4">
 
         <thead>
@@ -46,7 +48,7 @@
         <tbody> 
         
         
-      {% for user in users %}
+      {% for user in allUsers %}
         <tr>     
   
             <th scope="row" >
@@ -217,6 +219,15 @@
         </div>
 
       {% endfor %}
-     
-    
+</table>  
+
+<div class="pagination-custum">
+  {{ knp_pagination_render(allUsers) }}
+</div>   
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('pagination') }}
 {% endblock %}
