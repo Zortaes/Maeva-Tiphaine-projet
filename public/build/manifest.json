@@ -9,8 +9,6 @@
   "build/article_details.js": "/build/article_details.js",
   "build/board.css": "/build/board.css",
   "build/board.js": "/build/board.js",
-  "build/error.css": "/build/error.css",
-  "build/error.js": "/build/error.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
   "build/homepage.css": "/build/homepage.css",
@@ -19,6 +17,8 @@
   "build/legalMention.js": "/build/legalMention.js",
   "build/modal.css": "/build/modal.css",
   "build/modal.js": "/build/modal.js",
+  "build/pagination.css": "/build/pagination.css",
+  "build/pagination.js": "/build/pagination.js",
   "build/profil.css": "/build/profil.css",
   "build/profil.js": "/build/profil.js",
   "build/tables.css": "/build/tables.css",
@@ -46,9 +46,10 @@
   "build/images/jeux.jpg": "/build/images/jeux.cfc19b17.jpg",
   "build/images/linge-de-maison.jpg": "/build/images/linge-de-maison.022f251d.jpg",
   "build/images/logoLinkedin.jpg": "/build/images/logoLinkedin.2be9782a.jpg",
-  "build/images/lost_tree.png": "/build/images/lost_tree.b93fb11f.png",
   "build/images/maeva.jpg": "/build/images/maeva.4afec025.jpg",
   "build/images/menage-hygiene-maison.jpg": "/build/images/menage-hygiene-maison.40859839.jpg",
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
+  "build/vendors~app~pagination.js": "/build/vendors~app~pagination.js",
+  "build/images/lost_tree.png": "/build/images/lost_tree.b93fb11f.png"
 }
