@@ -23,13 +23,15 @@ require('../images/linge-de-maison.jpg');
 require('../images/menage-hygiene-maison.jpg');
 require('../images/recyclage.jpg');
 require('../images/vetements.jpg');
-require('../images/tiphaine.jpeg');
+require('../images/TiphaineSu.jpg');
+require('../images/TiphaineLe.jpg');
 require('../images/maeva.jpg');
 require('../images/logoLinkedin.jpg');
 require('../images/iconparam.png');
 require('../images/articlesFlag.jpg');
 require('../images/iconUser.png');
 require('../images/Logo.jpg');
+require('../images/lost_tree.png');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';

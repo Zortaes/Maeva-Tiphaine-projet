@@ -9,6 +9,7 @@
 {{ encore_entry_link_tags('profil') }}
 {{ encore_entry_link_tags('modal') }}
 {{ encore_entry_link_tags('tables') }}
+{{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
 {% block body %}
@@ -235,6 +236,10 @@
   </div>
 </div>
 
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('pagination') }}
+{% endblock %}
 
 {% endblock %}
 
