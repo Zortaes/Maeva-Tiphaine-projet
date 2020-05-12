@@ -23,7 +23,12 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=16, unique=true)
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $facebook_id;
+
+    /**
+     * @ORM\Column(type="string", length=55, unique=true)
      * @Assert\NotBlank
      */
     private $username;
@@ -40,8 +45,7 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @ORM\Column(type="date", nullable=true)
      */
     private $birth_date;
 
@@ -360,6 +364,26 @@ class User implements UserInterface
     public function setValidate($validate)
     {
         $this->validate = $validate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of facebook_id
+     */ 
+    public function getFacebook_id()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set the value of facebook_id
+     *
+     * @return  self
+     */ 
+    public function setFacebook_id($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
 
         return $this;
     }
