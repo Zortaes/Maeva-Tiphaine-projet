@@ -35,13 +35,13 @@ class UserType extends AbstractType
             ]
         )
         ->add(
-            'email', 
+            'email',
             EmailType::class,
             [
                 "label" => "Email",
                 'invalid_message' => 'L\'adresse email n\'est pas valide',
                 'constraints' => [
-                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),       
+                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),
                 ]
                                 
             ]

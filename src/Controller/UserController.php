@@ -47,7 +47,8 @@ class UserController extends AbstractController
         Slugger $slugger,
         MailerInterface $mailer,
         EmailConfirmation $confirmation
-    ): Response {
+    ): Response 
+    {
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
