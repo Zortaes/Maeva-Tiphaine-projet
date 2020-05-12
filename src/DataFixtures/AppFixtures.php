@@ -163,6 +163,8 @@ class AppFixtures extends Fixture
             // get between 1 and 13 categorie
             $articleCategories = $faker->randomElements($categories, random_int(1,12));
 
+            /* Have all article in one category (for test pagination) => $articleCategories = $categories; */
+
             // for add in this article
             foreach($articleCategories as $articleCategory) {
                 // get collection categories to this article and add the elements

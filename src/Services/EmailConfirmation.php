@@ -6,11 +6,17 @@ namespace App\Services;
 class EmailConfirmation
 {
 
+    /**
+     * @return subject of the email
+     */
     public function subject()
     {
         return 'Création de votre compte sur La rubrique écolo';
     }
 
+    /**
+     * @return $random token generate for the signup
+     */
     public function tokenSignup()
     {
         

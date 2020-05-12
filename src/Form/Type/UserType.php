@@ -5,19 +5,19 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 class UserType extends AbstractType
 {
@@ -30,7 +30,7 @@ class UserType extends AbstractType
             [
                 'label' => "Nom d'utilisateur",
                 'constraints' => [
-                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères"])
+                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères", "max" => 50, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères"])
                     ]
             ]
         )
@@ -70,12 +70,12 @@ class UserType extends AbstractType
             ]
         )
         ->add(
-            'birth_date', 
-            BirthdayType::class,
+            'avatar',
+            FileType::class,
             [
-                'invalid_message' => 'Veuillez entrer une date valide', 
-                'format' => 'dd-MM-yyyy',
-                "label" => "Date d'anniversaire"
+                "label" => "Avatar",
+                'invalid_message' => 'message d \'erreur avatar'
+                                
             ]
         )
         ->add('recaptcha', EWZRecaptchaType::class, array(

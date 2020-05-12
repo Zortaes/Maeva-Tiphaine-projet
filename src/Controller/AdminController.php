@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
 use App\Form\Type\EditUserType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -40,16 +41,21 @@ class AdminController extends AbstractController
      * 
      * @return User[] all Users 
      */
-    public function showUsers()
+    public function showUsers(Request $request, PaginatorInterface $paginator)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         /** @var UserRepository */
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        
+
+        $allUsers = $paginator->paginate(
+            $users, // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
         return $this->render('admin/all_users.html.twig', 
         [
-            'users' => $users, 
+            'allUsers' => $allUsers, 
         ]);
     }
 
@@ -146,7 +152,7 @@ class AdminController extends AbstractController
      * 
      * @return Article[] list of articles flagged 
      */
-    public function articleFlagged()
+    public function articleFlagged(Request $request, PaginatorInterface $paginator)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
   
@@ -154,10 +160,15 @@ class AdminController extends AbstractController
          /** @var ArticleRepository */
          $articlesFlagged = $this->getDoctrine()->getRepository(Article::class)->findByArticlesFlag(1); 
 
+         $allFlag = $paginator->paginate(
+            $articlesFlagged, // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
         
         return $this->render('admin/articles_flag.html.twig', 
         [
-            'articles' => $articlesFlagged, 
+            'allFlag' => $allFlag, 
         ]);
     }
 
