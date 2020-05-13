@@ -1,20 +1,19 @@
 {
   "entrypoints": {
-    "board": {
+    "profil": {
       "css": [
-        "/build/board.css"
+        "/build/profil.css"
       ],
       "js": [
-        "/build/board.js"
+        "/build/profil.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app~pagination.js",
-        "/build/app.js"
-      ],
+    "homepage": {
       "css": [
-        "/build/app.css"
+        "/build/homepage.css"
+      ],
+      "js": [
+        "/build/homepage.js"
       ]
     },
     "article_details": {
@@ -50,20 +49,21 @@
         "/build/about.js"
       ]
     },
-    "profil": {
-      "css": [
-        "/build/profil.css"
-      ],
+    "app": {
       "js": [
-        "/build/profil.js"
+        "/build/vendors~app~pagination.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
-    "homepage": {
+    "board": {
       "css": [
-        "/build/homepage.css"
+        "/build/board.css"
       ],
       "js": [
-        "/build/homepage.js"
+        "/build/board.js"
       ]
     },
     "user_details": {

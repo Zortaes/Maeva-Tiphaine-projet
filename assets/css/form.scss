@@ -92,50 +92,19 @@ label span
 }
 
 
-/*****************************
- For signup form - birth-date
- ****************************/
- .input-birth-date select
- {
-     
-     width: 40%; 
-     display: flex;
-     margin: 0.2em;  
- 
-     @media (min-width: 370px) { 
-         width: 30%;
-     }
-     
-           
- }
- 
- /***************************************
-  For signup form - error widget birth-date
-  ***************************************/
- legend + div {
- 
-    .is-invalid {
-         margin-bottom: 4em;
-     }
-    
-     div  {
-         border: none!important;  
-         background-image: none!important; 
-     }
- }
- 
- /*************************************
-  For signup form - error text birth-date
-  *************************************/
- legend span 
- {
-     font-size: 0.9em;
-     font-weight: normal;
- 
-     span span:first-child {
-         display: none;
-     }
- }
+.custom-file-input 
+{
+    opacity: 1!important; 
+}
+
+.form-group 
+{
+    .custom-file .custom-file-input
+    {
+        
+    }
+}
+
 
 /*************************************
   For signup form - info 
@@ -415,6 +384,5 @@ color: black!important;
 padding: 1px 5px 1px 5px;
 margin-bottom: 1em;
 }
-
 
 

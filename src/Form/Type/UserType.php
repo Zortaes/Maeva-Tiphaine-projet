@@ -69,15 +69,10 @@ class UserType extends AbstractType
                 ]
             ]
         )
-        ->add(
-            'avatar',
-            FileType::class,
-            [
-                "label" => "Avatar",
-                'invalid_message' => 'message d \'erreur avatar'
-                                
-            ]
-        )
+        ->add('avatar', FileType::class, array(
+            'label' => 'Avatar'
+            ))
+            
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
