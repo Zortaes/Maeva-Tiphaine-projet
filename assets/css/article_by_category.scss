@@ -19,6 +19,46 @@ Title Category
     } 
 }
 
+/*************
+Title By Author
+***************/
+.user-article-title
+{
+    margin-bottom: 2em;
+    margin-top: 2em; 
+
+   .user-article-title-p 
+    {
+        text-align: center;
+        font-weight: bold;
+        line-height: 2em;
+        font-size: calc(0.5em + 0.6vw);
+        text-shadow: 2px 1px 1px rgb(107, 107, 107); 
+
+        @media (min-width: 449px) 
+        { 
+            font-size: calc(0.8em + 0.6vw); 
+        }
+
+        @media(min-width: 778px)
+        {
+            
+            font-size: calc(1em + 0.8vw);
+        }
+
+        @media(min-width: 992px)
+        {
+            font-size: calc(1em + 0.8vw);
+        }
+
+        @media(min-width: 1199px)
+        {
+            font-size: calc(1em + 1vw); 
+        }
+ 
+    } 
+}
+
 
 /*************
 Container 
@@ -108,6 +148,11 @@ ALL TEXT
         text-align: center;
         font-style: italic;
         margin-top: 0.5em;
+        margin-left: 20%;
+        max-width: 60%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         @media (min-width: 1199.98px) 
         { 
@@ -134,9 +179,11 @@ ALL TEXT
       
         height: 120px;
         max-height: 50px;
+        max-width: 90%;
         overflow: hidden;
         text-overflow: ellipsis; 
-        overflow-wrap: break-word;
+        white-space: nowrap;
+
     }
 
     .btn-articleDetails 
