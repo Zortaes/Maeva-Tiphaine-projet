@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("username", message="Ce nom d'utilisateur existe déjà")
  * @UniqueEntity("email", message="Cet email est déjà utilisé")
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -42,9 +44,25 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $avatar;
+
+    /**
+    * NOTE: This is not a mapped field of entity metadata, just a simple property.
+    * 
+    * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="avatar", size="avatarSize")
+    * 
+    * @var File|null
+    */
+    private $avatarFile;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $avatarSize;
+
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -172,11 +190,10 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setAvatar(File $file = null)
+    public function setAvatar(?string $avatar): void
     {
-        $this->avatar = $file;
+        $this->avatar = $avatar; 
 
-        return $this;
     }
 
     /**
@@ -386,6 +403,54 @@ class User implements UserInterface
     public function setFacebook_id($facebook_id)
     {
         $this->facebook_id = $facebook_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of avatarSize
+     *
+     * @return  int|null
+     */ 
+    public function getAvatarSize()
+    {
+        return $this->avatarSize;
+    }
+
+    /**
+     * Set the value of avatarSize
+     *
+     * @param  int|null  $avatarSize
+     *
+     * @return  self
+     */ 
+    public function setAvatarSize($avatarSize)
+    {
+        $this->avatarSize = $avatarSize;
+
+        return $this;
+    }
+
+    /**
+     * Get nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  File|null
+     */ 
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * Set nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @param  File|null  $avatarFile  NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  self
+     */ 
+    public function setAvatarFile($avatarFile)
+    {
+        $this->avatarFile = $avatarFile;
 
         return $this;
     }

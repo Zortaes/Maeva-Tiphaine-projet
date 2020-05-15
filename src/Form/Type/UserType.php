@@ -5,7 +5,10 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Presta\ImageBundle\Form\Type\ImageType; 
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,10 +72,8 @@ class UserType extends AbstractType
                 ]
             ]
         )
-        ->add('avatar', FileType::class, array(
-            'label' => 'Avatar'
-            ))
-            
+        ->add('avatar', VichImageType::class)  
+        ->add('avatarFile', ImageType::class)      
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
