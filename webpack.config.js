@@ -35,11 +35,8 @@ Encore
     .addEntry('legalMention', './assets/js/legalMention.js')
     .addEntry('modal', './assets/js/modal.js')
     .addEntry('tables', './assets/js/tables.js')
-<<<<<<< HEAD
     .addEntry('pagination', './assets/js/pagination.js')
-=======
     .addEntry('error', './assets/js/error.js')
->>>>>>> 3808ed304cc27988b06ce0a3aaebad2eb1f78d40
    
 
     //.addEntry('page1', './assets/js/page1.js')

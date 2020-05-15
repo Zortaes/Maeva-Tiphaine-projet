@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/vendors~app.js",
+        "/build/vendors~app~pagination.js",
         "/build/app.js"
       ],
       "css": [
@@ -96,6 +96,23 @@
       ],
       "js": [
         "/build/tables.js"
+      ]
+    },
+    "pagination": {
+      "js": [
+        "/build/vendors~app~pagination.js",
+        "/build/pagination.js"
+      ],
+      "css": [
+        "/build/pagination.css"
+      ]
+    },
+    "error": {
+      "css": [
+        "/build/error.css"
+      ],
+      "js": [
+        "/build/error.js"
       ]
     }
   }
