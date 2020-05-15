@@ -23,9 +23,55 @@
 <!-- Block "Information générales" -->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
 
-  <h2>Information générales</h2>
-  <p class="username-profil">Pseudo : {{user.viewUsername}}</p>
-  <p>Adresse email : {{user.email}}</p>
+  <h2>Mes Informations générales</h2>
+
+<div class="container container-form-custom">
+    {{ form_start(form) }}
+
+    <div class="block-form-custom">
+
+      <div class="edit-user-input">
+          <div class="input-edit-user-label">
+            {{ form_label(form.viewUsername)}}
+          </div>
+          <div class="input-edit-user-input">
+              {{ form_widget(form.viewUsername)}}
+          </div>
+      </div>
+      <div class="error-edit-user">
+        {{ form_errors(form.viewUsername)}}
+      </div>
+
+        <div class="edit-user-input">
+          <div class="input-edit-user-label">
+            {{ form_label(form.email)}}
+          </div>
+          <div class="input-edit-user-input">
+            {{ form_widget(form.email)}}
+          </div>
+          <div class="error-edit-user">
+            {{ form_errors(form.email)}}
+          </div>
+        </div>
+
+      <div class="edit-user-input">
+        <div class="input-edit-user-label">
+          Mot de passe
+        </div>
+        <div class="input-edit-user-input">
+          <a href="{{path('modifyPassword')}}">modifier</a>
+        </div>
+      </div>
+
+
+        <div class="col-12 validateBtn">
+            {{ form_row(form.Enregistrer) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+</div>
 
   <!-- Dropdown for options account -->
   <div class="dropdown dropdown-account-custum text-center">

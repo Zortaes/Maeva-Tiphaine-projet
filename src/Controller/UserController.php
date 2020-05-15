@@ -6,6 +6,8 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Form\Type\EditPasswordType;
+use App\Form\Type\EditSelfType;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
 use Symfony\Component\Mime\Email;
@@ -105,19 +107,41 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/mon-profil", name="showProfil", methods={"GET"})
+     * @Route("/mon-profil", name="showProfil", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      * 
      * @return $this profil of the user 
      */
-    public function showProfil(PaginatorInterface $paginator, Request $request)
+    public function showProfil(PaginatorInterface $paginator, Request $request, Slugger $slugger)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $user = $this->getUser();
 
         /* logout User if he is banned */
         if ($user->getIsBanned() == true) {
             return $this->redirectToRoute('logout');
+        }
+
+        $form = $this->createForm(EditSelfType::class, $user);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+         
+           /* Slug */
+           $slugUsername = $form->get('viewUsername')->getData();
+           $usernameSluged = $slugger->sluggify($slugUsername); 
+           $user->setSlug($usernameSluged); 
+
+           $user->setUpdatedAt(new DateTime('now'));
+
+           $entityManager = $this->getDoctrine()->getManager();
+           $entityManager->persist($user);
+           $entityManager->flush();
+
+           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
         }
 
 
@@ -132,6 +156,49 @@ class UserController extends AbstractController
         return $this->render('user/profil.html.twig', [
             'user' => $user,
             'articles' => $articles,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/mon-profil/modifier-mot-de-passe", name="modifyPassword", methods={"GET" , "POST"})
+     * 
+     * @IsGranted("ROLE_USER")
+     * 
+     * @return $this redirect to route showProfil 
+     * 
+     */
+    public function ModifyPassword(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+
+            /* Password */
+            $plainPassword = $form->get('plain_password')->getData();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        
+           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
+
+        }
+
+        return $this->render('user/modify_password.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 

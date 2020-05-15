@@ -91,52 +91,6 @@ label span
    
 }
 
-
-/*****************************
- For signup form - birth-date
- ****************************/
- .input-birth-date select
- {
-     
-     width: 40%; 
-     display: flex;
-     margin: 0.2em;  
- 
-     @media (min-width: 370px) { 
-         width: 30%;
-     }
-     
-           
- }
- 
- /***************************************
-  For signup form - error widget birth-date
-  ***************************************/
- legend + div {
- 
-    .is-invalid {
-         margin-bottom: 4em;
-     }
-    
-     div  {
-         border: none!important;  
-         background-image: none!important; 
-     }
- }
- 
- /*************************************
-  For signup form - error text birth-date
-  *************************************/
- legend span 
- {
-     font-size: 0.9em;
-     font-weight: normal;
- 
-     span span:first-child {
-         display: none;
-     }
- }
-
 /*************************************
   For signup form - info 
   *************************************/
