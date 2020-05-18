@@ -37,6 +37,7 @@ Encore
     .addEntry('tables', './assets/js/tables.js')
     .addEntry('pagination', './assets/js/pagination.js')
     .addEntry('error', './assets/js/error.js')
+ 
    
 
     //.addEntry('page1', './assets/js/page1.js')

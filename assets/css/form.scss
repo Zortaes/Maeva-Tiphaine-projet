@@ -476,5 +476,19 @@ padding: 1px 5px 1px 5px;
 margin-bottom: 1em;
 }
 
+/**************
+MODIFY PASSWORD
+***************/
 
+.edit-password-input
+{
+    margin: 2em 0 2em 0 !important;
+
+    label, legend 
+    {
+        font-size: 1.2em!important; 
+        font-weight: bold;
+        color: gray;
+    }
+}
 

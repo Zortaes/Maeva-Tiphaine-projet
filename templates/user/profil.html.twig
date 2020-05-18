@@ -20,12 +20,27 @@
     </div>
 {% endfor %}
 
+
+
 <!-- Block "Information générales" -->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
 
   <h2>Mes Informations générales</h2>
 
 <div class="container container-form-custom">
+
+{% for message in app.flashes('successModifyPassword') %}
+    <div class="alert alert-success w-100 text-center mt-4 edit-self">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('successModifySelf') %}
+    <div class="alert alert-success w-100 text-center mt-4 edit-self">
+        {{ message }}
+    </div>
+{% endfor %}
+
     {{ form_start(form) }}
 
     <div class="block-form-custom">
@@ -56,7 +71,7 @@
 
       <div class="edit-user-input">
         <div class="input-edit-user-label">
-          Mot de passe
+          <p>Mot de passe</p>
         </div>
         <div class="input-edit-user-input">
           <a href="{{path('modifyPassword')}}">modifier</a>

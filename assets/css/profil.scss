@@ -9,7 +9,19 @@ h2
     font-size: 1.7em; 
     color: #81964d; 
     font-weight: bold;
-    margin-bottom: 1em; 
+    margin-bottom: 1em;
+    text-align: center; 
+}
+
+/**************
+FLASH MESSAGES
+**************/
+
+.edit-self
+{
+    background-color: #9eb66b ;
+    color: white;
+    margin-bottom: 2em;
 }
 
 /****************
@@ -24,9 +36,15 @@ h2
 
     .edit-user-input
     {
-        display: flex;
-        flex-direction: row !important;
-        margin: 1em 0 1em 0;
+
+
+        @media(min-width: 768px)
+        {
+            display: flex;
+            flex-direction: row !important;
+            margin: 1em 0 1em 0;
+        }
+
     }
 
 /***********
@@ -34,6 +52,7 @@ h2
  **********/
     label, legend 
     {
+        margin-top: 1.5em;
         font-size: 1.2em!important; 
         font-weight: bold;
         color: gray;
@@ -41,7 +60,23 @@ h2
     
     .input-edit-user-label
     {
-        min-width: 20%;
+        @media(min-width: 768px)
+        {
+            min-width: 30%;
+        }
+
+        @media(min-width: 1090px)
+        {
+            min-width: 20%;
+        }
+        
+        p
+        {
+            margin-top: 1.5em;
+            font-size: 1.2em!important; 
+            font-weight: bold;
+            color: gray; 
+        }
     }
 
 /***********
@@ -49,7 +84,24 @@ h2
  **********/
     .input-edit-user-input
     {
-        min-width: 80%;
+        
+        @media(min-width: 768px)
+        {
+            min-width: 70%;
+            margin-top: 1.7em;
+        }
+
+        @media(min-width: 1090px)
+        {
+            min-width: 80%;
+        }
+
+        a
+        {
+            font-size: 1.2em;
+            color: #de6262;
+        }
+
     }
 
 /********
@@ -194,6 +246,7 @@ PAGINATION
     }
 }
   
+
 
 
 

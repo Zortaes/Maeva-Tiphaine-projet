@@ -112,7 +112,12 @@ class UserController extends AbstractController
      * 
      * @return $this profil of the user 
      */
-    public function showProfil(PaginatorInterface $paginator, Request $request, Slugger $slugger)
+    public function showProfil(
+    PaginatorInterface $paginator, 
+    Request $request, 
+    Slugger $slugger, 
+    MailerInterface $mailer,
+    EmailConfirmation $confirmation)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -123,23 +128,63 @@ class UserController extends AbstractController
             return $this->redirectToRoute('logout');
         }
 
+
+        $userEmail = $user->getEmail();
+
         $form = $this->createForm(EditSelfType::class, $user);  
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) 
         {        
-         
-           /* Slug */
-           $slugUsername = $form->get('viewUsername')->getData();
-           $usernameSluged = $slugger->sluggify($slugUsername); 
-           $user->setSlug($usernameSluged); 
+            $newEmail = $form->get('email')->getData();
 
-           $user->setUpdatedAt(new DateTime('now'));
+            if($userEmail != $newEmail)
+            {
+                $user->setValidate(false);
 
-           $entityManager = $this->getDoctrine()->getManager();
-           $entityManager->persist($user);
-           $entityManager->flush();
+                /* Add token for email validation */
+                $user->setValidation($confirmation->tokenSignup());
+            }else
+            {
+                $user->setValidate(true);
+            }
+
+            /* Slug */
+            $slugUsername = $form->get('viewUsername')->getData();
+            $usernameSluged = $slugger->sluggify($slugUsername); 
+            $user->setSlug($usernameSluged); 
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+
+           /* email */
+           if($user->getValidate() == false)
+           {
+                $email = (new TemplatedEmail())
+                ->from('la.rubrique.ecolo@gmail.com')
+                ->to(new Address($user->getEmail()))
+                ->subject($confirmation->subject())
+
+                // path of the Twig template to render
+                ->htmlTemplate('email/_signup.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'id' => $user->getId(),
+                    'token' => $user->getValidation(),
+                ]);
+                    
+                $mailer->send($email);
+
+           }
+
+           $this->addFlash("successModifySelf", "Vos changement ont bien été enregistrés");
 
            return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
         }
@@ -174,6 +219,14 @@ class UserController extends AbstractController
 
         $user = $this->getUser();
 
+        /* logout User if he is banned */
+        if ($user->getIsBanned() == true) 
+        {
+            return $this->redirectToRoute('logout');
+        }
+        
+        
+
         $form = $this->createForm(EditPasswordType::class, $user);  
         $form->handleRequest($request);
 
@@ -191,6 +244,8 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->addFlash("successModifyPassword", "Votre mot de passe à bien été modifié");
         
            return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
 
