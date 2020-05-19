@@ -31,9 +31,7 @@
             {{ form_row(form.plain_password)}}
 
         </div>
-        <div class="col-12"> 
-            {{ form_row(form.avatar) }}  
-        </div>
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
         <div class="col-12"> 
             {{ form_row(form.avatarFile) }}  
         </div>

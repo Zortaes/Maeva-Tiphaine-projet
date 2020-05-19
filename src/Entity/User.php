@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -43,14 +44,14 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $avatar;
 
     /**
     * NOTE: This is not a mapped field of entity metadata, just a simple property.
     * 
-    * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="avatar", size="avatarSize")
+    * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar", size="avatarSize")
     * 
     * @var File|null
     */
