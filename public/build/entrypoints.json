@@ -114,6 +114,14 @@
       "js": [
         "/build/error.js"
       ]
+    },
+    "validation_reminder": {
+      "css": [
+        "/build/validation_reminder.css"
+      ],
+      "js": [
+        "/build/validation_reminder.js"
+      ]
     }
   }
 }

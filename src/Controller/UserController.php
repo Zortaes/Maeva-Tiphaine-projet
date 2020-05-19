@@ -323,4 +323,50 @@ class UserController extends AbstractController
             ]
         );
     }
+
+    /**
+     *  @Route("/validation-reminder", name="validationReminder")
+     * 
+     *  @return User 
+     */
+    public function validationReminder()
+    {
+        $user = $this->getUser();
+
+        return $this->render('email/validation_reminder.html.twig', [
+            'user' => $user,
+            'unlessFooter' => true,
+            'unlessNavbar' => true
+        ]);
+    }
+
+    /**
+     *  @Route("/send_email", name="sendValidationEmail")
+     * 
+     *  @return User 
+     */
+    public function sendValidationEmail(MailerInterface $mailer, EmailConfirmation $confirmation)
+    {
+        $user = $this->getUser();
+
+        $email = (new TemplatedEmail())
+        ->from('la.rubrique.ecolo@gmail.com')
+        ->to(new Address($user->getEmail()))
+        ->subject($confirmation->subject())
+
+        // path of the Twig template to render
+        ->htmlTemplate('email/_signup.html.twig')
+
+        // pass variables (name => value) to the template
+        ->context([
+            'id' => $user->getId(),
+            'token' => $user->getValidation(),
+        ]);
+            
+        $mailer->send($email);
+
+        $this->addFlash("successEmailSent", "Un nouvel e-mail vous a été envoyé pour vous permettre de valider votre compte.");
+
+        return $this->redirectToRoute('validationReminder');
+    }
 }
