@@ -73,7 +73,10 @@ class UserType extends AbstractType
                 ]
             ]
         )
-        ->add('avatarFile', ImageType::class)     
+        ->add('avatarFile', 
+        ImageType::class, [
+            'download_link' => false 
+        ])     
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(

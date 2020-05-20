@@ -1,5 +1,6 @@
+import 'cropperjs/dist/cropper.min';
+import * as Cropper from '../../vendor/presta/image-bundle/Resources/public/js/cropper.js';
 import '../css/form.scss';
-
 
 
 /*************************
