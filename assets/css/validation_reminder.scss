@@ -85,6 +85,16 @@ RETURN BTN
         transition: 1s;
         background-color: #799440  !important;
     }
+
+    a
+    {
+       color: white !important;
+
+       &:hover
+       {
+            text-decoration: none;
+       }
+    }
 }
 
 /************

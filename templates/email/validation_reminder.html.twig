@@ -27,10 +27,10 @@
 
     <p><span style="font-weight: bold;"> &#9888 Attention </span> : il se pourrait que l'email que nous vous avons envoyé soit considéré comme un spam.</p> 
     <p>Si vous ne le voyez pas dans votre boite mail, vérifiez dans votre dossier spam.</p> 
-    <p>Si vous ne le trouvez toujours pas, ajoutez la.rubrique.ecolo@gmail.com à votre liste de contacts puis <a href="{{path('sendValidationEmail')}}">demandez l'envoie d'un nouvel e-mail</a>.</p>
+    <p>Si vous ne le trouvez toujours pas, ajoutez la.rubrique.ecolo@gmail.com à votre liste de contacts puis <a class="help" href="{{path('sendValidationEmail')}}">demandez l'envoie d'un nouvel e-mail</a>.</p>
     
-    <input type="button" class="btn btn-secondary returnBtn" value="Retour" onclick="history.back(-1)" />
-    
+    <a href="{{ path('showProfil')}}"><button type="button" class="btn btn-secondary returnBtn">Retour à mon profil</a></button>
+
 </div>
 
 
