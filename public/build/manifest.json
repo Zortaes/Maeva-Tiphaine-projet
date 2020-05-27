@@ -27,7 +27,8 @@
   "build/tables.js": "/build/tables.js",
   "build/user_details.css": "/build/user_details.css",
   "build/user_details.js": "/build/user_details.js",
-  "build/vendors~app~pagination.js": "/build/vendors~app~pagination.js",
+  "build/vendors~app.js": "/build/vendors~app.js",
+  "build/vendors~app~form~homepage~pagination.js": "/build/vendors~app~form~homepage~pagination.js",
   "build/vendors~form.js": "/build/vendors~form.js",
   "build/images/Logo.jpg": "/build/images/Logo.c78812cb.jpg",
   "build/images/TiphaineLe.jpg": "/build/images/TiphaineLe.e418b3a7.jpg",
@@ -52,7 +53,7 @@
   "build/images/maeva.jpg": "/build/images/maeva.4afec025.jpg",
   "build/images/menage-hygiene-maison.jpg": "/build/images/menage-hygiene-maison.40859839.jpg",
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
-  "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg"
+  "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
 }
