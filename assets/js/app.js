@@ -37,6 +37,7 @@ require('../images/lost_tree.png');
 //import $ from 'jquery';
 
 var $ = require('jquery');
+require('bootstrap'); 
 
 
 

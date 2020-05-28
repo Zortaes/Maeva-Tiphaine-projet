@@ -1,5 +1,7 @@
-import 'cropperjs/dist/cropper.min.js';
+
+import 'cropperjs/dist/cropper.min';
 import 'jquery-cropper/dist/jquery-cropper.min.js';
+import 'bootstrap/js/dist/modal';
 import * as Cropper from '../../vendor/presta/image-bundle/Resources/public/js/cropper.js';
 import '../css/form.scss';
 
@@ -119,7 +121,11 @@ function addIngredientFormDeleteLink($ingredientForm) {
     });
 }
 
+
+
 (function(w, $) {
+
+    
 
     'use strict';
 
@@ -130,3 +136,5 @@ function addIngredientFormDeleteLink($ingredientForm) {
     });
 
 })(window, jQuery);
+
+

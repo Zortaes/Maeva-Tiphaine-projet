@@ -10,7 +10,8 @@
     },
     "app": {
       "js": [
-        "/build/vendors~app~form~pagination.js",
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app.js",
         "/build/app.js"
       ],
       "css": [
@@ -27,7 +28,7 @@
     },
     "form": {
       "js": [
-        "/build/vendors~app~form~pagination.js",
+        "/build/vendors~app~form~homepage~pagination.js",
         "/build/vendors~form.js",
         "/build/form.js"
       ],
@@ -60,11 +61,12 @@
       ]
     },
     "homepage": {
+      "js": [
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/homepage.js"
+      ],
       "css": [
         "/build/homepage.css"
-      ],
-      "js": [
-        "/build/homepage.js"
       ]
     },
     "user_details": {
@@ -101,7 +103,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~form~pagination.js",
+        "/build/vendors~app~form~homepage~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
