@@ -75,7 +75,11 @@ class UserType extends AbstractType
         )
         ->add('avatarFile', 
         ImageType::class, [
-            'download_link' => false 
+            'label' => 'Avatar (facultatif)',
+            'enable_remote' => false,
+            // 'PrestaImageBundle' => "PrestaImageBundle.fr.yaml", 
+            'upload_button_class' => 'btn btn-sm btn-success',
+            
         ])     
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
