@@ -1,4 +1,5 @@
-import 'cropperjs/dist/cropper.min';
+import 'cropperjs/dist/cropper.min.js';
+import 'jquery-cropper/dist/jquery-cropper.min.js';
 import * as Cropper from '../../vendor/presta/image-bundle/Resources/public/js/cropper.js';
 import '../css/form.scss';
 

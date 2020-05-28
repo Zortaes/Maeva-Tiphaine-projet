@@ -1,19 +1,20 @@
 {
   "entrypoints": {
-    "profil": {
+    "board": {
       "css": [
-        "/build/profil.css"
+        "/build/board.css"
       ],
       "js": [
-        "/build/profil.js"
+        "/build/board.js"
       ]
     },
-    "homepage": {
-      "css": [
-        "/build/homepage.css"
-      ],
+    "app": {
       "js": [
-        "/build/homepage.js"
+        "/build/vendors~app~form~pagination.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "article_details": {
@@ -26,6 +27,7 @@
     },
     "form": {
       "js": [
+        "/build/vendors~app~form~pagination.js",
         "/build/vendors~form.js",
         "/build/form.js"
       ],
@@ -49,21 +51,20 @@
         "/build/about.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app~pagination.js",
-        "/build/app.js"
-      ],
+    "profil": {
       "css": [
-        "/build/app.css"
+        "/build/profil.css"
+      ],
+      "js": [
+        "/build/profil.js"
       ]
     },
-    "board": {
+    "homepage": {
       "css": [
-        "/build/board.css"
+        "/build/homepage.css"
       ],
       "js": [
-        "/build/board.js"
+        "/build/homepage.js"
       ]
     },
     "user_details": {
@@ -100,7 +101,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~pagination.js",
+        "/build/vendors~app~form~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
