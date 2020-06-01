@@ -77,8 +77,17 @@ class UserType extends AbstractType
         ImageType::class, [
             'label' => 'Avatar (facultatif)',
             'enable_remote' => false,
-            // 'PrestaImageBundle' => "PrestaImageBundle.fr.yaml", 
-            'upload_button_class' => 'btn btn-sm btn-success',
+            'max_width' => 200,
+            'max_height' => 200, 
+            'aspect_ratios' => [],
+            'cropper_options'=> [
+                'aspectRatio'=>1,
+            ],
+            'preview_height' => 200, 
+            'preview_width' => 200, 
+            'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
+            'save_button_class' => 'btn btn-success mx-0 w-25',
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'
             
         ])     
         ->add('recaptcha', EWZRecaptchaType::class, array(

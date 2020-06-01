@@ -122,10 +122,13 @@ function addIngredientFormDeleteLink($ingredientForm) {
 }
 
 
+$(".cropper-local").removeClass('col-4').addClass('col-8 col-sm-6');
+
+$(".close").addClass('col-2 col-lg-1');
+
+$('.modal-footer').addClass('d-flex flex-nowrap justify-content-around');
 
 (function(w, $) {
-
-    
 
     'use strict';
 
