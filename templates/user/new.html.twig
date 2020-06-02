@@ -5,6 +5,7 @@
 
 {% block stylesheets %}
 {{ encore_entry_link_tags('form') }}
+{{ encore_entry_link_tags('formSignup') }}
 {% endblock %}
 
 {% block body %}
@@ -64,11 +65,7 @@
 
     {{ form_end(form) }}
 
-    <div class="info-signup" >
-        <p>
-           En créant ce compte, vous avez pris connaissance que la modification de vos données (hors suppression) ne pourra se faire que par le biais des administrateurs en les contactant directement <a href="#">ici</a>.
-        </p>
-    </div>
+    
 
     
 
@@ -78,10 +75,10 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
+
 
 {{ encore_entry_script_tags('form') }}
-
+{{ encore_entry_script_tags('formSignup') }}
 
 {% endblock %}
 

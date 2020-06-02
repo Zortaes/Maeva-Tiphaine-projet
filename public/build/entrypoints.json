@@ -1,16 +1,16 @@
 {
   "entrypoints": {
-    "profil": {
+    "user_details": {
       "css": [
-        "/build/profil.css"
+        "/build/user_details.css"
       ],
       "js": [
-        "/build/profil.js"
+        "/build/user_details.js"
       ]
     },
     "homepage": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
         "/build/homepage.js"
       ],
       "css": [
@@ -26,13 +26,11 @@
       ]
     },
     "form": {
-      "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
-        "/build/vendors~form.js",
-        "/build/form.js"
-      ],
       "css": [
         "/build/form.css"
+      ],
+      "js": [
+        "/build/form.js"
       ]
     },
     "article_by_category": {
@@ -51,14 +49,12 @@
         "/build/about.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "profil": {
       "css": [
-        "/build/app.css"
+        "/build/profil.css"
+      ],
+      "js": [
+        "/build/profil.js"
       ]
     },
     "board": {
@@ -69,12 +65,14 @@
         "/build/board.js"
       ]
     },
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
+    "app": {
       "js": [
-        "/build/user_details.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "legalMention": {
@@ -103,7 +101,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -116,6 +114,36 @@
       ],
       "js": [
         "/build/error.js"
+      ]
+    },
+    "formSignup": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~formSignup.js",
+        "/build/formSignup.js"
+      ],
+      "css": [
+        "/build/formSignup.css"
+      ]
+    },
+    "formLogin": {
+      "css": [
+        "/build/formLogin.css"
+      ],
+      "js": [
+        "/build/formLogin.js"
+      ]
+    },
+    "formArticle": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~formArticle.js",
+        "/build/formArticle.js"
+      ],
+      "css": [
+        "/build/formArticle.css"
       ]
     }
   }
