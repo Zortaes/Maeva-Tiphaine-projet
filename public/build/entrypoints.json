@@ -1,20 +1,28 @@
 {
   "entrypoints": {
+
+    
+
     "app": {
       "js": [
         "/build/vendors~app~pagination.js",
         "/build/app.js"
       ],
+
       "css": [
-        "/build/app.css"
+        "/build/profil.css"
+      ],
+      "js": [
+        "/build/profil.js"
       ]
     },
     "homepage": {
+      "js": [
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/homepage.js"
+      ],
       "css": [
         "/build/homepage.css"
-      ],
-      "js": [
-        "/build/homepage.js"
       ]
     },
     "article_details": {
@@ -27,6 +35,7 @@
     },
     "form": {
       "js": [
+        "/build/vendors~app~form~homepage~pagination.js",
         "/build/vendors~form.js",
         "/build/form.js"
       ],
@@ -50,12 +59,14 @@
         "/build/about.js"
       ]
     },
-    "profil": {
-      "css": [
-        "/build/profil.css"
-      ],
+    "app": {
       "js": [
-        "/build/profil.js"
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "board": {
@@ -100,7 +111,11 @@
     },
     "pagination": {
       "js": [
+
+        "/build/vendors~app~form~homepage~pagination.js",
+
         "/build/vendors~app~pagination.js",
+
         "/build/pagination.js"
       ],
       "css": [

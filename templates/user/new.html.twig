@@ -14,6 +14,8 @@
 <div class="container container-form-custum">
     {{ form_start(form) }}
 
+    
+
     <div class="block-form-custum">
 
         <h1 class="h4 mb-3 font-weight-normal text-center">S'inscrire</h1>
@@ -29,23 +31,18 @@
             {{ form_row(form.plain_password)}}
 
         </div>
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
+       
+        <div class="col-12"> 
+            {{ form_row(form.avatarFile) }}  
+        </div>
 
         
         <div class="col-12 mt-4 condition-signup">
             {{ form_row(form.condition)}} 
         </div>
 
-        <div class="mt-4 ml-4" style="transform:scale(0.80);-webkit-transform:scale(0.70);transform-origin:0 0;-webkit-transform-origin:0 0;">
-            {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
- 
-             {{ form_widget(form.recaptcha, { 'attr': {
-                 'options' : {
-                 'theme': 'light',
-                 'type': 'image',
-                 'size': 'normal'
-                 },
-              } }) }} 
-         </div>
+       
         
        
 
@@ -59,14 +56,22 @@
 
     <div class="info-signup" >
         <p>
-           En créant ce compte, vous avez pris connaissance que la modification de vos données (hors suppression) ne pourra se  faire que par le biais des administrateurs en les contactant directement <a href="#">ici</a>.
+           En créant ce compte, vous avez pris connaissance que la modification de vos données (hors suppression) ne pourra se faire que par le biais des administrateurs en les contactant directement <a href="#">ici</a>.
         </p>
     </div>
+
+    
 
 </div>
 
 
 {% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
 
+{{ encore_entry_script_tags('form') }}
+
+
+{% endblock %}
 
