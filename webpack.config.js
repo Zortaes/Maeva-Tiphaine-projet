@@ -38,6 +38,9 @@ Encore
     .addEntry('pagination', './assets/js/pagination.js')
     .addEntry('error', './assets/js/error.js')
     .addEntry('formSignup', './assets/js/formSignup.js')
+    .addEntry('formLogin', './assets/js/formLogin.js')
+    .addEntry('formArticle', './assets/js/formArticle.js')
+
    
 
     //.addEntry('page1', './assets/js/page1.js')

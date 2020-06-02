@@ -13,6 +13,9 @@
   "build/error.js": "/build/error.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
+  "build/formArticle.js": "/build/formArticle.js",
+  "build/formLogin.css": "/build/formLogin.css",
+  "build/formLogin.js": "/build/formLogin.js",
   "build/formSignup.css": "/build/formSignup.css",
   "build/formSignup.js": "/build/formSignup.js",
   "build/homepage.css": "/build/homepage.css",
@@ -60,5 +63,10 @@
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
   "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
+  "build/vendors~app~formSignup~homepage~pagination.js": "/build/vendors~app~formSignup~homepage~pagination.js",
+  "build/formArticle.css": "/build/formArticle.css",
+  "build/vendors~app~formArticle~formSignup~homepage~pagination.js": "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+  "build/vendors~formArticle.js": "/build/vendors~formArticle.js",
+  "build/vendors~formArticle~formSignup.js": "/build/vendors~formArticle~formSignup.js"
 }
