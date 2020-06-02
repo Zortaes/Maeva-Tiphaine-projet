@@ -11,6 +11,7 @@ use App\Form\Type\UserType;
 use Symfony\Component\Mime\Email;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
+use App\Services\AvatarVerification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,14 +47,15 @@ class UserController extends AbstractController
         UserPasswordEncoderInterface $encoder,
         Slugger $slugger,
         MailerInterface $mailer,
-        EmailConfirmation $confirmation
-    ): Response 
-    {
+        EmailConfirmation $confirmation,
+        AvatarVerification $avatar
+    ): Response {
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
 
             /* Password */
             $plainPassword = $form->get('plain_password')->getData();
@@ -64,6 +66,13 @@ class UserController extends AbstractController
             $slugUsername = $form->get('username')->getData();
             $usernameSluged = $slugger->sluggify($slugUsername);
             $newUser->setSlug($usernameSluged);
+
+            /* avatar */
+            if ($form->get('avatarFile')->getData() === null) 
+            {
+                /* Generate a default avatar */
+                $avatar->default($newUser);
+            } 
 
             /* Add token for signup */
             $newUser->setValidation($confirmation->tokenSignup());
@@ -88,7 +97,7 @@ class UserController extends AbstractController
                     'id' => $newUser->getId(),
                     'token' => $newUser->getValidation(),
                 ]);
-                
+
             $mailer->send($email);
 
             $this->addFlash("requestValidationEmail", "Un mail vous a été envoyé pour la confirmation de votre compte, veuillez valider votre inscription depuis votre boîte de réception <" . $newUser->getEmail() . ">");
@@ -123,11 +132,11 @@ class UserController extends AbstractController
 
 
         $articles = $paginator->paginate(
-                /** @var ArticleRepository */
-                $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
-                $request->query->getInt('page', 1), // number current page in URL, 1 if no
-                6 // number of result
-            );
+            /** @var ArticleRepository */
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
 
 
         return $this->render('user/profil.html.twig', [
@@ -188,10 +197,10 @@ class UserController extends AbstractController
     {
 
         $articles = $paginator->paginate(
-                $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
-                $request->query->getInt('page', 1), // number current page in URL, 1 if no
-                6 // number of result
-            );
+            $this->getDoctrine()->getRepository(Article::class)->findBy(["user" => $user]), // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+        );
 
 
         return $this->render(

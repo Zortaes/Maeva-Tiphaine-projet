@@ -4,3 +4,5 @@
 
 presta_image:
     resource: "@PrestaImageBundle/Resources/config/routing.yaml"
+   
+    
