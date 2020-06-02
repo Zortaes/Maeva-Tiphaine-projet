@@ -1,6 +1,14 @@
 {
   "entrypoints": {
-    "profil": {
+
+    
+
+    "app": {
+      "js": [
+        "/build/vendors~app~pagination.js",
+        "/build/app.js"
+      ],
+
       "css": [
         "/build/profil.css"
       ],
@@ -103,7 +111,11 @@
     },
     "pagination": {
       "js": [
+
         "/build/vendors~app~form~homepage~pagination.js",
+
+        "/build/vendors~app~pagination.js",
+
         "/build/pagination.js"
       ],
       "css": [

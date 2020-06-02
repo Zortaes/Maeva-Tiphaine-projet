@@ -34,6 +34,7 @@ require('../images/Logo.jpg');
 require('../images/lost_tree.png');
 require('../images/defaultAvatar.jpg');
 
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';
 

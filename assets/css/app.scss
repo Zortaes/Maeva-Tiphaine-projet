@@ -184,9 +184,13 @@ SIDEBAR
       border-radius: 20px;
       margin: 1em 0.5em 1em 0.5em;
       padding: 1em;
+
       h5
       {
         color: rgb(104, 103, 103);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
 
@@ -362,19 +366,28 @@ SIDEBAR
         height: 60px;
         overflow: hidden;
         padding: 0.2em 1em 0 1em;
-        
+
         .navProfil
         {
-          font-size: 1em;
+          min-height: 90%;
+          max-width: 90%;
+          font-size: 1;
           border: 1px solid #86c057;
           border-radius: 10px;
           background-color: transparent;
-          
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          &:focus
+          {
+            outline:none;
+          }
         }
 
         .showUserNav 
         {
-          margin: 0.2em 1em 0 0;
+          margin: 0.2em 3em 0 0;
           box-shadow: 2px 2px 10px rgb(128, 127, 127);
           display: none;
           position: absolute;
