@@ -1,16 +1,16 @@
 {
   "entrypoints": {
-    "profil": {
+    "board": {
       "css": [
-        "/build/profil.css"
+        "/build/board.css"
       ],
       "js": [
-        "/build/profil.js"
+        "/build/board.js"
       ]
     },
     "homepage": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~form~formSignup~homepage~pagination.js",
         "/build/homepage.js"
       ],
       "css": [
@@ -27,7 +27,8 @@
     },
     "form": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~form~formSignup~homepage~pagination.js",
+        "/build/vendors~form~formSignup.js",
         "/build/vendors~form.js",
         "/build/form.js"
       ],
@@ -51,21 +52,22 @@
         "/build/about.js"
       ]
     },
+    "profil": {
+      "css": [
+        "/build/profil.css"
+      ],
+      "js": [
+        "/build/profil.js"
+      ]
+    },
     "app": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~form~formSignup~homepage~pagination.js",
+        "/build/vendors~app.js",
         "/build/app.js"
       ],
       "css": [
         "/build/app.css"
-      ]
-    },
-    "board": {
-      "css": [
-        "/build/board.css"
-      ],
-      "js": [
-        "/build/board.js"
       ]
     },
     "user_details": {
@@ -102,7 +104,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~form~formSignup~homepage~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -115,6 +117,17 @@
       ],
       "js": [
         "/build/error.js"
+      ]
+    },
+    "formSignup": {
+      "js": [
+        "/build/vendors~app~form~formSignup~homepage~pagination.js",
+        "/build/vendors~form~formSignup.js",
+        "/build/vendors~formSignup.js",
+        "/build/formSignup.js"
+      ],
+      "css": [
+        "/build/formSignup.css"
       ]
     }
   }

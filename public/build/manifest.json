@@ -13,6 +13,8 @@
   "build/error.js": "/build/error.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
+  "build/formSignup.css": "/build/formSignup.css",
+  "build/formSignup.js": "/build/formSignup.js",
   "build/homepage.css": "/build/homepage.css",
   "build/homepage.js": "/build/homepage.js",
   "build/legalMention.css": "/build/legalMention.css",
@@ -28,8 +30,10 @@
   "build/user_details.css": "/build/user_details.css",
   "build/user_details.js": "/build/user_details.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/vendors~app~form~homepage~pagination.js": "/build/vendors~app~form~homepage~pagination.js",
+  "build/vendors~app~form~formSignup~homepage~pagination.js": "/build/vendors~app~form~formSignup~homepage~pagination.js",
   "build/vendors~form.js": "/build/vendors~form.js",
+  "build/vendors~formSignup.js": "/build/vendors~formSignup.js",
+  "build/vendors~form~formSignup.js": "/build/vendors~form~formSignup.js",
   "build/images/Logo.jpg": "/build/images/Logo.c78812cb.jpg",
   "build/images/TiphaineLe.jpg": "/build/images/TiphaineLe.e418b3a7.jpg",
   "build/images/TiphaineSu.jpg": "/build/images/TiphaineSu.7b2a3ff6.jpg",
@@ -40,6 +44,7 @@
   "build/images/bricolage.jpg": "/build/images/bricolage.38ecf90a.jpg",
   "build/images/cosmetiques-beaute-et-soins.jpg": "/build/images/cosmetiques-beaute-et-soins.04bdae80.jpg",
   "build/images/decorations.jpg": "/build/images/decorations.9746c738.jpg",
+  "build/images/defaultAvatar.jpg": "/build/images/defaultAvatar.5e30bbac.jpg",
   "build/images/favicon.ico": "/build/images/favicon.786d94a2.ico",
   "build/images/hygiene-corporelle.jpg": "/build/images/hygiene-corporelle.dd852fbc.jpg",
   "build/images/iconUser.png": "/build/images/iconUser.91536e5e.png",
@@ -55,6 +60,5 @@
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
   "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
-  "build/images/defaultAvatar.jpg": "/build/images/defaultAvatar.5e30bbac.jpg"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
 }

@@ -15,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
@@ -30,7 +29,7 @@ class EditUserType extends AbstractType
             [ 
                 'label' => "Nom d'utilisateur",
                 'constraints' => [
-                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères"])
+                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères", "max" => 50, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères"])
                     ]
             ]
         )
@@ -59,15 +58,6 @@ class EditUserType extends AbstractType
             ]
         )
         ->add(
-            'birth_date', 
-            BirthdayType::class,
-            [
-                'invalid_message' => 'Veuillez entrer une date valide', 
-                'format' => 'dd-MM-yyyy',
-                "label" => "Date d'anniversaire"
-            ]
-        )
-        ->add(
             'roles', ChoiceType::class, [
                 'choices' => ['ROLE_ADMIN' => 'ROLE_ADMIN', 'ROLE_USER' => 'ROLE_USER'],
                 'expanded' => true,
@@ -78,7 +68,7 @@ class EditUserType extends AbstractType
             $user = $event->getData();
             $form = $event->getForm();
 
-            dump($form->getData()->setUsername($user['viewUsername'])); 
+            $form->getData()->setUsername($user['viewUsername']); 
             unset($user['viewUsername']);
           
             

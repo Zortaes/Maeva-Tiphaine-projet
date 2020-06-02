@@ -5,6 +5,7 @@
 
 {% block stylesheets %}
 {{ encore_entry_link_tags('form') }}
+{{ encore_entry_link_tags('formSignup') }}
 {% endblock %}
 
 {% block body %}
@@ -13,6 +14,8 @@
 
 <div class="container container-form-custum">
     {{ form_start(form) }}
+
+    
 
     <div class="block-form-custum">
 
@@ -29,11 +32,10 @@
             {{ form_row(form.plain_password)}}
 
         </div>
-        <div class="col-12">
-            {{ form_label(form.birth_date)}}
-            <div class="input-birth-date">
-                {{ form_widget(form.birth_date)}}
-            </div>
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
+       
+        <div class="col-12"> 
+            {{ form_row(form.avatarFile) }}  
         </div>
 
         
@@ -63,16 +65,20 @@
 
     {{ form_end(form) }}
 
-    <div class="info-signup" >
-        <p>
-           En créant ce compte, vous avez pris connaissance que la modification de vos données (hors suppression) ne pourra se  faire que par le biais des administrateurs en les contactant directement <a href="#">ici</a>.
-        </p>
-    </div>
+    
+
+    
 
 </div>
 
 
 {% endblock %}
 
+{% block javascripts %}
 
+
+{{ encore_entry_script_tags('form') }}
+{{ encore_entry_script_tags('formSignup') }}
+
+{% endblock %}
 

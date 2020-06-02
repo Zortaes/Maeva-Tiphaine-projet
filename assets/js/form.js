@@ -1,5 +1,5 @@
-import '../css/form.scss';
 
+import '../css/form.scss';
 
 
 /*************************
@@ -116,3 +116,7 @@ function addIngredientFormDeleteLink($ingredientForm) {
 
     });
 }
+
+
+
+

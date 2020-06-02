@@ -5,7 +5,7 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
+use Presta\ImageBundle\Form\Type\ImageType; 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -14,10 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 class UserType extends AbstractType
 {
@@ -30,18 +30,18 @@ class UserType extends AbstractType
             [
                 'label' => "Nom d'utilisateur",
                 'constraints' => [
-                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères", "max" => 16, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 16 caractères"])
+                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères", "max" => 50, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères"])
                     ]
             ]
         )
         ->add(
-            'email', 
+            'email',
             EmailType::class,
             [
                 "label" => "Email",
                 'invalid_message' => 'L\'adresse email n\'est pas valide',
                 'constraints' => [
-                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),       
+                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),
                 ]
                                 
             ]
@@ -69,15 +69,25 @@ class UserType extends AbstractType
                 ]
             ]
         )
-        ->add(
-            'birth_date', 
-            BirthdayType::class,
-            [
-                'invalid_message' => 'Veuillez entrer une date valide', 
-                'format' => 'dd-MM-yyyy',
-                "label" => "Date d'anniversaire"
-            ]
-        )
+        ->add('avatarFile', 
+        ImageType::class, [
+            'label' => 'Avatar (facultatif)',
+            'enable_remote' => false,
+            'max_width' => 200,
+            'max_height' => 200, 
+            'aspect_ratios' => [],
+            'cropper_options'=> [
+                'aspectRatio'=> 1,  
+                'viewMode' => 1,
+                'minCropBoxWidth' => 120, 
+                'minCropBoxHeight' => 120, 
+            ],
+            'preview_height' => 200, 
+            'preview_width' => 200, 
+            'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
+            'save_button_class' => 'btn btn-success mx-0 w-25',
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
+        ])      
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
