@@ -8,13 +8,13 @@
         "/build/profil.js"
       ]
     },
-    "app": {
+    "homepage": {
       "js": [
-        "/build/vendors~app~pagination.js",
-        "/build/app.js"
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/homepage.js"
       ],
       "css": [
-        "/build/app.css"
+        "/build/homepage.css"
       ]
     },
     "article_details": {
@@ -27,6 +27,7 @@
     },
     "form": {
       "js": [
+        "/build/vendors~app~form~homepage~pagination.js",
         "/build/vendors~form.js",
         "/build/form.js"
       ],
@@ -50,12 +51,13 @@
         "/build/about.js"
       ]
     },
-    "homepage": {
-      "css": [
-        "/build/homepage.css"
-      ],
+    "app": {
       "js": [
-        "/build/homepage.js"
+        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "board": {
@@ -100,11 +102,19 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~pagination.js",
+        "/build/vendors~app~form~homepage~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
         "/build/pagination.css"
+      ]
+    },
+    "error": {
+      "css": [
+        "/build/error.css"
+      ],
+      "js": [
+        "/build/error.js"
       ]
     }
   }
