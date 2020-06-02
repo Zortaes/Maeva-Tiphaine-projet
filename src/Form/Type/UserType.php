@@ -75,9 +75,11 @@ class UserType extends AbstractType
         )
         ->add('avatarFile', 
         ImageType::class, [
-            'download_link' => false 
+            'enable_remote' => false, 
+           
+            'max_width' => 180, 
         ])     
-        ->add('recaptcha', EWZRecaptchaType::class, array(
+        /*->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
                     'theme' => 'light',
@@ -89,7 +91,7 @@ class UserType extends AbstractType
             'constraints' => array(
                 new RecaptchaTrue()
             )
-        ))
+        ))*/
         ->add(
             'condition', 
             CheckboxType::class,
