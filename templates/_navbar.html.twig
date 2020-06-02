@@ -26,7 +26,7 @@
         {% if app.user %}
 
         <div class="userNav">
-            <button class="navProfil">Bonjour, {{ app.user.viewUsername }} &#9662</button>
+            <button class="navProfil"> Bonjour, </br> {{ app.user.viewUsername }} </button>
 
             <div class="showUserNav">   
                     <a class="sidebarCategorie" href="{{path('showProfil')}}">Mon profil</a>
@@ -48,7 +48,7 @@
             <button class="closebtn">&times;</button>
 
             {% if app.user %}
-                <h5>Bonjour, {{ app.user.viewUsername }}</h5>
+                <h5>Bonjour, </br> {{ app.user.viewUsername }}</h5>
                 
             {% else %} 
                 <h5>Bonjour, veuillez vous identifier</h5>
