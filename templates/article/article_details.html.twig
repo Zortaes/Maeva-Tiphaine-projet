@@ -16,7 +16,18 @@
             {{ message }}
         </div>
     {% endfor %}
-    
+ <div class="articleAuthor">
+        {# Default avatar #}
+        {% if article.user.avatar == 'defaultAvatar.jpg' %}    
+        <img class="avatarUser" src="{{ asset("build/images/" ~ article.user.avatar ) }}"
+            alt="image represent avatarUser {{ article.user.viewUsername }}">
+        {% else %}
+        {# user avatar #}
+        <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ article.user.avatar ) }}"
+            alt="image represent avatarUser {{ article.user.viewUsername }}">
+        {% endif %}
+            <a href="{{path('articleByUser', {'slug':article.user.slug})}}"><h3>{{ article.user.viewUsername}}</h3></a>
+        </div>   
 <div id="articlePage">
     <h1 class="articleTitle">
         {{ article.title }}
@@ -91,9 +102,7 @@
                     </div>
                 </div>
             </div>
-        <div class="articleAuthor">
-            <a href="{{path('articleByUser', {'slug':article.user.slug})}}"><h3>{{ article.user.viewUsername}}</h3></a>
-        </div>
+        
 
         <div class="articleCategory" >                              
             <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>

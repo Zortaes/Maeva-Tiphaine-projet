@@ -6,14 +6,10 @@ namespace App\Form\Type;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Presta\ImageBundle\Form\Type\ImageType; 
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
@@ -81,28 +77,30 @@ class UserType extends AbstractType
             'max_height' => 200, 
             'aspect_ratios' => [],
             'cropper_options'=> [
-                'aspectRatio'=>1,
+                'aspectRatio'=> 1,  
+                'viewMode' => 1,
+                'minCropBoxWidth' => 120, 
+                'minCropBoxHeight' => 120, 
             ],
             'preview_height' => 200, 
             'preview_width' => 200, 
             'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
             'save_button_class' => 'btn btn-success mx-0 w-25',
-            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'
-            
-        ])     
-        ->add('recaptcha', EWZRecaptchaType::class, array(
-            'attr'        => array(
-                'options' => array(
-                    'theme' => 'light',
-                    'type'  => 'image',
-                    'size'  => 'normal'
-                )
-            ),
-            'mapped'      => false,
-            'constraints' => array(
-                new RecaptchaTrue()
-            )
-        ))
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
+        ])      
+        // ->add('recaptcha', EWZRecaptchaType::class, array(
+        //     'attr'        => array(
+        //         'options' => array(
+        //             'theme' => 'light',
+        //             'type'  => 'image',
+        //             'size'  => 'normal'
+        //         )
+        //     ),
+        //     'mapped'      => false,
+        //     'constraints' => array(
+        //         new RecaptchaTrue()
+        //     )
+        // ))
         ->add(
             'condition', 
             CheckboxType::class,

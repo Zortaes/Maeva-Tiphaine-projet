@@ -3,6 +3,7 @@
 
 {% block stylesheets %}
 {{ encore_entry_link_tags('form') }}
+{{ encore_entry_link_tags('formLogin') }}
 {% endblock %}
 
 {% block body %}
@@ -30,14 +31,23 @@
         <h1 class="h4 mb-3 font-weight-normal text-center">Se connecter</h1>
 
         <div class="social-media-buttons">
-            <a href="{{ path('connect_facebook') }}">
-                <div class="connexion-btn-facebook">
-                    Se connecter avec Facebook
-                </div>
-            </a>
-            <p>Lorsque vous utilisez le Facebook connect, nous collectons les données suivantes: vos prénoms et adresse e-mail à fin de créer et gérer votre compte.</p>
-        </div>
+            <div class="facebook-connexion">
+                <a href="{{ path('connect_facebook') }}">
+                    <div class="connexion-btn-facebook">
+                        Se connecter avec Facebook
+                    </div>
+                </a>
 
+                <div class="info-fb-dropdown" style="float:right;">
+                    <p class="info-fb-dropbtn">?</p>
+                    <div class="info-fb-dropdown-content">
+                        <p>Lorsque vous utilisez le Facebook connect, nous collectons les données suivantes: vos prénoms et adresse e-mail à fin de créer et gérer votre compte.</p>
+                    </div>
+                </div>
+            </div>
+        </div>             
+
+        <hr class="dotted"></hr><p class="or">ou</p><hr class="dotted"></hr>
         <div class="col-12 mt-4 mb-4">
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>

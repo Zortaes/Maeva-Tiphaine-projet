@@ -1,21 +1,20 @@
 {
   "entrypoints": {
-    "board": {
+    "user_details": {
       "css": [
-        "/build/board.css"
+        "/build/user_details.css"
       ],
       "js": [
-        "/build/board.js"
+        "/build/user_details.js"
       ]
     },
-    "app": {
+    "homepage": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/homepage.js"
       ],
       "css": [
-        "/build/app.css"
+        "/build/homepage.css"
       ]
     },
     "article_details": {
@@ -27,13 +26,11 @@
       ]
     },
     "form": {
-      "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
-        "/build/vendors~form.js",
-        "/build/form.js"
-      ],
       "css": [
         "/build/form.css"
+      ],
+      "js": [
+        "/build/form.js"
       ]
     },
     "article_by_category": {
@@ -60,21 +57,22 @@
         "/build/profil.js"
       ]
     },
-    "homepage": {
-      "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
-        "/build/homepage.js"
-      ],
+    "board": {
       "css": [
-        "/build/homepage.css"
+        "/build/board.css"
+      ],
+      "js": [
+        "/build/board.js"
       ]
     },
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
+    "app": {
       "js": [
-        "/build/user_details.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "legalMention": {
@@ -103,7 +101,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~form~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -116,6 +114,36 @@
       ],
       "js": [
         "/build/error.js"
+      ]
+    },
+    "formSignup": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~formSignup.js",
+        "/build/formSignup.js"
+      ],
+      "css": [
+        "/build/formSignup.css"
+      ]
+    },
+    "formLogin": {
+      "css": [
+        "/build/formLogin.css"
+      ],
+      "js": [
+        "/build/formLogin.js"
+      ]
+    },
+    "formArticle": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~formArticle.js",
+        "/build/formArticle.js"
+      ],
+      "css": [
+        "/build/formArticle.css"
       ]
     }
   }
