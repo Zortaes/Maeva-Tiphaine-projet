@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
+use Presta\ImageBundle\Form\Type\ImageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,26 @@ class EditSelfType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('avatarFile', 
+        ImageType::class, [
+            'label' => 'Avatar (facultatif)',
+            'enable_remote' => false,
+            'max_width' => 200,
+            'max_height' => 200, 
+            'aspect_ratios' => [],
+            'cropper_options'=> [
+                'aspectRatio'=> 1,  
+                'viewMode' => 1,
+                'minCropBoxWidth' => 120, 
+                'minCropBoxHeight' => 120, 
+            ],
+            'preview_height' => 200, 
+            'preview_width' => 200, 
+            'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
+            'save_button_class' => 'btn btn-success mx-0 w-25',
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
+        ])      
+
         ->add(
             'viewUsername', 
             TextType::class,

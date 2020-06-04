@@ -1,0 +1,124 @@
+/******************************
+Form article form - ingredients 
+******************************/
+
+
+fieldset {
+    margin-bottom: 0!important; 
+}
+
+@media (max-width: 768px)
+{ 
+    .instruction-new textarea
+    {
+        min-height: 250px;
+    }
+}
+.button-add-ingredient
+{
+    background-color: white!important; 
+    border-color: #9eb66b!important; 
+    box-shadow: none!important;
+    color: black!important; 
+    padding: 1px 5px 1px 5px;
+    margin-bottom: 1em; 
+
+}
+
+.button-delete-ingredient {
+    background-color: white!important; 
+    border-color: #de6262!important; 
+    box-shadow: none!important;
+    color: black!important; 
+    padding: 1px 5px 1px 5px;
+    margin-bottom: 1em; 
+}
+
+
+fieldset > div
+{
+    border-bottom: 2px solid lightgrey;
+
+    fieldset div 
+    {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        
+
+        div 
+        {
+
+           width: 45%; 
+           display: flex; 
+           flex-direction: column;
+           text-align: center;
+          
+        }
+     
+    }
+
+ 
+}
+
+.other-ingredient 
+{
+    border-bottom: 2px solid lightgrey; 
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.other-ingredient div
+{
+  
+    font-size: 0.9em;
+    display: flex; 
+    justify-content: space-between;
+    
+    div 
+    {
+        width: 45%; 
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+    }
+    
+}
+
+
+/**************
+MODIFY ARTICLE
+**************/
+
+.existingIngredients div
+{
+    font-size: 0.9em;
+    justify-content: space-between;
+    display:flex;
+    flex-direction: row;
+    margin-top: 1em;
+
+    div
+    {
+        width: 45%; 
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+        margin-bottom: 1em;
+        margin-top: 1em;
+    }
+    
+}
+
+
+.deleteExistingIngredient
+{
+background-color: white!important; 
+border-color: #de6262!important; 
+box-shadow: none!important;
+color: black!important; 
+padding: 1px 5px 1px 5px;
+margin-bottom: 1em;
+}
+
+

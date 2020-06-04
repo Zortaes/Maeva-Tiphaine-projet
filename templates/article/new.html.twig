@@ -7,6 +7,7 @@
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('form') }}
+{{ encore_entry_link_tags('formArticle') }}
 {% endblock %}
 
 {% block body %}
@@ -65,4 +66,5 @@
 {% block javascripts %}
 {{ parent() }}
 {{ encore_entry_script_tags('form') }}
+{{ encore_entry_script_tags('formArticle') }}
 {% endblock %}

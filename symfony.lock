@@ -102,6 +102,9 @@
     "doctrine/reflection": {
         "version": "1.2.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.0.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.17"
     },
@@ -142,8 +145,8 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
+    "jms/metadata": {
+        "version": "2.1.0"
     },
     "knplabs/knp-components": {
         "version": "v2.3.3"
@@ -201,6 +204,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
+    },
+    "presta/image-bundle": {
+        "version": "v2.0.1"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -477,6 +483,9 @@
     "symfony/polyfill-php73": {
         "version": "v1.14.0"
     },
+    "symfony/polyfill-php80": {
+        "version": "v1.17.0"
+    },
     "symfony/process": {
         "version": "v5.0.5"
     },
@@ -644,6 +653,18 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
     },
     "webimpress/safe-writer": {
         "version": "2.0.1"

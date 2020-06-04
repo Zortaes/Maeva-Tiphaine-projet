@@ -29,21 +29,30 @@
 
 <div class="container container-form-custom">
 
-{% for message in app.flashes('successModifyPassword') %}
-    <div class="alert alert-success w-100 text-center mt-4 edit-self">
-        {{ message }}
-    </div>
-{% endfor %}
+  {% for message in app.flashes('successModifyPassword') %}
+      <div class="alert alert-success w-100 text-center mt-4 edit-self">
+          {{ message }}
+      </div>
+  {% endfor %}
 
-{% for message in app.flashes('successModifySelf') %}
-    <div class="alert alert-success w-100 text-center mt-4 edit-self">
-        {{ message }}
-    </div>
-{% endfor %}
+  {% for message in app.flashes('successModifySelf') %}
+      <div class="alert alert-success w-100 text-center mt-4 edit-self">
+          {{ message }}
+      </div>
+  {% endfor %}
+
 
     {{ form_start(form) }}
 
     <div class="block-form-custom">
+
+      <div class="edit-user-input">
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
+       
+        <div class="col-12"> 
+            {{ form_row(form.avatarFile) }}  
+        </div>
+      </div>
 
       <div class="edit-user-input">
           <div class="input-edit-user-label">
@@ -82,6 +91,7 @@
         <div class="col-12 validateBtn">
             {{ form_row(form.Enregistrer) }}
         </div>
+
     </div>
 
     {{ form_end(form) }}
@@ -300,6 +310,7 @@
 {% block javascripts %}
 {{ parent() }}
 {{ encore_entry_script_tags('pagination') }}
+{{ encore_entry_script_tags('profil') }}
 {% endblock %}
 
 {% endblock %}
