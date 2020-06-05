@@ -167,10 +167,41 @@ CARD
 /* AVATAR */
 .avatarUser
 {
+
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
     margin-left: 5px;
+
+    @media (max-width: 450px)
+    {
+        width: 25px;
+        height: 25px;
+    }
+
+    @media (min-width: 451px) 
+    {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media (min-width: 600px) 
+    {
+        width: 35px;
+        height: 35px;
+    }
+
+    @media (min-width: 960px) 
+    {
+        width: 40px;
+        height: 40px;
+    }
+
+    @media (min-width: 1200px) 
+    {
+        width: 45px;
+        height: 45px;
+    }
+
+    
     
     
    
@@ -216,13 +247,13 @@ CARD
         word-break: break-all;
         color: gray;
     
+    
     @media (min-width: 960px) {
             
             font-size: calc(0.2em + 1vw);
             margin-left: 10px;
             margin-top: 10px;
             word-break: break-all;
-            
         }
     }
 
@@ -240,7 +271,7 @@ CARD
 {
     text-align: center;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 20px;
     a
     {
         font-size: calc(0.6em + 1vw);
