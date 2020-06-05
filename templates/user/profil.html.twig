@@ -46,13 +46,13 @@
 
     <div class="block-form-custom">
 
-      <div class="edit-user-input">
+      <div class="edit-user-input" id="edit-user-input-image">
         {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
        
         <div class="col-12"> 
             {{ form_row(form.avatarFile) }}
               {% if user.avatar == 'defaultAvatar.jpg' %}
-                <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
+                <img class="avatarUserdefault" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
                 alt="image represent avatarUser {{ app.user.viewUsername }}">
               {% endif %}
   

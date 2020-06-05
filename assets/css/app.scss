@@ -14,7 +14,12 @@ body {
 
 }
 
-
+.sidebarUsername
+{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 
 /*********************
@@ -180,17 +185,24 @@ SIDEBAR
 
     #bonjourSidebar
     {
-      border: #9eb66b 2px solid;
       border-radius: 20px;
       margin: 1em 0.5em 1em 0.5em;
       padding: 1em;
+      text-align : center;
+
+      img
+      {
+        border-radius: 50px;
+        width:80px;
+        height: 80px;
+        margin-bottom: 1em;
+      }
 
       h5
       {
         color: rgb(104, 103, 103);
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        border-bottom: solid rgb(104, 103, 103) 1px;
+        padding-bottom: 2em;
       }
     }
 
@@ -198,7 +210,7 @@ SIDEBAR
     {
       font-weight: bolder;
       color: #799440;
-      padding : 1em;
+      padding : 0 1em 1em 1em;
       text-decoration: none;
       margin: 0 0 10% 7%;
       
@@ -370,16 +382,19 @@ SIDEBAR
 
         .navProfil
         {
-          min-height: 90%;
-          max-width: 90%;
+          text-align: center;
           font-size: 1;
-          border: 1px solid #86c057;
-          border-radius: 10px;
           background-color: transparent;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
 
+          img
+          {
+            border-radius: 50px;
+            width:50px;
+            height: 50px;
+          }
           &:focus
           {
             outline:none;
@@ -394,7 +409,7 @@ SIDEBAR
           position: absolute;
           right: 0;
           background-color: white;
-          width: 200px;
+          width: 300px;
           z-index: 3;
           padding: 1em;
         }
@@ -406,7 +421,8 @@ SIDEBAR
       {
         display: block!important;
         height: auto;
-        
+        text-align: center;
+
         a
         {
           display:block;

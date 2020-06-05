@@ -32,12 +32,11 @@ FLASH MESSAGES
     .container-form-custom
     {
         margin-bottom: 3em;
-        margin-top: 2em;
+        margin-top: 1em;
     }
 
     .edit-user-input
     {
-
 
         @media(min-width: 768px)
         {
@@ -48,6 +47,11 @@ FLASH MESSAGES
 
     }
 
+    #edit-user-input-image
+    {
+        text-align: center;
+    }
+
     .form-group
     {
         text-align: center !important;
@@ -55,23 +59,8 @@ FLASH MESSAGES
 
     .cropper-local 
     {
-        max-width : 90% !important;
-        min-width : 90% !important;
-        margin: 0 5% 0 5% !important;
-
-        @media (min-width: 450px)
-        {
-            max-width : 50% !important;
-            min-width : 50% !important;
-            margin: 0 25% 0 25% !important;
-        }
-
-        @media (min-width: 960px)
-        {
-            max-width : 28% !important;
-            min-width : 28% !important;
-            margin: 0 36% 0 36% !important;
-        }
+        max-width : 300px !important;
+        margin: auto;
     }
 
 

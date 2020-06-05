@@ -26,9 +26,18 @@
         {% if app.user %}
 
         <div class="userNav">
-            <button class="navProfil"> {{ app.user.avatar }} </button>
+            <div class="navProfil">         
+                {% if app.user.avatar == 'defaultAvatar.jpg' %}    
+                    <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
+                    alt="image represent avatarUser {{ app.user.avatar  }}">
+                {% else %}
+                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar  ) }}"
+                    alt="image represent avatarUser {{ app.user.avatar }}">
+                {% endif %}    
+            </div>
 
-            <div class="showUserNav">   
+            <div class="showUserNav"> 
+                    <h5 class="sidebarUsername">{{ app.user.viewUsername }}</h5>
                     <a class="sidebarCategorie" href="{{path('showProfil')}}">Mon profil</a>
                     <a class="sidebarCategorie" href="{{path('logout')}}">Déconnexion</a>
             </div>
@@ -48,10 +57,18 @@
             <button class="closebtn">&times;</button>
 
             {% if app.user %}
-                <h5>Bonjour, </br> {{ app.user.viewUsername }}</h5>
-                
+                {% if app.user.avatar == 'defaultAvatar.jpg' %}    
+                    <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
+                    alt="image represent avatarUser {{ app.user.avatar  }}">
+                {% else %}
+                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar  ) }}"
+                    alt="image represent avatarUser {{ app.user.avatar }}">
+                {% endif %}
+
+                <h5 class="sidebarUsername">{{ app.user.viewUsername }}</h5>
+
             {% else %} 
-                <h5>Bonjour, veuillez vous identifier</h5>
+                <h5>Veuillez vous identifier</h5>
             {% endif %}
         
         </div>
