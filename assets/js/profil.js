@@ -11,6 +11,10 @@ $(".close").addClass('col-2 col-lg-1');
 
 $('.modal-footer').addClass('d-flex flex-nowrap justify-content-around');
 
+if($('.cropper-canvas-container').children().attr('src') == "/uploads/user/avatar/defaultAvatar.jpg")
+{
+    $('.cropper-canvas-container').hide();
+}
 
 (function(w, $) {
 

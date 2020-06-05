@@ -26,7 +26,7 @@
         {% if app.user %}
 
         <div class="userNav">
-            <button class="navProfil"> Bonjour, </br> {{ app.user.viewUsername }} </button>
+            <button class="navProfil"> {{ app.user.avatar }} </button>
 
             <div class="showUserNav">   
                     <a class="sidebarCategorie" href="{{path('showProfil')}}">Mon profil</a>
