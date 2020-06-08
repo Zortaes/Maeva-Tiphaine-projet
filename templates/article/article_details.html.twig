@@ -16,9 +16,9 @@
             {{ message }}
         </div>
     {% endfor %}
- <div class="articleAuthor">
+<div class="articleAuthor">
         {# Default avatar #}
-        {% if article.user.avatar == 'defaultAvatar.jpg' %}    
+        {% if article.user.avatar == 'defaultAvatar.jpg' %} 
         <img class="avatarUser" src="{{ asset("build/images/" ~ article.user.avatar ) }}"
             alt="image represent avatarUser {{ article.user.viewUsername }}">
         {% else %}
@@ -27,7 +27,7 @@
             alt="image represent avatarUser {{ article.user.viewUsername }}">
         {% endif %}
             <a href="{{path('articleByUser', {'slug':article.user.slug})}}"><h3>{{ article.user.viewUsername}}</h3></a>
-        </div> 
+</div> 
 <div id="articlePage">
     <h1 class="articleTitle">
         {{ article.title }}
@@ -40,28 +40,28 @@
         {% endfor %}
         {# If article have a vote #}
         {% if (sum != 0) %}
-            {# average #}
-            {% set average = sum / article.votes|length %}
-            {% set noteName = 'Noté par la communauté :' %}
-            {% if (average|round == 1) %}
-                {% set label = 'Médiocre' %}
-            {% endif %}
-            {% if (average|round == 2) %}
-                {% set label = 'Pas mal' %}
-            {% endif %}
-            {% if (average|round == 3) %}
-                {% set label = 'Bien' %}
-            {% endif %}
-            {% if (average|round == 4) %}
-                {% set label = 'Super' %}
-            {% endif %}
-            {% if (average|round == 5) %}
-                {% set label = 'Excellent' %}
-            {% endif %}
-            {# article doesn't have a vote #}
-            {% else %}
-                {% set noteName = '' %}
-                {% set label = 'Non noté' %}
+        {# average #}
+        {% set average = sum / article.votes|length %}
+        {% set noteName = 'Noté par la communauté :' %}
+        {% if (average|round == 1) %}
+            {% set label = 'Médiocre' %}
+        {% endif %}
+        {% if (average|round == 2) %}
+            {% set label = 'Pas mal' %}
+        {% endif %}
+        {% if (average|round == 3) %}
+            {% set label = 'Bien' %}
+        {% endif %}
+        {% if (average|round == 4) %}
+            {% set label = 'Super' %}
+        {% endif %}
+        {% if (average|round == 5) %}
+            {% set label = 'Excellent' %}
+        {% endif %}
+        {# article doesn't have a vote #}
+        {% else %}
+            {% set noteName = '' %}
+            {% set label = 'Non noté' %}
         {% endif %}
         {{noteName}} {{label}}
     </div>

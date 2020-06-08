@@ -1,9 +1,8 @@
-
-
 /*************
 Title Category
 ***************/
-.category-title {
+.category-title 
+{
 
     margin-bottom: 2em;
     margin-top: 2em; 
@@ -19,45 +18,128 @@ Title Category
     } 
 }
 
+
+.articleAuthor 
+{
+    display: flex;
+    width: 90%;
+    margin-top: 2em;
+    margin-bottom: 3em;
+    font-style: italic;
+    margin-left: 11.5%;
+
+    @media (max-width: 600px)
+    {
+        
+        margin-left: 3%;
+    }
+
+    @media (min-width: 601px) and (max-width: 766px)
+    {
+        margin-left: 5%;
+    }
+
+    @media (min-width: 767px) 
+    { 
+        width: 40%; 
+        margin-left: 20%;
+    }
+
+    .avatarUser
+    {
+
+        border-radius: 50%;
+        margin-left: 5px;
+
+        @media (max-width: 450px)
+        {
+            width: 25px;
+            height: 25px;
+        }
+
+        @media (min-width: 451px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 600px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 960px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 1200px) 
+        {
+            width: 35px;
+            height: 35px;
+        } 
+    }
+
+    .user-article-title-p
+    {
+        font-size: calc(0.4em + 1vw);
+        margin-left: 10px;
+        margin-top: 5px;
+        word-break: break-all;
+        color: gray;
+
+        @media (min-width: 960px) {
+            
+            font-size: calc(0.2em + 1vw);
+            margin-left: 10px;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+    }
+
+}
+
 /*************
 Title By Author
 ***************/
-.user-article-title
-{
-    margin-bottom: 2em;
-    margin-top: 2em; 
+// .user-article-title
+// {
+//     margin-bottom: 2em;
+//     margin-top: 2em; 
 
-   .user-article-title-p 
-    {
-        text-align: center;
-        font-weight: bold;
-        line-height: 2em;
-        font-size: calc(0.5em + 0.6vw);
-        text-shadow: 2px 1px 1px rgb(107, 107, 107); 
+//    .user-article-title-p 
+//     {
+//         text-align: center;
+//         font-weight: bold;
+//         line-height: 2em;
+//         font-size: calc(0.5em + 0.6vw);
+//         text-shadow: 2px 1px 1px rgb(107, 107, 107); 
 
-        @media (min-width: 449px) 
-        { 
-            font-size: calc(0.8em + 0.6vw); 
-        }
+//         @media (min-width: 449px) 
+//         { 
+//             font-size: calc(0.8em + 0.6vw); 
+//         }
 
-        @media(min-width: 778px)
-        {
+//         @media(min-width: 778px)
+//         {
             
-            font-size: calc(1em + 0.8vw);
-        }
+//             font-size: calc(1em + 0.8vw);
+//         }
 
-        @media(min-width: 992px)
-        {
-            font-size: calc(1em + 0.8vw);
-        }
+//         @media(min-width: 992px)
+//         {
+//             font-size: calc(1em + 0.8vw);
+//         }
 
-        @media(min-width: 1199px)
-        {
-            font-size: calc(1em + 1vw); 
-        }
+//         @media(min-width: 1199px)
+//         {
+//             font-size: calc(1em + 1vw); 
+//         }
  
-    } 
-}
+//     } 
+// }
 
 
 /*************
@@ -142,43 +224,44 @@ ALL TEXT
               
     }
 
+
     /* AVATAR */
-.avatarUser
-{
-
-    border-radius: 50%;
-    margin-left: 5px;
-
-    @media (max-width: 450px)
+    .avatarUser
     {
-        width: 25px;
-        height: 25px;
+
+        border-radius: 50%;
+        margin-left: 5px;
+
+        @media (max-width: 450px)
+        {
+            width: 25px;
+            height: 25px;
+        }
+
+        @media (min-width: 451px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 600px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 960px) 
+        {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (min-width: 1200px) 
+        {
+            width: 35px;
+            height: 35px;
+        } 
     }
-
-    @media (min-width: 451px) 
-    {
-        width: 30px;
-        height: 30px;
-    }
-
-    @media (min-width: 600px) 
-    {
-        width: 30px;
-        height: 30px;
-    }
-
-    @media (min-width: 960px) 
-    {
-        width: 30px;
-        height: 30px;
-    }
-
-    @media (min-width: 1200px) 
-    {
-        width: 35px;
-        height: 35px;
-    } 
-}
 
     /* author */
     .card-text-author 
