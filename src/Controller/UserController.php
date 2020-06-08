@@ -168,8 +168,9 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             
-
             $entityManager->flush();
+
+            $user->setAvatarFile(null);
 
            /* email */
            if($user->getValidate() == false)
