@@ -51,11 +51,11 @@
        
         <div class="col-12"> 
             {{ form_row(form.avatarFile) }}
-              {% if user.avatar == 'defaultAvatar.jpg' %}
-                <img class="avatarUserdefault" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
-                alt="image represent avatarUser {{ app.user.viewUsername }}">
-              {% endif %}
-  
+
+              {% if app.user.avatar == 'defaultAvatar.jpg' %}
+                <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
+                alt="image represent avatarUser {{ app.user.viewUsername  }}">
+              {% endif %} 
         </div>
       </div>
 

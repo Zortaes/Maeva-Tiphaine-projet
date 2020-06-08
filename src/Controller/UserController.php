@@ -74,7 +74,7 @@ class UserController extends AbstractController
             {
                 /* Generate a default avatar */
                 $avatar->default($newUser);
-            } 
+            }
 
             /* Add token for signup */
             $newUser->setValidation($confirmation->tokenSignup());

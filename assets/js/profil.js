@@ -18,6 +18,7 @@ if($('.cropper-canvas-container').children().attr('src') == "/uploads/user/avata
     $('.cropper-canvas-container').hide();
 }
 
+
 (function(w, $) {
 
     'use strict';
@@ -28,8 +29,8 @@ if($('.cropper-canvas-container').children().attr('src') == "/uploads/user/avata
         });
         $('.showUpload').click(function()
         {
-        $('.cropper-canvas-container').show();
-        $('.avatarUserdefault').hide();
+            $('.cropper-canvas-container').show();
+            $('.avatarUser').hide();
         })
 
     });

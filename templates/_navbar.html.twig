@@ -26,14 +26,14 @@
         {% if app.user %}
 
         <div class="userNav">
-            <div class="navProfil">         
-                {% if app.user.avatar == 'defaultAvatar.jpg' %}    
+            <div class="navProfil">
+                {% if app.user.avatar == 'defaultAvatar.jpg' %}
                     <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
-                    alt="image represent avatarUser {{ app.user.avatar  }}">
+                    alt="image represent avatarUser {{ app.user.viewUsername  }}">
                 {% else %}
                     <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar  ) }}"
-                    alt="image represent avatarUser {{ app.user.avatar }}">
-                {% endif %}    
+                    alt="image represent avatarUser {{ app.user.viewUsername }}">
+                {% endif %}   
             </div>
 
             <div class="showUserNav"> 

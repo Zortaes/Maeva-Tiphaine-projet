@@ -72,7 +72,7 @@ class EditUserType extends AbstractType
             unset($user['viewUsername']);
                     
         })
-        ->add('Modifier', SubmitType::class)
+        ->add('Envoyer', SubmitType::class)
         ;
     }
 

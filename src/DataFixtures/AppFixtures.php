@@ -51,7 +51,9 @@ class AppFixtures extends Fixture
             $user->setBirthDate($faker->datetime);
             $password = $this->encoder->encodePassword($user, 'faustine1');
             $user->setPassword($password);
-            $user->setAvatar('img.jpg');
+            $user->setAvatar('defaultAvatar.jpg');
+            $user->setAvatarSize(27874); 
+            $user->setValidate(true);
             $user->setCreatedAt($faker->datetime);
             $user->getRoles();
 

@@ -88,7 +88,7 @@ class UserType extends AbstractType
             'save_button_class' => 'btn btn-success mx-0 w-25',
             'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
         ])
-        /*->add('recaptcha', EWZRecaptchaType::class, array(
+        ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
                     'theme' => 'light',
@@ -100,7 +100,7 @@ class UserType extends AbstractType
             'constraints' => array(
                 new RecaptchaTrue()
             )
-        ))  */   
+        ))   
         ->add(
             'condition', 
             CheckboxType::class,
