@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Services\Slugger;
+use App\Services\AvatarVerification;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
@@ -33,13 +34,15 @@ class FacebookAuthenticator extends SocialAuthenticator
     private $clientRegistry;
     private $em;
     private $router;
+    private $avatar;
 
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router, Slugger $slugger)
+    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router, Slugger $slugger, AvatarVerification $avatar)
     {
         $this->slugger = $slugger;
         $this->clientRegistry = $clientRegistry;
         $this->em = $em;
         $this->router = $router;
+        $this->avatar = $avatar;
     }
 
     public function supports(Request $request)
@@ -54,7 +57,7 @@ class FacebookAuthenticator extends SocialAuthenticator
         return $this->fetchAccessToken($this->getFacebookClient());
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider )
     {
         
         /** @var FacebookUser $facebookUser */
@@ -66,6 +69,7 @@ class FacebookAuthenticator extends SocialAuthenticator
 
         /** @var FacebookUser Email $email */
         $email = $facebookUser->getEmail();
+
 
         // check for facebook_id in database and compare
         $existingUser = $this->em->getRepository(User::class)
@@ -104,6 +108,10 @@ class FacebookAuthenticator extends SocialAuthenticator
                 $user->setEmail($email);
 
                 $facebookName = $facebookUser->getFirstName();
+
+                /* Generate a default avatar */
+                $this->avatar->default($user);
+                
 
                 $existingUsername = $this->em->getRepository(User::class)
                 ->findOneBy(['username' => $facebookName]);

@@ -10,7 +10,7 @@
     },
     "homepage": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
         "/build/homepage.js"
       ],
       "css": [
@@ -50,11 +50,14 @@
       ]
     },
     "profil": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
+        "/build/profil.js"
+      ],
       "css": [
         "/build/profil.css"
-      ],
-      "js": [
-        "/build/profil.js"
       ]
     },
     "board": {
@@ -67,7 +70,7 @@
     },
     "app": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
@@ -101,7 +104,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -118,9 +121,9 @@
     },
     "formSignup": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/vendors~formArticle~formSignup.js",
-        "/build/vendors~formSignup.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
         "/build/formSignup.js"
       ],
       "css": [
@@ -137,8 +140,8 @@
     },
     "formArticle": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
         "/build/vendors~formArticle.js",
         "/build/formArticle.js"
       ],

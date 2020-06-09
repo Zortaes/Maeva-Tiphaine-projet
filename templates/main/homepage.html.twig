@@ -110,12 +110,25 @@ LAST ARTICLES
                                     </a>
                                 </h4>
 
-                                <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
-                                        {{ lastArticle.user.viewUsername }}
-                                    </a>
-                                </p>
+                                <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if lastArticle.user.avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
+                                            {{ lastArticle.user.viewUsername }}
+                                        </a>
+                                    </p>
+                                </div>
+
+                               
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">
@@ -214,12 +227,23 @@ LAST ARTICLES
                                     </a>
                                 </h4>
 
-                                <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
-                                        {{ lastArticle.user.viewUsername }}
-                                    </a>
-                                </p>
+                                <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if lastArticle.user.avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
+                                            {{ lastArticle.user.viewUsername }}
+                                        </a>
+                                    </p>
+                                </div>
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">
@@ -315,12 +339,25 @@ LAST ARTICLES
                                         {{ lastArticle.title }}
                                     </a>
                                 </h4>
+
                                 <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
-                                        {{ lastArticle.user.viewUsername }}
-                                    </a>
-                                </p>
+                                <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if lastArticle.user.avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ lastArticle.user.avatar ) }}"
+                                        alt="image represent avatarUser {{ lastArticle.user.viewUsername }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':lastArticle.user.slug })}}" class="link-custum">
+                                            {{ lastArticle.user.viewUsername }}
+                                        </a>
+                                    </p>
+                                </div>
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">
@@ -470,11 +507,23 @@ BEST ARTICLES
                                 </h4>
 
                                 <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
-                                        {{bestArticle.username}}
-                                    </a>
-                                </p>
+                                <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if bestArticle.user_avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
+                                            {{ bestArticle.username }}
+                                        </a>
+                                    </p>
+                                </div>
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">
@@ -553,12 +602,24 @@ BEST ARTICLES
                                     </a>
                                 </h4>
 
-                                <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
-                                        {{bestArticle.username}}
-                                    </a>
-                                </p>
+                                 <!-- author -->
+                                 <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if bestArticle.user_avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
+                                            {{ bestArticle.username }}
+                                        </a>
+                                    </p>
+                                </div>
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">
@@ -634,12 +695,25 @@ BEST ARTICLES
                                         {{bestArticle.title}}
                                     </a>
                                 </h4>
-                                <!-- author -->
-                                <p class="card-paragraph card-paragraph-author">
-                                    <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
-                                        {{bestArticle.username}}
-                                    </a>
-                                </p>
+                                
+                                 <!-- author -->
+                                 <div class="articleAuthor">
+                                    {# Default avatar #}
+                                    {% if bestArticle.user_avatar == 'defaultAvatar.jpg' %}
+                                    <img class="avatarUser" src="{{ asset("build/images/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% else %}
+                                    {# user avatar #}
+                                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ bestArticle.user_avatar ) }}"
+                                        alt="image represent avatarUser {{ bestArticle.username }}">
+                                    {% endif %}
+
+                                    <p class="card-paragraph card-paragraph-author">
+                                        <a href="{{path('articleByUser', {'slug':bestArticle.user_slug })}}" class="link-custum">
+                                            {{ bestArticle.username }}
+                                        </a>
+                                    </p>
+                                </div>
 
                                 <!-- summary -->
                                 <p class="card-paragraph card-paragraph-summary">

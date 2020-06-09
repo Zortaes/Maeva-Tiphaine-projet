@@ -6,6 +6,8 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Form\Type\EditPasswordType;
+use App\Form\Type\EditSelfType;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
 use Symfony\Component\Mime\Email;
@@ -72,7 +74,7 @@ class UserController extends AbstractController
             {
                 /* Generate a default avatar */
                 $avatar->default($newUser);
-            } 
+            }
 
             /* Add token for signup */
             $newUser->setValidation($confirmation->tokenSignup());
@@ -115,19 +117,85 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/mon-profil", name="showProfil", methods={"GET"})
+     * @Route("/mon-profil", name="showProfil", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      * 
      * @return $this profil of the user 
      */
-    public function showProfil(PaginatorInterface $paginator, Request $request)
+    public function showProfil(
+    PaginatorInterface $paginator, 
+    Request $request, 
+    Slugger $slugger, 
+    MailerInterface $mailer,
+    EmailConfirmation $confirmation)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $user = $this->getUser();
 
         /* logout User if he is banned */
         if ($user->getIsBanned() == true) {
             return $this->redirectToRoute('logout');
+        }
+
+        $userEmail = $user->getEmail();
+
+        $form = $this->createForm(EditSelfType::class, $user);  
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+            $newEmail = $form->get('email')->getData();
+
+            if($userEmail != $newEmail)
+            {
+                $user->setValidate(false);
+
+                /* Add token for email validation */
+                $user->setValidation($confirmation->tokenSignup());
+            }else
+            {
+                $user->setValidate(true);
+            }
+
+            /* Slug */
+            $slugUsername = $form->get('viewUsername')->getData();
+            $usernameSluged = $slugger->sluggify($slugUsername); 
+            $user->setSlug($usernameSluged); 
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            
+            $entityManager->flush();
+
+            $user->setAvatarFile(null);
+
+           /* email */
+           if($user->getValidate() == false)
+           {
+                $email = (new TemplatedEmail())
+                ->from('la.rubrique.ecolo@gmail.com')
+                ->to(new Address($user->getEmail()))
+                ->subject($confirmation->subject())
+
+                // path of the Twig template to render
+                ->htmlTemplate('email/_signup.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'id' => $user->getId(),
+                    'token' => $user->getValidation(),
+                ]);
+                    
+                $mailer->send($email);
+
+           }
+
+           $this->addFlash("successModifySelf", "Vos changement ont bien été enregistrés");
+
+           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
         }
 
 
@@ -142,6 +210,59 @@ class UserController extends AbstractController
         return $this->render('user/profil.html.twig', [
             'user' => $user,
             'articles' => $articles,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/mon-profil/modifier-mot-de-passe", name="modifyPassword", methods={"GET" , "POST"})
+     * 
+     * @IsGranted("ROLE_USER")
+     * 
+     * @return $this redirect to route showProfil 
+     * 
+     */
+    public function ModifyPassword(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user = $this->getUser();
+
+        /* logout User if he is banned */
+        if ($user->getIsBanned() == true) 
+        {
+            return $this->redirectToRoute('logout');
+        }
+        
+        
+
+        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+
+            /* Password */
+            $plainPassword = $form->get('plain_password')->getData();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash("successModifyPassword", "Votre mot de passe à bien été modifié");
+        
+           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
+
+        }
+
+        return $this->render('user/modify_password.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 
@@ -210,5 +331,51 @@ class UserController extends AbstractController
                 'articles' => $articles
             ]
         );
+    }
+
+    /**
+     *  @Route("/validation-reminder", name="validationReminder")
+     * 
+     *  @return User 
+     */
+    public function validationReminder()
+    {
+        $user = $this->getUser();
+
+        return $this->render('email/validation_reminder.html.twig', [
+            'user' => $user,
+            'unlessFooter' => true,
+            'unlessNavbar' => true
+        ]);
+    }
+
+    /**
+     *  @Route("/send_email", name="sendValidationEmail")
+     * 
+     *  @return User 
+     */
+    public function sendValidationEmail(MailerInterface $mailer, EmailConfirmation $confirmation)
+    {
+        $user = $this->getUser();
+
+        $email = (new TemplatedEmail())
+        ->from('la.rubrique.ecolo@gmail.com')
+        ->to(new Address($user->getEmail()))
+        ->subject($confirmation->subject())
+
+        // path of the Twig template to render
+        ->htmlTemplate('email/_signup.html.twig')
+
+        // pass variables (name => value) to the template
+        ->context([
+            'id' => $user->getId(),
+            'token' => $user->getValidation(),
+        ]);
+            
+        $mailer->send($email);
+
+        $this->addFlash("successEmailSent", "Un nouvel e-mail vous a été envoyé pour vous permettre de valider votre compte.");
+
+        return $this->redirectToRoute('validationReminder');
     }
 }
