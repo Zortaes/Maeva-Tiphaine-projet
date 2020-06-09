@@ -48,7 +48,6 @@ class AppFixtures extends Fixture
             } 
 
             $user->setSlug($this->slugger->sluggify($user->getViewUsername()));
-            $user->setBirthDate($faker->datetime);
             $password = $this->encoder->encodePassword($user, 'faustine1');
             $user->setPassword($password);
             $user->setAvatar('defaultAvatar.jpg');
