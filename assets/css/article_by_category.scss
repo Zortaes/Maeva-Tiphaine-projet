@@ -18,38 +18,25 @@ Title Category
     } 
 }
 
+/* AVATAR (article_by_user) */
 
-.articleAuthor 
+.articleAuthor
 {
+    
     display: flex;
+    justify-content: center;
+    font-style: italic;
     width: 90%;
     margin-top: 2em;
-    margin-bottom: 3em;
-    font-style: italic;
-    margin-left: 11.5%;
+    margin-bottom: 1em;
+    margin-left: 5%;
 
-    @media (max-width: 600px)
-    {
-        
-        margin-left: 3%;
-    }
-
-    @media (min-width: 601px) and (max-width: 766px)
-    {
-        margin-left: 5%;
-    }
-
-    @media (min-width: 767px) 
-    { 
-        width: 40%; 
-        margin-left: 20%;
-    }
 
     .avatarUser
     {
 
         border-radius: 50%;
-        margin-left: 5px;
+        
 
         @media (max-width: 450px)
         {
@@ -65,26 +52,26 @@ Title Category
 
         @media (min-width: 600px) 
         {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
         }
 
         @media (min-width: 960px) 
         {
-            width: 30px;
-            height: 30px;
+            width: 34px;
+            height: 34px;
         }
 
         @media (min-width: 1200px) 
         {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
         } 
     }
 
     .user-article-title-p
     {
-        font-size: calc(0.4em + 1vw);
+        font-size: calc(0.7em + 1vw);
         margin-left: 10px;
         margin-top: 5px;
         word-break: break-all;
@@ -92,7 +79,7 @@ Title Category
 
         @media (min-width: 960px) {
             
-            font-size: calc(0.2em + 1vw);
+            font-size: calc(0.5em + 1vw);
             margin-left: 10px;
             margin-top: 5px;
             word-break: break-all;
@@ -100,46 +87,6 @@ Title Category
     }
 
 }
-
-/*************
-Title By Author
-***************/
-// .user-article-title
-// {
-//     margin-bottom: 2em;
-//     margin-top: 2em; 
-
-//    .user-article-title-p 
-//     {
-//         text-align: center;
-//         font-weight: bold;
-//         line-height: 2em;
-//         font-size: calc(0.5em + 0.6vw);
-//         text-shadow: 2px 1px 1px rgb(107, 107, 107); 
-
-//         @media (min-width: 449px) 
-//         { 
-//             font-size: calc(0.8em + 0.6vw); 
-//         }
-
-//         @media(min-width: 778px)
-//         {
-            
-//             font-size: calc(1em + 0.8vw);
-//         }
-
-//         @media(min-width: 992px)
-//         {
-//             font-size: calc(1em + 0.8vw);
-//         }
-
-//         @media(min-width: 1199px)
-//         {
-//             font-size: calc(1em + 1vw); 
-//         }
- 
-//     } 
-// }
 
 
 /*************
@@ -225,7 +172,7 @@ ALL TEXT
     }
 
 
-    /* AVATAR */
+    /* AVATAR (article_by-category) */
     .avatarUser
     {
 
