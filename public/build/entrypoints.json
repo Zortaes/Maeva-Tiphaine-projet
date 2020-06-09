@@ -1,20 +1,21 @@
 {
   "entrypoints": {
-    "user_details": {
+    "legalMention": {
       "css": [
-        "/build/user_details.css"
+        "/build/legalMention.css"
       ],
       "js": [
-        "/build/user_details.js"
+        "/build/legalMention.js"
       ]
     },
-    "homepage": {
+    "app": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/homepage.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/homepage.css"
+        "/build/app.css"
       ]
     },
     "article_details": {
@@ -50,11 +51,14 @@
       ]
     },
     "profil": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
+        "/build/profil.js"
+      ],
       "css": [
         "/build/profil.css"
-      ],
-      "js": [
-        "/build/profil.js"
       ]
     },
     "board": {
@@ -65,22 +69,21 @@
         "/build/board.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "user_details": {
       "css": [
-        "/build/app.css"
+        "/build/user_details.css"
+      ],
+      "js": [
+        "/build/user_details.js"
       ]
     },
-    "legalMention": {
-      "css": [
-        "/build/legalMention.css"
-      ],
+    "homepage": {
       "js": [
-        "/build/legalMention.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/homepage.js"
+      ],
+      "css": [
+        "/build/homepage.css"
       ]
     },
     "modal": {
@@ -101,7 +104,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -116,11 +119,19 @@
         "/build/error.js"
       ]
     },
+    "validation_reminder": {
+      "css": [
+        "/build/validation_reminder.css"
+      ],
+      "js": [
+        "/build/validation_reminder.js"
+      ]
+    },
     "formSignup": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/vendors~formArticle~formSignup.js",
-        "/build/vendors~formSignup.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
         "/build/formSignup.js"
       ],
       "css": [
@@ -137,8 +148,8 @@
     },
     "formArticle": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination.js",
-        "/build/vendors~formArticle~formSignup.js",
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
         "/build/vendors~formArticle.js",
         "/build/formArticle.js"
       ],

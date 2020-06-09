@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rappel de validation{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('validation_reminder') }}
+{% endblock %}
+
+{% block body %}
+
+
+<div class="validation-reminder-container">
+    <h1>Veuillez valider votre compte</h1>
+
+{% for message in app.flashes('successEmailSent') %}
+    <div class="alert alert-success w-100 text-center mt-4 successEmailSent">
+        {{ message }}
+    </div>
+{% endfor %}
+
+    <p>
+        Pour pouvoir utiliser votre compte, merci de valider l'adresse e-mail que vous nous avez renseigné : <span style="font-style: italic;"> " {{ user.email }} " </span>.
+    </p>
+
+    <p>Pour cela, cliquez sur le lien présent dans cet e-mail afin de valider votre adresse e-mail ainsi que votre compte.</p>
+
+    <p><span style="font-weight: bold;"> &#9888 Attention </span> : il se pourrait que l'email que nous vous avons envoyé soit considéré comme un spam.</p> 
+    <p>Si vous ne le voyez pas dans votre boite mail, vérifiez dans votre dossier spam.</p> 
+    <p>Si vous ne le trouvez toujours pas, ajoutez la.rubrique.ecolo@gmail.com à votre liste de contacts puis <a class="help" href="{{path('sendValidationEmail')}}">demandez l'envoie d'un nouvel e-mail</a>.</p>
+    
+    <a href="{{ path('showProfil')}}"><button type="button" class="btn btn-secondary returnBtn">Retour à mon profil</a></button>
+
+</div>
+
+
+{% endblock %}

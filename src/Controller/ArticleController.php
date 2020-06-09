@@ -41,6 +41,10 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('logout');
         }
 
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
+        }
+
         $newArticle = new Article();
 
         /** @var \App\Entity\User $user */
@@ -127,6 +131,10 @@ class ArticleController extends AbstractController
         if($this->getUser()->getIsBanned() == true)
         {
             return $this->redirectToRoute('logout');
+        }
+
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
         }
 
         // order the existing ingredient into array
@@ -272,6 +280,10 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('logout');
         } 
 
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
+        }
+
         $vote_value = $request->request->get('userVote');
 
         $vote = $this->getDoctrine()->getRepository(Vote::class)->findOneBy([
@@ -329,6 +341,10 @@ class ArticleController extends AbstractController
              return $this->redirectToRoute('logout');
         } 
 
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
+        }
+
         $flag = $request->request->get('flag');
 
         if(filter_var($flag, FILTER_VALIDATE_BOOLEAN))
@@ -363,6 +379,10 @@ class ArticleController extends AbstractController
         {      
             return $this->redirectToRoute('logout');
         } 
+
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
+        }
 
         $this->denyAccessUnlessGranted('DELETE', $article);
 
