@@ -1,4 +1,5 @@
-
+@import "/../../node_modules/cropperjs/dist/cropper.min";
+@import '../../vendor/presta/image-bundle/Resources/public/css/cropper.css';
 
 /******************************************************************************
                                  PROFIL
@@ -9,16 +10,192 @@ h2
     font-size: 1.7em; 
     color: #81964d; 
     font-weight: bold;
-    margin-bottom: 1em; 
+    margin-bottom: 1em;
+    text-align: center; 
 }
 
-p.username-profil
+/**************
+FLASH MESSAGES
+**************/
+
+.edit-self
 {
-    max-width: 80%;
-    word-break: break-all;
-
+    background-color: #9eb66b ;
+    color: white;
+    margin-bottom: 2em;
 }
 
+/****************
+ FORM EDIT SELF
+*****************/
+
+    .container-form-custom
+    {
+        margin-bottom: 3em;
+        margin-top: 1em;
+    }
+
+    .edit-user-input
+    {
+
+        @media(min-width: 768px)
+        {
+            display: flex;
+            flex-direction: row !important;
+            margin: 1em 0 1em 0;
+        }
+
+    }
+
+    #edit-user-input-image
+    {
+        text-align: center;
+    }
+
+    .form-group
+    {
+        text-align: center !important;
+    }
+
+    .cropper-local 
+    {
+        max-width : 300px !important;
+        margin: auto;
+    }
+
+
+/***********
+ Labels 
+ **********/
+    label, legend 
+    {
+        margin-top: 1.5em;
+        font-size: 1.2em!important; 
+        font-weight: bold;
+        color: gray;
+    }
+    
+    .input-edit-user-label
+    {
+        @media(min-width: 768px)
+        {
+            min-width: 30%;
+        }
+
+        @media(min-width: 1090px)
+        {
+            min-width: 20%;
+        }
+        
+        p
+        {
+            margin-top: 1.5em;
+            font-size: 1.2em!important; 
+            font-weight: bold;
+            color: gray; 
+        }
+    }
+
+/***********
+ Input
+ **********/
+    .input-edit-user-input
+    {
+        
+        @media(min-width: 768px)
+        {
+            min-width: 70%;
+            margin-top: 1.7em;
+        }
+
+        @media(min-width: 1090px)
+        {
+            min-width: 80%;
+        }
+
+        a
+        {
+            font-size: 1.2em;
+            color: #de6262;
+        }
+
+    }
+
+/********
+ ERRORS
+ ********/
+ label span 
+ {
+    display: none;
+ 
+    span span:first-child 
+    {
+        display: none;
+    }
+ }
+
+.error-edit-user span
+{
+    text-align: center;
+    
+    span span:first-child 
+    {
+        display: none;
+    }
+        
+}
+
+/*****************************
+ Button color to validate form 
+ *****************************/
+.validateBtn
+{
+    margin-top: 2em;
+    text-align: center;
+    button
+    {
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+ 
+        &:hover
+        {
+            border-color: #799440 !important;
+            transition: 1s;
+            background-color: #799440  !important;
+        }
+ 
+    }
+ 
+    /** for login form **/
+    a
+    {
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+     
+        &:hover
+        {
+            border-color: #799440 !important;
+            transition: 1s;
+            background-color: #799440  !important;
+        }
+    }
+ 
+    /** for login form **/
+    #redirectBtn
+    {
+        width: 100% !important;
+        
+        @media (min-width: 992px)
+        {
+            width: 50% !important;
+        }
+    }
+ 
+}
+
+ 
 .dropdown-account-custum 
 { 
     /* Btn "paramètres du compte" */
@@ -86,6 +263,7 @@ PAGINATION
     }
 }
   
+
 
 
 

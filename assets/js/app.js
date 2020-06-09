@@ -47,6 +47,7 @@ require('bootstrap');
 var app = {
     init:function() 
     {
+        var mql = window.matchMedia("(max-width: 960px)");
 
         $(document).ready(function()
         {
@@ -59,6 +60,23 @@ var app = {
             });
 
         })
+
+            // call listener function explicitly at run time
+            mediaqueryresponse(mql);
+
+            // attach listener function to listen in on state changes
+            mql.addListener(mediaqueryresponse);
+                
+            function mediaqueryresponse(mql)
+            {
+                    
+                /* if media query doesn't match */
+                if (!mql.matches)
+                { 
+                    app.closeSideNav();
+                } 
+            }
+      
     },
 
     openSideNav:function() 
@@ -74,7 +92,6 @@ var app = {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("overlay").style.display = "none";
     },
-
         
 }
 
