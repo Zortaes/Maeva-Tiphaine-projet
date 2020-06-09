@@ -288,17 +288,34 @@ ALL TEXT IN CARD (after image)
         margin: 0; 
     }
 
-    .card-paragraph-author 
+    .articleAuthor
     {
-        margin-top: 1.5em !important;
-        font-style: italic; 
-        text-align: center;
-        margin-left: 20%;
-        max-width: 60%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+       margin-top: 0.5em; 
+        display: flex; 
+        justify-content: center; 
+
+        .avatarUser 
+        {
+            border-radius: 50%; 
+            width: 1.3em; 
+            height: 1.3em; 
+
+        }
+
+        .card-paragraph-author 
+        {
+            margin-left: 5px;
+            font-style: italic; 
+            text-align: center;
+            max-width: 60%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        
     }
+    
 
     .card-paragraph-summary 
     {

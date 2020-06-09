@@ -13,35 +13,51 @@
 {% block body %}
 
 <div class="card card-custum">
-    <div class="card-body">
-      <img class="card img-fluid" src="{{ asset("build/images/iconUser.png") }} "
-          alt="image represent icon user avatar">
-      <h5 class="card-title title-custum">{{user.viewUsername}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">id {{user.id}}</h6>
-      <p class="card-text">email : {{user.email}}</p>
-      <p class="card-text">date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
-      {% for role in user.roles %}
-        <p class="card-text">{{role}}</p>  
-      {% endfor %}  
-      <p class="card-text">Profil créé le : {{user.createdAt|date("d/m/Y", "Europe/Paris")}}</p> 
-      <a href="{{path('editUser', {'id' : user.id}) }}" class="card-link">Modifier</a>
+    <div class="card-body row">
       
-      {% if (user.isBanned) %}
-        <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
-        data-target="#modalUnbanAccount-{{ user.id }}">
-          débannir
-        </button>
-      {% else %}
-        <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
-          data-target="#modalBanAccount-{{ user.id }}">
-            Bannir
-        </button>
-      {% endif %}
+      <!-- Image avatar user -->
+      <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+          <img class="card img-fluid user-avatar" src="{{ asset("uploads/user/avatar/" ~ user.avatar) }}" alt="image represent icon user avatar">
+      </div>
+      <!-- /Image avatar user-->
+      
+      <!-- elements user -->
+      <div class="col-12 col-md-6 col-lg-7 col-xl-8">
+        <h5 class="card-title title-custum">{{user.viewUsername}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">id {{user.id}}</h6>
+        <p class="card-text">email : {{user.email}}</p>
+        <p class="card-text">date de naissance : {{user.birthDate|date("d/m/Y", "Europe/Paris")}}</p>
+        {% for role in user.roles %}
+          <p class="card-text">{{role}}</p>  
+        {% endfor %}  
+        <p class="card-text">Profil créé le : {{user.createdAt|date("d/m/Y", "Europe/Paris")}}</p> 
+      </div>
+      <!-- /elements user -->
 
-      <button type="button" class="btn btn-primary link-delete" data-toggle="modal"
-      data-target="#modalDeleteAccount-{{ user.id }}">
-        Supprimer
-      </button>  
+      <!-- buttons -->
+      <div class="col-12 ml-md-4 ml-lg-0">
+
+        <a href="{{path('editUser', {'id' : user.id}) }}" class="card-link">Modifier</a>
+        
+        {% if (user.isBanned) %}
+          <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+          data-target="#modalUnbanAccount-{{ user.id }}">
+            débannir
+          </button>
+        {% else %}
+          <button type="button" class="btn btn-primary user-ban " data-toggle="modal"
+            data-target="#modalBanAccount-{{ user.id }}">
+              Bannir
+          </button>
+        {% endif %}  
+        <button type="button" class="btn btn-primary link-delete" data-toggle="modal"
+        data-target="#modalDeleteAccount-{{ user.id }}">
+          Supprimer
+        </button>
+        
+      </div>
+      <!-- /buttons -->
+
     </div>
 
 <!-- MODALS -->
