@@ -7,6 +7,7 @@ Articles signalés
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('article_by_category') }}
+{{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
 
@@ -17,7 +18,7 @@ Articles signalés
 </div>
 
 
-{% if articles is empty %}
+{% if allFlag is empty %}
 
 <p class="text-center">Il n'y a pas d'articles signalés</p>
   
@@ -26,7 +27,7 @@ Articles signalés
 <!-- Container Cards -->
 <div class="container container-custum row">
 
-    {% for article in articles %}
+    {% for article in allFlag %}
 
 
     <div class="card card-custum col-sm-5">
@@ -99,8 +100,18 @@ Articles signalés
     </div>
     {% endfor %}
 
+    
+
     {% endif %}
 </div>
+
+<div class="pagination-custum">
+    {{ knp_pagination_render(allFlag) }}
+</div> 
 <!-- /Container Cards -->
 {% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('pagination') }}
+{% endblock %}

@@ -3,15 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("username", message="Ce nom d'utilisateur existe déjà")
  * @UniqueEntity("email", message="Cet email est déjà utilisé")
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -23,7 +27,12 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=16, unique=true)
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $facebook_id;
+
+    /**
+     * @ORM\Column(type="string", length=55, unique=true)
      * @Assert\NotBlank
      */
     private $username;
@@ -35,13 +44,29 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $avatar;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank
+    * NOTE: This is not a mapped field of entity metadata, just a simple property.
+    * 
+    * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar", size="avatarSize")
+    * 
+    * @var File|null
+    */
+    private $avatarFile;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $avatarSize;
+
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
      */
     private $birth_date;
 
@@ -77,6 +102,16 @@ class User implements UserInterface
     private $is_banned;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $validation;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validate;
+
+    /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
@@ -89,6 +124,7 @@ class User implements UserInterface
     public function __construct() 
     {
         $this->is_banned = false;
+        $this->validate = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         
@@ -155,11 +191,10 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setAvatar($avatar)
+    public function setAvatar(?string $avatar): void
     {
-        $this->avatar = $avatar;
+        $this->avatar = $avatar; 
 
-        return $this;
     }
 
     /**
@@ -309,6 +344,114 @@ class User implements UserInterface
     public function setIsBanned($is_banned)
     {
         $this->is_banned = $is_banned;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validation
+     */ 
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set the value of validation
+     *
+     * @return  self
+     */ 
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validate
+     */ 
+    public function getValidate()
+    {
+        return $this->validate;
+    }
+
+    /**
+     * Set the value of validate
+     *
+     * @return  self
+     */ 
+    public function setValidate($validate)
+    {
+        $this->validate = $validate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of facebook_id
+     */ 
+    public function getFacebook_id()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set the value of facebook_id
+     *
+     * @return  self
+     */ 
+    public function setFacebook_id($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of avatarSize
+     *
+     * @return  int|null
+     */ 
+    public function getAvatarSize()
+    {
+        return $this->avatarSize;
+    }
+
+    /**
+     * Set the value of avatarSize
+     *
+     * @param  int|null  $avatarSize
+     *
+     * @return  self
+     */ 
+    public function setAvatarSize($avatarSize)
+    {
+        $this->avatarSize = $avatarSize;
+
+        return $this;
+    }
+
+    /**
+     * Get nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  File|null
+     */ 
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * Set nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @param  File|null  $avatarFile  NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  self
+     */ 
+    public function setAvatarFile($avatarFile)
+    {
+        $this->avatarFile = $avatarFile;
 
         return $this;
     }

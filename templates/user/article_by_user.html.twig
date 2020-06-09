@@ -6,15 +6,27 @@
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('article_by_category') }}
+{{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
 {% block body %}
 
-<div class="category-title">
-    <p class="category-title-p">{{user.viewUsername}}</p>
+<div class="articleAuthor d-flex">
+        {# Default avatar #}
+        {% if user.avatar == 'defaultAvatar.jpg' %}
+        <img class="avatarUser" src="{{ asset("build/images/" ~ user.avatar ) }}"
+            alt="image represent avatarUser {{ user.viewUsername }}">
+        {% else %}
+        {# user avatar #}
+        <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ user.avatar ) }}"
+            alt="image represent avatarUser {{ user.viewUsername }}">
+        {% endif %}
+        <div class="user-article-title">
+            <p class="user-article-title-p">{{user.viewUsername}}</p>
+        </div>
 </div>
 
-  
+
 <!-- Container Cards -->
 <div class="container container-custum row">
 
@@ -29,7 +41,7 @@
             <h5 class="card-title card-title-custum">
                 <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
                    {{article.title}} 
-                </a>      
+                </a>
             </h5>
             <p class="card-text-author">
                 <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" class="link-custum" style="color:{{ article.category.color }}">
@@ -102,5 +114,5 @@
 
 {% block javascripts %}
 {{ parent() }}
-{{ encore_entry_script_tags('article_by_category') }}
+{{ encore_entry_script_tags('pagination') }}
 {% endblock %}

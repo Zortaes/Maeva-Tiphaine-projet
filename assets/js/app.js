@@ -23,19 +23,23 @@ require('../images/linge-de-maison.jpg');
 require('../images/menage-hygiene-maison.jpg');
 require('../images/recyclage.jpg');
 require('../images/vetements.jpg');
-require('../images/tiphaine.jpeg');
+require('../images/TiphaineSu.jpg');
+require('../images/TiphaineLe.jpg');
 require('../images/maeva.jpg');
 require('../images/logoLinkedin.jpg');
 require('../images/iconparam.png');
 require('../images/articlesFlag.jpg');
 require('../images/iconUser.png');
 require('../images/Logo.jpg');
+require('../images/lost_tree.png');
+require('../images/defaultAvatar.jpg');
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';
 
 var $ = require('jquery');
+require('bootstrap'); 
 
 
 
@@ -43,6 +47,7 @@ var $ = require('jquery');
 var app = {
     init:function() 
     {
+        var mql = window.matchMedia("(max-width: 960px)");
 
         $(document).ready(function()
         {
@@ -55,6 +60,23 @@ var app = {
             });
 
         })
+
+            // call listener function explicitly at run time
+            mediaqueryresponse(mql);
+
+            // attach listener function to listen in on state changes
+            mql.addListener(mediaqueryresponse);
+                
+            function mediaqueryresponse(mql)
+            {
+                    
+                /* if media query doesn't match */
+                if (!mql.matches)
+                { 
+                    app.closeSideNav();
+                } 
+            }
+      
     },
 
     openSideNav:function() 
@@ -70,7 +92,6 @@ var app = {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("overlay").style.display = "none";
     },
-
         
 }
 

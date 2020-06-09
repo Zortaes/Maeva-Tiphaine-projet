@@ -1,19 +1,20 @@
 {
   "entrypoints": {
-    "about": {
+    "user_details": {
       "css": [
-        "/build/about.css"
+        "/build/user_details.css"
       ],
       "js": [
-        "/build/about.js"
+        "/build/user_details.js"
       ]
     },
     "homepage": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/homepage.js"
+      ],
       "css": [
         "/build/homepage.css"
-      ],
-      "js": [
-        "/build/homepage.js"
       ]
     },
     "article_details": {
@@ -25,12 +26,11 @@
       ]
     },
     "form": {
-      "js": [
-        "/build/vendors~form.js",
-        "/build/form.js"
-      ],
       "css": [
         "/build/form.css"
+      ],
+      "js": [
+        "/build/form.js"
       ]
     },
     "article_by_category": {
@@ -41,21 +41,23 @@
         "/build/article_by_category.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "about": {
       "css": [
-        "/build/app.css"
+        "/build/about.css"
+      ],
+      "js": [
+        "/build/about.js"
       ]
     },
     "profil": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
+        "/build/profil.js"
+      ],
       "css": [
         "/build/profil.css"
-      ],
-      "js": [
-        "/build/profil.js"
       ]
     },
     "board": {
@@ -66,12 +68,14 @@
         "/build/board.js"
       ]
     },
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
+    "app": {
       "js": [
-        "/build/user_details.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "legalMention": {
@@ -96,6 +100,53 @@
       ],
       "js": [
         "/build/tables.js"
+      ]
+    },
+    "pagination": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/pagination.js"
+      ],
+      "css": [
+        "/build/pagination.css"
+      ]
+    },
+    "error": {
+      "css": [
+        "/build/error.css"
+      ],
+      "js": [
+        "/build/error.js"
+      ]
+    },
+    "formSignup": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formSignup~profil.js",
+        "/build/formSignup.js"
+      ],
+      "css": [
+        "/build/formSignup.css"
+      ]
+    },
+    "formLogin": {
+      "css": [
+        "/build/formLogin.css"
+      ],
+      "js": [
+        "/build/formLogin.js"
+      ]
+    },
+    "formArticle": {
+      "js": [
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~formArticle.js",
+        "/build/formArticle.js"
+      ],
+      "css": [
+        "/build/formArticle.css"
       ]
     }
   }

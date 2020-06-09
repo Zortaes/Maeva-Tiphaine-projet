@@ -7,6 +7,7 @@
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('article_by_category') }}
+{{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
 
@@ -36,15 +37,24 @@
             <h5 class="card-title card-title-custum">
                 <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
                    {{article.title}} 
-                </a>      
+                </a>
             </h5>
             <p class="card-text-author">
+                {# Default avatar #}
+                {% if article.user.avatar == 'defaultAvatar.jpg' %}
+                <img class="avatarUser" src="{{ asset("build/images/" ~ article.user.avatar ) }}"
+                    alt="image represent avatarUser {{ article.user.viewUsername }}">
+                {% else %}
+                {# user avatar #}
+                <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ article.user.avatar ) }}"
+                    alt="image represent avatarUser {{ article.user.viewUsername }}">
+                {% endif %}
                 <a href="{{path('articleByUser', {'slug':article.user.slug})}}" class="link-custum">
                     {{article.user.viewUsername}}
                 </a>
             </p>
             <p class="card-paragraph card-paragraph-summary">
-                {{article.summary}} 
+                {{article.summary}}
             </p>
 
             {% set sum = 0 %}
@@ -111,5 +121,5 @@
 
 {% block javascripts %}
 {{ parent() }}
-{{ encore_entry_script_tags('article_by_category') }}
+{{ encore_entry_script_tags('pagination') }}
 {% endblock %}

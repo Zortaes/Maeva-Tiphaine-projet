@@ -20,6 +20,8 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
+                    - App\Security\FacebookAuthenticator
+                entry_point: App\Security\LoginAuthenticator
             logout:
                 path: logout
                 invalidate_session: true

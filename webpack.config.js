@@ -35,6 +35,13 @@ Encore
     .addEntry('legalMention', './assets/js/legalMention.js')
     .addEntry('modal', './assets/js/modal.js')
     .addEntry('tables', './assets/js/tables.js')
+    .addEntry('pagination', './assets/js/pagination.js')
+    .addEntry('error', './assets/js/error.js')
+    .addEntry('validation_reminder', './assets/js/validation_reminder.js')
+    .addEntry('formSignup', './assets/js/formSignup.js')
+    .addEntry('formLogin', './assets/js/formLogin.js')
+    .addEntry('formArticle', './assets/js/formArticle.js')
+
    
 
     //.addEntry('page1', './assets/js/page1.js')
@@ -78,7 +85,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
