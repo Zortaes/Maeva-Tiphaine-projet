@@ -119,6 +119,14 @@
         "/build/error.js"
       ]
     },
+    "validation_reminder": {
+      "css": [
+        "/build/validation_reminder.css"
+      ],
+      "js": [
+        "/build/validation_reminder.js"
+      ]
+    },
     "formSignup": {
       "js": [
         "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
