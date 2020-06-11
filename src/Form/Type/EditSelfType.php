@@ -67,7 +67,7 @@ class EditSelfType extends AbstractType
             $user = $event->getData();
             $form = $event->getForm();
 
-            dump($form->getData()->setUsername($user['viewUsername'])); 
+            $form->getData()->setUsername($user['viewUsername']); 
             unset($user['viewUsername']);
 
         })
