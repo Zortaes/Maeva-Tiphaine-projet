@@ -565,7 +565,12 @@ Logo
   flex-shrink: 0;
   
   background-color: #cccccc;
-  height: 15vh; 
+  height: 15vh;
+
+  @media (min-height: 960px)
+  {
+    max-height: 100px !important;
+  }
 
   .footer-link-custum p
    {
