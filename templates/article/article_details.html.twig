@@ -76,8 +76,7 @@
                     ...
                     </button>
 
-                    <div class="dropdown-menu option-article p-0 mt-1 " aria-labelledby="dropdownMenu2">
-                        <div class="dropdown-menu-flag-custom">
+                    <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
                             <ul>
                                 <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
                                 <li><button type="submit" name="flag" value="true">Signaler l'article</button></li>
@@ -98,7 +97,6 @@
                                     </button></li>                    
                                 {% endif %}
                             </ul>
-                        </div>
                     </div>
                 </div>
             </div>

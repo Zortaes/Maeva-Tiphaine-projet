@@ -473,6 +473,12 @@ Logo
   height: 15vh;
 }
 
+@media (min-height: 960px) {
+  .container-footer-custum {
+    max-height: 100px !important;
+  }
+}
+
 .container-footer-custum .footer-link-custum p {
   padding-left: 1em;
   padding-top: 1em;
