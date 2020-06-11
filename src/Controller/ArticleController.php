@@ -354,7 +354,7 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
-            $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande.');
+            $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande dans les meilleurs délais.');
 
             return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug() ], 301);
 

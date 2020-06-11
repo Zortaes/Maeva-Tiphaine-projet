@@ -25,7 +25,7 @@
 <!-- Block "Information générales" -->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
 
-  <h2>Mes Informations générales</h2>
+  <h2>Mes Informations Générales</h2>
 
 <div class="container container-form-custom">
 
@@ -137,7 +137,7 @@
   <h2 class="text-center mb-3">Vos articles</h2>
 
   {% if articles is empty %}
-  <p class="text-center">Vous n'avez pas encore créer d'article</p>
+  <p class="text-center">Vous n'avez pas encore créé d'article</p>
   {% else %}
 
   <table class="table">
@@ -148,7 +148,7 @@
         <th scope="col">Titre</th>
         <th scope="col">Sommaire</th>
         <th scope="col" class="mobile-option">Option</th>
-        <th scope="col" class="desktop-option">Details</th>
+        <th scope="col" class="desktop-option">Détails</th>
         <th scope="col" class="desktop-option">Modifier</th>
         <th scope="col" class="desktop-option">Supprimer</th>
       </tr>
@@ -187,7 +187,7 @@
 
               <div class="container-parameters-option">
                 <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
-                  Details
+                  Détails
                 </a>
                 <a href="#">
                   Modifier
@@ -207,7 +207,7 @@
 
         <td class="desktop-option">
           <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
-            Voir les details
+            Voir les détails
           </a>
         </td>
         <td class="desktop-option">
@@ -231,7 +231,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article "{{article.title}}" ?</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Voulez-vous vraiment supprimer l'article "{{article.title}}" ?</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -265,11 +265,11 @@
 <hr>
 
 
-<h2 class="text-center mt-5 mb-4">Les articles que vous avez voté</h2>
+<h2 class="text-center mt-5 mb-4">Les articles que vous avez noté</h2>
 
 {% if user.votes is empty %}
 
-<p class="text-center">Vous n'avez pas encore voté d'article </p>
+<p class="text-center">Vous n'avez pas encore noté d'article </p>
 
 {% else %}
 
@@ -292,13 +292,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer votre compte ?</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Voulez-vous vraiment supprimer votre compte ?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Tous vos articles ainsi que votre contributions aux votes seront aussi supprimés.
+        Tous vos articles, ainsi que votre contribution aux notes, seront aussi supprimés.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

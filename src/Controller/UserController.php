@@ -193,7 +193,7 @@ class UserController extends AbstractController
 
            }
 
-           $this->addFlash("successModifySelf", "Vos changement ont bien été enregistrés");
+           $this->addFlash("successModifySelf", "Vos changements ont bien été enregistrés");
 
            return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
         }
@@ -222,7 +222,7 @@ class UserController extends AbstractController
      * @return $this redirect to route showProfil 
      * 
      */
-    public function ModifyPassword(Request $request, UserPasswordEncoderInterface $encoder)
+    public function modifyPassword(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -254,7 +254,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash("successModifyPassword", "Votre mot de passe à bien été modifié");
+            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
         
            return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
 
