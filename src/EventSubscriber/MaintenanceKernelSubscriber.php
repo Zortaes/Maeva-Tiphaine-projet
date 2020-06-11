@@ -12,6 +12,7 @@ class MaintenanceKernelSubscriber implements EventSubscriberInterface
 
     public function __construct($displayMaintenanceMessage)
     {
+       
         $this->displayMaintenanceMessage = $displayMaintenanceMessage[0];
         $this->maintenanceMessage = $displayMaintenanceMessage[1]; 
      
