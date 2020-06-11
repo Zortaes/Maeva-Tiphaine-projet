@@ -1,5 +1,13 @@
 {
   "entrypoints": {
+    "legalMention": {
+      "css": [
+        "/build/legalMention.css"
+      ],
+      "js": [
+        "/build/legalMention.js"
+      ]
+    },
     "app": {
       "js": [
         "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
@@ -8,15 +16,6 @@
       ],
       "css": [
         "/build/app.css"
-      ]
-    },
-    "homepage": {
-      "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/homepage.js"
-      ],
-      "css": [
-        "/build/homepage.css"
       ]
     },
     "article_details": {
@@ -78,12 +77,13 @@
         "/build/user_details.js"
       ]
     },
-    "legalMention": {
-      "css": [
-        "/build/legalMention.css"
-      ],
+    "homepage": {
       "js": [
-        "/build/legalMention.js"
+        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/homepage.js"
+      ],
+      "css": [
+        "/build/homepage.css"
       ]
     },
     "modal": {
