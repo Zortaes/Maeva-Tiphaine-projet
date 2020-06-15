@@ -86,10 +86,16 @@ class Article
      */
     private $votes;
 
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Flag", mappedBy="article", cascade={"remove"})
+     */
+    private $flags;
+
     public function __construct() 
     {
         $this->ingredients = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->flags = new ArrayCollection();
     }
 
    
@@ -286,4 +292,24 @@ class Article
     }
 
 
+
+    /**
+     * Get the value of flags
+     */ 
+    public function getFlags()
+    {
+        return $this->flags;
+    }
+
+    /**
+     * Set the value of flags
+     *
+     * @return  self
+     */ 
+    public function setFlags($flags)
+    {
+        $this->flags = $flags;
+
+        return $this;
+    }
 }
