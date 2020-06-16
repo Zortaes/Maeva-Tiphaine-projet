@@ -124,6 +124,13 @@ CARD
         color: #de6262 !important;
     }
 
+    .article-delete:hover
+    {
+        text-decoration: underline; 
+    }
+
+   
+
     a
     {   
         padding-left: 0.5em;
@@ -439,8 +446,10 @@ VOTES
 
 }
 
+
+
 /* creation's date*/
-.dateDeCreation
+.dateCreation
 {
     text-align: right;
     font-size: 0.6em;
@@ -448,8 +457,16 @@ VOTES
     border-top: 1px solid rgb(173, 172, 172);
 }
 
+/**********
+Flags 
+***********/
 
-
+/* form in the modal */
+.select-flag:focus
+{
+    border-color: #6c757d; 
+    box-shadow: 0 0 0 0.2rem rgba(100, 105, 96, 0.25); 
+}
 
 
 

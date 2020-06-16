@@ -22,6 +22,12 @@
             
      }
 
+     .button-yes-custum:focus
+     {
+      border-color: #de6262; 
+      box-shadow: 0 0 0 0.2rem rgba(105, 18, 3, 0.25); 
+     }
+
      .button-yes-custum a 
      { 
         color: white;            

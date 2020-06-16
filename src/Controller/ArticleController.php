@@ -361,30 +361,6 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/{slug}/signaler/{value}", name="flag")
-     * @IsGranted("ROLE_USER")
-     * 
-     * @param Article $article that we want flag 
-     * @param Request $request 
-     * @param EntityManagerInterface $manager 
-     * 
-     * @return Flagged, return a boolean when the article get flagged
-     */
-    public function flag(Article $article, Request $request, EntityManagerInterface $manager, $value)
-    {
-        dump($value);
-        dump($article);
-        dd('prout');
-
-        $flag = $request->request->get('flag');
-
-        if (filter_var($flag, FILTER_VALIDATE_BOOLEAN)) {
-        } else
-
-            throw new Exception('La valeur n\'est pas bonne');
-    }
-
-    /**
      * @Route("/{slug}/supprimer", name="article_delete")
      * 
      * @param Article $article that we want delete 

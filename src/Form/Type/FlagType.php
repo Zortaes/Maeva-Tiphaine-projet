@@ -3,19 +3,12 @@
 namespace App\Form\Type;
 
 use App\Entity\Flag;
-
-use App\Entity\Contact;
-use Symfony\Component\Form\RatioType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 
 class FlagType extends AbstractType
@@ -29,7 +22,7 @@ class FlagType extends AbstractType
         ->add('option_value', ChoiceType::class,
         [
             'expanded' => false, 
-            'label' => "",    
+            'label' => "pourquoi voulez vous signaler cet article ?",    
             'choices' => [
                 'fausse information' => 1,
                 'contenu indésirable' => 2,
@@ -39,7 +32,7 @@ class FlagType extends AbstractType
             ],                        
         ])
 
-        ->add('Envoyer', SubmitType::class);
+        ->add('Valider', SubmitType::class);
         
     }
 
