@@ -16,6 +16,9 @@
     {{ message }}
 </div>
 {% endfor %}
+
+
+
 <div class="articleAuthor">
     {# Default avatar #}
     {% if article.user.avatar == 'defaultAvatar.jpg' %}
@@ -82,8 +85,14 @@
                 <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
                     <ul>
 
-                        <li><button type="button" class="btn btn-primary article-delete " data-toggle="modal"
-                                data-target="#modalFlagArticle">Signaler l'article</button></li>
+                        <li>
+                            {% if flag == false %}
+                                <button type="button" class="btn btn-primary article-delete " data-toggle="modal"
+                                data-target="#modalFlagArticle">Signaler l'article</button> 
+                            {% else %}
+                                <p> Article déjà signalé </p>
+                            {% endif %}                     
+                        </li>
 
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a></li>

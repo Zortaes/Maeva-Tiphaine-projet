@@ -239,12 +239,18 @@ class ArticleController extends AbstractController
             "article" => $article
         ]);
 
+        /* Request to see if the user has already flag this article */
+        $flag = $this->getDoctrine()->getRepository(Flag::class)->findOneBy([
+            "user" => $this->getUser(),
+            "article" => $article
+        ]);
+
         /* form to the flags */
         $newFlag = new Flag();
         $formFlag = $this->createForm(FlagType::class, $newFlag);
         $formFlag->handleRequest($request);
 
-        if ($formFlag->isSubmitted() && $formFlag->isValid()) {
+        if ($formFlag->isSubmitted() && $formFlag->isValid() && $flag === null) {
 
             $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -260,13 +266,13 @@ class ArticleController extends AbstractController
 
             /* Requests */
             $formFlagValue = $formFlag->get('option_value')->getData();
-            $flagger = $this->getUser(); 
+            $flagger = $this->getUser();
 
             /* set in the BDD Flag */
-            $newFlag->setOptionValue($formFlagValue); 
-            $newFlag->setUser($flagger); 
-            $newFlag->setArticle($article); 
-            $newFlag->setCreatedAt(new Datetime); 
+            $newFlag->setOptionValue($formFlagValue);
+            $newFlag->setUser($flagger);
+            $newFlag->setArticle($article);
+            $newFlag->setCreatedAt(new Datetime);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newFlag);
@@ -278,17 +284,19 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande dans les meilleurs délais.');
 
-            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);  
-
-            
+            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
         }
 
+        /* See to the template the posibility for flag an article or no */
+        ($flag === null) ? $flag = false : $flag = true; 
+         
         return $this->render(
             'article/article_details.html.twig',
             [
                 'form' => $formFlag->createView(),
                 'article' => $article,
-                'vote' => $vote
+                'vote' => $vote,
+                'flag' => $flag
             ]
         );
     }
@@ -371,8 +379,6 @@ class ArticleController extends AbstractController
         $flag = $request->request->get('flag');
 
         if (filter_var($flag, FILTER_VALIDATE_BOOLEAN)) {
-
-            
         } else
 
             throw new Exception('La valeur n\'est pas bonne');
