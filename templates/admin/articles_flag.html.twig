@@ -7,6 +7,7 @@ Articles signalés
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('article_by_category') }}
+{{ encore_entry_link_tags('modal') }}
 {{ encore_entry_link_tags('pagination') }}
 {% endblock %}
 
@@ -21,37 +22,52 @@ Articles signalés
 {% if allFlag is empty %}
 
 <p class="text-center">Il n'y a pas d'articles signalés</p>
-  
+
 {% else %}
-  
+
 <!-- Container Cards -->
 <div class="container container-custum row">
 
-    {% for article in allFlag %}
+    {% for articleFlag in allFlag %}
 
 
     <div class="card card-custum col-sm-5">
-        <img class="card img-fluid" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-            alt="image represent category {{ article.category.name}}">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ articleFlag.article.category.picture ) }} "
+            alt="image represent category {{ articleFlag.article.category.name}}">
         <div class="card-body card-body-custum">
+
+            {% set sumFlags = 0 %}
+
+            {% for sumOfFlag in articleFlag.article.flags %}
+            {% set sumFlags = sumFlags + 1 %}
+            {% endfor %}
+
+            <h2 class="flags-articles-count">
+                Cet article a été signalé {{sumFlags}} fois.
+            </h2>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn flags-articles-details" data-toggle="modal" data-target="#modalFlagArticle-{{ articleFlag.article.id }}">
+                    En savoir plus
+                </button>
+            </div>
             <h5 class="card-title card-title-custum">
-                <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
-                   {{article.title}} 
-                </a>      
+                <a href="{{path('articleDetails', {'slug':articleFlag.article.slug})}}" class="link-custum">
+                    {{articleFlag.article.title}}
+                </a>
             </h5>
             <p class="card-text-author">
-                <a href="{{path('articleByUser', {'slug':article.user.slug})}}" class="link-custum">
-                    {{article.user.viewUsername}}
+                <a href="{{path('articleByUser', {'slug':articleFlag.article.user.slug})}}" class="link-custum">
+                    {{articleFlag.article.user.viewUsername}}
                 </a>
             </p>
             <p class="card-paragraph card-paragraph-summary">
-                {{article.summary}} 
+                {{articleFlag.article.summary}}
             </p>
 
             {% set sum = 0 %}
 
             {# Sum of votes for one article #}
-            {% for votes in article.votes %}
+            {% for votes in articleFlag.article.votes %}
             {% set sum = sum + votes.voteValue %}
             {% endfor %}
 
@@ -59,7 +75,7 @@ Articles signalés
             {% if (sum != 0) %}
 
             {# average #}
-            {% set average = sum / article.votes|length %}
+            {% set average = sum / articleFlag.article.votes|length %}
             {% set noteName = 'Noté :' %}
 
             {% if (average|round == 1) %}
@@ -88,26 +104,90 @@ Articles signalés
             {% set label = 'Non noté' %}
             {% endif %}
 
-            
+
             <p class=" card-paragraph card-paragraph-note">
                 {{noteName}} {{label}}
             </p>
 
             <div class="d-flex justify-content-center">
-                <a href="{{path('articleDetails', {'slug':article.slug})}}" class="btn btn-primary btn-articleDetails">Lire la suite</a>
+                <a href="{{path('articleDetails', {'slug':articleFlag.article.slug})}}"
+                    class="btn btn-primary btn-articleDetails">Lire la suite</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal to see details flags -->
+    <div class="modal fade modal-container-articlesFlag" id="modalFlagArticle-{{ articleFlag.article.id }}" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Détails des signalements</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {# see details of flaggers and raison of flag #}
+                {% for flaggers in articleFlag.article.flags %}
+
+                <div class="modal-body">
+                   
+                    {% if flaggers.optionValue == 1 %}
+                    {% set raison = 'fausse information' %}
+                    {% endif %}
+
+                    {% if flaggers.optionValue == 2 %}
+                    {% set raison = 'contenu indésirable' %}
+                    {% endif %}
+
+                    {% if flaggers.optionValue == 3 %}
+                    {% set raison = 'Violence/Nudité' %}
+                    {% endif %}
+
+                    {% if flaggers.optionValue == 4 %}
+                    {% set raison = 'Discours inappropriés' %}
+                    {% endif %}
+
+                    {% if flaggers.optionValue == 5 %}
+                    {% set raison = 'Autre chose' %}
+                    {% endif %}
+
+                    <p>
+                        <a href="{{path('userDetails', {'id':flaggers.user.id})}}">
+                           {{flaggers.user.viewUsername}} 
+                        </a>
+                         
+                        a signalé cet article pour 
+
+                        <strong>
+                          {{raison}}  
+                        </strong>
+                        
+                    </p>
+                </div>
+
+                {% endfor %}
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary " data-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>
     {% endfor %}
 
-    
+
 
     {% endif %}
 </div>
 
+
+
+
 <div class="pagination-custum">
     {{ knp_pagination_render(allFlag) }}
-</div> 
+</div>
 <!-- /Container Cards -->
 {% endblock %}
 
