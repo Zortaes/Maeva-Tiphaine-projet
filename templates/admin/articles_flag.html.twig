@@ -27,31 +27,43 @@ Articles signalés
 <!-- Container Cards -->
 <div class="container container-custum row">
 
-    {% for article in allFlag %}
+    {% for articleFlag in allFlag %}
 
 
     <div class="card card-custum col-sm-5">
-        <img class="card img-fluid" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-            alt="image represent category {{ article.category.name}}">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ articleFlag.article.category.picture ) }} "
+            alt="image represent category {{ articleFlag.article.category.name}}">
         <div class="card-body card-body-custum">
+
+            {% for flaggers in articleFlag.article.flags %}
+               <h2>
+                
+                {{flaggers.user.viewUsername}}
+                {{flaggers.optionValue}}
+
+                </h2>   
+            {% endfor %}
+
+           
+
             <h5 class="card-title card-title-custum">
-                <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
-                   {{article.title}} 
+                <a href="{{path('articleDetails', {'slug':articleFlag.article.slug})}}" class="link-custum">
+                   {{articleFlag.article.title}} 
                 </a>      
             </h5>
             <p class="card-text-author">
-                <a href="{{path('articleByUser', {'slug':article.user.slug})}}" class="link-custum">
-                    {{article.user.viewUsername}}
+                <a href="{{path('articleByUser', {'slug':articleFlag.article.user.slug})}}" class="link-custum">
+                    {{articleFlag.article.user.viewUsername}}
                 </a>
             </p>
             <p class="card-paragraph card-paragraph-summary">
-                {{article.summary}} 
+                {{articleFlag.article.summary}} 
             </p>
 
             {% set sum = 0 %}
 
             {# Sum of votes for one article #}
-            {% for votes in article.votes %}
+            {% for votes in articleFlag.article.votes %}
             {% set sum = sum + votes.voteValue %}
             {% endfor %}
 
@@ -59,7 +71,7 @@ Articles signalés
             {% if (sum != 0) %}
 
             {# average #}
-            {% set average = sum / article.votes|length %}
+            {% set average = sum / articleFlag.article.votes|length %}
             {% set noteName = 'Noté :' %}
 
             {% if (average|round == 1) %}
@@ -94,7 +106,7 @@ Articles signalés
             </p>
 
             <div class="d-flex justify-content-center">
-                <a href="{{path('articleDetails', {'slug':article.slug})}}" class="btn btn-primary btn-articleDetails">Lire la suite</a>
+                <a href="{{path('articleDetails', {'slug':articleFlag.article.slug})}}" class="btn btn-primary btn-articleDetails">Lire la suite</a>
             </div>
         </div>
     </div>

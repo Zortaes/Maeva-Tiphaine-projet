@@ -36,7 +36,7 @@
   "build/validation_reminder.css": "/build/validation_reminder.css",
   "build/validation_reminder.js": "/build/validation_reminder.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js": "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+  "build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js": "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
   "build/vendors~formArticle.js": "/build/vendors~formArticle.js",
   "build/vendors~formArticle~formSignup~profil.js": "/build/vendors~formArticle~formSignup~profil.js",
   "build/vendors~formSignup~profil.js": "/build/vendors~formSignup~profil.js",
@@ -66,6 +66,5 @@
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
   "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
-  "build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js": "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
 }

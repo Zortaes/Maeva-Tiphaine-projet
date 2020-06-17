@@ -233,13 +233,13 @@ class ArticleController extends AbstractController
     public function article(Article $article, Request $request)
     {
 
-        /* Request vote to see the average in the template */
+        /** @var VoteRepository */
         $vote = $this->getDoctrine()->getRepository(Vote::class)->findOneBy([
             "user" => $this->getUser(),
             "article" => $article
         ]);
 
-        /* Request to see if the user has already flag this article */
+         /** @var FlagRepository */
         $flag = $this->getDoctrine()->getRepository(Flag::class)->findOneBy([
             "user" => $this->getUser(),
             "article" => $article
