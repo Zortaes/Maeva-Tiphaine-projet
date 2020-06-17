@@ -42,13 +42,14 @@ Articles signalés
             {% set sumFlags = sumFlags + 1 %}
             {% endfor %}
 
-            <h2>
+            <h2 class="flags-articles-count">
                 Cet article a été signalé {{sumFlags}} fois.
             </h2>
-            <button type="button" class="btn article-delete " data-toggle="modal" data-target="#modalFlagArticle-{{ articleFlag.article.id }}">
-                En savoir plus
-            </button>
-
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn flags-articles-details" data-toggle="modal" data-target="#modalFlagArticle-{{ articleFlag.article.id }}">
+                    En savoir plus
+                </button>
+            </div>
             <h5 class="card-title card-title-custum">
                 <a href="{{path('articleDetails', {'slug':articleFlag.article.slug})}}" class="link-custum">
                     {{articleFlag.article.title}}
@@ -159,7 +160,7 @@ Articles signalés
                          
                         a signalé cet article pour 
 
-                        <strong class="raison-flag">
+                        <strong>
                           {{raison}}  
                         </strong>
                         
