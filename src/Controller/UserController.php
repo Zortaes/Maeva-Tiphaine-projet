@@ -308,6 +308,33 @@ class UserController extends AbstractController
         }
     }
 
+     /**
+     * @Route("/{slug}/supMonAvatar", name="deleteAvatar", methods={"GET"})
+     * 
+     * @param User $userParam that we want delete, to compare with the user connected
+     * 
+     * @return $this redirect to route homepage 
+     * 
+     */
+    public function deleteAvatar(User $userParam)
+    {
+
+        dd('test'); ; 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $userCurrent = $this->getUser();
+
+        if ($userCurrent === $userParam) {
+
+
+           
+            return $this->redirectToRoute('profil');
+        } else {
+            throw new Exception('La valeur n\'est pas bonne');
+        }
+    }
+
+
     /**
      * @Route("/{slug}/articles", name="articleByUser")
      *

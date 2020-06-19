@@ -50,7 +50,14 @@
         {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
        
         <div class="col-12"> 
-            {{ form_row(form.avatarFile) }}
+          
+            {{ form_label(form.avatarFile) }}
+            <a href="{{path('deleteAvatar', {'slug' : user.slug}) }}">
+                Supprimer 
+              </a>
+            {{ form_widget(form.avatarFile) }}
+           
+            
 
               {% if app.user.avatar == 'defaultAvatar.jpg' %}
                 <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
