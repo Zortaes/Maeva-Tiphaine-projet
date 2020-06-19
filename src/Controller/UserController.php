@@ -311,24 +311,33 @@ class UserController extends AbstractController
      /**
      * @Route("/{slug}/supMonAvatar", name="deleteAvatar", methods={"GET"})
      * 
-     * @param User $userParam that we want delete, to compare with the user connected
+     * @param User $userParam that we want to delete Avatar, to compare with the user connected
      * 
      * @return $this redirect to route homepage 
      * 
      */
-    public function deleteAvatar(User $userParam)
+    public function deleteAvatar(User $userParam, AvatarVerification $avatarService)
     {
 
-        dd('test'); ; 
+        
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $userCurrent = $this->getUser();
 
         if ($userCurrent === $userParam) {
 
+            /* Security if the user have a default Avatar and delete avatar if is not default */
+            $avatarService->alreadyDefault($userParam); 
 
-           
-            return $this->redirectToRoute('profil');
+            /* Generate a default avatar */
+            $avatarService->default($userParam); 
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($userParam);
+            $entityManager->flush();
+
+            $this->addFlash("successDeleteAvatar", "Votre avatar a bien été supprimé.");
+            return $this->redirectToRoute('showProfil');
         } else {
             throw new Exception('La valeur n\'est pas bonne');
         }

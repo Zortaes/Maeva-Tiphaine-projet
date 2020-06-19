@@ -41,6 +41,11 @@
       </div>
   {% endfor %}
 
+  {% for message in app.flashes('successDeleteAvatar') %}
+      <div class="alert alert-success w-100 text-center mt-4 edit-self">
+          {{ message }}
+      </div>
+  {% endfor %}
 
     {{ form_start(form) }}
 
