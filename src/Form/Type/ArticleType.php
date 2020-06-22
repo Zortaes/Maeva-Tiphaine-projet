@@ -65,11 +65,11 @@ class ArticleType extends AbstractType
             'allow_delete' => true,
         ])   
         ->add(
-            'category', 
+            'categories',
             EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => function ($category) {
-                    return $category->getName();
+                'choice_label' => function ($categories) {
+                    return $categories->getName();
                 }, 
                 'label' => 'Catégorie',
             ]

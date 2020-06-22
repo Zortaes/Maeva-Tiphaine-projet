@@ -155,7 +155,7 @@ class AdminController extends AbstractController
 
         unlink("../public/uploads/user/avatar/" . $user->getAvatar());
 
-        $user->setAvatar('defaultAvatar.jpg'); 
+        $user->setAvatar('defaultAvatar.jpg');
         $user->setAvatarSize(27874);
 
         $entityManager = $this->getDoctrine()->getManager();

@@ -121,12 +121,19 @@ class User implements UserInterface
     */
     private $votes;
 
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Flag", mappedBy="user", cascade={"remove"})
+    */
+    private $flags;
+
+
     public function __construct() 
     {
         $this->is_banned = false;
         $this->validate = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->flags = new ArrayCollection();
         
     }
 
@@ -452,6 +459,26 @@ class User implements UserInterface
     public function setAvatarFile($avatarFile)
     {
         $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of flags
+     */ 
+    public function getFlags()
+    {
+        return $this->flags;
+    }
+
+    /**
+     * Set the value of flags
+     *
+     * @return  self
+     */ 
+    public function setFlags($flags)
+    {
+        $this->flags = $flags;
 
         return $this;
     }

@@ -67,9 +67,11 @@
     </div>
     <div class="articleDetails">
             <!-- image -->
-            <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-            alt="image represent category {{ article.category.name}}"> 
+            <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
+            alt="image represent category {{ article.categories.first.name}}"> 
             <div class="dropdown-flag-custom">
+
+            <!-- flag dropdown -->
                 <div class="dropdown m-3">
                 
                     <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -101,9 +103,15 @@
                 </div>
             </div>
         
-
-        <div class="articleCategory" >                              
-            <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
+        <!-- article details section -->
+        <div class="articleCategory" >
+        
+        {% for category in article.categories %} 
+                                    
+                <a href="{{path('articleByCategory', {'slug':category.slug})}}" style="color:{{ category.color }}">{{ category.name }}</a>
+            
+        {% endfor %}
+        
         </div>
         <div class="fullSummary">
             <p>{{ article.summary }}</p>

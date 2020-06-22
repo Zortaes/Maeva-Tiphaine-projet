@@ -35,8 +35,8 @@
 
 
     <div class="card card-custum col-sm-5">
-        <img class="card img-fluid" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-            alt="image represent category {{ article.category.name }}">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
+            alt="image represent category {{ article.categories.first.name }}">
         <div class="card-body card-body-custum">
             <h5 class="card-title card-title-custum">
                 <a href="{{path('articleDetails', {'slug':article.slug})}}" class="link-custum">
@@ -44,9 +44,11 @@
                 </a>
             </h5>
             <p class="card-text-author">
-                <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" class="link-custum" style="color:{{ article.category.color }}">
-                    {{article.category.name}}
+                {% for category in article.categories %}
+                <a href="{{path('articleByCategory', {'slug':category.slug})}}" class="link-custum" style="color:{{ category.color }}">
+                    {{category.name}}
                 </a>
+                {% endfor %}
             </p>
             <p class="card-paragraph card-paragraph-summary">
                 {{article.summary}} 
