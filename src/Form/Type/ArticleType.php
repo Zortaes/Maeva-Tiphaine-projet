@@ -8,6 +8,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 
 use Symfony\Component\Form\AbstractType;
+use Presta\ImageBundle\Form\Type\ImageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
@@ -49,24 +50,28 @@ class ArticleType extends AbstractType
         )
         ->add(
             'instruction', 
-            TextareaType::class,
+            TextareaType::class, 
             [
                 "label" => "Instruction",
-                'help' => 'Veuillez indiquer les instructions à suivre pour réussir votre fabrication',
-                                
+                'help' => 'Veuillez indiquer les instructions à suivre pour réussir votre fabrication',                       
             ]
         )
-        ->add('ingredients', CollectionType::class, [
-            'entry_type' => ListIngredientType::class,
-            'required' => true,
-            'entry_options' => ['label' => false],
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' => true,
-        ])   
+        ->add(
+            'ingredients', 
+            CollectionType::class, 
+            [
+                'entry_type' => ListIngredientType::class,
+                'required' => true,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+            ]
+        )   
         ->add(
             'category', 
-            EntityType::class, [
+            EntityType::class, 
+            [
                 'class' => Category::class,
                 'choice_label' => function ($category) {
                     return $category->getName();
@@ -74,6 +79,30 @@ class ArticleType extends AbstractType
                 'label' => 'Catégorie',
             ]
         )
+
+        ->add(
+            'articleImageFile',
+            ImageType::class, 
+            [
+                'label' => 'Illustration de votre article',
+                'enable_remote' => false,
+                'max_width' => 200,
+                'max_height' => 200,
+                'aspect_ratios' => [],
+                'cropper_options'=> [
+                    'aspectRatio'=> 1,
+                    'viewMode' => 1,
+                    'minCropBoxWidth' => 120,
+                    'minCropBoxHeight' => 120,
+                ],
+                'preview_height' => 200, 
+                'preview_width' => 200, 
+                'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
+                'save_button_class' => 'btn btn-success mx-0 w-25',
+                'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'
+            ]
+        )
+
         ->add("Envoyer", SubmitType::class)
         ;
     }

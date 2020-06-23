@@ -80,7 +80,7 @@ class UserType extends AbstractType
                 'aspectRatio'=> 1,  
                 'viewMode' => 1,
                 'minCropBoxWidth' => 120, 
-                'minCropBoxHeight' => 120, 
+                'minCropBoxHeight' => 120,
             ],
             'preview_height' => 200, 
             'preview_width' => 200, 

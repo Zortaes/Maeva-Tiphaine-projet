@@ -7,11 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @UniqueEntity("title", message="Ce titre existe déjà, veuillez en choisir un autre")
+ * @Vich\Uploadable
  */
 class Article
 {
@@ -44,6 +47,14 @@ class Article
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="image", size="2580")
+     * @var File|null
+     */
+    private $articleImageFile;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 0})
@@ -141,6 +152,9 @@ class Article
         return $this;
     }
 
+    /**
+     * Get the value of articleImage
+     */ 
     public function getImage(): ?string
     {
         return $this->image;
@@ -152,6 +166,55 @@ class Article
 
         return $this;
     }
+
+    // /**
+    //  * Get the value of imageSize
+    //  *
+    //  * @return  int|null
+    //  */ 
+    // public function getImageSize()
+    // {
+    //     return $this->imageSize;
+    // }
+
+    /**
+     * Set the value of imageSize
+     *
+     * @param  int|null  $imageSize
+     *
+     * @return  self
+     */ 
+    public function setImageSize($imageSize)
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    /**
+     * Get nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  File|null
+     */ 
+    public function getArticleImageFile()
+    {
+        return $this->articleImageFile;
+    }
+
+    /**
+     * Set nOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @param  File|null  $articleImageFile  NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @return  self
+     */ 
+    public function setArticleImageFile($articleImageFile)
+    {
+        $this->articleImageFile = $articleImageFile;
+
+        return $this;
+    }
+    
 
     public function getFlagged(): ?bool
     {
