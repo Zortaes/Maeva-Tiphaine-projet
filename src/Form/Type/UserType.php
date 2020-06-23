@@ -106,7 +106,7 @@ class UserType extends AbstractType
             CheckboxType::class,
             [
                 'mapped' => false,
-                'required' => true, 
+                'required' => true,
                 'label' => "J'accepte les conditions générales d'utilisations", 
                 'help' => 'En cochant cette case, vous reconnaissez avoir lu nos <a href="/mention-legales">conditions générales d\'utilisation</a>',
                 'help_html' => true,
