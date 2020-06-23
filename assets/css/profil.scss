@@ -264,7 +264,52 @@ PAGINATION
 }
   
 
+/*********
+btn delete
+*********/
 
+.delete 
+{
+    max-width: 300px!important; 
+
+    @media (min-width: 768px)
+    {
+        max-width: 400px!important; 
+        margin-top: 2em;
+        margin-bottom: 1em; 
+    }
+
+    @media (min-width: 992px)
+    {
+        max-width: 500px!important;  
+    }
+
+    @media (min-width: 1200px)
+    {
+        max-width: none!important;  
+    }
+}
+
+.cropper-local-custum 
+{
+    @media (min-width: 768px)
+    {
+        max-width: 400px!important; 
+        margin-bottom: 2em; 
+    }
+
+    @media (min-width: 992px)
+    {
+        max-width: 500px!important; 
+      
+    }
+
+    @media (min-width: 1200px)
+    {
+        max-width: none!important; 
+      
+    }
+}
 
 
 

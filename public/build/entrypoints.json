@@ -1,21 +1,20 @@
 {
   "entrypoints": {
-    "legalMention": {
+    "user_details": {
       "css": [
-        "/build/legalMention.css"
+        "/build/user_details.css"
       ],
       "js": [
-        "/build/legalMention.js"
+        "/build/user_details.js"
       ]
     },
-    "app": {
+    "homepage": {
       "js": [
         "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
+        "/build/homepage.js"
       ],
       "css": [
-        "/build/app.css"
+        "/build/homepage.css"
       ]
     },
     "article_details": {
@@ -70,21 +69,22 @@
         "/build/board.js"
       ]
     },
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
-      "js": [
-        "/build/user_details.js"
-      ]
-    },
-    "homepage": {
+    "app": {
       "js": [
         "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/homepage.js"
+        "/build/vendors~app.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/homepage.css"
+        "/build/app.css"
+      ]
+    },
+    "legalMention": {
+      "css": [
+        "/build/legalMention.css"
+      ],
+      "js": [
+        "/build/legalMention.js"
       ]
     },
     "modal": {
