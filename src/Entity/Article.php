@@ -51,10 +51,17 @@ class Article
      /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="article_image", fileNameProperty="image", size="1200")
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="image", size="imageSize")
      * @var File|null
      */
     private $articleImageFile;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $imageSize;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 0})
@@ -167,15 +174,15 @@ class Article
         return $this;
     }
 
-    // /**
-    //  * Get the value of imageSize
-    //  *
-    //  * @return  int|null
-    //  */ 
-    // public function getImageSize()
-    // {
-    //     return $this->imageSize;
-    // }
+     /**
+     * Get the value of imageSize
+     *
+     * @return  int|null
+     */ 
+    public function getImageSize()
+    {
+        return $this->imageSize;
+    }
 
     /**
      * Set the value of imageSize
