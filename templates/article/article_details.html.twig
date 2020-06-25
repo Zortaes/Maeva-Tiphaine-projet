@@ -72,11 +72,12 @@
     </div>
     <div class="articleDetails">
             <!-- image -->
-            <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
-            alt="image represent category {{ article.categories.first.name}}"> 
-            <div class="dropdown-flag-custom">
+            <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ article.image ) }} "
+            alt="image represent category {{ article.image}}">
 
-                <!-- flag dropdown -->
+            <!-- flag dropdown -->
+            <div class="dropdown-flag-custom">
+ 
                 <div class="dropdown m-3">
                 
                     <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

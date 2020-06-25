@@ -88,8 +88,8 @@ class ArticleType extends AbstractType
             [
                 'label' => 'Illustration de votre article',
                 'enable_remote' => false,
-                'max_width' => 300,
-                'max_height' => 100,
+                'max_width' => 1280,
+                'max_height' => 720,
                 'aspect_ratios' => [],
                 'cropper_options'=> [
                     'aspectRatio'=> 3,
