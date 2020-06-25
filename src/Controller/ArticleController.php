@@ -56,7 +56,7 @@ class ArticleController extends AbstractController
         $ingredient = new ListIngredient();
         $ingredient->setDisposition(1);
         $newArticle->getIngredients()->add($ingredient);
-
+        
         $formArticle = $this->createForm(ArticleType::class, $newArticle);
 
         $formArticle->handleRequest($request);
@@ -82,10 +82,10 @@ class ArticleController extends AbstractController
                     $value->setDisposition($key);
                 }
             }
-
+            
             /* Add Flagged to false, User author, ingredients and created At*/
-            $newArticle->setFlagged(0);
-            $newArticle->setUser($user);
+            $newArticle->setFlagged(0); 
+            $newArticle->setUser($user);           
             $newArticle->addIngredient($ingredient);
             $newArticle->setCreatedAt(new DateTime('now'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\ListIngredient;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -83,10 +84,7 @@ class Article
      */
     private $updated_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
-     */
-    private $category;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
@@ -109,25 +107,42 @@ class Article
      */
     private $flags;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="articles")
+     */
+    private $categories;
+
+
     public function __construct() 
     {
         $this->ingredients = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->flags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
    
-
+    /**
+     * Get the value of id
+     */ 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the value of title
+     */ 
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */ 
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -135,11 +150,19 @@ class Article
         return $this;
     }
 
+    /**
+     * Get the value of summary
+     */ 
     public function getSummary(): ?string
     {
         return $this->summary;
     }
 
+    /**
+     * Set the value of summary
+     *
+     * @return  self
+     */ 
     public function setSummary(string $summary): self
     {
         $this->summary = $summary;
@@ -147,11 +170,19 @@ class Article
         return $this;
     }
 
+    /**
+     * Get the value of instruction
+     */ 
     public function getInstruction(): ?string
     {
         return $this->instruction;
     }
 
+    /**
+     * Set the value of instruction
+     *
+     * @return  self
+     */ 
     public function setInstruction(string $instruction): self
     {
         $this->instruction = $instruction;
@@ -167,6 +198,11 @@ class Article
         return $this->image;
     }
 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
     public function setImage(?string $image): self
     {
         $this->image = $image;
@@ -222,12 +258,21 @@ class Article
         return $this;
     }
     
-
+    /**
+     * Get the value of flagged
+     *
+     * @return  self
+     */ 
     public function getFlagged(): ?bool
     {
         return $this->flagged;
     }
 
+        /**
+     * Set the value of flagged
+     *
+     * @return  self
+     */ 
     public function setFlagged(bool $flagged): self
     {
         $this->flagged = $flagged;
@@ -235,11 +280,39 @@ class Article
         return $this;
     }
 
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of created_at
+     */ 
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */ 
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
@@ -247,11 +320,19 @@ class Article
         return $this;
     }
 
+    /**
+     * Get the value of updated_at
+     */ 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */ 
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
@@ -259,26 +340,9 @@ class Article
         return $this;
     }
 
-    /**
-     * Get the value of category
-     */ 
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-
-    /**
-     * Set the value of category
-     *
-     * @return  self
-     */ 
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+    /***********
+    RELATIONSHIP
+    ***********/
 
     /**
      * Get the value of user
@@ -320,37 +384,6 @@ class Article
         return $this;
     }
 
-    /**
-     * Get the value of votes
-     */ 
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
- 
-
-
-    /**
-     * Get the value of slug
-     */ 
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     public function addIngredient(ListIngredient $listIngredient)
     {
         $this->ingredients->add($listIngredient);
@@ -361,7 +394,13 @@ class Article
         $this->ingredients->removeElement($listIngredient);
     }
 
-
+    /**
+     * Get the value of votes
+     */ 
+    public function getVotes()
+    {
+        return $this->votes;
+    }
 
     /**
      * Get the value of flags
@@ -382,4 +421,45 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Set the value of categories
+     *
+     * @return  self
+     */ 
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function addCategory(Category $category)
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category)
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+
+
 }
