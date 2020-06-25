@@ -86,7 +86,7 @@ class UserType extends AbstractType
             'preview_width' => 200, 
             'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
             'save_button_class' => 'btn btn-success mx-0 w-25',
-            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'    
         ])
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(

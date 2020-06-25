@@ -37,7 +37,7 @@ class ArticleType extends AbstractType
             ]
         )
         ->add(
-            'summary', 
+            'summary',
             TextType::class,
             [
                 "label" => "Introduction",
@@ -82,7 +82,7 @@ class ArticleType extends AbstractType
 
         ->add(
             'articleImageFile',
-            ImageType::class, 
+            ImageType::class,
             [
                 'label' => 'Illustration de votre article',
                 'enable_remote' => false,
