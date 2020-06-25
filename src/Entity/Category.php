@@ -48,24 +48,35 @@ class Category
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
      */
     private $articles;
 
+
+    /* CONSTRUCT */
     public function __construct() {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * Get the value of id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the value of name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Set the value of name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -73,11 +84,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the value of color
+     */ 
     public function getColor(): ?string
     {
         return $this->color;
     }
 
+    /**
+     * Set the value of color
+     */ 
     public function setColor(?string $color): self
     {
         $this->color = $color;
@@ -85,11 +102,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the value of picture
+     */ 
     public function getPicture(): ?string
     {
         return $this->picture;
     }
 
+    /**
+     * Set the value of picture
+     */ 
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
@@ -97,11 +120,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the value of created_at
+     */ 
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
+    /**
+     * Set the value of created_at
+     */ 
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
@@ -109,24 +138,22 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the value of updated_at
+     */ 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
+    /**
+     * Set the value of updated_at
+     */ 
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
-    }
-
-    /**
-     * Get the value of articles
-     */ 
-    public function getArticles()
-    {
-        return $this->articles;
     }
 
     /**
@@ -148,4 +175,22 @@ class Category
 
         return $this;
     }
+
+    /**
+     * Get the value of articles
+     */ 
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Add the value of articles
+     */ 
+    public function addArticles(Article $article)
+    {
+        $this->articles[] = $article;
+    }
+
+
 }

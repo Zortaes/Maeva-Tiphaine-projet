@@ -52,7 +52,16 @@
         <tr>     
   
             <th scope="row" >
-              {{user.id}}
+              {{user.id}} </br>
+            {# Default avatar #}
+              {% if user.avatar == 'defaultAvatar.jpg' %} 
+              <img class="avatarUser" src="{{ asset("build/images/" ~ user.avatar ) }}"
+                  alt="image represent avatarUser {{ user.viewUsername }}">
+              {% else %}
+            {# user avatar #}
+              <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ user.avatar ) }}"
+                  alt="image represent avatarUser {{ user.viewUsername }}">
+              {% endif %}
             </th>
   
             <td>

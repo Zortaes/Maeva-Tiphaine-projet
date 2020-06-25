@@ -144,7 +144,28 @@ class AdminController extends AbstractController
         ]);
     }
  
-    
+    /**
+     * @Route("/utilisateurs/{id}/modifieAvatar", name="editUserAvatar")
+     * @param User $user that we want edit
+     * 
+     * @return User Default Avatar
+     */
+    public function editUserAvatar(User $user)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        unlink("../public/uploads/user/avatar/" . $user->getAvatar());
+
+        $user->setAvatar('defaultAvatar.jpg');
+        $user->setAvatarSize(27874);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('userDetails', ['id' => $user->getId()]);
+
+    }
 
 
 

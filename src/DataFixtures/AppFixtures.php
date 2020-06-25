@@ -169,7 +169,7 @@ class AppFixtures extends Fixture
             // for add in this article
             foreach($articleCategories as $articleCategory) {
                 // get collection categories to this article and add the elements
-                $article->setCategory($articleCategory);
+                $article->addCategory($articleCategory);
             }
             
             // get reference user random

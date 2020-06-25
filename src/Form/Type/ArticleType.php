@@ -10,6 +10,7 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
@@ -65,17 +66,19 @@ class ArticleType extends AbstractType
             'allow_delete' => true,
         ])   
         ->add(
-            'category', 
+            'categories', 
             EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => function ($category) {
                     return $category->getName();
                 }, 
                 'label' => 'Catégorie',
+                'multiple' => true,
+                'expanded' => true
             ]
         )
-        ->add("Envoyer", SubmitType::class)
-        ;
+
+        ->add("Envoyer", SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
