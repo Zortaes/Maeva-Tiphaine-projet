@@ -36,7 +36,7 @@
   "build/validation_reminder.css": "/build/validation_reminder.css",
   "build/validation_reminder.js": "/build/validation_reminder.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js": "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+  "build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js": "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
   "build/vendors~formArticle.js": "/build/vendors~formArticle.js",
   "build/vendors~formArticle~formSignup~profil.js": "/build/vendors~formArticle~formSignup~profil.js",
   "build/vendors~formSignup~profil.js": "/build/vendors~formSignup~profil.js",

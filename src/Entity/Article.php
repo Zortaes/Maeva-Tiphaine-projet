@@ -362,6 +362,18 @@ class Article
         return $this->categories;
     }
 
+    /**
+     * Set the value of categories
+     *
+     * @return  self
+     */ 
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
     public function addCategory(Category $category)
     {
         if (!$this->categories->contains($category)) {
@@ -379,5 +391,7 @@ class Article
 
         return $this;
     }
+
+
 
 }

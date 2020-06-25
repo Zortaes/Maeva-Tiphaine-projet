@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use DateTime;
+use App\Entity\Flag;
 use App\Entity\User;
 use App\Entity\Article;
 use App\Services\Slugger;
@@ -178,10 +179,14 @@ class AdminController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
   
 
-         /** @var ArticleRepository */
-         $articlesFlagged = $this->getDoctrine()->getRepository(Article::class)->findByArticlesFlag(1); 
+        /** @var ArticleRepository */
+        //$articlesFlagged = $this->getDoctrine()->getRepository(Article::class)->findByArticlesFlag(1); 
 
-         $allFlag = $paginator->paginate(
+        /** @var FlagRepository */
+        $articlesFlagged = $this->getDoctrine()->getRepository(Flag::class)->findAll();
+
+
+        $allFlag = $paginator->paginate(
             $articlesFlagged, // Request contains data to paginate 
             $request->query->getInt('page', 1), // number current page in URL, 1 if no
             6 // number of result
