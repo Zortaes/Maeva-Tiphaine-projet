@@ -13,6 +13,7 @@ $('.modal-footer').addClass('d-flex flex-nowrap justify-content-around');
 
 $('.w-25').addClass('showUpload');
 
+/* If the user have a default avatar */
 if($('.cropper-canvas-container').children().attr('src') == "/uploads/user/avatar/defaultAvatar.jpg")
 {
     $('.cropper-canvas-container').hide();
@@ -23,7 +24,7 @@ if($('.cropper-canvas-container').children().attr('src') == "/uploads/user/avata
 }
 
 
-/* add btn "supprimer"  btn "importer" */
+/* add btn "supprimer" prepend to btn "importer" */
 var $btnParent = $(".cropper-local").parent(".row");
 var $btnDelete = $(".delete"); 
 
@@ -32,6 +33,8 @@ $btnDelete.addClass('col-12 col-xl-7 mx-auto');
 
 $btnDelete.prependTo($btnParent); 
 
+
+/* Pluging cropper */
 (function(w, $) {
 
     'use strict';
