@@ -59,8 +59,15 @@
 
 
         <div class="col-12">
-            {{ form_label(form.categories)}}
-            {{ form_widget(form.categories)}}
+                    {{ form_errors(form.categories) }}
+            <div class="dropdown categories">
+                <button class="btn btn-secondary dropdown-toggle category-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <p>{{ form_label(form.categories)}}</p>
+                </button>
+                <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+                    {{ form_widget(form.categories) }}
+                </div>
+            </div>    
         </div>
 
         
