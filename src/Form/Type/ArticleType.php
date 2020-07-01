@@ -44,7 +44,7 @@ class ArticleType extends AbstractType
                 "label" => "Introduction",
                 'help' => 'Votre introduction doit être courte, il s\'agit d\'une petite présentation de votre article (pas plus de 160 caractères)',
                 'constraints' => [
-                   new Length(["max" => 160, "maxMessage" => "Veuillez entrer un contenu inférieur à 160 caractères"]),       
+                   new Length(["max" => 160, "maxMessage" => "Veuillez entrer un contenu inférieur à 160 caractères"]),
                 ]
                                 
             ]
@@ -93,16 +93,17 @@ class ArticleType extends AbstractType
                 'aspect_ratios' => [],
                 'cropper_options'=> [
                     'aspectRatio'=> 3,
-                    'viewMode' => 3,
+                    'viewMode' => 2,
                     'minCropBoxWidth' => 120,
                     'minCropBoxHeight' => 120,
                 ],
-                'preview_height' => 200, 
-                'preview_width' => 200, 
+                'preview_height' => 200,
+                'preview_width' => 200,
                 'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
                 'save_button_class' => 'btn btn-success mx-0 w-25',
-                'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'
+                'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25',
             ]
+
         )
 
         ->add("Envoyer", SubmitType::class)
