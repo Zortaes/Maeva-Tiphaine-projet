@@ -4,10 +4,12 @@
 namespace App\Form\Type;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Presta\ImageBundle\Form\Type\ImageType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +20,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class EditSelfType extends AbstractType
 {
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager) 
+    {
+        $this->manager = $manager; 
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -45,10 +54,12 @@ class EditSelfType extends AbstractType
             'viewUsername', 
             TextType::class,
             [ 
-                'label' => "Nom d'utilisateur",
+                'label' => "Nom d'utilisateur", 
                 'constraints' => [
-                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères", "max" => 50, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères"])
-                    ]
+                    new Length(["min" => 5, "minMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères", "max" => 50, "maxMessage" => "Veuillez entrer un nom d'utilisateur entre 5 et 50 caractères"]), 
+                    
+                ],
+                
             ]
         )
         ->add(
@@ -58,22 +69,50 @@ class EditSelfType extends AbstractType
                 "label" => "Email",
                 'invalid_message' => 'L\'adresse email n\'est pas valide',
                 'constraints' => [
-                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),       
+                   new Length(["max" => 100, "maxMessage" => "Veuillez entrer un email plus court"]),  
+                     
                 ]
                                 
             ]
         )
-        ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        ->addEventListener(FormEvents::PRE_SUBMIT,  function (FormEvent $event) {
             $user = $event->getData();
             $form = $event->getForm();
+            
 
-            $form->getData()->setUsername($user['viewUsername']); 
-            unset($user['viewUsername']);
+            /* Delete spaces before and after string */
+            $usernameTrimmed = trim($user['viewUsername'], " "); 
+            
+            /* Search if username exist for display error */
+            $uniqueUsername = $this->manager->getRepository(User::class)->findBy([
+                "username" => $usernameTrimmed
+            ]); 
 
+            if ($uniqueUsername === [])
+            {
+                $form->getData()->setUsername($usernameTrimmed); 
+                unset($user['viewUsername']);
+                dump("good"); 
+            }
+            else 
+            {
+                dump($form); 
+                dump('not good'); 
+            }
+
+            dd($uniqueUsername); 
+
+
+            
+
+            
+           
         })
         ->add('Enregistrer', SubmitType::class)
         ;
     }
+
+    
 
     public function configureOptions(OptionsResolver $resolver)
     {
