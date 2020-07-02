@@ -32,8 +32,8 @@ Articles signalés
 
 
     <div class="card card-custum col-sm-5">
-        <img class="card img-fluid" src="{{ asset("build/images/" ~ articleFlag.article.category.picture ) }} "
-            alt="image represent category {{ articleFlag.article.category.name}}">
+        <img class="card img-fluid" src="{{ asset("build/images/" ~ articleFlag.article.category.first.picture ) }} "
+            alt="image represent category {{ articleFlag.article.category.first.name}}">
         <div class="card-body card-body-custum">
 
             {% set sumFlags = 0 %}
