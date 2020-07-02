@@ -143,6 +143,19 @@ class UserController extends AbstractController
         $form = $this->createForm(EditSelfType::class, $user);  
         $form->handleRequest($request);
 
+        
+        /* add error message if the username edit already exist */
+        if ($form->isSubmitted())
+        {   
+            $newUsername = $form->get('viewUsername')->getData(); 
+          
+           
+            dump($user->getViewUsername()); 
+            dump($newUsername); 
+            dd('CUT');
+        }
+       
+
         if ($form->isSubmitted() && $form->isValid()) 
         {        
             $newEmail = $form->get('email')->getData();
@@ -192,6 +205,7 @@ class UserController extends AbstractController
                 $mailer->send($email);
 
            }
+
 
            $this->addFlash("successModifySelf", "Vos changements ont bien été enregistrés");
 

@@ -4,23 +4,27 @@
 namespace App\Form\Type;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Presta\ImageBundle\Form\Type\ImageType;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 class EditSelfType extends AbstractType
 {
     private $manager;
+
+ 
 
     public function __construct(EntityManagerInterface $manager) 
     {
@@ -83,29 +87,29 @@ class EditSelfType extends AbstractType
             /* Delete spaces before and after string */
             $usernameTrimmed = trim($user['viewUsername'], " "); 
             
+            
             /* Search if username exist for display error */
             $uniqueUsername = $this->manager->getRepository(User::class)->findBy([
                 "username" => $usernameTrimmed
             ]); 
 
-            if ($uniqueUsername === [])
+
+
+            /* if the user change his username with an username unique (don't exist in database) or if the user don't change his username */
+            if ($uniqueUsername === [] || $form->getData()->getViewUsername() === $uniqueUsername[0]->getViewUsername())
             {
-                $form->getData()->setUsername($usernameTrimmed); 
-                unset($user['viewUsername']);
-                dump("good"); 
+                $form->getData()->setUsername($usernameTrimmed);  
+                unset($user['viewUsername']); 
             }
             else 
             {
-                dump($form); 
-                dump('not good'); 
+               /* passe ici mais ne veut pas que je rentre autre chose que viewUsername */
+                $form->getData()->setUsername('notUnique'); 
+                unset($user['viewUsername']);   
+                  
             }
 
-            dd($uniqueUsername); 
-
-
-            
-
-            
+             
            
         })
         ->add('Enregistrer', SubmitType::class)
