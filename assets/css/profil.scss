@@ -25,6 +25,14 @@ FLASH MESSAGES
     margin-bottom: 2em;
 }
 
+.uniqueUsername
+{
+    background-color: white;
+    color: #da7878;  
+    margin: 0;
+    padding: 5px 0 0 0;
+}
+
 /****************
  FORM EDIT SELF
 *****************/
@@ -167,31 +175,8 @@ FLASH MESSAGES
  
     }
  
-    /** for login form **/
-    a
-    {
-    background-color: #9eb66b !important;
-    border-color: #9eb66b !important;
-    transition: 2s;
-     
-        &:hover
-        {
-            border-color: #799440 !important;
-            transition: 1s;
-            background-color: #799440  !important;
-        }
-    }
+   
  
-    /** for login form **/
-    #redirectBtn
-    {
-        width: 100% !important;
-        
-        @media (min-width: 992px)
-        {
-            width: 50% !important;
-        }
-    }
  
 }
 
@@ -264,7 +249,54 @@ PAGINATION
 }
   
 
+/*********
+btn delete
+*********/
+.delete 
+{
+    max-width: 300px!important; 
 
+    @media (min-width: 768px)
+    {
+        max-width: 400px!important; 
+        margin-top: 2em;
+        margin-bottom: 1em; 
+    }
+
+    @media (min-width: 992px)
+    {
+        max-width: 500px!important;  
+    }
+
+    @media (min-width: 1200px)
+    {
+        max-width: none!important;  
+    }
+}
+
+/*********
+btn import
+*********/
+.cropper-local-custum 
+{
+    @media (min-width: 768px)
+    {
+        max-width: 400px!important; 
+        margin-bottom: 2em; 
+    }
+
+    @media (min-width: 992px)
+    {
+        max-width: 500px!important; 
+      
+    }
+
+    @media (min-width: 1200px)
+    {
+        max-width: none!important; 
+      
+    }
+}
 
 
 

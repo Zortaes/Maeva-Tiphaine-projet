@@ -14,75 +14,119 @@
 
 {% block body %}
 
-{% for message in app.flashes('successArticleDelete') %}
-    <div class="alert alert-success w-100 text-center mt-4">
-        {{ message }}
-    </div>
-{% endfor %}
 
 
 
-<!-- Block "Information générales" -->
+<!--*************************** 
+  Block "Information générales" 
+******************************-->
 <div class="d-flex flex-column align-items-center mt-5 mb-4">
 
   <h2>Mes Informations Générales</h2>
 
-<div class="container container-form-custom">
+  <!-- 
+    Form 
+  -->
+  <div class="container container-form-custom">
 
-  {% for message in app.flashes('successModifyPassword') %}
-      <div class="alert alert-success w-100 text-center mt-4 edit-self">
-          {{ message }}
-      </div>
-  {% endfor %}
+    <!-- Flash Message -->
+    {% for message in app.flashes('successArticleDelete') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+      {{ message }}
+    </div>
+    {% endfor %}
 
-  {% for message in app.flashes('successModifySelf') %}
-      <div class="alert alert-success w-100 text-center mt-4 edit-self">
-          {{ message }}
-      </div>
-  {% endfor %}
+    {% for message in app.flashes('successModifyPassword') %}
+    <div class="alert alert-success w-100 text-center mt-4 edit-self">
+      {{ message }}
+    </div>
+    {% endfor %}
 
+    {% for message in app.flashes('successModifySelf') %}
+    <div class="alert alert-success w-100 text-center mt-4 edit-self">
+      {{ message }}
+    </div>
+    {% endfor %}
+
+    {% for message in app.flashes('successDeleteAvatar') %}
+    <div class="alert alert-success w-100 text-center mt-4 edit-self">
+      {{ message }}
+    </div>
+    {% endfor %}
+
+   
+    <!-- /Flash Message -->
 
     {{ form_start(form) }}
 
     <div class="block-form-custom">
 
+      <!-- Avatar-->
       <div class="edit-user-input" id="edit-user-input-image">
         {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
-       
-        <div class="col-12"> 
-            {{ form_row(form.avatarFile) }}
 
-              {% if app.user.avatar == 'defaultAvatar.jpg' %}
-                <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
-                alt="image represent avatarUser {{ app.user.viewUsername  }}">
-              {% endif %} 
+        <div class="col-12">
+
+          <div>
+            {{ form_label(form.avatarFile) }}
+          </div>
+          <div class="delete">
+
+            {% if user.avatar != 'defaultAvatar.jpg' %}
+            <button type="button" class="btn btn-dark btn-delete" data-toggle="modal" data-target="#modalDeleteAvatar">
+              Supprimer
+            </button>
+            {% endif %}
+
+
+          </div>
+          <div>
+            {{ form_widget(form.avatarFile) }}
+          </div>
+
+          {% if app.user.avatar == 'defaultAvatar.jpg' %}
+          <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar  ) }}"
+            alt="image represent avatarUser {{ app.user.viewUsername  }}">
+          {% endif %}
         </div>
       </div>
+      <!-- /Avatar-->
 
+      <!-- Username -->
       <div class="edit-user-input">
-          <div class="input-edit-user-label">
-            {{ form_label(form.viewUsername)}}
-          </div>
-          <div class="input-edit-user-input">
-              {{ form_widget(form.viewUsername)}}
-          </div>
+        <div class="input-edit-user-label">
+          {{ form_label(form.viewUsername)}}
+        </div>
+        <div class="input-edit-user-input">
+          {{ form_widget(form.viewUsername)}}
+        </div>
       </div>
+      {% for message in app.flashes('usernameNotUnique') %}
+      <div class="alert uniqueUsername text-center">
+        {{ message }}
+      </div>
+      {% endfor %}
+      <!-- /Username -->
+
       <div class="error-edit-user">
         {{ form_errors(form.viewUsername)}}
       </div>
 
-        <div class="edit-user-input">
-          <div class="input-edit-user-label">
-            {{ form_label(form.email)}}
-          </div>
-          <div class="input-edit-user-input">
-            {{ form_widget(form.email)}}
-          </div>
-          <div class="error-edit-user">
-            {{ form_errors(form.email)}}
-          </div>
+      <!-- Email -->
+      <div class="edit-user-input">
+        <div class="input-edit-user-label">
+          {{ form_label(form.email)}}
         </div>
+        <div class="input-edit-user-input">
+          {{ form_widget(form.email)}}
+        </div>
+        <div class="error-edit-user">
+          {{ form_errors(form.email)}}
+        </div>
+      </div>
+      <!-- /Email -->
 
+      <!-- Password -->
       <div class="edit-user-input">
         <div class="input-edit-user-label">
           <p>Mot de passe</p>
@@ -91,19 +135,23 @@
           <a href="{{path('modifyPassword')}}">modifier</a>
         </div>
       </div>
+      <!-- /Password -->
 
 
-        <div class="col-12 validateBtn">
-            {{ form_row(form.Enregistrer) }}
-        </div>
+      <div class="col-12 validateBtn">
+        {{ form_row(form.Enregistrer) }}
+      </div>
 
     </div>
 
     {{ form_end(form) }}
 
-</div>
+  </div>
+  <!-- Form -->
 
-  <!-- Dropdown for options account -->
+  <!-- 
+    Dropdown for "paramètres du compte" 
+  -->
   <div class="dropdown dropdown-account-custum text-center">
 
     <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -126,13 +174,15 @@
     </div>
 
   </div>
-  <!-- /Dropdown for options account -->
+  <!-- /Dropdown for "paramètres du compte"  -->
 </div>
 <!-- / Block "Information générales" -->
 
 
 
-<!-- Block "Vos articles" -->
+<!--***************** 
+  Block "Vos articles" 
+********************-->
 <div>
   <h2 class="text-center mb-3">Vos articles</h2>
 
@@ -172,39 +222,48 @@
           {{article.summary}}
         </td>
 
+        <!-- 
+          Mobile option
+        -->
         <td class="mobile-option">
 
           <!-- Dropdown for mobile -->
-          <div class="dropdown text-center">
+          <div class=" dropdown text-center dropleft">
 
             <button class="btn dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               <img src="{{asset("build/images/iconparam.png")}}" alt="icon parameters" class="image-parameters">
             </button>
 
-
             <div class="dropdown-menu p-0 dropdown-menu-custum" aria-labelledby="dropdownMenuButton">
 
-              <div class="container-parameters-option">
-                <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
-                  Détails
-                </a>
-                <a href="#">
-                  Modifier
-                </a>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn article-delete " data-toggle="modal"
-                  data-target="#modalDeleteArticle-{{article.id}}">
-                  Supprimer
-                </button>
+                <div class="container-parameters-option">
+                  <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
+                    Détails
+                  </a>
+                  <a href="{{path('article_update', {'slug' : article.slug}) }}">
+                    Modifier
+                  </a>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn article-delete " data-toggle="modal"
+                    data-target="#modalDeleteArticle-{{article.id}}">
+                    Supprimer
+                  </button>
+                </div>
+  
               </div>
-
-            </div>
+  
 
           </div>
           <!-- /Dropdown for mobile -->
-        </td>
 
+        </td>
+        <!-- /Mobile option -->
+
+
+        <!-- 
+          Desktop option
+        -->
         <td class="desktop-option">
           <a href="{{path('articleDetails', {'slug' : article.slug}) }}">
             Voir les détails
@@ -222,16 +281,20 @@
             Supprimer l'article
           </button>
         </td>
+        <!-- /Desktop option -->
 
       </tr>
 
-      <!-- Modal Delete article -->
+      <!-- 
+        Modal Delete article 
+      -->
       <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
         aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Voulez-vous vraiment supprimer l'article "{{article.title}}" ?</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Voulez-vous vraiment supprimer l'article
+                "{{article.title}}" ?</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -247,20 +310,23 @@
           </div>
         </div>
       </div>
+      <!-- /Modal Delete article -->
 
       {% endfor %}
 
       {% endif %}
-    
+
     </tbody>
   </table>
 </div>
-
-<div class="pagination-custum">
-{{ knp_pagination_render(articles) }}
-</div>
-
 <!-- /Block "Vos articles" -->
+
+<!-- Pagination "Vos articles" -->
+<div class="pagination-custum">
+  {{ knp_pagination_render(articles) }}
+</div>
+<!-- /Pagination "Vos articles" -->
+
 
 <hr>
 
@@ -273,7 +339,9 @@
 
 {% else %}
 
-<!-- Block articles voted -->
+<!--******************* 
+  Block articles voted 
+*********************-->
 <div class="w-75 mx-auto d-flex justify-content-center flex-wrap">
   {% for articlevoted in user.votes %}
   <p class="px-3 article-voted">
@@ -286,7 +354,37 @@
 <!-- /Block articles voted -->
 {% endif %}
 
-<!-- Modal Delete account -->
+
+<!--******************* 
+  Modal Delete avatar 
+********************-->
+<div class="modal fade modal-container-custum" id="modalDeleteAvatar" tabindex="-1" role="dialog"
+  aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Êtes vous sûre de vouloir supprimer votre avatar ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary button-yes-custum">
+          <a href="{{path('deleteAvatar', {'slug' : user.slug}) }}">
+            Oui
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal Delete avatar -->
+
+
+<!--***************** 
+  Modal Delete account 
+********************-->
 <div class="modal fade modal-container-custum" id="modalDeleteAccount" tabindex="-1" role="dialog"
   aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -311,6 +409,7 @@
     </div>
   </div>
 </div>
+<!-- Modal Delete account -->
 
 {% block javascripts %}
 {{ parent() }}
@@ -319,5 +418,3 @@
 {% endblock %}
 
 {% endblock %}
-
-

@@ -181,6 +181,9 @@
     "league/oauth2-facebook": {
         "version": "2.0.1"
     },
+    "league/oauth2-google": {
+        "version": "3.0.2"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },

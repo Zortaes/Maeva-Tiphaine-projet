@@ -1,13 +1,11 @@
 {
   "entrypoints": {
-    "app": {
-      "js": [
-        "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "user_details": {
       "css": [
-        "/build/app.css"
+        "/build/user_details.css"
+      ],
+      "js": [
+        "/build/user_details.js"
       ]
     },
     "homepage": {
@@ -71,12 +69,14 @@
         "/build/board.js"
       ]
     },
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
+    "app": {
       "js": [
-        "/build/user_details.js"
+        "/build/vendors~app~article_details~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "legalMention": {

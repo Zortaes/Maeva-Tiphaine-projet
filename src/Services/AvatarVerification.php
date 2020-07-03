@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
+
 
 class AvatarVerification
 {
@@ -9,16 +11,38 @@ class AvatarVerification
    
 
     /**
-     * @param User $newUser 
-     * @return User newUser with an avatar default 
+     * @param User $user newUser or a user who want to delete his avatar
+     * @return User user with a default avatar  
      */
-    public function default($newUser)
+    public function default($user)
     {
         
-        $newUser->setAvatar('defaultAvatar.jpg'); 
-        $newUser->setAvatarSize(27874); 
+        $user->setAvatar('defaultAvatar.jpg'); 
+        $user->setAvatarSize(27874); 
 
         return; 
+       
+
+    }
+
+    /**
+     * @param User $user who want to delete his avatar and have a default avatar
+     * @return Exeption if user have a default avatar, else delete his avatar
+     */
+    public function alreadyDefault($user)
+    {
+        
+        if ($user->getAvatar() === 'defaultAvatar.jpg') 
+            {
+                throw new Exception('La valeur n\'est pas bonne ;)');
+                
+            }
+            else 
+            {
+                unlink("../public/uploads/user/avatar/" . $user->getAvatar()); 
+                return;
+            }
+            
        
 
     }

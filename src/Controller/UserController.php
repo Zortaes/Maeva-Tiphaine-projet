@@ -143,6 +143,15 @@ class UserController extends AbstractController
         $form = $this->createForm(EditSelfType::class, $user);  
         $form->handleRequest($request);
 
+        
+        /* add error message if the username edit already exist */
+        if ($form->isSubmitted() && $user->getValidate() === false)
+        {         
+            $this->addFlash("usernameNotUnique", "Ce nom d'utilisateur existe déjà, veuillez en choisir un autre");
+            $user->setValidate(true);       
+        }
+       
+
         if ($form->isSubmitted() && $form->isValid()) 
         {        
             $newEmail = $form->get('email')->getData();
@@ -192,6 +201,7 @@ class UserController extends AbstractController
                 $mailer->send($email);
 
            }
+
 
            $this->addFlash("successModifySelf", "Vos changements ont bien été enregistrés");
 
@@ -307,6 +317,42 @@ class UserController extends AbstractController
             throw new Exception('La valeur n\'est pas bonne');
         }
     }
+
+     /**
+     * @Route("/{slug}/supMonAvatar", name="deleteAvatar", methods={"GET"})
+     * 
+     * @param User $userParam that we want to delete Avatar, to compare with the user connected
+     * 
+     * @return $this redirect to route homepage 
+     * 
+     */
+    public function deleteAvatar(User $userParam, AvatarVerification $avatarService)
+    {
+
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $userCurrent = $this->getUser();
+
+        if ($userCurrent === $userParam) {
+
+            /* Security if the user have a default Avatar and delete avatar if is not default */
+            $avatarService->alreadyDefault($userParam); 
+
+            /* Generate a default avatar */
+            $avatarService->default($userParam); 
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($userParam);
+            $entityManager->flush();
+
+            $this->addFlash("successDeleteAvatar", "Votre avatar a bien été supprimé.");
+            return $this->redirectToRoute('showProfil');
+        } else {
+            throw new Exception('La valeur n\'est pas bonne');
+        }
+    }
+
 
     /**
      * @Route("/{slug}/articles", name="articleByUser")
