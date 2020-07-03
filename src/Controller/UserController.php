@@ -145,14 +145,10 @@ class UserController extends AbstractController
 
         
         /* add error message if the username edit already exist */
-        if ($form->isSubmitted())
-        {   
-            $newUsername = $form->get('viewUsername')->getData(); 
-          
-           
-            dump($user->getViewUsername()); 
-            dump($newUsername); 
-            dd('CUT');
+        if ($form->isSubmitted() && $user->getValidate() === false)
+        {         
+            $this->addFlash("usernameNotUnique", "Ce nom d'utilisateur existe déjà, veuillez en choisir un autre");
+            $user->setValidate(true);       
         }
        
 

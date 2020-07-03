@@ -24,8 +24,6 @@ class EditSelfType extends AbstractType
 {
     private $manager;
 
- 
-
     public function __construct(EntityManagerInterface $manager) 
     {
         $this->manager = $manager; 
@@ -93,8 +91,6 @@ class EditSelfType extends AbstractType
                 "username" => $usernameTrimmed
             ]); 
 
-
-
             /* if the user change his username with an username unique (don't exist in database) or if the user don't change his username */
             if ($uniqueUsername === [] || $form->getData()->getViewUsername() === $uniqueUsername[0]->getViewUsername())
             {
@@ -103,8 +99,8 @@ class EditSelfType extends AbstractType
             }
             else 
             {
-               /* passe ici mais ne veut pas que je rentre autre chose que viewUsername */
-                $form->getData()->setUsername('notUnique'); 
+                $form->getData()->setValidate(false); 
+                $form->getData()->setUsername($usernameTrimmed); 
                 unset($user['viewUsername']);   
                   
             }

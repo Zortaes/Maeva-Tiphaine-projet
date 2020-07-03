@@ -53,6 +53,8 @@
       {{ message }}
     </div>
     {% endfor %}
+
+   
     <!-- /Flash Message -->
 
     {{ form_start(form) }}
@@ -99,6 +101,11 @@
           {{ form_widget(form.viewUsername)}}
         </div>
       </div>
+      {% for message in app.flashes('usernameNotUnique') %}
+      <div class="alert uniqueUsername text-center">
+        {{ message }}
+      </div>
+      {% endfor %}
       <!-- /Username -->
 
       <div class="error-edit-user">
