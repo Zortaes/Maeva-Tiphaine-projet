@@ -27,14 +27,14 @@ class MainController extends AbstractController
 
         /** @var VoteRepository */
         $bestArticles = $this->getDoctrine()->getRepository(Vote::class)->findBestArticle();
-    
+        
         
         return $this->render('main/homepage.html.twig', [
             'lastArticles' => $lastArticles,
             'bestArticles' => $bestArticles
             ]);
    
-
+    
     }
 
     /**

@@ -30,13 +30,13 @@ class VoteRepository extends ServiceEntityRepository
         SQL query
         *********/
         $rawSql = "
-        SELECT A.title, A.summary, A.slug, U.username, U.slug user_slug, U.avatar AS user_avatar, C.name AS category_name, C.picture AS category_picture, AVG(V.vote_value)moyen 
+        SELECT A.title, A.summary, A.slug, U.username, U.slug user_slug, U.avatar AS user_avatar, C.name AS category_name, C.picture AS category_picture, AVG(V.vote_value) moyen 
         FROM article_category AC, article A, category C, vote V, user U
         WHERE AC.article_id = A.id
         AND AC.category_id = C.id
         AND V.article_id = A.id
         AND A.user_id = U.id
-        GROUP BY V.article_id
+        GROUP BY AC.article_id, AC.category_id
         ORDER BY moyen DESC
         LIMIT 6";
 
