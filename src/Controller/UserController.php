@@ -6,16 +6,17 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
-use App\Form\Type\EditPasswordType;
-use App\Form\Type\EditSelfType;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use App\Form\Type\EditSelfType;
 use Symfony\Component\Mime\Email;
+use App\Form\Type\EditPasswordType;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
 use App\Services\AvatarVerification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Form\Type\LostPassword\SendEmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -423,5 +424,46 @@ class UserController extends AbstractController
         $this->addFlash("successEmailSent", "Un nouvel e-mail vous a été envoyé pour vous permettre de valider votre compte.");
 
         return $this->redirectToRoute('validationReminder');
+    }
+
+    /**
+     *  @Route("/mot-de-passe-oublié", name="lostPassword")
+     * 
+     *  @return 
+     */
+    public function lostPassword(Request $request, MailerInterface $mailer)
+    {
+
+        $userConnect = $this->getUser(); 
+
+        dump($userConnect); 
+
+        // erreur exeption si l'utilisateur est déjà connecté à moins que symfony le fasse
+        // vérifie que l'email existe dans la base
+        
+        $userForget = new User();
+        $form = $this->createForm(SendEmailType::class, $userForget);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+
+            dd('hello'); 
+
+            $this->addFlash("successModifyPassword", "message disant que un email a été envoyé");
+        
+           return $this->redirectToRoute('login');
+
+        }
+
+        return $this->render('user/form_email_lost_password.html.twig', [
+            'form' => $form->createView(),
+            'unlessFooter' => true,
+            'unlessNavbar' => true,
+        ]);
+
+
+       
     }
 }

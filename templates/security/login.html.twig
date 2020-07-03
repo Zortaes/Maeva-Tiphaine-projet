@@ -55,6 +55,7 @@
         <div class="col-12 mt-4 mb-4">
             <label for="inputPassword">Mot de passe</label>
             <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <p><a href="{{path('lostPassword')}}">Mot de passe oublié ?</a></p>
         </div>
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}">
