@@ -36,7 +36,7 @@ class VoteRepository extends ServiceEntityRepository
         AND AC.category_id = C.id
         AND V.article_id = A.id
         AND A.user_id = U.id
-        GROUP BY V.article_id
+        GROUP BY AC.article_id, AC.category_id
         ORDER BY moyen DESC
         LIMIT 6";
 

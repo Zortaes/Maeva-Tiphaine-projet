@@ -116,18 +116,22 @@
             </div>
         
         <!-- article details section -->
-        <div class="articleCategory" >
-        
-        {% for category in article.categories %} 
-                                    
-                <a href="{{path('articleByCategory', {'slug':category.slug})}}" style="color:{{ category.color }}">{{ category.name }}</a>
-            
-        {% endfor %}
-        
+        <div class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle category-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catégories
+            </button>
+            <div class="dropdown-menu category-dropdown">
+                <ul class="articleCategory">
+                {% for category in article.categories %}                     
+                    <a href="{{path('articleByCategory', {'slug':category.slug})}}" style="color:{{ category.color }}">{{ category.name }}</a>        
+                {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="fullSummary">
             <p>{{ article.summary }}</p>
         </div>
+
         <div class="ingredientInstruction">
             <div class="ingredient">
                 <h3>Ingrédients</h3>
