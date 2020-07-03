@@ -25,7 +25,31 @@ class VoteRepository extends ServiceEntityRepository
     */
     public function findBestArticle()
     {
-        $qb = $this->createQueryBuilder('v')
+
+        /********
+        SQL query
+        *********/
+        $rawSql = "
+        SELECT A.title, A.summary, A.slug, U.username, U.slug user_slug, U.avatar AS user_avatar, C.name AS category_name, C.picture AS category_picture, AVG(V.vote_value)moyen 
+        FROM article_category AC, article A, category C, vote V, user U
+        WHERE AC.article_id = A.id
+        AND AC.category_id = C.id
+        AND V.article_id = A.id
+        AND A.user_id = U.id
+        GROUP BY AC.article_id, AC.category_id
+        ORDER BY moyen DESC
+        LIMIT 6";
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+
+        /********
+        DQL query
+        *********/
+        
+        /*$qb = $this->createQueryBuilder('v')
         ->select('a.title, a.summary, a.slug, u.username, u.slug user_slug, u.avatar user_avatar, c.name category_name, c.color category_color, c.picture category_picture, avg(v.vote_value)moyen')
         ->innerJoin('App\Entity\Article', 'a', 'WITH', 'a = v.article')
         ->innerJoin('App\Entity\Category', 'c', 'WITH', 'c = a.category')
@@ -36,7 +60,7 @@ class VoteRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
         
-        return $qb; 
+        return $qb; */
     }
 
 

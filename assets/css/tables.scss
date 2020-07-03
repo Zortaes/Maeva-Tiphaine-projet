@@ -111,6 +111,19 @@ BAN BUTTON
     } 
 }
 
+/******
+AVATAR
+******/
+.avatarUser
+{
+    max-width: 70%;
+    max-height: 70%;
+    @media (min-width: 400px) 
+    { 
+        max-width: 50%;
+        max-height: 50%;
+    }
+}
 
 /***
  image of article 
