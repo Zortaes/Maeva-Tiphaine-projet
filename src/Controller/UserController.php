@@ -36,6 +36,7 @@ class UserController extends AbstractController
     /**
      * @Route("/inscription", name="signup", methods={"GET","POST"})
      * 
+     * 
      * @param Request $request -> POST 
      * @param UserPasswordEncoderInterface $encoder -> POST 
      * @param Slugger $slugger -> POST 
@@ -53,6 +54,14 @@ class UserController extends AbstractController
         EmailConfirmation $confirmation,
         AvatarVerification $avatar
     ): Response {
+
+       
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
+
+       
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
@@ -427,12 +436,17 @@ class UserController extends AbstractController
     }
 
     /**
-     *  @Route("/mot-de-passe-oublié", name="lostPassword")
+     * @Route("/mot-de-passe-oublié", name="lostPassword")
      * 
      *  @return 
      */
     public function lostPassword(Request $request, MailerInterface $mailer)
     {
+
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
 
         $userConnect = $this->getUser(); 
 
@@ -442,7 +456,7 @@ class UserController extends AbstractController
         // vérifie que l'email existe dans la base
         
         $userForget = new User();
-        $form = $this->createForm(SendEmailType::class, $userForget);  
+        $form = $this->createForm(SendEmailType::class);  
         $form->handleRequest($request);
 
 

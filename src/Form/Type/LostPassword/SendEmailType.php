@@ -36,7 +36,7 @@ class SendEmailType extends AbstractType
                                 
             ]
         )
-        ->add('recaptcha', EWZRecaptchaType::class, array(
+        /*->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
                 'options' => array(
                     'theme' => 'light',
@@ -48,7 +48,7 @@ class SendEmailType extends AbstractType
             'constraints' => array(
                 new RecaptchaTrue()
             )
-        ))   
+        ))*/ 
 
         ->add('Envoyer', SubmitType::class);
         
@@ -57,9 +57,7 @@ class SendEmailType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
+       
     }
 
 }
