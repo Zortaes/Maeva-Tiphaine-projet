@@ -55,7 +55,7 @@ class UserController extends AbstractController
         AvatarVerification $avatar
     ): Response {
 
-       
+        /* security to access only anonymous */
         if ($this->getUser() !== null)
         {
             $this->denyAccessUnlessGranted('IS_ANONYMOUS');
@@ -443,29 +443,48 @@ class UserController extends AbstractController
     public function lostPassword(Request $request, MailerInterface $mailer)
     {
 
+        /* security to access only anonymous */
         if ($this->getUser() !== null)
         {
             $this->denyAccessUnlessGranted('IS_ANONYMOUS');
         }
-
-        $userConnect = $this->getUser(); 
-
-        dump($userConnect); 
-
-        // erreur exeption si l'utilisateur est déjà connecté à moins que symfony le fasse
-        // vérifie que l'email existe dans la base
+    
         
-        $userForget = new User();
         $form = $this->createForm(SendEmailType::class);  
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) 
-        {        
+        {    
+            $emailForm = $form->get('email')->getData(); 
+            
+            /** @var UserRepository Search email in database */ 
+            $emailDatabase = $this->getDoctrine()->getRepository(User::class)->findBy([
+                'email' => $emailForm
+            ]); 
+
+            /* email doesn't exist in database */
+            if (empty($emailDatabase)) 
+            { 
+                $this->addFlash("lostPasswordNotSuccess", "Qui êtes vous ? Mouhaha");
+
+                return $this->render('user/form_email_lost_password.html.twig', [
+                    'form' => $form->createView(),
+                    'unlessFooter' => true,
+                    'unlessNavbar' => true,
+                ]);
+            }
+
+
+
+            dump($emailDatabase); 
+
+
+            dump($emailForm); 
 
             dd('hello'); 
 
-            $this->addFlash("successModifyPassword", "message disant que un email a été envoyé");
+            $this->addFlash("lostPasswordSuccess", "message disant que un email a été envoyé");
         
            return $this->redirectToRoute('login');
 
