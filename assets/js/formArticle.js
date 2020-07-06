@@ -1,5 +1,6 @@
 import '../css/formArticle.scss';
 
+
 /*************************
  Form new Article and edit
  ************************/
@@ -10,7 +11,10 @@ var $addIngredientButton = $('<button type="button" class="add_ingredient_link">
 var $newLinkDiv = $('<div></div>').append($addIngredientButton);
 
 
+
 jQuery(document).ready(function() {
+
+
 
     /************
     EDIT ARTICLE
@@ -114,6 +118,10 @@ function addIngredientFormDeleteLink($ingredientForm) {
 
     });
 }
+
+
+   
+    
 
 
 

@@ -66,6 +66,10 @@
                 </div>
             </div>    
         </div>
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
+        <div class="col-12">
+            {{ form_row(form.articleImageFile)}}
+        </div>
 
         
         <div class="col-12 validateBtn">

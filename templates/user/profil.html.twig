@@ -210,8 +210,15 @@
       <tr>
 
         <th scope="row">
-          <img class="image-category" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
-            alt="image represent category {{article.categories.first.name}}">
+        {# Default articleImage #}
+            {% if article.image == null %}
+            <img class="card img-fluid" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
+            alt="image represent category {{ article.categories.first.name }}">
+            {% else %}
+        {# user articleImage #}
+            <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ article.image ) }} "
+            alt="image represent article">
+            {% endif %}
         </th>
 
         <td>
