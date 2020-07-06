@@ -51,13 +51,21 @@
                    {{article.title}} 
                 </a>
             </h5>
-            <p class="card-text-author">
-                {% for category in article.categories %}
-                <a href="{{path('articleByCategory', {'slug':category.slug})}}" class="link-custum" style="color:{{ category.color }}">
-                    {{category.name}}
-                </a>
-                {% endfor %}
-            </p>
+
+            <button class="btn btn-secondary btn-sm dropdown-toggle category-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catégories
+            </button>
+            <div class="dropdown-menu">
+                <ul class="card-text-category">
+                    {% for category in article.categories %}
+                        <li><a href="{{path('articleByCategory', {'slug':category.slug})}}" class="link-custum">
+                            {{category.name}}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
             <p class="card-paragraph card-paragraph-summary">
                 {{article.summary}} 
             </p>

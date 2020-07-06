@@ -112,6 +112,7 @@ CARD
         outline: none;
         max-width: 200px !important;
 
+
         @media (min-width: 767px)
         { 
             font-size: 0.7em;
@@ -257,19 +258,49 @@ CARD
 }
 
 /* NAME OF THE CATEGORY */
+.category-btn
+{
+    color: black !important;
+    background-color: #f8ffea !important;
+    border-color: rgb(170, 170, 170) !important;
+    &:hover
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+    }
+    &:focus
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+}
+
+.category-dropdown
+{
+    width: 100%;
+    margin: 0 !important;
+    box-shadow: 0px 10px 10px grey;
+    border-radius: unset !important;
+}
+
 .articleCategory
 {
-    text-align: center;
-    font-weight: 500;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 0.7em;   
+    list-style: none;
+    padding: 1em 1em 1em 1em;
+
     a
     {
-        font-size: calc(0.6em + 1vw);
-        
+        padding: 1em;
     }
-    
-
 }
+
 
 /* SUMMARY */
 .fullSummary

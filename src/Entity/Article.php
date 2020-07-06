@@ -109,6 +109,11 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @Assert\Count(
+     * min="1", 
+     * max="3", 
+     * minMessage="Votre article doit avoir au moins une catégorie", 
+     * maxMessage="Votre article ne peut avoir au plus de trois catégories")
      */
     private $categories;
 

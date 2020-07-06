@@ -66,5 +66,8 @@
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
   "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
+  "build/vendors~app~article_details~formArticle~homepage~pagination~profil.js": "/build/vendors~app~article_details~formArticle~homepage~pagination~profil.js",
+  "build/vendors~formArticle~profil.js": "/build/vendors~formArticle~profil.js",
+  "build/vendors~profil.js": "/build/vendors~profil.js"
 }
