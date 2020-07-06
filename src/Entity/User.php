@@ -64,6 +64,11 @@ class User implements UserInterface
      */
     private $avatarSize;
 
+     /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     */
+    private $code;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -479,6 +484,26 @@ class User implements UserInterface
     public function setFlags($flags)
     {
         $this->flags = $flags;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of code
+     */ 
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set the value of code
+     *
+     * @return  self
+     */ 
+    public function setCode($code)
+    {
+        $this->code = $code;
 
         return $this;
     }

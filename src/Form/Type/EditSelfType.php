@@ -86,7 +86,7 @@ class EditSelfType extends AbstractType
             $usernameTrimmed = trim($user['viewUsername'], " "); 
             
             
-            /* Search if username exist for display error */
+            /** @var UserRepository Search if username exist for display error */ 
             $uniqueUsername = $this->manager->getRepository(User::class)->findBy([
                 "username" => $usernameTrimmed
             ]); 

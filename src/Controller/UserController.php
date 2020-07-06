@@ -6,16 +6,17 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
-use App\Form\Type\EditPasswordType;
-use App\Form\Type\EditSelfType;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use App\Form\Type\EditSelfType;
 use Symfony\Component\Mime\Email;
+use App\Form\Type\EditPasswordType;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
 use App\Services\AvatarVerification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Form\Type\LostPassword\SendEmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,7 @@ class UserController extends AbstractController
     /**
      * @Route("/inscription", name="signup", methods={"GET","POST"})
      * 
+     * 
      * @param Request $request -> POST 
      * @param UserPasswordEncoderInterface $encoder -> POST 
      * @param Slugger $slugger -> POST 
@@ -52,6 +54,14 @@ class UserController extends AbstractController
         EmailConfirmation $confirmation,
         AvatarVerification $avatar
     ): Response {
+
+        /* security to access only anonymous */
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
+
+       
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
@@ -423,5 +433,79 @@ class UserController extends AbstractController
         $this->addFlash("successEmailSent", "Un nouvel e-mail vous a été envoyé pour vous permettre de valider votre compte.");
 
         return $this->redirectToRoute('validationReminder');
+    }
+
+    /**
+     * @Route("/mot-de-passe-oublié", name="lostPassword")
+     * 
+     *  @return 
+     */
+    public function lostPassword(Request $request, MailerInterface $mailer,  EmailConfirmation $confirmation)
+    {
+
+        /* security to access only anonymous */
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
+    
+        
+        $form = $this->createForm(SendEmailType::class);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {    
+            $emailForm = $form->get('email')->getData(); 
+            
+            /** @var UserRepository Search email in database */ 
+            $emailDatabase = $this->getDoctrine()->getRepository(User::class)->findBy([
+                'email' => $emailForm
+            ]); 
+
+            /* email doesn't exist in database */
+            if (empty($emailDatabase)) 
+            { 
+                $this->addFlash("lostPasswordNotSuccess", "Il n'y a pas de compte associé à cette adresse email");
+
+                return $this->render('user/form_email_lost_password.html.twig', [
+                    'form' => $form->createView(),
+                    'unlessFooter' => true,
+                    'unlessNavbar' => true,
+                ]);
+            }
+
+            // généré un code, l'entrer dans la BDD et le transmettre dans le context de l'email
+            
+            /* email */
+            $email = (new TemplatedEmail())
+            ->from('la.rubrique.ecolo@gmail.com')
+            ->to(new Address($emailDatabase[0]->getEmail()))
+            ->subject($confirmation->subject())
+            // path of the Twig template to render
+            ->htmlTemplate('email/_lostPassword.html.twig')
+            // pass variables (name => value) to the template
+            ->context([
+                'id' => $emailDatabase[0]->getId(),
+                'token' => $emailDatabase[0]->getValidation(),
+            ]);
+
+            $mailer->send($email);
+
+
+            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre compte");
+        
+            return $this->redirectToRoute('login');
+
+        }
+
+        return $this->render('user/form_email_lost_password.html.twig', [
+            'form' => $form->createView(),
+            'unlessFooter' => true,
+            'unlessNavbar' => true,
+        ]);
+
+
+       
     }
 }
