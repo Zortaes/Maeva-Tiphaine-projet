@@ -466,7 +466,7 @@ class UserController extends AbstractController
             /* email doesn't exist in database */
             if (empty($emailDatabase)) 
             { 
-                $this->addFlash("lostPasswordNotSuccess", "Il n'y a pas de compte rattaché à cet adresse email");
+                $this->addFlash("lostPasswordNotSuccess", "Il n'y a pas de compte associé à cette adresse email");
 
                 return $this->render('user/form_email_lost_password.html.twig', [
                     'form' => $form->createView(),
