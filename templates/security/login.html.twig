@@ -21,6 +21,13 @@
     </div>
 {% endfor %}
 
+
+{% for message in app.flashes('lostPasswordSuccess') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <div class="container container-form-custum">
     <form action="{{ path('login') }}" method="post">
         {% if error %}

@@ -440,7 +440,7 @@ class UserController extends AbstractController
      * 
      *  @return 
      */
-    public function lostPassword(Request $request, MailerInterface $mailer)
+    public function lostPassword(Request $request, MailerInterface $mailer,  EmailConfirmation $confirmation)
     {
 
         /* security to access only anonymous */
@@ -466,7 +466,7 @@ class UserController extends AbstractController
             /* email doesn't exist in database */
             if (empty($emailDatabase)) 
             { 
-                $this->addFlash("lostPasswordNotSuccess", "Qui êtes vous ? Mouhaha");
+                $this->addFlash("lostPasswordNotSuccess", "Il n'y a pas de compte rattaché à cet adresse email");
 
                 return $this->render('user/form_email_lost_password.html.twig', [
                     'form' => $form->createView(),
@@ -475,18 +475,27 @@ class UserController extends AbstractController
                 ]);
             }
 
+            // généré un code, l'entrer dans la BDD et le transmettre dans le context de l'email
+            
+            /* email */
+            $email = (new TemplatedEmail())
+            ->from('la.rubrique.ecolo@gmail.com')
+            ->to(new Address($emailDatabase[0]->getEmail()))
+            ->subject($confirmation->subject())
+            // path of the Twig template to render
+            ->htmlTemplate('email/_lostPassword.html.twig')
+            // pass variables (name => value) to the template
+            ->context([
+                'id' => $emailDatabase[0]->getId(),
+                'token' => $emailDatabase[0]->getValidation(),
+            ]);
+
+            $mailer->send($email);
 
 
-            dump($emailDatabase); 
-
-
-            dump($emailForm); 
-
-            dd('hello'); 
-
-            $this->addFlash("lostPasswordSuccess", "message disant que un email a été envoyé");
+            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre compte");
         
-           return $this->redirectToRoute('login');
+            return $this->redirectToRoute('login');
 
         }
 
