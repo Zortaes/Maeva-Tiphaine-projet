@@ -184,25 +184,6 @@ class User implements UserInterface
     {
         return (string) $this->email;
     }
-   
-    /**
-     * Get the value of avatar
-     */ 
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * Set the value of avatar
-     *
-     * @return  self
-     */ 
-    public function setAvatar(?string $avatar): void
-    {
-        $this->avatar = $avatar; 
-
-    }
 
     /**
      * Get the value of birth_date
@@ -413,6 +394,25 @@ class User implements UserInterface
         $this->facebook_id = $facebook_id;
 
         return $this;
+    }
+
+     /**
+     * Get the value of avatar
+     */ 
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Set the value of avatar
+     *
+     * @return  self
+     */ 
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar; 
+
     }
 
     /**
