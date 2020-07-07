@@ -71,7 +71,7 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/{id}/{string}/récupération", name="lostPasswordRecovery")
+     * @Route("/{id}/{string}/recuperation", name="lostPasswordRecovery")
      */
     public function lostPasswordRecovery(User $user, $string, Request $request)
     {
@@ -82,10 +82,12 @@ class SecurityController extends AbstractController
             $this->denyAccessUnlessGranted('IS_ANONYMOUS');
         }
 
-        /* Request User thanks mail message url */
+
+        /* Request User thanks to mail message url, Token correct to this user, else exeption*/
         if ($user->getValidation() === $string) 
         {
 
+            /* User enter the code request to his mailbox */
             $formCode = $this->createForm(CodePasswordRecoveryType::class);  
             $formCode->handleRequest($request);
 
@@ -93,7 +95,30 @@ class SecurityController extends AbstractController
             if ($formCode->isSubmitted() && $formCode->isValid()) 
             {    
             
-            // vérifier que cela correspond bien au code inscrit dans la BDD
+                $codeForm = $formCode->get('code')->getData(); 
+
+                 /** @var UserRepository Search code to this user in database */ 
+                $codeUser = $this->getDoctrine()->getRepository(User::class)->findBy([
+                    'code' => $codeForm,
+                    'validation' => $string, 
+                    'id' => $user->getId()
+                ]);
+
+              
+                /* Code doesn't exist in database */
+                if (empty($codeUser)) 
+                { 
+                    $this->addFlash("codeNotSuccess", "Le code entré n'est pas correct");
+                    
+                    return $this->render('security/code_lost_password_recovery.html.twig', [
+                        'form' => $formCode->createView(),
+                        'unlessFooter' => true,
+                        'unlessNavbar' => true,
+                    ]);
+                }
+
+              
+           
             
            // Dans une autre fonctionnalité, allez chercher le form que tiphaine a créer pour la modification du mdp et ses fonctions
 

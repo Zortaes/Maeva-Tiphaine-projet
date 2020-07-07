@@ -475,19 +475,33 @@ class UserController extends AbstractController
                 ]);
             }
 
-            // généré un code, l'entrer dans la BDD et le transmettre dans le context de l'email
+            /* generate code random */
+            $numberRandom = $confirmation->numberRandomCode(); 
+
+            /* Token validation */
+            $token = $confirmation->tokenSignup(); 
+
+            /* set in database, and render in email */
+            $emailDatabase[0]->setcode($numberRandom);
+            $emailDatabase[0]->setValidation($token);  
+  
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($emailDatabase[0]);
+            $entityManager->flush();
+
             
             /* email */
             $email = (new TemplatedEmail())
             ->from('la.rubrique.ecolo@gmail.com')
             ->to(new Address($emailDatabase[0]->getEmail()))
-            ->subject($confirmation->subject())
+            ->subject($confirmation->subjectPassword())
             // path of the Twig template to render
             ->htmlTemplate('email/_lostPassword.html.twig')
             // pass variables (name => value) to the template
             ->context([
                 'id' => $emailDatabase[0]->getId(),
                 'token' => $emailDatabase[0]->getValidation(),
+                'code' => $numberRandom
             ]);
 
             $mailer->send($email);
