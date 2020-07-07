@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
+use App\Form\Type\EditPasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\Type\LostPassword\CodePasswordRecoveryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -42,6 +45,12 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/{id}/{string}/validation", name="validate")
+     * 
+     * @param User $user 
+     * @param $string Token validation security
+     * 
+     * @return $this redirect to Route login 
+     * @return \LogicException if the User or/and token no correct
      */
     public function validate(User $user, $string)
     {
@@ -72,6 +81,14 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/{id}/{string}/recuperation", name="lostPasswordRecovery")
+     * 
+     * @param User $user => GET
+     * @param $string Token validation security => GET
+     * @param Request $request => POST (form) 
+     * 
+     * @return $this render template form for code
+     * @return $this redirect to Route login 
+     * @return \LogicException if the User or/and token no correct
      */
     public function lostPasswordRecovery(User $user, $string, Request $request)
     {
@@ -116,13 +133,14 @@ class SecurityController extends AbstractController
                         'unlessNavbar' => true,
                     ]);
                 }
-
-              
-           
-            
-           // Dans une autre fonctionnalité, allez chercher le form que tiphaine a créer pour la modification du mdp et ses fonctions
-
-            dd("cut"); 
+                else 
+                {
+                    $secondForm = $this->forward('App\Controller\SecurityController::modifyPasswordRecovery', [
+                       'user' => $codeUser[0]
+                    ]);
+                
+                    return $secondForm;
+                }
 
             }
 
@@ -142,6 +160,55 @@ class SecurityController extends AbstractController
        
 
     }
+
+    /**
+     * @param User $user 
+     * @param Request $request 
+     * @param UserPasswordEncoderInterface $encoder 
+     * 
+     * @return $this redirect to route login 
+     * 
+     */
+    public function modifyPasswordRecovery($user, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+      
+        /* security to access only anonymous */
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }  
+
+        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {        
+
+            dd('cut'); 
+            /* Password */
+            $plainPassword = $form->get('plain_password')->getData();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encodedPassword);
+
+            $user->setUpdatedAt(new DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
+        
+           return $this->redirectToRoute('login');
+
+        }
+
+        return $this->render('user/modify_password.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
 
     /**
      * @Route("/logout", name="logout")
