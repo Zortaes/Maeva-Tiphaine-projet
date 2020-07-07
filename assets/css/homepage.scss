@@ -229,6 +229,7 @@ CONTAINER CAROUSELS
         background-color: #404040;
        
     }
+
 }
 
 /****
@@ -244,12 +245,16 @@ CONTAINER CAROUSELS
     .carousel-item-custum 
     {    
         padding-bottom: 1.2em; 
-        border: 1em solid  #bacf8e; 
+        border: 1em solid  #bacf8e;
 
-    }
+    }    
+
 }
 
-
+#articleImageDetail{
+    max-width: 100%;
+    max-height: 100%;
+}
     
 /*** 
 ALL TEXT IN CARD (after image) 
