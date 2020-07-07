@@ -103,6 +103,7 @@ class SecurityController extends AbstractController
         /* Request User thanks to mail message url, Token correct to this user, else exeption*/
         if ($user->getValidation() === $string) 
         {
+            
 
             /* User enter the code request to his mailbox */
             $formCode = $this->createForm(CodePasswordRecoveryType::class);  
@@ -111,38 +112,34 @@ class SecurityController extends AbstractController
 
             if ($formCode->isSubmitted() && $formCode->isValid()) 
             {    
-            
-                $codeForm = $formCode->get('code')->getData(); 
+                
+                // a faire une condition ici avec le code à null ou pas 
+               
+                $postForm = $this->forward('App\Controller\SecurityController::code', [
+                    'user' => $user, 
+                    'formCode' => $formCode, 
+                    'string' => $string, 
+                    'merde' => false,
 
-                 /** @var UserRepository Search code to this user in database */ 
-                $codeUser = $this->getDoctrine()->getRepository(User::class)->findBy([
-                    'code' => $codeForm,
-                    'validation' => $string, 
-                    'id' => $user->getId()
+                 ]);
+
+                dd($user); 
+
+                 return $postForm;  
+                 
+                 
+                $formPassword = $this->createForm(EditPasswordType::class, $user);  
+                $formPassword->handleRequest($request);
+
+
+                return $this->render('user/modify_password.html.twig', [
+                    'user' => $user,
+                    'form' => $formPassword->createView()
                 ]);
 
-              
-                /* Code doesn't exist in database */
-                if (empty($codeUser)) 
-                { 
-                    $this->addFlash("codeNotSuccess", "Le code entré n'est pas correct");
-                    
-                    return $this->render('security/code_lost_password_recovery.html.twig', [
-                        'form' => $formCode->createView(),
-                        'unlessFooter' => true,
-                        'unlessNavbar' => true,
-                    ]);
-                }
-                else 
-                {
-                    $secondForm = $this->forward('App\Controller\SecurityController::modifyPasswordRecovery', [
-                       'user' => $codeUser[0]
-                    ]);
-                
-                    return $secondForm;
-                }
-
             }
+
+            
 
             return $this->render('security/code_lost_password_recovery.html.twig', [
                 'form' => $formCode->createView(),
@@ -162,14 +159,15 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * 
      * @param User $user 
-     * @param Request $request 
-     * @param UserPasswordEncoderInterface $encoder 
+     * @param FormInterface $formCode
+     * @param $string Token validation security
      * 
      * @return $this redirect to route login 
      * 
      */
-    public function modifyPasswordRecovery($user, Request $request, UserPasswordEncoderInterface $encoder)
+    public function code($user, $formCode, $string, Request $request )
     {
       
         /* security to access only anonymous */
@@ -178,36 +176,42 @@ class SecurityController extends AbstractController
             $this->denyAccessUnlessGranted('IS_ANONYMOUS');
         }  
 
-        $form = $this->createForm(EditPasswordType::class, $user);  
-        $form->handleRequest($request);
+        $codeForm = $formCode->get('code')->getData(); 
 
+        /** @var UserRepository Search code to this user in database */ 
+       $codeUser = $this->getDoctrine()->getRepository(User::class)->findBy([
+           'code' => $codeForm,
+           'validation' => $string, 
+           'id' => $user->getId()
+       ]);
 
-        if ($form->isSubmitted() && $form->isValid()) 
-        {        
+     
+       /* Code doesn't exist in database */
+       if (empty($codeUser)) 
+       { 
+           $this->addFlash("codeNotSuccess", "Le code entré n'est pas correct");
+           
+           return $this->render('security/code_lost_password_recovery.html.twig', [
+               'form' => $formCode->createView(),
+               'unlessFooter' => true,
+               'unlessNavbar' => true,
+           ]);
+       }
 
-            dd('cut'); 
-            /* Password */
-            $plainPassword = $form->get('plain_password')->getData();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
-            $user->setPassword($encodedPassword);
+      $codeUser[0]->setCode(5); 
 
-            $user->setUpdatedAt(new DateTime('now'));
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
-        
-           return $this->redirectToRoute('login');
-
-        }
-
-        return $this->render('user/modify_password.html.twig', [
-            'user' => $user,
-            'form' => $form->createView()
-        ]);
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($codeUser);
+      $entityManager->flush();
+    dd($codeUser);
+      return $this;
+       
+      
+         
     }
+
+
+
 
 
     /**
