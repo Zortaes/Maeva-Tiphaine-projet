@@ -4,13 +4,18 @@ namespace App\Controller;
 
 use DateTime;
 use Exception;
+
 use App\Entity\Flag;
 use App\Entity\Vote;
 use App\Entity\Article;
-use App\Services\Slugger;
-use App\Form\Type\FlagType;
+use App\Entity\Feedback;
 use App\Entity\ListIngredient;
+
+use App\Form\Type\FlagType;
 use App\Form\Type\ArticleType;
+use App\Form\Type\FeedbackType;
+
+use App\Services\Slugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -245,7 +250,19 @@ class ArticleController extends AbstractController
             "article" => $article
         ]);
 
-        /* form to the flags */
+        /** @var FeedingRepository */
+        $existingFeedback= $this->getDoctrine()->getRepository(Feedback::class)->findOneBy([
+            "user" => $this->getUser(),
+            "article" => $article
+        ]);
+
+        /** @var FeedbackRepository */
+        $feedback = $this->getDoctrine()->getRepository(Feedback::class)->findAll();
+        
+
+        /********
+        FORM FLAG
+        ********/
         $newFlag = new Flag();
         $formFlag = $this->createForm(FlagType::class, $newFlag);
         $formFlag->handleRequest($request);
@@ -290,13 +307,50 @@ class ArticleController extends AbstractController
         /* See to the template the posibility for flag an article or no */
         ($flag === null) ? $flag = false : $flag = true; 
          
+
+        /************
+        FORM FEEDBACK 
+        ************/
+        $newFeedback = new Feedback();
+        $formFeedback = $this->createForm(FeedbackType::class, $newFeedback);
+        $formFeedback->handleRequest($request);
+
+        if ($formFeedback->isSubmitted() && $formFeedback->isValid() && !$existingFeedback) 
+        {
+
+            $this->denyAccessUnlessGranted('ROLE_USER');
+
+            /* logout User if he is banned */
+            if ($this->getUser()->getIsBanned() == true) {
+                return $this->redirectToRoute('logout');
+            }
+
+            /* If user change his email and don't validate this */
+            if ($this->getUser()->getValidate() == false) {
+                return $this->redirectToRoute('validationReminder');
+            }
+
+            $feedbacker = $this->getUser();
+            $newFeedback ->setCreated_at(new Datetime);
+            $newFeedback->setUser($feedbacker);
+            $newFeedback->setArticle($article);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newFeedback);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
+        }
+
         return $this->render(
             'article/article_details.html.twig',
             [
                 'form' => $formFlag->createView(),
+                'formFeedback' => $formFeedback->createView(),
                 'article' => $article,
                 'vote' => $vote,
-                'flag' => $flag
+                'flag' => $flag,
+                'feedback' => $existingFeedback
             ]
         );
     }

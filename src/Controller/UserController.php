@@ -390,7 +390,7 @@ class UserController extends AbstractController
     }
 
     /**
-     *  @Route("/validation-reminder", name="validationReminder")
+     *  @Route("/rappelle-de-validation", name="validationReminder")
      * 
      *  @return User 
      */
@@ -406,7 +406,7 @@ class UserController extends AbstractController
     }
 
     /**
-     *  @Route("/send_email", name="sendValidationEmail")
+     *  @Route("/envoie-email", name="sendValidationEmail")
      * 
      *  @return User 
      */

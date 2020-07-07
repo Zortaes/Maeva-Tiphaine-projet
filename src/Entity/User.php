@@ -116,6 +116,11 @@ class User implements UserInterface
      */
     private $validate;
 
+
+/***********
+RELATIONSHIP 
+***********/
+
     /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
@@ -131,6 +136,11 @@ class User implements UserInterface
     */
     private $flags;
 
+    /**
+     * ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="user", cascade={"remove"})
+     */
+    private $feedback;
+
 
     public function __construct() 
     {
@@ -142,6 +152,10 @@ class User implements UserInterface
         
     }
 
+
+/****************
+SETTERS & GETTERS  
+****************/
 
     public function getId(): ?int
     {

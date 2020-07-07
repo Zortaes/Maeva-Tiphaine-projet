@@ -512,9 +512,9 @@ BEST ARTICLES
 
                             <!-- image -->
                             {# Default articleImage #}
-                                {% if bestArticle.category_picture == null %}
-                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.categories.first.category_picture ) }} "
-                                alt="image represent category {{ bestArticle.categories.first.category_name }}">
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
                                 <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
@@ -617,9 +617,9 @@ BEST ARTICLES
 
                             <!-- image -->
                             {# Default articleImage #}
-                                {% if bestArticle.category_picture == null %}
-                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.categories.first.category_picture ) }} "
-                                alt="image represent category {{ bestArticle.categories.first.category_name }}">
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
                                 <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
@@ -717,9 +717,9 @@ BEST ARTICLES
 
                             <!-- image -->
                             {# Default articleImage #}
-                                {% if bestArticle.category_picture == null %}
-                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.categories.first.category_picture ) }} "
-                                alt="image represent category {{ bestArticle.categories.first.category_name }}">
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
                                 <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
