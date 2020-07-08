@@ -438,7 +438,16 @@ class UserController extends AbstractController
     /**
      * @Route("/mot-de-passe-oublié", name="lostPassword")
      * 
-     *  @return 
+     * If ok, send email security with code 
+     * 
+     * @param Request $request
+     * @param MailerInterface $mailer 
+     * @param EmailConfirmation $confirmation
+     * 
+     * 
+     * @return $this render template form (for email)
+     * @return $this redirect to route login with flash message
+     * 
      */
     public function lostPassword(Request $request, MailerInterface $mailer,  EmailConfirmation $confirmation)
     {
@@ -481,7 +490,7 @@ class UserController extends AbstractController
             /* Token validation */
             $token = $confirmation->tokenSignup(); 
 
-            /* set in database, and render in email */
+            /* set in database */
             $emailDatabase[0]->setcode($numberRandom);
             $emailDatabase[0]->setValidation($token);  
   
@@ -490,7 +499,7 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             
-            /* email */
+            /* email with user Id, token security and code */
             $email = (new TemplatedEmail())
             ->from('la.rubrique.ecolo@gmail.com')
             ->to(new Address($emailDatabase[0]->getEmail()))
@@ -505,7 +514,6 @@ class UserController extends AbstractController
             ]);
 
             $mailer->send($email);
-
 
             $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre compte");
         
