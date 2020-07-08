@@ -525,7 +525,7 @@ class UserController extends AbstractController
 
             $mailer->send($email);
 
-            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre compte");
+            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre mot de passe");
         
             return $this->redirectToRoute('login');
 

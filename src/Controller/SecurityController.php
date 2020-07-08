@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
-use App\Form\Type\LostPassword\EditPasswordType;
+use App\Form\Type\LostPassword\PasswordReviewalType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -109,7 +109,7 @@ class SecurityController extends AbstractController
              ******************************************************************/
             if ($user->getCode() === NULL) {
 
-                $formPassword = $this->createForm(EditPasswordType::class, $user);
+                $formPassword = $this->createForm(PasswordReviewalType::class, $user);
                 $formPassword->handleRequest($request);
 
                 /*******************************
