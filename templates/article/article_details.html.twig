@@ -17,8 +17,14 @@
 </div>
 {% endfor %}
 
+{% for message in app.flashes('successFeedbackDeleted') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
 
-{# AUTHOR #}
+
+<!-- AUTHOR DETAILS -->
 <div class="articleAuthor">
     {# Default avatar #}
     {% if article.user.avatar == 'defaultAvatar.jpg' %}
@@ -33,9 +39,10 @@
         <h3>{{ article.user.viewUsername}}</h3>
     </a>
 </div>
-<div id="articlePage">
+<!--/. AUTHOR DETAILS -->
 
-    {# SCORE #}
+<div id="articlePage">
+    <!-- SCORE -->
     <h1 class="articleTitle">
         {{ article.title }}
     </h1>
@@ -72,6 +79,8 @@
         {% endif %}
         {{noteName}} {{label}}
     </div>
+    <!--/. SCORE -->
+
     <div class="articleDetails">
             <!-- image -->
             {# Default image -> Category's picture #}
@@ -84,7 +93,7 @@
                 alt="image represent article">
             {% endif %}
             
-            {# OPTION BUTTON #}
+            <!-- OPTION BUTTON -->
             <!-- flag dropdown -->
             <div class="dropdown-flag-custom">
  
@@ -96,7 +105,7 @@
                 
                 <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
                     <ul>
-                    {# FLAG OPTION #}
+                    <!-- flag options -->
                         <li>
                             {% if flag == false %}
                                 <button type="button" class="btn article-delete " data-toggle="modal"
@@ -106,7 +115,7 @@
                             {% endif %}                     
                         </li>
 
-                    {# ROLE_ADMIN OPTION #}
+                    <!-- role_admin options -->
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a></li>
                         {% endif %}
@@ -126,10 +135,11 @@
                 </div>
                 </div>
             </div>
+            <!--/. OPTION BUTTON -->
         
         <!-- article details section -->
         <div class="btn-group">
-            {# CATEGORIES #}
+            <!-- categories -->
             <button class="btn btn-secondary btn-sm dropdown-toggle category-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Catégories
             </button>
@@ -142,14 +152,14 @@
             </div>
         </div>
 
-        {# SUMMARY #}
+        <!-- summary -->
         <div class="fullSummary">
             <p>{{ article.summary }}</p>
         </div>
 
-        {# INGREDIENTS & INSTRUCTIONS #}
+        <!-- ingredients & instructions -->
         <div class="ingredientInstruction">
-            {# INGREDIENTS LIST #}
+            <!-- ingredient list -->
             <div class="ingredient">
                 <h3>Ingrédients</h3>
                 <ul>
@@ -158,14 +168,14 @@
                     {% endfor %}
                 </ul>
             </div>
-            {# INSTRUCTIONS #}
+            <!-- instructions -->
             <div class="instruction">
                 <h3>Instructions</h3>
                 <p>{{ article.instruction|nl2br }}</p>
             </div>
         </div>
 
-        {# USER'S VOTE #}
+        <!-- USER'S VOTE -->
         {% if app.user %}
             {% if vote %}
             <div class="UserThoughs">
@@ -188,8 +198,9 @@
             </div>
             {% endif %}
         {% endif %}
+        <!--/. USER'S VOTE -->
 
-        {# VOTE OPTIONS #}
+        <!-- VOTE OPTIONS -->
         <div class="dropdown text-center">
             <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -213,122 +224,176 @@
                 </div>
             </div>
         </div>
+        <!--/. VOTE OPTIONS -->
+
         <p class="dateCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
     </div>
-</div>
+    <!--/. article details section -->
 
-{# FEEDBACK FORM #}
-<div>
-{% if app.user %}
+    <div class="feedbackSection">
+    <!-- FEEDBACK FORM -->
+    <div>
+        {% if app.user %}
 
-    {# CONNECTED USER AVATAR #}
-    <!-- Default avatar -->
-    {% if app.user.avatar == 'defaultAvatar.jpg' %}
-    <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
-        alt="image represent avatarUser {{ app.user.viewUsername }}">
-    {% else %}
-    <!-- User avatar -->
-    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
-        alt="image represent avatarUser {{ app.user.viewUsername }}">
-    {% endif %}
-
-{% endif %}
-
-    {# FORM #}
-    <div class="feedbackForm">
-        {% if feedback %}
-            <div class="feedbackinput">
-                <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
-                <p class="feedback">{{ feedback.comment }}</p>
-            </div>
-        {% else %}
-            <div class="feedbackinput">
-                {{ form_start(formFeedback) }}
-                {{ form_row(formFeedback.comment) }}
-                {{ form_row(formFeedback.Poster) }}
-                {{ form_end(formFeedback) }}
-            </div>
-        {% endif %}
-    </div>
-</div>
-
-{# ALL FEEDBACK FOR THIS ARTICLE #}
-<div>
-    {% for feedback in article.feedback %}
-        <div>
-            {# FEEDBACKER AVATAR #}
             <!-- Default avatar -->
             {% if app.user.avatar == 'defaultAvatar.jpg' %}
-                <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
-                    alt="image represent avatarUser {{ app.user.viewUsername }}">
-                {% else %}
-                <!-- User avatar -->
-                <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
-                    alt="image represent avatarUser {{ app.user.viewUsername }}">
+            <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
+                alt="image represent avatarUser {{ app.user.viewUsername }}">
+            {% else %}
+            <!-- User avatar -->
+            <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
+                alt="image represent avatarUser {{ app.user.viewUsername }}">
             {% endif %}
+            {# no image if user not logged in #}
+        {% endif %}
 
-            {# FEEDBACK #}
-            <div>
+        {# FORM #}
+        <div class="feedbackForm">
+            {% if feedback %}
                 <div class="feedbackinput">
-                    <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
-                    <p class="feedback">{{ feedback.comment }}</p>
+                    <div class="inf&options">
+                        <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
+                        <!-- dropdown option feedback -->
+                        <div class="dropdown m-3">
+                            
+                            <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ...
+                            </button>
+                            
+                            <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
+                                <!-- user options -->
+                                {% if is_granted('DELETE', feedback) %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn article-delete" data-toggle="modal"
+                                        data-target="#modalDeleteFeedback-{{feedback.id}}">
+                                        Supprimer
+                                    </button>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <p class="feedback">{{ feedback.comment|nl2br }}</p>
+                        <p class="feedbackDate">{{ feedback.createdAt|date("d/m/Y") }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="feedbackinput">
+                    {{ form_start(formFeedback) }}
+                    {{ form_row(formFeedback.comment ) }}
+                    {{ form_row(formFeedback.Poster) }}
+                    {{ form_end(formFeedback) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!--/. FEEDBACK FORM -->
+
+
+    <!-- ALL FEEDBACK FOR THIS ARTICLE  -->
+    <div>
+        {% for feedback in article.feedback %}
+            <div>
+                <!-- FEEDBACKER AVATAR -->
+                <!-- Default avatar -->
+                {% if app.user.avatar == 'defaultAvatar.jpg' %}
+                    <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
+                        alt="image represent avatarUser {{ app.user.viewUsername }}">
+                    {% else %}
+                    <!-- User avatar -->
+                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
+                        alt="image represent avatarUser {{ app.user.viewUsername }}">
+                {% endif %}
+
+                <!-- FEEDBACK -->
+                <div>
+                    <div class="feedbackinput">
+                        <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
+                        <p class="feedback">{{ feedback.comment|nl2br }}</p>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    <!--/. ALL FEEDBACK FOR THIS ARTICLE  -->
+    </div>
+
+    {# MODALS #}
+    <!-- Modal Delete article -->
+    <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article
+                        "{{article.title}}" ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary button-yes-custum">
+                        <a href="{{path('article_delete', {'slug' : article.slug}) }}">
+                            Oui
+                        </a>
+                    </button>
                 </div>
             </div>
-
         </div>
-    {% endfor %}
-</div>
+    </div>
 
-
-{# MODALS #}
-<!-- Modal Delete article -->
-<div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
-    aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article
-                    "{{article.title}}" ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary button-yes-custum">
-                    <a href="{{path('article_delete', {'slug' : article.slug}) }}">
-                        Oui
-                    </a>
-                </button>
+    <!-- Modal Flag an article -->
+    <div class="modal fade modal-container-custum" id="modalFlagArticle" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sélectionner la raison de votre signalement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.option_value) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Annuler</button>
+                        {{ form_row(form.Valider) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Flag an article -->
-<div class="modal fade modal-container-custum" id="modalFlagArticle" tabindex="-1" role="dialog"
-    aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Sélectionner la raison de votre signalement</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{ form_start(form) }}
-                {{ form_row(form.option_value) }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary " data-dismiss="modal">Annuler</button>
-                    {{ form_row(form.Valider) }}
-                {{ form_end(form) }}
+    <!-- Modal Delete feedback -->
+    {% if feedback %}
+    <div class="modal fade modal-container-custum" id="modalDeleteFeedback-{{feedback.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalfeedbackDelete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer ce commentaire ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary button-yes-custum">
+                        <a href="{{path('feedbackDelete', {'id' : feedback.id}) }}">
+                            Oui
+                        </a>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
-
 {% endblock %}
 
 {% block javascripts %}

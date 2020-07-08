@@ -331,7 +331,7 @@ class ArticleController extends AbstractController
             }
 
             $feedbacker = $this->getUser();
-            $newFeedback ->setCreated_at(new Datetime);
+            $newFeedback ->setCreatedAt(new Datetime);
             $newFeedback->setUser($feedbacker);
             $newFeedback->setArticle($article);
 

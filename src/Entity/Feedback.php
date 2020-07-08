@@ -85,7 +85,7 @@ SETTERS & GETTERS
     /**
      * Get the value of created_at
      */ 
-    public function getCreated_at()
+    public function getCreatedAt()
     {
         return $this->created_at;
     }
@@ -95,7 +95,7 @@ SETTERS & GETTERS
      *
      * @return  self
      */ 
-    public function setCreated_at($created_at)
+    public function setCreatedAt($created_at)
     {
         $this->created_at = $created_at;
 
@@ -105,7 +105,7 @@ SETTERS & GETTERS
     /**
      * Get the value of updated_at
      */ 
-    public function getUpdated_at()
+    public function getUpdatedAt()
     {
         return $this->updated_at;
     }

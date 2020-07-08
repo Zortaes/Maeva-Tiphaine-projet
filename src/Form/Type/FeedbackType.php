@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Validator\Constraints\Length;
 
 class FeedbackType extends AbstractType
 {
@@ -22,7 +22,10 @@ class FeedbackType extends AbstractType
         TextareaType::class,
         [
             "label" => false,
-            "attr" => array('placeholder' => "Ajouter un commentaire")
+            "attr" => array('placeholder' => "Ajouter un commentaire"),
+            "constraints" => [
+                new Length(["max" => 2000, "maxMessage" => "Votre commentaire ne peut pas faire plus de 2000 caractères"])
+                ]
         ])
         ->add("Poster", SubmitType::class); 
 
