@@ -10,7 +10,7 @@ use App\Services\Slugger;
 use App\Form\Type\UserType;
 use App\Form\Type\EditSelfType;
 use Symfony\Component\Mime\Email;
-use App\Form\Type\EditPasswordType;
+use App\Form\Type\EditPasswordProfilType;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
 use App\Services\AvatarVerification;
@@ -254,29 +254,39 @@ class UserController extends AbstractController
             return $this->redirectToRoute('logout');
         }
         
-        
-
-        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form = $this->createForm(EditPasswordProfilType::class, $user);  
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) 
         {        
 
-            /* Password */
-            $plainPassword = $form->get('plain_password')->getData();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
-            $user->setPassword($encodedPassword);
+            $oldPassword = $form->get('oldPassword')->getData();
+            $compareOldPassword = $encoder->isPasswordValid($user, $oldPassword);
+ 
+            if ($compareOldPassword)
+            {
+               /* New Password */
+                $plainPassword = $form->get('plain_password')->getData();
+                $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encodedPassword);
 
-            $user->setUpdatedAt(new DateTime('now'));
+                $user->setUpdatedAt(new DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
+                $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
         
-           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
+                return $this->redirectToRoute('showProfil', ['id' => $user->getId()]); 
+            }
+            else 
+            {
+                $this->addFlash("NotsuccessModifyPassword", "Votre ancien mot de passe ne correspond pas");
+            }
+
+            
 
         }
 

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
-use App\Form\Type\EditPasswordType;
+use App\Form\Type\LostPassword\EditPasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,10 +80,14 @@ class SecurityController extends AbstractController
      * @param $string Token validation security => GET
      * @param Request $request => form 
      * 
-     * @return $this render template form for code
+     * @return \LogicException if the User or/and token no correct (0)
      * 
-     * @return $this redirect to Route login 
-     * @return \LogicException if the User or/and token no correct
+     * @return $this->render() template form for code (1)
+     * @return $this->forward() for processing Data form code (2)
+     * 
+     * @return $this->render() template form for renewal password if the form code is submit and processed (3)
+     * @return $this->forward() for processing Data form Password (4)
+     * 
      */
     public function lostPasswordRecovery(User $user, $string, Request $request)
     {
@@ -113,14 +117,10 @@ class SecurityController extends AbstractController
                 ********************************/
                 if ($formPassword->isSubmitted() && $formPassword->isValid()) {
 
-                   
-
                     $postFormPassword = $this->forward('App\Controller\SecurityController::passwordRenewal', [
                         'user' => $user,
                         'formPassword' => $formPassword,
                         'string' => $string,
-
-
                     ]);
 
                     return $postFormPassword;
@@ -175,7 +175,8 @@ class SecurityController extends AbstractController
      * @param FormInterface $formCode
      * @param $string Token validation security
      * 
-     * @return $this redirect to route lostPasswordRecovery
+     * @return $this->render() template twig if the code doesn't ok
+     * @return $this->redirectToRoute() lostPasswordRecovery if is ok. And set code NULL
      * 
      */
     public function code($user, $formCode, $string)
