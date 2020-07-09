@@ -10,7 +10,7 @@ use App\Services\Slugger;
 use App\Form\Type\UserType;
 use App\Form\Type\EditSelfType;
 use Symfony\Component\Mime\Email;
-use App\Form\Type\EditPasswordType;
+use App\Form\Type\EditPasswordProfilType;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
 use App\Services\AvatarVerification;
@@ -254,29 +254,39 @@ class UserController extends AbstractController
             return $this->redirectToRoute('logout');
         }
         
-        
-
-        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form = $this->createForm(EditPasswordProfilType::class, $user);  
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) 
         {        
 
-            /* Password */
-            $plainPassword = $form->get('plain_password')->getData();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
-            $user->setPassword($encodedPassword);
+            $oldPassword = $form->get('oldPassword')->getData();
+            $compareOldPassword = $encoder->isPasswordValid($user, $oldPassword);
+ 
+            if ($compareOldPassword)
+            {
+               /* New Password */
+                $plainPassword = $form->get('plain_password')->getData();
+                $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encodedPassword);
 
-            $user->setUpdatedAt(new DateTime('now'));
+                $user->setUpdatedAt(new DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
+                $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
         
-           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
+                return $this->redirectToRoute('showProfil', ['id' => $user->getId()]); 
+            }
+            else 
+            {
+                $this->addFlash("NotsuccessModifyPassword", "Votre ancien mot de passe ne correspond pas");
+            }
+
+            
 
         }
 
@@ -438,7 +448,16 @@ class UserController extends AbstractController
     /**
      * @Route("/mot-de-passe-oublié", name="lostPassword")
      * 
-     *  @return 
+     * If ok, send email security with code 
+     * 
+     * @param Request $request
+     * @param MailerInterface $mailer 
+     * @param EmailConfirmation $confirmation
+     * 
+     * 
+     * @return $this render template form (for email)
+     * @return $this redirect to route login with flash message
+     * 
      */
     public function lostPassword(Request $request, MailerInterface $mailer,  EmailConfirmation $confirmation)
     {
@@ -475,25 +494,38 @@ class UserController extends AbstractController
                 ]);
             }
 
-            // généré un code, l'entrer dans la BDD et le transmettre dans le context de l'email
+            /* generate code random */
+            $numberRandom = $confirmation->numberRandomCode(); 
+
+            /* Token validation */
+            $token = $confirmation->tokenSignup(); 
+
+            /* set in database */
+            $emailDatabase[0]->setcode($numberRandom);
+            $emailDatabase[0]->setValidation($token);  
+  
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($emailDatabase[0]);
+            $entityManager->flush();
+
             
-            /* email */
+            /* email with user Id, token security and code */
             $email = (new TemplatedEmail())
             ->from('la.rubrique.ecolo@gmail.com')
             ->to(new Address($emailDatabase[0]->getEmail()))
-            ->subject($confirmation->subject())
+            ->subject($confirmation->subjectPassword())
             // path of the Twig template to render
             ->htmlTemplate('email/_lostPassword.html.twig')
             // pass variables (name => value) to the template
             ->context([
                 'id' => $emailDatabase[0]->getId(),
                 'token' => $emailDatabase[0]->getValidation(),
+                'code' => $numberRandom
             ]);
 
             $mailer->send($email);
 
-
-            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre compte");
+            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre mot de passe");
         
             return $this->redirectToRoute('login');
 

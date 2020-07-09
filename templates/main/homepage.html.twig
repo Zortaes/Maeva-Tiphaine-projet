@@ -19,6 +19,11 @@
 
 
 
+{% for message in app.flashes('successPasswordRenewal') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
     
 <!-- 
 JUMBOTRON (image-flowers)
