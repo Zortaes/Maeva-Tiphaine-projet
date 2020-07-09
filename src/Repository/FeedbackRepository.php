@@ -19,6 +19,18 @@ class FeedbackRepository extends ServiceEntityRepository
         parent::__construct($registry, Feedback::class);
     }
 
+        /**
+    * @return Feedback[] list of last feedback flagged
+    */
+    public function findByFlaggedFeedback($flag) 
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.flaggedUp = :val')
+            ->setParameter('val', $flag)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Feedback[] Returns an array of Feedback objects
     //  */

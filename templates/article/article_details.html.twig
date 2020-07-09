@@ -11,6 +11,7 @@
 
 {% block body %}
 
+<!-- flash messages -->
 {% for message in app.flashes('success') %}
 <div class="alert alert-success text-center">
     {{ message }}
@@ -23,6 +24,12 @@
 </div>
 {% endfor %}
 
+{% for message in app.flashes('successFeedbackFlaggedUp') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+<!--/. flash messages -->
 
 <!-- AUTHOR DETAILS -->
 <div class="articleAuthor">
@@ -309,8 +316,35 @@
                 <!-- FEEDBACK -->
                 <div>
                     <div class="feedbackinput">
-                        <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
+                        <div class="inf&options">
+                            <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
+                            <!-- dropdown option flagUp -->
+                            <div class="dropdown m-3">
+                                
+                                <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ...
+                                </button>
+                                
+                                <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
+                                    <!-- user options -->
+                                        <!-- Button trigger modal -->
+                                        {% if feedback.flaggedUp == false %}
+                                        <button type="button" class="btn article-delete">
+                                        <a href="{{path('feedbackFlagUp', {'id' : feedback.id}) }}">
+                                            Signaler
+                                        </a>
+                                        </button>
+                                        {% else %}
+                                        <p>Ce commentaire à déjà été signalé</a>
+                                        {% endif %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
                         <p class="feedback">{{ feedback.comment|nl2br }}</p>
+                        <p class="feedbackDate">{{ feedback.createdAt|date("d/m/Y") }}</p>
                     </div>
                 </div>
 

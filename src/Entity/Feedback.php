@@ -25,6 +25,11 @@ class Feedback
     private $comment;
 
     /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $flaggedUp;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -78,6 +83,26 @@ SETTERS & GETTERS
     public function setComment($comment)
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of flaggedUp
+     */ 
+    public function getFlaggedUp()
+    {
+        return $this->flaggedUp;
+    }
+
+    /**
+     * Set the value of flaggedUp
+     *
+     * @return  self
+     */ 
+    public function setFlaggedUp($flaggedUp)
+    {
+        $this->flaggedUp = $flaggedUp;
 
         return $this;
     }
@@ -149,4 +174,5 @@ SETTERS & GETTERS
 
         return $this;
     }
+
 }
