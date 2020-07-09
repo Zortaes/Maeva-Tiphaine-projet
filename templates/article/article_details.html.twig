@@ -5,6 +5,7 @@
 {% block stylesheets %}
 {{ parent() }}
 {{ encore_entry_link_tags('article_details') }}
+{{ encore_entry_link_tags('feedback_flag') }}
 {{ encore_entry_link_tags('modal') }}
 {% endblock %}
 
@@ -239,7 +240,7 @@
 
     <div class="feedbackSection">
     <!-- FEEDBACK FORM -->
-    <div>
+    <div class="userFeedback">
         {% if app.user %}
 
             <!-- Default avatar -->
@@ -256,6 +257,8 @@
 
         {# FORM #}
         <div class="feedbackForm">
+                {{ form_start(formFeedback) }}
+                {{ form_errors(formFeedback) }}
             {% if feedback %}
                 <div class="feedbackinput">
                     <div class="inf&options">
@@ -286,12 +289,14 @@
                     </div>
                 </div>
             {% else %}
-                <div class="feedbackinput">
-                    {{ form_start(formFeedback) }}
-                    {{ form_row(formFeedback.comment ) }}
-                    {{ form_row(formFeedback.Poster) }}
-                    {{ form_end(formFeedback) }}
+
+
+                <div class="comment">
+                    <div class="commentWidget">{{ form_row(formFeedback.comment ) }}</div>
+                    {{ form_row(formFeedback.Poster) }} 
                 </div>
+            {{ form_end(formFeedback) }}
+
             {% endif %}
         </div>
     </div>
