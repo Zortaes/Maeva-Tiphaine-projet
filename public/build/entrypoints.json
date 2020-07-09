@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
@@ -12,7 +12,7 @@
     },
     "homepage": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/homepage.js"
       ],
       "css": [
@@ -21,7 +21,7 @@
     },
     "article_details": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/article_details.js"
       ],
       "css": [
@@ -30,7 +30,8 @@
     },
     "form": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
         "/build/vendors~form~formArticle~profil.js",
         "/build/vendors~form~profil.js",
         "/build/form.js"
@@ -57,7 +58,8 @@
     },
     "profil": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
         "/build/vendors~form~formArticle~profil.js",
         "/build/vendors~form~profil.js",
         "/build/profil.js"
@@ -108,7 +110,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -149,7 +151,8 @@
     },
     "formArticle": {
       "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
         "/build/vendors~form~formArticle~profil.js",
         "/build/vendors~formArticle.js",
         "/build/formArticle.js"
@@ -158,12 +161,14 @@
         "/build/formArticle.css"
       ]
     },
-    "feedback_flag": {
-      "css": [
-        "/build/feedback_flag.css"
-      ],
+    "feedback": {
       "js": [
-        "/build/feedback_flag.js"
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
+        "/build/feedback.js"
+      ],
+      "css": [
+        "/build/feedback.css"
       ]
     }
   }

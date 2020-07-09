@@ -11,8 +11,8 @@
   "build/board.js": "/build/board.js",
   "build/error.css": "/build/error.css",
   "build/error.js": "/build/error.js",
-  "build/feedback_flag.css": "/build/feedback_flag.css",
-  "build/feedback_flag.js": "/build/feedback_flag.js",
+  "build/feedback.css": "/build/feedback.css",
+  "build/feedback.js": "/build/feedback.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
   "build/formArticle.css": "/build/formArticle.css",
@@ -38,7 +38,8 @@
   "build/validation_reminder.css": "/build/validation_reminder.css",
   "build/validation_reminder.js": "/build/validation_reminder.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js": "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+  "build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js": "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+  "build/vendors~feedback~form~formArticle~profil.js": "/build/vendors~feedback~form~formArticle~profil.js",
   "build/vendors~formArticle.js": "/build/vendors~formArticle.js",
   "build/vendors~form~formArticle~profil.js": "/build/vendors~form~formArticle~profil.js",
   "build/vendors~form~profil.js": "/build/vendors~form~profil.js",
@@ -68,5 +69,6 @@
   "build/images/recyclage.jpg": "/build/images/recyclage.5a09f711.jpg",
   "build/images/rotate-left.svg": "/build/images/rotate-left.1c2e65a3.svg",
   "build/images/rotate-right.svg": "/build/images/rotate-right.7abf641f.svg",
-  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg"
+  "build/images/vetements.jpg": "/build/images/vetements.db456796.jpg",
+  "build/images/caution.png": "/build/images/caution.ef9ad9a3.png"
 }

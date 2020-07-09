@@ -267,41 +267,17 @@ class ArticleController extends AbstractController
         $formFlag = $this->createForm(FlagType::class, $newFlag);
         $formFlag->handleRequest($request);
 
-        if ($formFlag->isSubmitted() && $formFlag->isValid() && $flag === null) {
+        if ($formFlag->isSubmitted() && $formFlag->isValid() && $flag === null) 
+        {
 
-            $this->denyAccessUnlessGranted('ROLE_USER');
+            $postFormFeedback = $this->forward('App\Controller\ArticleController::formFlagArticle', [
+                'article' => $article,
+                'newFlag' => $newFlag,
+                'formFlag' => $formFlag
+            ]);
 
-            /* logout User if he is banned */
-            if ($this->getUser()->getIsBanned() == true) {
-                return $this->redirectToRoute('logout');
-            }
+            return $postFormFeedback;
 
-            /* If user change his email and don't validate this */
-            if ($this->getUser()->getValidate() == false) {
-                return $this->redirectToRoute('validationReminder');
-            }
-
-            /* Requests */
-            $formFlagValue = $formFlag->get('option_value')->getData();
-            $flagger = $this->getUser();
-
-            /* set in the BDD Flag */
-            $newFlag->setOptionValue($formFlagValue);
-            $newFlag->setUser($flagger);
-            $newFlag->setArticle($article);
-            $newFlag->setCreatedAt(new Datetime);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newFlag);
-            $entityManager->flush();
-
-            $article->setFlagged(true);
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande dans les meilleurs délais.');
-
-            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
         }
 
         /* See to the template the posibility for flag an article or no */
@@ -318,29 +294,12 @@ class ArticleController extends AbstractController
         if ($formFeedback->isSubmitted() && $formFeedback->isValid() && !$existingFeedback) 
         {
 
-            $this->denyAccessUnlessGranted('ROLE_USER');
+            $postFormFeedback = $this->forward('App\Controller\FeedbackController::newFeedback', [
+                'article' => $article,
+                'newFeedback' => $newFeedback
+            ]);
 
-            /* logout User if he is banned */
-            if ($this->getUser()->getIsBanned() == true) {
-                return $this->redirectToRoute('logout');
-            }
-
-            /* If user change his email and don't validate this */
-            if ($this->getUser()->getValidate() == false) {
-                return $this->redirectToRoute('validationReminder');
-            }
-
-            $feedbacker = $this->getUser();
-            $newFeedback->setFlaggedUp(false);
-            $newFeedback ->setCreatedAt(new Datetime);
-            $newFeedback->setUser($feedbacker);
-            $newFeedback->setArticle($article);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newFeedback);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
+            return $postFormFeedback;
         }
 
         return $this->render(
@@ -443,5 +402,50 @@ class ArticleController extends AbstractController
         $this->addFlash("successArticleDelete", "L'article a bien été supprimé");
 
         return $this->redirectToRoute('showProfil');
+    }
+
+    /**
+     * @param Article $article 
+     * @param FormInterface $formFlag
+     * @param Flag
+     * 
+     * @return $this->render() template twig 
+     * @return $this->redirectToRoute() articleDetails 
+     */
+    public function formFlagArticle($article, $formFlag, $newFlag)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        /* logout User if he is banned */
+        if ($this->getUser()->getIsBanned() == true) {
+            return $this->redirectToRoute('logout');
+        }
+
+        /* If user change his email and don't validate this */
+        if ($this->getUser()->getValidate() == false) {
+            return $this->redirectToRoute('validationReminder');
+        }
+
+        /* Requests */
+        $formFlagValue = $formFlag->get('option_value')->getData();
+        $flagger = $this->getUser();
+
+        /* set in the BDD Flag */
+        $newFlag->setOptionValue($formFlagValue);
+        $newFlag->setUser($flagger);
+        $newFlag->setArticle($article);
+        $newFlag->setCreatedAt(new Datetime);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($newFlag);
+        $entityManager->flush();
+
+        $article->setFlagged(true);
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Le signalement a bien été pris en compte, nous traîtons votre demande dans les meilleurs délais.');
+
+        return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
     }
 }
