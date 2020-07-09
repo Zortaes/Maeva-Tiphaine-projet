@@ -91,10 +91,11 @@ class ArticleType extends AbstractType
                 'cropper_options'=> [
                     'aspectRatio'=> 3,
                     'viewMode' => 2,
-                    'minCropBoxWidth' => 120,
-                    'minCropBoxHeight' => 120,
+                    'minCropBoxWidth' => 1280,
+                    'minCropBoxHeight' => 1280,
+                    
                 ],
-                'preview_height' => 200,
+                'preview_height' => 66,
                 'preview_width' => 200,
                 'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
                 'save_button_class' => 'btn btn-success mx-0 w-25',
