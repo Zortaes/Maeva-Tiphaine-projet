@@ -15,8 +15,9 @@ Title Category
     line-height: 2em;
     text-shadow: 2px 1px 1px rgb(53, 52, 52);
  
-    } 
+    }
 }
+
 
 /* AVATAR (article_by_user) */
 
@@ -146,7 +147,16 @@ Container
     }
 
     width: 50%;
+
+    /* IMAGE */
+#articleImageDetail
+{
+max-width: 100%;
+height: auto;
+}
+
 }  
+
 
 /*** 
 ALL TEXT 

@@ -48,7 +48,7 @@ class SendEmailType extends AbstractType
             'constraints' => array(
                 new RecaptchaTrue()
             )
-        )) 
+        ))
 
         ->add('Envoyer', SubmitType::class);
         

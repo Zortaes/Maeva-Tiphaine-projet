@@ -53,7 +53,7 @@ class CategoryController extends AbstractController
   
         return $this->render('category/article_by_category.html.twig',
         [
-            'categoryInfo' => $category, 
+            'categoryInfo' => $category,
             'category' => $articlesByCategory
         ]);
     }
