@@ -212,6 +212,36 @@ CATEGORIES
 
 }
 
+/******************************** 
+Form lost password email and code
+********************************/
+.notFoundRequest
+{
+    color: rgb(209, 76, 76);
+    font-size: 1.2em;
+    border: 1px solid  rgb(209, 76, 76);
+    margin: 0 1em; 
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-control.is-invalid 
+{
+    background-image: none;
+}
+
+
+
 /*************************** 
     maintenance message
 ****************************/
@@ -228,4 +258,4 @@ CATEGORIES
   
 }
 
- 
+

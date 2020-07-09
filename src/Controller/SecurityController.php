@@ -199,7 +199,7 @@ class SecurityController extends AbstractController
 
         /* Code doesn't exist in database */
         if (empty($codeUser)) {
-            $this->addFlash("codeNotSuccess", "Le code entré n'est pas correct");
+            $this->addFlash("codeNotSuccess", "Le code n'est pas correct");
 
             return $this->render('security/code_lost_password_recovery.html.twig', [
                 'form' => $formCode->createView(),
