@@ -253,6 +253,7 @@ CONTAINER CAROUSELS
 
 #articleImageDetail{
     max-width: 100%;
+    min-height: 155px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     
@@ -297,7 +298,7 @@ ALL TEXT IN CARD (after image)
 
     .articleAuthor
     {
-       margin-top: 0.5em; 
+       margin-top: 0.8em; 
         display: flex; 
         justify-content: center; 
 
@@ -327,11 +328,10 @@ ALL TEXT IN CARD (after image)
     .card-paragraph-summary 
     {
         height: 100px;
-        margin: 1vh 3vw 0 5vw;
-        max-height: 40px;
+        margin: 2vh 3vw 1vh 5vw;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap; 
+        white-space: nowrap;
 
     }
 

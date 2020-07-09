@@ -86,15 +86,16 @@ class ArticleType extends AbstractType
                 'label' => 'Illustration de votre article',
                 'enable_remote' => false,
                 'max_width' => 1280,
-                'max_height' => 1280,
+                'max_height' => 720,
                 'aspect_ratios' => [],
                 'cropper_options'=> [
                     'aspectRatio'=> 3,
                     'viewMode' => 2,
                     'minCropBoxWidth' => 1280,
                     'minCropBoxHeight' => 1280,
+                    
                 ],
-                'preview_height' => 200,
+                'preview_height' => 66,
                 'preview_width' => 200,
                 'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
                 'save_button_class' => 'btn btn-success mx-0 w-25',

@@ -384,10 +384,13 @@ INGREDIENTS AND INSTRCUTIONS
 {
     font-size: calc(0.5em + 1vw);
 
+
     @media (min-width: 767px)
     { 
         padding-left: 2em;
         font-size: 1em;
+        
+        
     }
     
 }

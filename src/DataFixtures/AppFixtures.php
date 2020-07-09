@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
             ],  
             "Hygiène corporelle" => [
                 "hygiene-corporelle.jpg",
-                "#fff5ad"
+                "#e6d977"
             ], 
             "Ménage/Hygiène maison"=> [
                 "menage-hygiene-maison.jpg",
@@ -96,7 +96,7 @@ class AppFixtures extends Fixture
             ],  
             "Jardin/Jardinage" => [
                 "jardin-jardinage.jpg",
-                "#b0eb7d"
+                "#94c966"
             ],  
             "Animaux" => [
                 "animaux.jpg",
