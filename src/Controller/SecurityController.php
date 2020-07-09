@@ -226,7 +226,7 @@ class SecurityController extends AbstractController
      * @param FormInterface $formCode
      * @param UserPasswordEncoderInterface $encoder
      * 
-     * @return $this redirect to route login 
+     * @return $this redirect to route homepage
      * 
      */
     public function passwordRenewal($user, $formPassword, UserPasswordEncoderInterface $encoder)
@@ -245,7 +245,7 @@ class SecurityController extends AbstractController
 
         $this->addFlash("successPasswordRenewal", "Votre mot de passe a bien été modifié, vous pouvez maintenant vous connecter");
 
-        return $this->redirectToRoute('login');
+        return $this->redirectToRoute('homepage');
     }
 
 
