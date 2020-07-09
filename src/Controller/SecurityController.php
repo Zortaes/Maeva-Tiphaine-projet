@@ -107,7 +107,7 @@ class SecurityController extends AbstractController
             /***************************************************************** 
             3 - Data to the confidential code is already processed and correct 
              ******************************************************************/
-            if ($user->getCode() === NULL) {
+            if ($user->getValidateLostPassword()) {
 
                 $formPassword = $this->createForm(PasswordReviewalType::class, $user);
                 $formPassword->handleRequest($request);
@@ -209,6 +209,7 @@ class SecurityController extends AbstractController
         }
 
         $user->setCode(NULL);
+        $user->setValidateLostPassword(true); 
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
@@ -238,6 +239,7 @@ class SecurityController extends AbstractController
         $user->setPassword($encodedPassword);
 
         $user->setUpdatedAt(new DateTime('now'));
+        $user->setValidateLostPassword(false); 
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);

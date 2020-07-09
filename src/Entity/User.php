@@ -116,6 +116,11 @@ class User implements UserInterface
      */
     private $validate;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validateLostPassword;
+
 
 /***********
 RELATIONSHIP 
@@ -146,6 +151,7 @@ RELATIONSHIP
     {
         $this->is_banned = false;
         $this->validate = false; 
+        $this->validateLostPassword = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->flags = new ArrayCollection();
@@ -518,6 +524,26 @@ SETTERS & GETTERS
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validateLostPassword
+     */ 
+    public function getValidateLostPassword()
+    {
+        return $this->validateLostPassword;
+    }
+
+    /**
+     * Set the value of validateLostPassword
+     *
+     * @return  self
+     */ 
+    public function setValidateLostPassword($validateLostPassword)
+    {
+        $this->validateLostPassword = $validateLostPassword;
 
         return $this;
     }
