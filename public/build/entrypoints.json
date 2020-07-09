@@ -1,11 +1,13 @@
 {
   "entrypoints": {
-    "user_details": {
-      "css": [
-        "/build/user_details.css"
-      ],
+    "app": {
       "js": [
-        "/build/user_details.js"
+        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
       ]
     },
     "homepage": {
@@ -72,14 +74,12 @@
         "/build/board.js"
       ]
     },
-    "app": {
-      "js": [
-        "/build/vendors~app~article_details~form~formArticle~homepage~pagination~profil.js",
-        "/build/vendors~app.js",
-        "/build/app.js"
-      ],
+    "user_details": {
       "css": [
-        "/build/app.css"
+        "/build/user_details.css"
+      ],
+      "js": [
+        "/build/user_details.js"
       ]
     },
     "legalMention": {
@@ -156,6 +156,14 @@
       ],
       "css": [
         "/build/formArticle.css"
+      ]
+    },
+    "feedback_flag": {
+      "css": [
+        "/build/feedback_flag.css"
+      ],
+      "js": [
+        "/build/feedback_flag.js"
       ]
     }
   }
