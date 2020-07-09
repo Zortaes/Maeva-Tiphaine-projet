@@ -85,6 +85,9 @@ class Article
     private $updated_at;
 
 
+/************
+RELATIONSHIPS
+************/
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
@@ -107,6 +110,11 @@ class Article
      */
     private $flags;
 
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="article", cascade={"remove"})
+     */
+    private $feedback;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="articles")
      * @Assert\Count(
@@ -126,6 +134,10 @@ class Article
         $this->categories = new ArrayCollection();
     }
 
+
+/****************
+SETTERS & GETTERS  
+****************/
    
     /**
      * Get the value of id
@@ -467,4 +479,24 @@ class Article
 
 
 
+
+    /**
+     * Get the value of feedback
+     */ 
+    public function getFeedback()
+    {
+        return $this->feedback;
+    }
+
+    /**
+     * Set the value of feedback
+     *
+     * @return  self
+     */ 
+    public function setFeedback($feedback)
+    {
+        $this->feedback = $feedback;
+
+        return $this;
+    }
 }

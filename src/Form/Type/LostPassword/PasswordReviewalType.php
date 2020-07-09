@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Form\Type;
+namespace App\Form\Type\LostPassword;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditPasswordType extends AbstractType
+class PasswordReviewalType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,10 +31,10 @@ class EditPasswordType extends AbstractType
                 ],
                 'required' => true,
                 'first_options'  => [
-                    'label' => 'Mot de passe'
+                    'label' => 'Nouveau mot de passe'
                 ],
                 'second_options' => [
-                    'label' => 'Confirmation de mot de passe'
+                    'label' => 'Confirmation de votre nouveau mot de passe'
                 ],
                 'constraints' => [
                 new NotBlank(),

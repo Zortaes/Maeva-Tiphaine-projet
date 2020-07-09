@@ -157,8 +157,6 @@ class AppFixtures extends Fixture
             $article->setSlug($this->slugger->sluggify($article->getTitle()));
             $article->setSummary($faker->sentence);
             $article->setInstruction($faker->paragraph);
-            $article->setImage('defaultArticle.jpg');
-            $article->setImageSize(27874);
             $article->setCreatedAt($faker->datetime); 
             $article->setFlagged(0);
             

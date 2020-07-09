@@ -7,6 +7,7 @@ use DateTime;
 use App\Entity\Flag;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Feedback;
 use App\Services\Slugger;
 use App\Form\Type\EditUserType;
 use Knp\Component\Pager\PaginatorInterface;
@@ -307,4 +308,77 @@ class AdminController extends AbstractController
  
     }
 
+    /**
+     * @Route("/commentaires/signalement", name="feedbackFlagged")
+     * @param Feedback $feedback
+     * @param PaginatorInterface $paginator
+     * @return Feedback[] list of feedback flagged 
+     */
+    public function FeedbackFlagged(Request $request, PaginatorInterface $paginator)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    
+            $manager = $this->getDoctrine()->getManager();
+    
+
+            /** @var FeedbackRepository */
+            $feedbackFlagged = $this->getDoctrine()->getRepository(Feedback::class)->findByFlaggedFeedback(1); 
+
+            $allFlag = $paginator->paginate(
+            $feedbackFlagged, // Request contains data to paginate 
+            $request->query->getInt('page', 1), // number current page in URL, 1 if no
+            6 // number of result
+            );
+
+            return $this->render('admin/feedback_flag.html.twig', 
+            [
+            'allFlag' => $allFlag, 
+            ]);
+      
+    }
+
+    /**
+     * @Route("/commentaire/{id}/enlever-signalement", methods={"GET"}, name="feedbackFlagDelete")
+     *
+     * @param User $user
+     * @return Feedback flagged = false
+     */
+    public function deleteFeedbackFlag(Feedback $feedback)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $feedback->setFlaggedUp(false);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->persist($feedback);
+
+        $manager->flush();
+
+        $this->addFlash("successFeedbackFlagDeleted", "Ce commentaire n'est plus signalé");
+
+        return $this->redirectToRoute('feedbackFlagged');
+    }
+
+    /**
+     * @Route("/commentaire/{id}/supprimer", methods={"GET"}, name="userFeedbackDelete")
+     *
+     * @param User $user
+     * @return Feedback flagged = false
+     */
+    public function deleteFeedback(Feedback $feedback)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($feedback);
+
+        $manager->flush();
+
+        $this->addFlash("successUserFeedbackDeleted", "Ce commentaire a été supprimé");
+
+        return $this->redirectToRoute('feedbackFlagged');
+    }
 }

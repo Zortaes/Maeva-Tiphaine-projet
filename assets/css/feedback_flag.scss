@@ -1,0 +1,117 @@
+.userFeedback
+{
+    margin-top: 3em;
+    background-color:#bacf8e;
+    height: 190px;
+    display: flex;
+    flex-direction: row;
+
+    img 
+    {
+        width: 30px;
+        height: 30px;
+        margin: 2em 0.3em 2em 0.5em;
+
+        @media (min-width: 767px)
+        { 
+            width: 50px;
+            height: 50px;
+        }
+
+    }
+}
+
+.feedbackForm
+{
+    width: 100%;
+    padding: 0.5em;
+    background-color: white;
+    width: 95%;
+    height: 120px;
+    margin: 2em 0.5em 2em 0.5em;
+    border-radius: 5px;
+    box-shadow: grey 5px 5px 20px;
+
+    @media (min-width: 390px)
+    { 
+        margin-right: 1em;
+    }
+
+    @media (min-width: 576px) 
+    { 
+        margin-right: 3em;
+    }
+
+}
+
+.comment
+{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.commentWidget
+{
+    min-width: 75%;
+
+    @media (min-width: 576px) 
+    { 
+        min-width: 84%;
+    }
+
+    @media (min-width: 768px)
+    { 
+        min-width: 80%;
+    }
+
+    @media (min-width: 1200px)
+    { 
+        min-width: 89%;
+    }
+}
+
+#feedback_comment
+{
+    font-size: calc(0.6em + 1vw);
+    min-height: 100px;
+    max-height: 100px;
+
+    @media (min-width: 768px)
+    { 
+        font-size: 1em;
+    }
+}
+
+#feedback_Poster
+{
+    font-size: calc(0.6em + 1vw);
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+    border-radius: 15px;
+    padding: 0.4em; 
+    &:hover
+    {
+        border-color: #799440 !important;
+        transition: 1s;
+        background-color: #799440  !important;
+    }
+
+    @media (min-width: 768px)
+    { 
+        font-size: 1em;
+        border-radius: 25px;
+    }
+}
+
+span 
+{
+    font-size: 0.9em;
+    font-weight: normal;
+
+    span span:first-child {
+        display: none;
+        }
+    }

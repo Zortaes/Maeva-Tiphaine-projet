@@ -6,16 +6,17 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
-use App\Form\Type\EditPasswordType;
-use App\Form\Type\EditSelfType;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
+use App\Form\Type\EditSelfType;
 use Symfony\Component\Mime\Email;
+use App\Form\Type\EditPasswordProfilType;
 use App\Services\EmailConfirmation;
 use Symfony\Component\Mime\Address;
 use App\Services\AvatarVerification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Form\Type\LostPassword\SendEmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,7 @@ class UserController extends AbstractController
     /**
      * @Route("/inscription", name="signup", methods={"GET","POST"})
      * 
+     * 
      * @param Request $request -> POST 
      * @param UserPasswordEncoderInterface $encoder -> POST 
      * @param Slugger $slugger -> POST 
@@ -52,6 +54,14 @@ class UserController extends AbstractController
         EmailConfirmation $confirmation,
         AvatarVerification $avatar
     ): Response {
+
+        /* security to access only anonymous */
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
+
+       
         $newUser = new User();
         $form = $this->createForm(UserType::class, $newUser);
         $form->handleRequest($request);
@@ -244,29 +254,39 @@ class UserController extends AbstractController
             return $this->redirectToRoute('logout');
         }
         
-        
-
-        $form = $this->createForm(EditPasswordType::class, $user);  
+        $form = $this->createForm(EditPasswordProfilType::class, $user);  
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) 
         {        
 
-            /* Password */
-            $plainPassword = $form->get('plain_password')->getData();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
-            $user->setPassword($encodedPassword);
+            $oldPassword = $form->get('oldPassword')->getData();
+            $compareOldPassword = $encoder->isPasswordValid($user, $oldPassword);
+ 
+            if ($compareOldPassword)
+            {
+               /* New Password */
+                $plainPassword = $form->get('plain_password')->getData();
+                $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encodedPassword);
 
-            $user->setUpdatedAt(new DateTime('now'));
+                $user->setUpdatedAt(new DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
+                $this->addFlash("successModifyPassword", "Votre mot de passe a bien été modifié");
         
-           return $this->redirectToRoute('showProfil', ['id' => $user->getId()]);
+                return $this->redirectToRoute('showProfil', ['id' => $user->getId()]); 
+            }
+            else 
+            {
+                $this->addFlash("NotsuccessModifyPassword", "Votre ancien mot de passe ne correspond pas");
+            }
+
+            
 
         }
 
@@ -380,7 +400,7 @@ class UserController extends AbstractController
     }
 
     /**
-     *  @Route("/validation-reminder", name="validationReminder")
+     *  @Route("/rappelle-de-validation", name="validationReminder")
      * 
      *  @return User 
      */
@@ -396,7 +416,7 @@ class UserController extends AbstractController
     }
 
     /**
-     *  @Route("/send_email", name="sendValidationEmail")
+     *  @Route("/envoie-email", name="sendValidationEmail")
      * 
      *  @return User 
      */
@@ -423,5 +443,101 @@ class UserController extends AbstractController
         $this->addFlash("successEmailSent", "Un nouvel e-mail vous a été envoyé pour vous permettre de valider votre compte.");
 
         return $this->redirectToRoute('validationReminder');
+    }
+
+    /**
+     * @Route("/mot-de-passe-oublié", name="lostPassword")
+     * 
+     * If ok, send email security with code 
+     * 
+     * @param Request $request
+     * @param MailerInterface $mailer 
+     * @param EmailConfirmation $confirmation
+     * 
+     * 
+     * @return $this render template form (for email)
+     * @return $this redirect to route login with flash message
+     * 
+     */
+    public function lostPassword(Request $request, MailerInterface $mailer,  EmailConfirmation $confirmation)
+    {
+
+        /* security to access only anonymous */
+        if ($this->getUser() !== null)
+        {
+            $this->denyAccessUnlessGranted('IS_ANONYMOUS');
+        }
+    
+        
+        $form = $this->createForm(SendEmailType::class);  
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {    
+            $emailForm = $form->get('email')->getData(); 
+            
+            /** @var UserRepository Search email in database */ 
+            $emailDatabase = $this->getDoctrine()->getRepository(User::class)->findBy([
+                'email' => $emailForm
+            ]); 
+
+            /* email doesn't exist in database */
+            if (empty($emailDatabase)) 
+            { 
+                $this->addFlash("lostPasswordNotSuccess", "Il n'y a pas de compte associé à cette adresse email");
+
+                return $this->render('user/form_email_lost_password.html.twig', [
+                    'form' => $form->createView(),
+                    'unlessFooter' => true,
+                    'unlessNavbar' => true,
+                ]);
+            }
+
+            /* generate code random */
+            $numberRandom = $confirmation->numberRandomCode(); 
+
+            /* Token validation */
+            $token = $confirmation->tokenSignup(); 
+
+            /* set in database */
+            $emailDatabase[0]->setcode($numberRandom);
+            $emailDatabase[0]->setValidation($token);  
+  
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($emailDatabase[0]);
+            $entityManager->flush();
+
+            
+            /* email with user Id, token security and code */
+            $email = (new TemplatedEmail())
+            ->from('la.rubrique.ecolo@gmail.com')
+            ->to(new Address($emailDatabase[0]->getEmail()))
+            ->subject($confirmation->subjectPassword())
+            // path of the Twig template to render
+            ->htmlTemplate('email/_lostPassword.html.twig')
+            // pass variables (name => value) to the template
+            ->context([
+                'id' => $emailDatabase[0]->getId(),
+                'token' => $emailDatabase[0]->getValidation(),
+                'code' => $numberRandom
+            ]);
+
+            $mailer->send($email);
+
+            $this->addFlash("lostPasswordSuccess", "Un email vous a été envoyé pour récupérer votre mot de passe");
+        
+            return $this->redirectToRoute('login');
+
+        }
+
+        return $this->render('user/form_email_lost_password.html.twig', [
+            'form' => $form->createView(),
+            'unlessFooter' => true,
+            'unlessNavbar' => true,
+        ]);
+
+
+       
     }
 }

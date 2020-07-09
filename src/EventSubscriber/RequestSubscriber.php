@@ -30,7 +30,6 @@ class RequestSubscriber implements EventSubscriberInterface
             || 'flag' === $request->attributes->get('_route')
             || 'signup' === $request->attributes->get('_route')
             || 'connect_facebook' === $request->attributes->get('_route')
-          
         ) 
         {
             return;
