@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./assets/js/app.js","vendors~app~article_details~form~formArticle~homepage~pagination~profil","vendors~app"]);
+/******/ 	deferredModules.push(["./assets/js/app.js","vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil","vendors~app"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -251,6 +251,17 @@ module.exports = "/build/images/arts.a171f13f.jpg";
 /***/ (function(module, exports) {
 
 module.exports = "/build/images/bricolage.2998a199.jpg";
+
+/***/ }),
+
+/***/ "./assets/images/caution.png":
+/*!***********************************!*\
+  !*** ./assets/images/caution.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/build/images/caution.ef9ad9a3.png";
 
 /***/ }),
 
@@ -426,7 +437,7 @@ module.exports = "/build/images/menage-hygiene-maison.0826cfef.jpg";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/build/images/recyclage.05a1d46a.jpg";
+module.exports = "/build/images/recyclage.0ac6ed5f.jpg";
 
 /***/ }),
 
@@ -509,7 +520,9 @@ __webpack_require__(/*! ../images/Logo.jpg */ "./assets/images/Logo.jpg");
 
 __webpack_require__(/*! ../images/lost_tree.png */ "./assets/images/lost_tree.png");
 
-__webpack_require__(/*! ../images/defaultAvatar.jpg */ "./assets/images/defaultAvatar.jpg"); // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
+__webpack_require__(/*! ../images/defaultAvatar.jpg */ "./assets/images/defaultAvatar.jpg");
+
+__webpack_require__(/*! ../images/caution.png */ "./assets/images/caution.png"); // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 //import $ from 'jquery';
 
 

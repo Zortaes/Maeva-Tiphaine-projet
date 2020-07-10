@@ -41,7 +41,7 @@ Encore
     .addEntry('formSignup', './assets/js/formSignup.js')
     .addEntry('formLogin', './assets/js/formLogin.js')
     .addEntry('formArticle', './assets/js/formArticle.js')
-    .addEntry('feedback_flag', './assets/js/feedback_flag.js')
+    .addEntry('feedback', './assets/js/feedback.js')
    
 
     //.addEntry('page1', './assets/js/page1.js')

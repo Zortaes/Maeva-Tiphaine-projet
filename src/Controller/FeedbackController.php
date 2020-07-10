@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use DateTime;
+
 use App\Entity\Feedback;
 use App\Entity\Article;
 
@@ -73,5 +75,40 @@ class FeedbackController extends AbstractController
         $this->addFlash("successFeedbackFlaggedUp", "Votre signalement a bien été pris en compte, nous traîterons votre demande dans les meilleurs délais.");
 
         return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
+    }
+
+    /**
+     * @param Feedback $article 
+     * @param FormInterface $formFeedback
+     * @param Article
+     * 
+     * @return $this->render() template twig 
+     * @return $this->redirectToRoute() articleDetails 
+     */
+    public function newFeedback($article, $newFeedback)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+            /* logout User if he is banned */
+            if ($this->getUser()->getIsBanned() == true) {
+                return $this->redirectToRoute('logout');
+            }
+
+            /* If user change his email and don't validate this */
+            if ($this->getUser()->getValidate() == false) {
+                return $this->redirectToRoute('validationReminder');
+            }
+
+            $feedbacker = $this->getUser();
+            $newFeedback->setFlaggedUp(false);
+            $newFeedback ->setCreatedAt(new DateTime);
+            $newFeedback->setUser($feedbacker);
+            $newFeedback->setArticle($article);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newFeedback);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('articleDetails', ['slug' => $article->getSlug()], 301);
     }
 }

@@ -1,0 +1,319 @@
+/**********************************************
+Container of all infomation of user and feeback
+**********************************************/
+
+.commentSectionTitle
+{
+    text-align:center;
+    margin-top: 2em;
+    font-size: calc(0.8em + 1vw);
+}
+
+.userFeedback
+{
+    margin-top: 1em;
+    background-color:#d1e6a4;
+    display: flex;
+    flex-direction: row;
+    min-height: 240px;
+    max-height: auto !important;
+
+    img 
+    {
+        width: 30px;
+        height: 30px;
+        margin: 2em 0 2em 0.3em;
+
+        @media (min-width: 767px)
+        { 
+            width: 50px;
+            height: 50px;
+        }
+
+    }
+}
+
+.allFeedback
+{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 250px;
+    max-height: auto !important;
+
+    img 
+    {
+        width: 30px;
+        height: 30px;
+        margin: 2em 0 2em 0.3em;
+
+        @media (min-width: 767px)
+        { 
+            width: 50px;
+            height: 50px;
+        }
+
+    }
+}
+
+.feedbackerUsername
+{
+    font-style: italic;
+    padding: 0.5em;
+    width: 200px;
+    min-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    @media (min-width: 530px)
+    { 
+        width: 250px;
+    }
+
+    @media (min-width: 530px)
+    { 
+        width: 350px;
+    }
+}
+
+/****************
+Feedback dropdown
+****************/
+.menu-feedback-custom
+{
+    box-shadow: grey 5px 5px 20px;
+    padding: 0.7em;
+    p 
+    {
+        font-size: calc(0.6em + 1vw);
+
+        @media (min-width: 768px)
+        { 
+            font-size: 0.6em;
+        }
+        
+        @media (min-width: 1900px)
+        { 
+            font-size: 0.4em;
+        }
+    }
+}
+
+/******
+Feeback
+******/
+.feedbackForm
+{
+    width: 100%;
+    padding: 0.5em;
+    background-color: white;
+    width: 95%;
+    height: auto;
+    margin: 2em 0.5em 2em 0.5em;
+    border-radius: 5px;
+    box-shadow: grey 5px 5px 20px;
+
+    @media (min-width: 390px)
+    { 
+        margin-right: 1em;
+    }
+
+    @media (min-width: 576px) 
+    { 
+        margin-right: 2em;
+    }
+
+}
+
+/***************************
+Username and feedback option
+***************************/
+.infOptions
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-height: 20px;
+
+    .dropdown-feedback-option
+    {
+        margin: 0 !important;
+        
+    }
+}
+
+/*************************
+container input and button
+*************************/
+.comment
+{ 
+    height: auto;
+    margin-top: 1em;
+}
+
+.commentInput
+{
+    max-height: 150px;
+    button 
+    {
+        width: 20%;
+        margin-left: 80%;
+        
+        @media (min-width: 992px) 
+        { 
+            width: 15%;
+            margin-left: 85%;
+        }
+
+        @media (min-width: 1500px) 
+        { 
+            width: 10%;
+            margin-left: 90%;
+        }
+    }
+
+}
+
+.feedback .more-text{
+    display: none;
+}
+
+.feedback
+{
+    font-size: calc(0.6em + 1vw);
+    min-height: 80px;
+    padding: 1em;
+    @media (min-width: 768px)
+    { 
+        font-size: 1em;
+    }
+}
+
+/***********************
+feedback input Container
+***********************/
+.commentWidget
+{
+    min-width: 80%;
+
+    @media (min-width: 576px) 
+    { 
+        min-width: 84%;
+    }
+
+    @media (min-width: 768px)
+    { 
+        min-width: 80%;
+    }
+
+    @media (min-width: 1200px)
+    { 
+        min-width: 89%;
+    }
+}
+
+/*************
+feedback input
+*************/
+#feedback_comment
+{
+    font-size: calc(0.6em + 1vw);
+    min-height: 100px;
+    max-height: 100px;
+
+    @media (min-width: 768px)
+    { 
+        font-size: 1em;
+    }
+}
+
+/**************
+feedback button
+**************/
+#feedback_Poster
+{
+    font-size: calc(0.6em + 1vw);
+    background-color: #9eb66b !important;
+    border-color: #9eb66b !important;
+    transition: 2s;
+    border-radius: 15px;
+    padding: 0.4em; 
+    &:hover
+    {
+        border-color: #799440 !important;
+        transition: 1s;
+        background-color: #799440  !important;
+    }
+
+    @media (min-width: 768px)
+    { 
+        font-size: 1em;
+        border-radius: 25px;
+    }
+}
+
+/*****
+Errors
+*****/
+span 
+{
+    font-size: 1em;
+    font-weight: normal;
+    margin-top: -2.5em;
+    span span:first-child {
+        display: none;
+        }
+    }
+
+/*******************
+Admin feedback board
+*******************/
+
+/* AVATAR */
+.allFeedbackFlagged
+{
+    @media(max-width: 400px)
+    {
+        width: 90%;
+        margin: 5%;
+    }
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 250px;
+    max-height: auto !important;
+    margin: 3% 10% 3% 10%;
+    width: 80%;
+
+    img 
+    {
+        @media(max-width: 400px)
+        {
+            width: 30px;
+            height: 30px;
+        }
+        margin-top: 2em;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+.feedbacker
+{
+    font-style: italic;
+    padding: 0.5em;
+
+    @media(max-width: 697px)
+    {
+    width: 200px;
+    min-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+}

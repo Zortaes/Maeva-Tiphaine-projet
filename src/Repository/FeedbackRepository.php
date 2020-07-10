@@ -31,6 +31,21 @@ class FeedbackRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function findByDate($article_id) 
+    {
+        $qb = $this->createQueryBuilder('f')
+        ->select('f.id, f.comment, f.created_at, f.flaggedUp, u.username, u.avatar user_avatar ')
+        ->andWhere('f.article = :val')
+        ->innerJoin('App\Entity\Article', 'a', 'WITH', 'a = f.article')
+        ->innerJoin('App\Entity\User', 'u', 'WITH', 'u = f.user')
+        ->setParameter('val', $article_id)
+        ->orderBy('f.created_at', 'DESC')
+        ->getQuery()
+        ->getResult();
+        
+        return $qb;
+    }
+
     // /**
     //  * @return Feedback[] Returns an array of Feedback objects
     //  */
