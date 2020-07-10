@@ -90,7 +90,7 @@ class ArticleType extends AbstractType
                 'aspect_ratios' => [],
                 'cropper_options'=> [
                     'aspectRatio'=> 3,
-                    'viewMode' => 0,
+                    'viewMode' => 0, 
                     'minCropBoxWidth' => 1280,
                     'minCropBoxHeight' => 720,
                     

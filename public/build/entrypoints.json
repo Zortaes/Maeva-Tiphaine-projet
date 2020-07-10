@@ -10,6 +10,14 @@
         "/build/app.css"
       ]
     },
+    "legalMention": {
+      "css": [
+        "/build/legalMention.css"
+      ],
+      "js": [
+        "/build/legalMention.js"
+      ]
+    },
     "homepage": {
       "js": [
         "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
@@ -82,14 +90,6 @@
       ],
       "js": [
         "/build/user_details.js"
-      ]
-    },
-    "legalMention": {
-      "css": [
-        "/build/legalMention.css"
-      ],
-      "js": [
-        "/build/legalMention.js"
       ]
     },
     "modal": {
