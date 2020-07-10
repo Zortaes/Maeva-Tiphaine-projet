@@ -11,6 +11,8 @@
   "build/board.js": "/build/board.js",
   "build/error.css": "/build/error.css",
   "build/error.js": "/build/error.js",
+  "build/feedback_flag.css": "/build/feedback_flag.css",
+  "build/feedback_flag.js": "/build/feedback_flag.js",
   "build/form.css": "/build/form.css",
   "build/form.js": "/build/form.js",
   "build/formArticle.css": "/build/formArticle.css",
