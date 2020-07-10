@@ -255,9 +255,10 @@ class ArticleController extends AbstractController
             "user" => $this->getUser(),
             "article" => $article
         ]);
-
+        
+        $article_id = $article->getId();
         /** @var FeedbackRepository */
-        $feedback = $this->getDoctrine()->getRepository(Feedback::class)->findAll();
+        $feedback = $this->getDoctrine()->getRepository(Feedback::class)->findbyDate($article_id);
         
 
         /********
@@ -310,7 +311,8 @@ class ArticleController extends AbstractController
                 'article' => $article,
                 'vote' => $vote,
                 'flag' => $flag,
-                'feedback' => $existingFeedback
+                'feedback' => $existingFeedback,
+                'allFeedback' => $feedback
             ]
         );
     }

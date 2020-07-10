@@ -107,7 +107,7 @@ LAST ARTICLES
                                 alt="image represent category {{ lastArticle.categories.first.name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
                             
@@ -231,7 +231,7 @@ LAST ARTICLES
                                 alt="image represent category {{ lastArticle.categories.first.name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
 
@@ -350,7 +350,7 @@ LAST ARTICLES
                                 alt="image represent category {{ lastArticle.categories.first.name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
 
@@ -518,11 +518,11 @@ BEST ARTICLES
                             <!-- image -->
                             {# Default articleImage #}
                                 {% if bestArticle.image == null %}
-                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.categories.first.picture ) }} "
-                                alt="image represent category {{ bestArticle.categories.first.name }}">
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
                             {# <img class="card img-fluid"
@@ -627,7 +627,7 @@ BEST ARTICLES
                                 alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
 
@@ -727,7 +727,7 @@ BEST ARTICLES
                                 alt="image represent category {{ bestArticle.category_name }}">
                                 {% else %}
                             {# user articleImage #}
-                                <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
                                 alt="image represent article">
                                 {% endif %}
 
