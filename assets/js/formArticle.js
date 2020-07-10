@@ -12,6 +12,7 @@ var $newLinkDiv = $('<div></div>').append($addIngredientButton);
 
 
 
+
 jQuery(document).ready(function() {
 
 
