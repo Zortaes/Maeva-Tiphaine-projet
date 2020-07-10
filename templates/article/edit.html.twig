@@ -22,17 +22,15 @@
         <h1 class="h4 mb-3 font-weight-normal text-center">Modifier un article</h1>
         <div class="col-12">
             {{ form_row(form.title)}}
-
         </div>
+
         <div class="col-12">
             {{ form_row(form.summary)}}
-
         </div>
+
         <div class="col-12 ">
             {{ form_row(form.instruction)}}
-
         </div>
-        
        
         
         <div class="col-12 ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">   
@@ -59,8 +57,18 @@
 
 
         <div class="col-12">
-            {{ form_label(form.category)}}
-            {{ form_widget(form.category)}}
+            <div class="dropdown categories">
+                <button class="btn btn-secondary dropdown-toggle category-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ form_label(form.categories)}}
+                </button>
+                <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+                    {{ form_widget(form.categories) }}
+                </div>
+            </div>    
+        </div>
+        {% form_theme form '@PrestaImage/form/bootstrap_4.html.twig' %}
+        <div class="col-12">
+            {{ form_row(form.articleImageFile)}}
         </div>
 
         

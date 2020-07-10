@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Vote;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,21 +21,20 @@ class MainController extends AbstractController
      */
     public function homepage()
     {
-        
+
         /** @var ArticleRepository */
         $lastArticles = $this->getDoctrine()->getRepository(Article::class)->findByLastArticle();
 
         /** @var VoteRepository */
         $bestArticles = $this->getDoctrine()->getRepository(Vote::class)->findBestArticle();
-
-      
-
+        
+        
         return $this->render('main/homepage.html.twig', [
             'lastArticles' => $lastArticles,
             'bestArticles' => $bestArticles
             ]);
    
-
+    
     }
 
     /**

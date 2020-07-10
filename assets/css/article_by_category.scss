@@ -15,8 +15,9 @@ Title Category
     line-height: 2em;
     text-shadow: 2px 1px 1px rgb(53, 52, 52);
  
-    } 
+    }
 }
+
 
 /* AVATAR (article_by_user) */
 
@@ -146,7 +147,16 @@ Container
     }
 
     width: 50%;
+
+    /* IMAGE */
+#articleImageDetail
+{
+max-width: 100%;
+height: auto;
+}
+
 }  
+
 
 /*** 
 ALL TEXT 
@@ -284,8 +294,52 @@ ALL TEXT
 
     }
 
-
-
-
 }
+
+
+/***********************
+page all articles flags
+*************************/
+.flags-articles-count
+{
+    color: #920c00; 
+    text-align: center;
+  
+}
+
+.flags-articles-details
+{
+   border: 2px solid #c1372b;
+   margin-bottom: 2em;
+   background-color: #fb897f;
+}
+
+.category-btn
+{
+    width: 25%;
+    display:block;
+    margin: auto;
+    color: black !important;
+    background-color: #f8ffea !important;
+    border-color: rgb(170, 170, 170) !important;
+    &:hover
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+    }
+    &:focus
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+    }
+}
+
+.card-text-category
+{
+    list-style: none;
+    padding: 1em 1em 1em 1em;
+}
+
 

@@ -2,33 +2,55 @@
 
 {% block title %}{{article.title}}{% endblock %}
 
-    {% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('article_details') }}
-    {{ encore_entry_link_tags('modal') }}
-    {% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('article_details') }}
+{{ encore_entry_link_tags('feedback') }}
+{{ encore_entry_link_tags('modal') }}
+{% endblock %}
 
 
 {% block body %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success text-center">
-            {{ message }}
-        </div>
-    {% endfor %}
+<!-- flash messages -->
+{% for message in app.flashes('success') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for message in app.flashes('successFeedbackDeleted') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for message in app.flashes('successFeedbackFlaggedUp') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+<!--/. flash messages -->
+
+<!-- AUTHOR DETAILS -->
 <div class="articleAuthor">
-        {# Default avatar #}
-        {% if article.user.avatar == 'defaultAvatar.jpg' %} 
-        <img class="avatarUser" src="{{ asset("build/images/" ~ article.user.avatar ) }}"
-            alt="image represent avatarUser {{ article.user.viewUsername }}">
-        {% else %}
-        {# user avatar #}
-        <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ article.user.avatar ) }}"
-            alt="image represent avatarUser {{ article.user.viewUsername }}">
-        {% endif %}
-            <a href="{{path('articleByUser', {'slug':article.user.slug})}}"><h3>{{ article.user.viewUsername}}</h3></a>
-</div> 
+    {# Default avatar #}
+    {% if article.user.avatar == 'defaultAvatar.jpg' %}
+    <img class="avatarUser" src="{{ asset("build/images/" ~ article.user.avatar ) }}"
+        alt="image represent avatarUser {{ article.user.viewUsername }}">
+    {% else %}
+    {# user avatar #}
+    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ article.user.avatar ) }}"
+        alt="image represent avatarUser {{ article.user.viewUsername }}">
+    {% endif %}
+    <a href="{{path('articleByUser', {'slug':article.user.slug})}}">
+        <h3>{{ article.user.viewUsername}}</h3>
+    </a>
+</div>
+<!--/. AUTHOR DETAILS -->
+
 <div id="articlePage">
+    <!-- SCORE -->
     <h1 class="articleTitle">
         {{ article.title }}
     </h1>
@@ -44,155 +66,381 @@
         {% set average = sum / article.votes|length %}
         {% set noteName = 'Noté par la communauté :' %}
         {% if (average|round == 1) %}
-            {% set label = 'Médiocre' %}
+        {% set label = 'Médiocre' %}
         {% endif %}
         {% if (average|round == 2) %}
-            {% set label = 'Pas mal' %}
+        {% set label = 'Pas mal' %}
         {% endif %}
         {% if (average|round == 3) %}
-            {% set label = 'Bien' %}
+        {% set label = 'Bien' %}
         {% endif %}
         {% if (average|round == 4) %}
-            {% set label = 'Super' %}
+        {% set label = 'Super' %}
         {% endif %}
         {% if (average|round == 5) %}
-            {% set label = 'Excellent' %}
+        {% set label = 'Excellent' %}
         {% endif %}
         {# article doesn't have a vote #}
         {% else %}
-            {% set noteName = '' %}
-            {% set label = 'Non noté' %}
+        {% set noteName = '' %}
+        {% set label = 'Non noté' %}
         {% endif %}
         {{noteName}} {{label}}
     </div>
+    <!--/. SCORE -->
+
     <div class="articleDetails">
             <!-- image -->
-            <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.category.picture ) }} "
-            alt="image represent category {{ article.category.name}}"> 
+            {# Default image -> Category's picture #}
+            {% if article.image == null %}
+            <img id="articleImageDetail" src="{{ asset("build/images/" ~ article.categories.first.picture ) }} "
+            alt="image represent category {{ article.categories.first.name }}">
+            {% else %}
+            {# user articleImage #}
+            <img id="articleImageDetail" src="{{ asset("uploads/article/image/" ~ article.image ) }} "
+                alt="image represent article">
+            {% endif %}
+            
+            <!-- OPTION BUTTON -->
+            <!-- flag dropdown -->
             <div class="dropdown-flag-custom">
+ 
                 <div class="dropdown m-3">
                 
                     <button class="btn bg-white btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ...
                     </button>
+                
+                <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
+                    <ul>
+                    <!-- flag options -->
+                        <li>
+                            {% if flag == false %}
+                                <button type="button" class="btn article-delete " data-toggle="modal"
+                                data-target="#modalFlagArticle">Signaler l'article</button> 
+                            {% else %}
+                            <button type="button" class="btn">Article déjà signalé.</button> 
+                            {% endif %}                     
+                        </li>
 
-                    <div class="dropdown-menu dropdown-menu-right menu-flag-custom">
-                            <ul>
-                                <form action="{{ path('flag', {'slug' : article.slug}) }}" method="post">
-                                <li><button type="submit" name="flag" value="true">Signaler l'article</button></li>
-                                </form>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <li><a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a></li>                                                     
-                                {% endif %}
+                    <!-- role_admin options -->
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('deleteFlag', {'id' : article.id}) }}">Retirer signalement</a></li>
+                        {% endif %}
 
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <li><a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a></li>                                                      
-                                {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('article_update', {'slug' : article.slug}) }}">Modifier l'article</a></li>
+                        {% endif %}
 
-                                {% if is_granted('ROLE_ADMIN') %}
-                                        <!-- Button trigger modal -->
-                                    <li><button type="button" class="btn article-delete" data-toggle="modal"
-                                        data-target="#modalDeleteArticle-{{article.id}}">
-                                        Supprimer
-                                    </button></li>                    
-                                {% endif %}
-                            </ul>
-                    </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <!-- Button trigger modal -->
+                        <li><button type="button" class="btn article-delete" data-toggle="modal"
+                                data-target="#modalDeleteArticle-{{article.id}}">
+                                Supprimer
+                            </button></li>
+                        {% endif %}
+                    </ul>
+                </div>
                 </div>
             </div>
+            <!--/. OPTION BUTTON -->
         
-
-        <div class="articleCategory" >                              
-            <a href="{{path('articleByCategory', {'slug':article.category.slug})}}" style="color:{{ article.category.color }}">{{ article.category.name }}</a>
+        <!-- article details section -->
+        <div class="btn-group">
+            <!-- categories -->
+            <button class="btn btn-secondary btn-sm dropdown-toggle category-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catégories
+            </button>
+            <div class="dropdown-menu category-dropdown">
+                <ul class="articleCategory">
+                {% for category in article.categories %}                     
+                    <a href="{{path('articleByCategory', {'slug':category.slug})}}" style="color:{{ category.color }}">{{ category.name }}</a>        
+                {% endfor %}
+                </ul>
+            </div>
         </div>
+
+        <!-- summary -->
         <div class="fullSummary">
             <p>{{ article.summary }}</p>
         </div>
+
+        <!-- ingredients & instructions -->
         <div class="ingredientInstruction">
+            <!-- ingredient list -->
             <div class="ingredient">
                 <h3>Ingrédients</h3>
                 <ul>
                     {% for ingredientList in article.ingredients %}
-                        <li>{{ ingredientList.quantity }} {{ ingredientList.ingredient }}</li>
+                    <li>{{ ingredientList.quantity }} {{ ingredientList.ingredient }}</li>
                     {% endfor %}
-                </ul> 
+                </ul>
             </div>
+            <!-- instructions -->
             <div class="instruction">
                 <h3>Instructions</h3>
                 <p>{{ article.instruction|nl2br }}</p>
             </div>
         </div>
-    {% if app.user %}
-        {% if vote %}
-        <div class="UserThoughs">    
+
+        <!-- USER'S VOTE -->
+        {% if app.user %}
+            {% if vote %}
+            <div class="UserThoughs">
                 {% if (vote.voteValue == 1) %}
-                    {% set label = 'Médiocre' %}
+                {% set label = 'Médiocre' %}
                 {% endif %}
                 {% if (vote.voteValue == 2) %}
-                    {% set label = 'Pas mal' %}
+                {% set label = 'Pas mal' %}
                 {% endif %}
                 {% if (vote.voteValue == 3) %}
-                    {% set label = 'Bien' %}
+                {% set label = 'Bien' %}
                 {% endif %}
                 {% if (vote.voteValue == 4) %}
-                    {% set label = 'Super' %}
+                {% set label = 'Super' %}
                 {% endif %}
                 {% if (vote.voteValue == 5) %}
-                    {% set label = 'Excellent' %}
+                {% set label = 'Excellent' %}
                 {% endif %}
                 <p>Vous avez trouvé cet article {{label}}</p>
             </div>
+            {% endif %}
         {% endif %}
+        <!--/. USER'S VOTE -->
 
-    {% endif %}
+        <!-- VOTE OPTIONS -->
         <div class="dropdown text-center">
-            <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-dark dropdown-toggle mb-5" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Que pensez-vous de cet article ?
             </button>
-            
+
             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                 <div class="dropdown-vote-custom">
                     <form action="{{ path('vote', {'slug' : article.slug}) }}" method="post">
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3 active" type="submit" name="userVote" id="mediocre" value="1">Médiocre</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="2">Pas mal</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="3">Bien</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" value="4">Super</button>
-                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote" id="excellent" value="5">Excellent</button>       
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3 active" type="submit" name="userVote"
+                            id="mediocre" value="1">Médiocre</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote"
+                            value="2">Pas mal</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote"
+                            value="3">Bien</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote"
+                            value="4">Super</button>
+                        <button class="dropdown-item-row pt-2 pr-3 pb-2 pl-3" type="submit" name="userVote"
+                            id="excellent" value="5">Excellent</button>
                     </form>
                 </div>
             </div>
         </div>
-        <p class="dateDeCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
-    </div>
-</div>
+        <!--/. VOTE OPTIONS -->
 
+        <p class="dateCreation">cet article à été créé le : {{ article.createdAt|date("d/m/Y") }}</p>
+    </div>
+    <!--/. article details section -->
+
+<h3 class="commentSectionTitle"> Votre commentaire pour cet article </h3>
+    <!-- FEEDBACK FORM -->
+    <div class="userFeedback">
+        {% if app.user %}
+
+            <!-- Default avatar -->
+            {% if app.user.avatar == 'defaultAvatar.jpg' %}
+            <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
+                alt="image represent avatarUser {{ app.user.viewUsername }}">
+            {% else %}
+            <!-- User avatar -->
+            <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
+                alt="image represent avatarUser {{ app.user.viewUsername }}">
+            {% endif %}
+            {# no image if user not logged in #}
+        {% endif %}
+
+        {# FORM #}
+        <div class="feedbackForm">
+
+            {% if feedback %}
+                    <div class="infOptions">
+                        <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
+                        <!-- dropdown option feedback -->
+                        <div class="dropdown m-3 dropdown-feedback-option">
+                            
+                            <button class="btn bg-white btn-sm btn-feedback-option" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ...
+                            </button>
+                            
+                            <div class="dropdown-menu dropdown-menu-right menu-feedback-custom">
+                                <!-- user options -->
+                                {% if is_granted('DELETE', feedback) %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn article-delete" data-toggle="modal"
+                                        data-target="#modalDeleteFeedback-{{feedback.id}}">
+                                        Supprimer
+                                    </button>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="comment">
+                            <p class="feedback">{{ feedback.comment|nl2br }} </p>
+                    </div>
+                    <div class="feedbackDate">
+                        <p class="dateCreation">écrit le : {{ feedback.createdAt|date("d/m/Y") }}</p>
+                    </div>
+
+            {% else %}
+                {{ form_start(formFeedback) }}
+                <div class="commentInput">
+                    {{ form_errors(formFeedback) }}
+                    <div class="commentWidget">
+                        {{ form_row(formFeedback.comment ) }}
+                    </div>
+                    {{ form_row(formFeedback.Poster) }} 
+                </div>
+                
+            {{ form_end(formFeedback) }}
+
+            {% endif %}
+        </div>
+    </div>
+    <!--/. FEEDBACK FORM -->
+
+
+    <!-- ALL FEEDBACK FOR THIS ARTICLE  -->
+    <h3 class="commentSectionTitle"> Tous les commentaires pour cet article </h3>
+    
+        {% for feedback in allFeedback %}
+        
+        <div class="allFeedback">   
+                <!-- FEEDBACKER AVATAR -->
+                <!-- Default avatar -->
+                {% if feedback.user_avatar == 'defaultAvatar.jpg' %}
+                    <img class="avatarUser" src="{{ asset("build/images/" ~ feedback.user_avatar ) }}"
+                        alt="image represent avatarUser {{ feedback.username }}">
+                    {% else %}
+                    <!-- User avatar -->
+                    <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ feedback.user_avatar ) }}"
+                        alt="image represent avatarUser {{ feedback.username }}">
+                {% endif %}
+
+                <!-- FEEDBACK -->
+            <div class="feedbackForm">   
+                    <div class="infOptions">
+                        <p class="feedbackerUsername">{{ feedback.username }}</p>
+                        <!-- dropdown option feedback -->
+                        <div class="dropdown m-3 dropdown-feedback-option">
+                                
+                                <button class="btn bg-white btn-sm btn-feedback-option" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ...
+                                </button>
+                                
+                                <div class="dropdown-menu dropdown-menu-right menu-feedback-custom">
+                                    <!-- user options -->
+                                        <!-- Button trigger modal -->
+                                        {% if feedback.flaggedUp == false %}
+                                        <button type="button" class="btn article-delete">
+                                        <a href="{{path('feedbackFlagUp', {'id' : feedback.id}) }}">
+                                            Signaler
+                                        </a>
+                                        </button>
+                                        {% else %}
+                                        <p>Ce commentaire à déjà été signalé</a>
+                                        {% endif %}
+                                </div>
+
+                            </div>
+                        </div>
+                    
+                        <div class="comment">
+                                <p class="feedback">{{ feedback.comment|nl2br }} </p>
+                        </div>
+                        <div class="feedbackDate">
+                            <p class="dateCreation">écrit le : {{ feedback.created_at|date("d/m/Y") }}</p>
+                        </div>
+                </div>
+         </div>
+        {% endfor %}
+    </div>
+    <!--/. ALL FEEDBACK FOR THIS ARTICLE  -->
+
+    {# MODALS #}
     <!-- Modal Delete article -->
-      <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
+    <div class="modal fade modal-container-custum" id="modalDeleteArticle-{{article.id}}" tabindex="-1" role="dialog"
         aria-labelledby="modalDeleteArticleTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article "{{article.title}}" ?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer l'article
+                        "{{article.title}}" ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary button-yes-custum">
+                        <a href="{{path('article_delete', {'slug' : article.slug}) }}">
+                            Oui
+                        </a>
+                    </button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary button-yes-custum">
-                <a href="{{path('article_delete', {'slug' : article.slug}) }}">
-                  Oui
-                </a>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
+    <!-- Modal Flag an article -->
+    <div class="modal fade modal-container-custum" id="modalFlagArticle" tabindex="-1" role="dialog"
+        aria-labelledby="modalDeleteAccountTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sélectionner la raison de votre signalement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.option_value) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Annuler</button>
+                        {{ form_row(form.Valider) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete feedback -->
+    {% if feedback %}
+    <div class="modal fade modal-container-custum" id="modalDeleteFeedback-{{feedback.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalfeedbackDelete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer ce commentaire ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary button-yes-custum">
+                        <a href="{{path('feedbackDelete', {'id' : feedback.id}) }}">
+                            Oui
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('article_details') }} 
-    {% endblock %}
-
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('article_details') }}
+{{ encore_entry_script_tags('feedback') }}
+{% endblock %}

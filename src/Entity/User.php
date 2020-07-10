@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Length;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -64,6 +65,10 @@ class User implements UserInterface
      */
     private $avatarSize;
 
+     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $code;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -112,6 +117,16 @@ class User implements UserInterface
     private $validate;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validateLostPassword;
+
+
+/***********
+RELATIONSHIP 
+***********/
+
+    /**
      * ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user", cascade={"remove"})
      */
     private $articles;
@@ -121,15 +136,32 @@ class User implements UserInterface
     */
     private $votes;
 
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Flag", mappedBy="user", cascade={"remove"})
+    */
+    private $flags;
+
+    /**
+     * ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="user", cascade={"remove"})
+     */
+    private $feedback;
+
+
     public function __construct() 
     {
         $this->is_banned = false;
         $this->validate = false; 
+        $this->validateLostPassword = false; 
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->flags = new ArrayCollection();
         
     }
 
+
+/****************
+SETTERS & GETTERS  
+****************/
 
     public function getId(): ?int
     {
@@ -176,25 +208,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
-    }
-   
-    /**
-     * Get the value of avatar
-     */ 
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * Set the value of avatar
-     *
-     * @return  self
-     */ 
-    public function setAvatar(?string $avatar): void
-    {
-        $this->avatar = $avatar; 
-
     }
 
     /**
@@ -408,6 +421,25 @@ class User implements UserInterface
         return $this;
     }
 
+     /**
+     * Get the value of avatar
+     */ 
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Set the value of avatar
+     *
+     * @return  self
+     */ 
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar; 
+
+    }
+
     /**
      * Get the value of avatarSize
      *
@@ -452,6 +484,66 @@ class User implements UserInterface
     public function setAvatarFile($avatarFile)
     {
         $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of flags
+     */ 
+    public function getFlags()
+    {
+        return $this->flags;
+    }
+
+    /**
+     * Set the value of flags
+     *
+     * @return  self
+     */ 
+    public function setFlags($flags)
+    {
+        $this->flags = $flags;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of code
+     */ 
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set the value of code
+     *
+     * @return  self
+     */ 
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of validateLostPassword
+     */ 
+    public function getValidateLostPassword()
+    {
+        return $this->validateLostPassword;
+    }
+
+    /**
+     * Set the value of validateLostPassword
+     *
+     * @return  self
+     */ 
+    public function setValidateLostPassword($validateLostPassword)
+    {
+        $this->validateLostPassword = $validateLostPassword;
 
         return $this;
     }

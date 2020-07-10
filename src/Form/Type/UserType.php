@@ -80,13 +80,13 @@ class UserType extends AbstractType
                 'aspectRatio'=> 1,  
                 'viewMode' => 1,
                 'minCropBoxWidth' => 120, 
-                'minCropBoxHeight' => 120, 
+                'minCropBoxHeight' => 120,
             ],
             'preview_height' => 200, 
             'preview_width' => 200, 
             'upload_button_class' => 'btn w-75 ml-0 mt-1 btn-success',
             'save_button_class' => 'btn btn-success mx-0 w-25',
-            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'      
+            'cancel_button_class' => 'btn btn-outline-secondary mx-0 w-25'    
         ])
         ->add('recaptcha', EWZRecaptchaType::class, array(
             'attr'        => array(
@@ -106,7 +106,7 @@ class UserType extends AbstractType
             CheckboxType::class,
             [
                 'mapped' => false,
-                'required' => true, 
+                'required' => true,
                 'label' => "J'accepte les conditions générales d'utilisations", 
                 'help' => 'En cochant cette case, vous reconnaissez avoir lu nos <a href="/mention-legales">conditions générales d\'utilisation</a>',
                 'help_html' => true,

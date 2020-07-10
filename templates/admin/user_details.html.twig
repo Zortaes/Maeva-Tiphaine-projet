@@ -24,6 +24,8 @@
           <img class="card img-fluid user-avatar" src="{{ asset("uploads/user/avatar/" ~ user.avatar ) }}"
             alt="image represent icon user avatar {{ user.viewUsername }}">
         {% endif %}
+
+        <a href="{{path('editUserAvatar', {'id' : user.id}) }}" class="card-link">Remettre l'image par défaut</a>
       </div>
       <!-- /Image avatar user-->
       

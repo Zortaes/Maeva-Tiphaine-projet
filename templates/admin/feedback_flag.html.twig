@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}flagged feedback{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('feedback') }}
+{{ encore_entry_link_tags('modal') }}
+{% endblock %}
+
+{% block body %}
+
+<!-- flash messages -->
+{% for message in app.flashes('successFeedbackFlagDeleted') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for message in app.flashes('successUserFeedbackDeleted') %}
+<div class="alert alert-success text-center">
+    {{ message }}
+</div>
+{% endfor %}
+<!--/. flash messages -->
+<h3 class="commentSectionTitle">Tous les articles signalés</h3>
+
+{% for feedback in allFlag %}
+
+<div class="allFeedbackFlagged"> 
+    <!-- FEEDBACKER AVATAR -->
+    <!-- Default avatar -->
+    {% if app.user.avatar == 'defaultAvatar.jpg' %}
+        <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
+        alt="image represent avatarUser {{ app.user.viewUsername }}">
+    {% else %}
+        <!-- User avatar -->
+        <img class="avatarUser" src="{{ asset("uploads/user/avatar/" ~ app.user.avatar ) }}"
+        alt="image represent avatarUser {{ app.user.viewUsername }}">
+    {% endif %}
+
+                <!-- FEEDBACK -->
+    <div class="feedbackForm">   
+        <div class="infOptions">
+            <a href="{{ path('userDetails', {'id' : feedback.user.id }) }}">
+            <p class="feedbacker">{{ feedback.user.viewUsername }}</p></a>
+            <!-- dropdown option feedback -->
+            <div class="dropdown m-3 dropdown-feedback-option">
+                                
+                <button class="btn bg-white btn-sm btn-feedback-option" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ...
+                </button>
+                                
+                <div class="dropdown-menu dropdown-menu-right menu-feedback-custom">
+                    <!-- admin options -->
+                    <button type="button" class="btn article-delete">
+                    <a href="{{path('feedbackFlagDelete', {'id' : feedback.id}) }}">
+                        Supprimer le signalement
+                    </a>
+                    </button>
+                    
+                    <button type="button" class="btn article-delete" data-toggle="modal"
+                    data-target="#modalDeleteFeedback-{{feedback.id}}">
+                        Supprimer le commentaire
+                    </button>
+                </div>
+
+            </div>
+        </div>
+            <div class="comment">
+                <p class="feedback">{{ feedback.comment|nl2br }} </p>
+            </div>
+            <div class="feedbackDate">
+                <p class="dateCreation">écrit le : {{ feedback.createdAt|date("d/m/Y") }}</p>
+            </div>
+    </div>
+</div>
+
+<!-- modal -->
+    <div class="modal fade modal-container-custum" id="modalDeleteFeedback-{{feedback.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="modalfeedbackDelete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Voulez vous vraiment supprimer ce commentaire ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary button-yes-custum">
+                        <a href="{{path('userFeedbackDelete', {'id' : feedback.id}) }}">
+                            Oui
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('feedback') }}
+{% endblock %}

@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
@@ -10,9 +10,17 @@
         "/build/app.css"
       ]
     },
+    "legalMention": {
+      "css": [
+        "/build/legalMention.css"
+      ],
+      "js": [
+        "/build/legalMention.js"
+      ]
+    },
     "homepage": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/homepage.js"
       ],
       "css": [
@@ -20,19 +28,24 @@
       ]
     },
     "article_details": {
+      "js": [
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/article_details.js"
+      ],
       "css": [
         "/build/article_details.css"
-      ],
-      "js": [
-        "/build/article_details.js"
       ]
     },
     "form": {
+      "js": [
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
+        "/build/vendors~form~formArticle~profil.js",
+        "/build/vendors~form~profil.js",
+        "/build/form.js"
+      ],
       "css": [
         "/build/form.css"
-      ],
-      "js": [
-        "/build/form.js"
       ]
     },
     "article_by_category": {
@@ -53,9 +66,10 @@
     },
     "profil": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/vendors~formArticle~formSignup~profil.js",
-        "/build/vendors~formSignup~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
+        "/build/vendors~form~formArticle~profil.js",
+        "/build/vendors~form~profil.js",
         "/build/profil.js"
       ],
       "css": [
@@ -78,14 +92,6 @@
         "/build/user_details.js"
       ]
     },
-    "legalMention": {
-      "css": [
-        "/build/legalMention.css"
-      ],
-      "js": [
-        "/build/legalMention.js"
-      ]
-    },
     "modal": {
       "css": [
         "/build/modal.css"
@@ -104,7 +110,7 @@
     },
     "pagination": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
         "/build/pagination.js"
       ],
       "css": [
@@ -128,14 +134,11 @@
       ]
     },
     "formSignup": {
-      "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/vendors~formArticle~formSignup~profil.js",
-        "/build/vendors~formSignup~profil.js",
-        "/build/formSignup.js"
-      ],
       "css": [
         "/build/formSignup.css"
+      ],
+      "js": [
+        "/build/formSignup.js"
       ]
     },
     "formLogin": {
@@ -148,13 +151,24 @@
     },
     "formArticle": {
       "js": [
-        "/build/vendors~app~formArticle~formSignup~homepage~pagination~profil.js",
-        "/build/vendors~formArticle~formSignup~profil.js",
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
+        "/build/vendors~form~formArticle~profil.js",
         "/build/vendors~formArticle.js",
         "/build/formArticle.js"
       ],
       "css": [
         "/build/formArticle.css"
+      ]
+    },
+    "feedback": {
+      "js": [
+        "/build/vendors~app~article_details~feedback~form~formArticle~homepage~pagination~profil.js",
+        "/build/vendors~feedback~form~formArticle~profil.js",
+        "/build/feedback.js"
+      ],
+      "css": [
+        "/build/feedback.css"
       ]
     }
   }

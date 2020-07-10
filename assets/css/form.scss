@@ -1,6 +1,5 @@
-
-
-
+@import "/../../node_modules/cropperjs/dist/cropper.min";
+@import '../../vendor/presta/image-bundle/Resources/public/css/cropper.css';
 
 /******************
  TITLE BEFORE FORM 
@@ -91,6 +90,78 @@ label span
    
 }
 
+/*********
+CATEGORIES
+*********/
+.categories
+{
+    /********
+    SCROLLBAR
+    ********/
+    ::-webkit-scrollbar 
+    {
+    width: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb 
+    {
+    background: rgb(180, 179, 179);
+    border-radius: 2px;
+    }
+
+    margin: 1em 0 3em 0;
+    .category-btn
+    {
+
+    /********
+    ERRORS
+    ********/
+    span 
+    {
+        font-size: 0.9em;
+        font-weight: normal;
+
+        span span:first-child {
+            display: none;
+            }
+    }
+        background-color: white !important;
+        width: 70% !important;
+        margin-left: 15% !important;
+        padding : 0 0 0 0.5em;
+        color: black !important;
+        p 
+        {
+            display: inline-block;
+            margin: 0;
+        }
+
+        &:focus
+        {
+            background-color: white;
+            color: black;
+        }
+
+    }
+
+
+
+}
+
+
+
+
+.scrollable-dropdown
+{
+    width: 70% !important;
+    background-color: #f8ffea;
+    height: auto;
+    max-height: 150px;
+    overflow-x: hidden;
+    padding: 1em;
+    font-size: small;
+}
 
 
 /*****************************
@@ -141,6 +212,46 @@ label span
 
 }
 
+/******************************** 
+Form lost password email and code
+********************************/
+.notFoundRequest
+{
+    color: #21252f;
+    font-size: 1.2em;
+    border: 1px solid #fa7373;
+    width: 60%; 
+    margin: auto;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-control.is-invalid 
+{
+    background-image: none;
+}
+
+/*************************** 
+    modify password
+***************************/
+.oldPasswordNotFound
+{
+    font-size: 0.8em; 
+    color: #dc3545; 
+    padding: 0; 
+    margin-top: 0; 
+    margin-bottom: 5px; 
+}
 
 /*************************** 
     maintenance message
@@ -158,4 +269,4 @@ label span
   
 }
 
- 
+

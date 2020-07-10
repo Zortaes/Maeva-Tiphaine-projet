@@ -1,4 +1,3 @@
-
 /*******************************
 Main Div that contain everything
 *******************************/
@@ -9,11 +8,17 @@ Main Div that contain everything
 
     @media (min-width: 390px)
     { 
-        width: 80%;
-        margin-left: 10%;
+        width: 90%;
+        margin-left: 5%;
     }
 
-    @media (min-width: 767px) 
+    @media (min-width: 768px) 
+    { 
+        width: 60%;
+        margin: 3% 0 5% 20%;
+    }
+
+    @media (min-width: 992px) 
     { 
         width: 50%;
         margin: 3% 0 5% 25%;
@@ -59,7 +64,7 @@ CARD
 /* IMAGE */
 #articleImageDetail
 {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -78,7 +83,7 @@ CARD
     { 
         right: 12%;
     }
-    @media (min-width: 767px) 
+    @media (min-width: 768px) 
     { 
         right: 27%;
     }
@@ -113,7 +118,8 @@ CARD
         outline: none;
         max-width: 200px !important;
 
-        @media (min-width: 767px)
+
+        @media (min-width: 768px)
         { 
             font-size: 0.7em;
         }
@@ -124,6 +130,13 @@ CARD
         color: #de6262 !important;
     }
 
+    .article-delete:hover
+    {
+        text-decoration: underline; 
+    }
+
+   
+
     a
     {   
         padding-left: 0.5em;
@@ -133,7 +146,7 @@ CARD
         color: black;
         text-decoration: none;
         
-        @media (min-width: 767px)
+        @media (min-width: 768px)
         { 
             font-size: 0.7em;
         }
@@ -215,7 +228,7 @@ CARD
         margin-left: 8%;
     }
 
-    @media (min-width: 767px) 
+    @media (min-width: 768px) 
     { 
         width: 40%;
         margin-left: 25%;
@@ -251,30 +264,60 @@ CARD
 }
 
 /* NAME OF THE CATEGORY */
+.category-btn
+{
+    color: black !important;
+    background-color: #f8ffea !important;
+    border-color: rgb(170, 170, 170) !important;
+    &:hover
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+    }
+    &:focus
+    {
+        background-color: #9eb66b !important;
+        border-color: rgb(170, 170, 170) !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+}
+
+.category-dropdown
+{
+    width: 100%;
+    margin: 0 !important;
+    box-shadow: 0px 10px 10px grey;
+    border-radius: unset !important;
+}
+
 .articleCategory
 {
-    text-align: center;
-    font-weight: 500;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 0.7em;   
+    list-style: none;
+    padding: 1em 1em 1em 1em;
+
     a
     {
-        font-size: calc(0.6em + 1vw);
-        
+        padding: 1em;
     }
-    
-
 }
+
 
 /* SUMMARY */
 .fullSummary
 {
     padding: 2em;
-    margin: 3em 4em 3em 4em;
+    margin: 3em;
     border: solid 1px #FF876E;
     border-radius: 30px;
     font-size: calc(0.5em + 1vw);
 
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
         font-size: 1em;
     }
@@ -288,7 +331,7 @@ INGREDIENTS AND INSTRCUTIONS
 {
     padding: 0 2em 3em 2em;
 
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
         display: flex;
         flex-direction: row;
@@ -303,7 +346,7 @@ INGREDIENTS AND INSTRCUTIONS
     padding: 1em 0 1em 0;
     font-size: calc(1.17em + 1vw);
 
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
         font-size: 1.17em;
     }
@@ -311,7 +354,7 @@ INGREDIENTS AND INSTRCUTIONS
 
 .ingredient 
 {
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
     min-width: 30%;
     max-width: 35%;
@@ -325,7 +368,7 @@ INGREDIENTS AND INSTRCUTIONS
     padding-right: 1em;
     font-size: calc(0.5em + 1vw);
 
-        @media (min-width: 767px)
+        @media (min-width: 768px)
         { 
             font-size: 1em;
         }
@@ -347,10 +390,12 @@ INGREDIENTS AND INSTRCUTIONS
 {
     font-size: calc(0.5em + 1vw);
 
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
         padding-left: 2em;
         font-size: 1em;
+        
+        
     }
     
 }
@@ -376,7 +421,7 @@ VOTES
     border-radius: 10px;
     font-size: calc(0.6em + 1vw);
 
-    @media (min-width: 767px)
+    @media (min-width: 768px)
     { 
         font-size: 1em;
     }
@@ -431,7 +476,7 @@ VOTES
             transition: 0.8s;
         }
 
-        @media (min-width: 767px)
+        @media (min-width: 768px)
         { 
             font-size: 0.7em;
         }
@@ -439,8 +484,10 @@ VOTES
 
 }
 
+
+
 /* creation's date*/
-.dateDeCreation
+.dateCreation
 {
     text-align: right;
     font-size: 0.6em;
@@ -448,10 +495,15 @@ VOTES
     border-top: 1px solid rgb(173, 172, 172);
 }
 
+/**********
+Flags 
+***********/
 
-
-
-
-
+/* form in the modal */
+.select-flag:focus
+{
+    border-color: #6c757d; 
+    box-shadow: 0 0 0 0.2rem rgba(100, 105, 96, 0.25); 
+}
 
 

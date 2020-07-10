@@ -229,6 +229,7 @@ CONTAINER CAROUSELS
         background-color: #404040;
        
     }
+
 }
 
 /****
@@ -244,12 +245,19 @@ CONTAINER CAROUSELS
     .carousel-item-custum 
     {    
         padding-bottom: 1.2em; 
-        border: 1em solid  #bacf8e; 
+        border: 1em solid  #bacf8e;
 
-    }
+    }    
+
 }
 
-
+#articleImageDetail{
+    max-width: 100%;
+    min-height: 155px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+}
     
 /*** 
 ALL TEXT IN CARD (after image) 
@@ -290,7 +298,7 @@ ALL TEXT IN CARD (after image)
 
     .articleAuthor
     {
-       margin-top: 0.5em; 
+       margin-top: 0.8em; 
         display: flex; 
         justify-content: center; 
 
@@ -319,12 +327,34 @@ ALL TEXT IN CARD (after image)
 
     .card-paragraph-summary 
     {
-        height: 100px;
-        margin: 1vh 3vw 0 5vw;
-        max-height: 40px;
+        height: 60px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap; 
+        margin: 2vh 3vw 2vh 5vw;
+
+        @media(min-width: 768px)
+        {
+            height: 45px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media(min-width: 992px)
+        {
+            height: 80px;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
 
     }
 

@@ -19,6 +19,11 @@
 
 
 
+{% for message in app.flashes('successPasswordRenewal') %}
+    <div class="alert alert-success w-100 text-center mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
     
 <!-- 
 JUMBOTRON (image-flowers)
@@ -96,9 +101,16 @@ LAST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
-                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
-                                alt="image represent category {{ lastArticle.category.name}}">
+                             {# Default articleImage #}
+                                {% if lastArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ lastArticle.categories.first.picture ) }} "
+                                alt="image represent category {{ lastArticle.categories.first.name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
+                            
 
                             <!-- All text -->
                             <div class="card-body-custum">
@@ -213,9 +225,15 @@ LAST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
-                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
-                                alt="image represent category {{ lastArticle.category.name}}">
+                            {# Default articleImage #}
+                                {% if lastArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ lastArticle.categories.first.picture ) }} "
+                                alt="image represent category {{ lastArticle.categories.first.name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
 
                             <!-- All text -->
                             <div class="card-body-custum">
@@ -326,9 +344,15 @@ LAST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
-                                src="{{ asset("build/images/" ~ lastArticle.category.picture ) }} "
-                                alt="image represent category {{ lastArticle.category.name}}">
+                             {# Default articleImage #}
+                                {% if lastArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ lastArticle.categories.first.picture ) }} "
+                                alt="image represent category {{ lastArticle.categories.first.name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ lastArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
 
                             <!-- All text -->
                             <div class="card-body-custum">
@@ -492,9 +516,18 @@ BEST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
+                            {# Default articleImage #}
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
+                            {# <img class="card img-fluid"
                                 src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
-                                alt="image represent category {{bestArticle.category_name}}">
+                                alt="image represent category {{bestArticle.category_name}}"> #}
 
                             <!-- All text -->
                             <div class="card-body-custum">
@@ -588,9 +621,15 @@ BEST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
-                                src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
-                                alt="image represent category {{bestArticle.category_name}}">
+                            {# Default articleImage #}
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
 
                             <!-- All text -->
                             <div class="card-body-custum">
@@ -682,9 +721,15 @@ BEST ARTICLES
                         <div class="card mb-2">
 
                             <!-- image -->
-                            <img class="card img-fluid"
-                                src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
-                                alt="image represent category {{bestArticle.category_name}}">
+                            {# Default articleImage #}
+                                {% if bestArticle.image == null %}
+                                <img class="card img-fluid" src="{{ asset("build/images/" ~ bestArticle.category_picture ) }} "
+                                alt="image represent category {{ bestArticle.category_name }}">
+                                {% else %}
+                            {# user articleImage #}
+                                <img class="card img-fluid" src="{{ asset("uploads/article/image/" ~ bestArticle.image ) }} "
+                                alt="image represent article">
+                                {% endif %}
 
                             <!-- All text -->
                             <div class="card-body-custum">
