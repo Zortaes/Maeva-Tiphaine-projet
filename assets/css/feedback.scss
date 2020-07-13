@@ -176,6 +176,15 @@ container input and button
 
 }
 
+.feedback-flag
+{
+    a
+    {
+        color: #de6262;
+    }
+    
+}
+
 .feedback .more-text{
     display: none;
 }
@@ -229,6 +238,25 @@ feedback input
     }
 }
 
+.read-more
+{
+    color: #FF876E;
+    &:hover
+    {
+         color: #FF876E;
+    }
+}
+
+.read-less
+{
+   color: #FF876E;
+   &:hover
+   {
+        color: #FF876E;
+   }
+}
+
+
 /**************
 feedback button
 **************/
@@ -262,10 +290,20 @@ span
     font-size: 1em;
     font-weight: normal;
     margin-top: -2.5em;
-    span span:first-child {
+    span span:first-child 
+    {
         display: none;
-        }
     }
+}
+
+/*************
+If no app.user
+*************/
+.pleaseLogin
+{
+    text-align:center;
+    margin: 3em;
+}
 
 /*******************
 Admin feedback board
@@ -310,10 +348,11 @@ Admin feedback board
 
     @media(max-width: 697px)
     {
-    width: 200px;
-    min-height: 40px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+        width: 200px;
+        min-height: 40px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
+

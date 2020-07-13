@@ -22,7 +22,7 @@ $(document).ready(function(){
         $(".read-more").click(function(){
             $(this).siblings(".more-text").contents().unwrap();
             $(".read-more").remove();
-            myFunction();
+            readLess();
     
         });
     }
@@ -32,12 +32,17 @@ $(document).ready(function(){
     {
         $(".feedback").each(function(){
             var myStr = $(this).text();
-            $(this).append(' <a href="javascript:void(0);" class="read-less">refermer...</a>'); 
+            if($.trim(myStr).length > maxLength)
+            {
+                $(this).append(' <a href="javascript:void(0);" class="read-less">refermer...</a>');
+            }  
         });
 
         $(".read-less").click(function(){
+            var myStr = $(this).text();
             $(".read-less").remove();
-            cettefonctionlademerde();
+            readMore();
+
         });
     }
     
