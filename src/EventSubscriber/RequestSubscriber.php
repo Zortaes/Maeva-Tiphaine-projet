@@ -27,7 +27,7 @@ class RequestSubscriber implements EventSubscriberInterface
             || $request->isXmlHttpRequest()
             || 'login' === $request->attributes->get('_route')
             || 'vote' === $request->attributes->get('_route')
-            || 'flag' === $request->attributes->get('_route')
+            || 'flagUpFeedback' === $request->attributes->get('_route')
             || 'signup' === $request->attributes->get('_route')
             || 'connect_facebook' === $request->attributes->get('_route')
         ) 
