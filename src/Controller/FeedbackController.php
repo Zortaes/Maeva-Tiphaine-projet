@@ -55,6 +55,8 @@ class FeedbackController extends AbstractController
      */
     public function flagUpFeedback(Feedback $feedback)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         /* logout User if he is banned */
         if ($this->getUser()->getIsBanned() == true) {
             return $this->redirectToRoute('logout');

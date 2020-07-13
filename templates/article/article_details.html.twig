@@ -238,11 +238,13 @@
     </div>
     <!--/. article details section -->
 
-<h3 class="commentSectionTitle"> Votre commentaire pour cet article </h3>
-    <!-- FEEDBACK FORM -->
-    <div class="userFeedback">
-        {% if app.user %}
 
+    <!-- FEEDBACK FORM -->
+    
+    {% if app.user %}
+        <h3 class="commentSectionTitle"> Votre commentaire pour cet article </h3>
+
+        <div class="userFeedback">
             <!-- Default avatar -->
             {% if app.user.avatar == 'defaultAvatar.jpg' %}
             <img class="avatarUser" src="{{ asset("build/images/" ~ app.user.avatar ) }}"
@@ -253,27 +255,26 @@
                 alt="image represent avatarUser {{ app.user.viewUsername }}">
             {% endif %}
             {# no image if user not logged in #}
-        {% endif %}
 
-        {# FORM #}
-        <div class="feedbackForm">
+            {# FORM #}
+            <div class="feedbackForm">
 
-            {% if feedback %}
+                {% if feedback %}
                     <div class="infOptions">
                         <p class="feedbackerUsername">{{ feedback.user.viewUsername }}</p>
                         <!-- dropdown option feedback -->
                         <div class="dropdown m-3 dropdown-feedback-option">
-                            
+                                
                             <button class="btn bg-white btn-sm btn-feedback-option" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ...
+                                ...
                             </button>
-                            
+                                
                             <div class="dropdown-menu dropdown-menu-right menu-feedback-custom">
                                 <!-- user options -->
                                 {% if is_granted('DELETE', feedback) %}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn article-delete" data-toggle="modal"
-                                        data-target="#modalDeleteFeedback-{{feedback.id}}">
+                                    data-target="#modalDeleteFeedback-{{feedback.id}}">
                                         Supprimer
                                     </button>
                                 {% endif %}
@@ -281,29 +282,37 @@
 
                         </div>
                     </div>
-                    <div class="comment">
+                        <div class="comment">
                             <p class="feedback">{{ feedback.comment|nl2br }} </p>
-                    </div>
-                    <div class="feedbackDate">
-                        <p class="dateCreation">écrit le : {{ feedback.createdAt|date("d/m/Y") }}</p>
-                    </div>
+                        </div>
+                        <div class="feedbackDate">
+                            <p class="dateCreation">écrit le : {{ feedback.createdAt|date("d/m/Y") }}</p>
+                        </div>
 
-            {% else %}
-                {{ form_start(formFeedback) }}
-                <div class="commentInput">
-                    {{ form_errors(formFeedback) }}
-                    <div class="commentWidget">
-                        {{ form_row(formFeedback.comment ) }}
-                    </div>
-                    {{ form_row(formFeedback.Poster) }} 
-                </div>
-                
-            {{ form_end(formFeedback) }}
+                {% else %}
 
-            {% endif %}
+                    {{ form_start(formFeedback) }}
+                        <div class="commentInput">
+                            {{ form_errors(formFeedback) }}
+                            <div class="commentWidget">
+                                {{ form_row(formFeedback.comment ) }}
+                            </div>
+                            {{ form_row(formFeedback.Poster) }} 
+                        </div>
+                    {{ form_end(formFeedback) }}
+
+                {% endif %}
+            </div>
         </div>
-    </div>
     <!--/. FEEDBACK FORM -->
+
+    {% else %}
+
+        <p class="pleaseLogin">Veuillez <a href="{{ path('login') }}">vous connecter</a> pour commenter cet article</p>
+
+    {% endif %}
+
+        
 
 
     <!-- ALL FEEDBACK FOR THIS ARTICLE  -->
@@ -338,7 +347,7 @@
                                     <!-- user options -->
                                         <!-- Button trigger modal -->
                                         {% if feedback.flaggedUp == false %}
-                                        <button type="button" class="btn article-delete">
+                                        <button type="button" class="btn feedback-flag">
                                         <a href="{{path('feedbackFlagUp', {'id' : feedback.id}) }}">
                                             Signaler
                                         </a>
