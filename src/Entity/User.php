@@ -155,7 +155,7 @@ RELATIONSHIP
         $this->articles = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->flags = new ArrayCollection();
-        
+        $this->feedback = new ArrayCollection();
     }
 
 
@@ -210,25 +210,6 @@ SETTERS & GETTERS
         return (string) $this->email;
     }
 
-    /**
-     * Get the value of birth_date
-     */ 
-    public function getBirthDate()
-    {
-        return $this->birth_date;
-    }
-
-    /**
-     * Set the value of birth_date
-     *
-     * @return  self
-     */ 
-    public function setBirthDate($birth_date)
-    {
-        $this->birth_date = $birth_date;
-
-        return $this;
-    }
 
     /**
      * @see UserInterface
@@ -509,6 +490,14 @@ SETTERS & GETTERS
     }
 
     /**
+     * Get oRM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="user", cascade={"remove"})
+     */ 
+    public function getFeedback()
+    {
+        return $this->feedback;
+    }
+
+    /**
      * Get the value of code
      */ 
     public function getCode()
@@ -547,4 +536,6 @@ SETTERS & GETTERS
 
         return $this;
     }
+
+
 }

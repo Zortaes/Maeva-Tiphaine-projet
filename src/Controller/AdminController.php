@@ -291,10 +291,20 @@ class AdminController extends AbstractController
                 $articles = $this->getDoctrine()->getRepository(Article::class)->findBy([
                 "user" => $user
                 ]);
-      
+
+                /** @var FeedbackRepository */
+                $feedbacks = $this->getDoctrine()->getRepository(Feedback::class)->findBy([
+                "user" => $user
+                ]);
+
             foreach ($articles as $article) 
             {
                 $manager->remove($article);
+            }
+
+            foreach ($feedbacks as $feedback) 
+            {
+                $manager->remove($feedback);
             }
 
             $manager->remove($user);

@@ -6,6 +6,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Feedback;
 use App\Services\Slugger;
 use App\Form\Type\UserType;
 use App\Form\Type\EditSelfType;
@@ -321,8 +322,16 @@ class UserController extends AbstractController
                 "user" => $userCurrent
             ]);
 
+            $feedbacks = $this->getDoctrine()->getRepository(Feedback::class)->findBy([
+                "user" => $userCurrent
+            ]);
+
             foreach ($articles as $article) {
                 $manager->remove($article);
+            }
+
+            foreach ($feedbacks as $feedback) {
+                $manager->remove($feedback);
             }
 
             $manager->remove($userParam);
