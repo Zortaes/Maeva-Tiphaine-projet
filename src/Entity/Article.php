@@ -132,6 +132,7 @@ RELATIONSHIPS
         $this->votes = new ArrayCollection();
         $this->flags = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
 
