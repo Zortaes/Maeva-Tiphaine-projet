@@ -106,7 +106,6 @@ Feeback
 ******/
 .feedbackForm
 {
-    width: 100%;
     padding: 0.5em;
     background-color: white;
     width: 95%;
@@ -317,13 +316,12 @@ Admin feedback board
         width: 90%;
         margin: 5%;
     }
-    margin-top: 1em;
     display: flex;
     flex-direction: row;
     height: auto;
     min-height: 250px;
     max-height: auto !important;
-    margin: 3% 10% 3% 10%;
+    margin: 3% 10%;
     width: 80%;
 
     img 
